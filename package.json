@@ -1,7 +1,10 @@
 {
   "scripts": {
     "server": "http-server ./docs -p 3002 -c-1",
-    "dev": "node ./webpack.config.dev.js",
+    "devold": "node ./webpack.dev.js",
+    "buildold": "node ./webpack.build.js",
+    "dev": "node ./bin/docs-dev.js",
+    "build": "node ./bin/docs-build.js",
     "dev2": "NODE_PATH=. webpack --config ./webpack.config.dev.js"
   },
   "devDependencies": {
