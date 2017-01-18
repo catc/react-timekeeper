@@ -1,19 +1,27 @@
 {
   "scripts": {
-    "server": "http-server ./docs -p 3002 -c-1",
+    "dev": "node ./bin/docs-dev.js",
+    "build": "NODE_ENV=production node ./bin/docs-build.js",
+    "server": "http-server ./docs -p 3003 -c-1",
     "devold": "node ./webpack.dev.js",
     "buildold": "node ./webpack.build.js",
-    "dev": "node ./bin/docs-dev.js",
-    "build": "node ./bin/docs-build.js",
     "dev2": "NODE_PATH=. webpack --config ./webpack.config.dev.js"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "node-sass": "^4.3.0",
+    "postcss-loader": "^1.2.2",
     "react-dom": "^15.4.2",
     "react-hot-loader": "^1.3.1",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },

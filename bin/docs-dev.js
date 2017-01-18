@@ -1,16 +1,18 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const webpackConfig = require('../webpack.config.js')
+const config = require('../webpack.config.js')
 
 const port = 3002
-const WebpackDevServer = require('webpack-dev-server')
+const devServer = require('webpack-dev-server')
 
-// var webpackConfig = require('../webpack.config.js')
-let docs = Object.create(webpackConfig)
-// let docs = webpackConfig
+let docs = config
 
-docs.entry = ['webpack-dev-server/client?http://localhost:' + port, 'webpack/hot/dev-server', docs.entry[0]]
+docs.entry = [
+	'webpack-dev-server/client?http://localhost:' + port,
+	'webpack/hot/dev-server',
+	docs.entry[0]
+]
 
 docs.module.loaders[0].loaders.unshift('react-hot-loader')
 docs.module.loaders[1].loaders.unshift('react-hot-loader')
@@ -18,14 +20,10 @@ docs.module.loaders[1].loaders.unshift('react-hot-loader')
 docs.devtool = 'eval'
 docs.debug = true
 
-console.log( '---------------' )
-console.log( docs )
-console.log( '---------------' )
-new WebpackDevServer(webpack(docs), {
-	// publicPath: '/' + docs.output.publicPath,
+new devServer(webpack(docs), {
 	publicPath: '/build/',
-	contentBase: 'docs',
-	// publicPath: '/docs/',
+	contentBase: './docs',
+
 	hot: true,
 	stats: {
 		cached: false,
