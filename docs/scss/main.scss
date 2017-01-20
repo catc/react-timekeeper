@@ -1,21 +1,12 @@
-
-
-
-body {
-	background: yellow;
-	// background: red;
-	// background: green;
-}
-
-h1 {
-	color: white;
-	animation: 0.5s fadeIn ease-out;
-
-	display: flex;
-	// transition: 0.2s ease-out;
-	div {
-		background: green;
-	}
-}
-
 @import 'common/normalize.scss';
+
+* {
+	box-sizing: border-box;
+}
+body {
+	background: white;
+}
+
+.picker-test-wrapper {
+	padding: 50px;
+}

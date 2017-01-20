@@ -49,4 +49,5 @@ module.exports = {
 		}),
 		// new webpack.NoErrorsPlugin(),
 	],
+	quiet: true
 }

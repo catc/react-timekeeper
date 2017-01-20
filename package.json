@@ -1,15 +1,15 @@
 {
   "name": "react-timekeeper",
   "version": "1.0.0",
-  "description": "Time picker based on the Google Keep app style.",
+  "description": "Time picker based on the style of Google Keep app.",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/catc/react-timekeeper.git",
+    "url": "git+https://github.com/catc/react-timekeeper.git"
   },
   "homepage": "https://catc.github.io/react-timekeeper/",
   "keywords": [
-      "..."
+    "..."
   ],
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
@@ -36,6 +36,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "react": "^15.4.2"
+    "react": "^15.4.2",
+    "reactcss": "^1.1.1"
   }
 }
