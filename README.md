@@ -2,8 +2,6 @@
 Time picker based on the style of the google keep app.
 
 ### TODO
-- add inline css
-- add eslint
 - public to npm
 	- add .npmignore
 	- add script to copy everything to lib

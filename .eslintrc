@@ -1,0 +1,70 @@
+{
+    "env": {
+        "node": true,
+        "browser": true,
+        "es6": true
+    },
+    "extends": ["plugin:react/recommended"],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "blockBindings": true,
+            "generators": true,
+            "arrowFunctions": true,
+            "destructuring": true,
+            "defaultParams": true,
+            "restParams": true,
+            "spread": true,
+            "templateStrings": true,
+            "modules": true,
+            "arrow-body-style": true,
+            "jsx": true,
+            "objectLiteralShorthandMethods": true,
+            "experimentalObjectRestSpread": true
+        },
+        "sourceType": "module"
+    },
+    "settings": {
+        "react": {
+            "createClass": "createClass", // Regex for Component Factory to use, default to "createClass"
+            "pragma": "React",  // Pragma to use, default to "React"
+            "version": "15.0" // React version, default to the latest React stable release
+        }
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "curly": 2,
+        // "semi": 1,
+        "eqeqeq": 1,
+        "no-eval": 2,
+        "no-unused-vars": 1,
+        "no-use-before-define": [1, "nofunc"],
+        "no-undef": 1,
+        "global-require": 0,
+        "quotes": [1, "single", "avoid-escape"],
+        "indent": [2, "tab", {"SwitchCase": 1}],
+        "no-mixed-spaces-and-tabs": 2,
+        "no-trailing-spaces": [2, { "skipBlankLines": true }],
+        "arrow-parens": [1, "as-needed"],
+        "keyword-spacing": [1, {"before": true, "after": true}],
+        "no-var": 1,
+
+        // "react/jsx-uses-react": 2,
+        // "react/jsx-uses-vars": 2
+    },
+    "globals": {
+        "_": true,
+        "console": true,
+        "window": true,
+        "document",
+        "jest",
+        "test",
+        "expect",
+        "describe",
+        "it",
+        "afterAll",
+        "beforeAll"
+    }
+}
