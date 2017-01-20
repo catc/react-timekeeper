@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "react": "^15.4.2",
+    "react-motion": "^0.4.7",
     "reactcss": "^1.1.1"
   }
 }

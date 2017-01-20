@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import Clock from './Clock'
+import ClockWrapper from './ClockWrapper'
 import Time from './Time'
 
 import css from 'reactcss'
@@ -41,7 +41,7 @@ class Timepicker  extends React.Component {
 		return (
 			<div style={styles.timePicker}>
 				<Time />
-				<Clock />
+				<ClockWrapper />
 
 				<span style={styles.doneButton}>Done</span>
 				

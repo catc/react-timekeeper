@@ -8,9 +8,10 @@ import css, {loop} from 'reactcss'
 const CLOCK_RADIUS = 120
 const CLOCK_SIZE = CLOCK_RADIUS * 2
 
-const INCREMENT = 12
-const INCREMENT_VALUE = 360 / INCREMENT
+const CLOCK_HAND_LENGTH = 90
 
+
+// number of actual numbers
 const NUMBER_INCREMENTS = 12
 const NUMBER_INCREMENTS_VALUE = 360 / NUMBER_INCREMENTS
 
@@ -45,7 +46,7 @@ class Clock extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			selected: 2,
+			// selected: 2,
 
 			// only for testing (dot)
 			pointx: 0,
@@ -93,7 +94,8 @@ class Clock extends React.Component {
 					background: 'white',
 					width: `${CLOCK_SIZE}px`,
 					height: `${CLOCK_SIZE}px`,
-					position: 'relative'
+					position: 'relative',
+					cursor: 'pointer',
 				},
 				numberPositioning: {
 					display: 'inline-block',
@@ -126,27 +128,19 @@ class Clock extends React.Component {
 					background: 'red'*/
 				}
 			},
-			/*after: {
-				clock: {
-					content: "aaaaaaaa",
-				},
-			},
-			'first-child': {
-				clock: {
-					background: 'red'
-				}
-			},
-			even: {
-				numberPositioning: {
-					background: 'green'
-				}
-			}*/
 		});
 
-		const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+		// number of possible increments (60 for minutes, 12 for hours)
+		const INCREMENT = this.props.increments
+		const INCREMENT_VALUE = 360 / INCREMENT
+
+		
+		// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+		const numbers = this.props.numbers
 		const formattedNumbers = numbers.map((n, i, items) => {
 			// console.log( loop(i, items.length) )
 			// console.log( 'left is', sin( rad(n * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2 )
+			const num = i + 1;
 			return (
 				<span
 					key={n}
@@ -156,8 +150,8 @@ class Clock extends React.Component {
 						// left: 225,
 						// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
 						// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
-						left: sin( rad(n * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
-						top: cos( rad(n * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
+						left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
+						top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
 						// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS  + ( sin(rad(n * 30)) > 0 ? -NUM_SIZE / 2 : 0 ),
 						// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
 					}}
@@ -169,10 +163,10 @@ class Clock extends React.Component {
 			)
 		})
 		
-		const handRotation = this.state.selected * INCREMENT_VALUE
+		const selected = this.props.val
+		const handRotation = selected * INCREMENT_VALUE
 		// const handRotation = 0
 
-		const CLOCK_HAND_LENGTH = 80
 
 		return (
 			<div style={styles.clockWrapper}>
@@ -183,7 +177,7 @@ class Clock extends React.Component {
 					{/* x + y lines */}
 					<span style={{
 						display: 'inline-block',
-						background: 'rgba(0,0,0,0.2)',
+						// background: 'rgba(0,0,0,0.2)',
 						position: 'absolute',
 						width: '100%',
 						height: 1,
@@ -192,7 +186,7 @@ class Clock extends React.Component {
 					}}></span>
 					<span style={{
 						display: 'inline-block',
-						background: 'rgba(0,0,0,0.2)',
+						// background: 'rgba(0,0,0,0.2)',
 						position: 'absolute',
 						height: '100%',
 						width: 1,
@@ -216,13 +210,13 @@ class Clock extends React.Component {
 						ref={el => this.clock = el}
 						style={{
 							...styles.clockHand,
-							border: '1px solid red'
+							// border: '1px solid red'
 						}}
 					>
 						<g transform={`rotate(${handRotation} ${CLOCK_RADIUS} ${CLOCK_RADIUS})`}>
 							<line x1={CLOCK_RADIUS} y1={CLOCK_RADIUS} x2={CLOCK_RADIUS} y2={CLOCK_RADIUS - CLOCK_HAND_LENGTH}
-								// transformOrigin="0px 0px" 
-								strokeWidth="1" 
+								// transformOrigin="0px 0px"
+								strokeWidth="1"
 								stroke="#BCEAFF"
 								
 							/>
@@ -233,18 +227,9 @@ class Clock extends React.Component {
 							/>
 						</g>
 					</svg>
-					<div>
-						{/*<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" >
-							<line x1="0" y1="0" x2="50" y2="100"
-								transformOrigin="0px 0px" 
-								strokeWidth="1" 
-								stroke="black"
-								transform="rotate(-35 20 100)"
-							/>
-						</svg>*/}
-					</div>
 				</div>
 
+				{/* stats */}
 				<br/>
 				normalized: {(() => {
 					// <br/><br/>
@@ -275,7 +260,7 @@ class Clock extends React.Component {
 				})()}
 
 				<br/>
-				<input type="text" value={this.state.selected} onChange={((e) => {this.setState({selected: parseInt(e.target.value) || 0})})}/>
+				<input type="text" value={selected} onChange={((e) => {this.setState({selected: parseInt(e.target.value) || 0})})}/>
 			</div>
 		)
 	}
@@ -314,10 +299,9 @@ class Clock extends React.Component {
 	}
 
 	stopDragHandler(){
-		console.log( 'left' )
 		document.removeEventListener('mousemove', this.dragHandler, false)
 		document.removeEventListener('mouseup', this.stopDragHandler, false)
-		this.clock.addEventListener('mouseleave', this.stopDragHandler, false)
+		this.clock.removeEventListener('mouseleave', this.stopDragHandler, false)
 	}
 
 	componentWillUnmount(){
@@ -336,11 +320,16 @@ class Clock extends React.Component {
 			d = 360 + d
 		}
 
+		// TODO - move this const to state
+		const INCREMENT = this.props.increments
+		const INCREMENT_VALUE = 360 / INCREMENT
+
 		const selected = Math.round( d / INCREMENT_VALUE )
 
-		this.setState({
-			selected
-		})
+		// this.setState({
+		// 	selected
+		// })
+		this.props.update(selected)
 	}
 }
 
