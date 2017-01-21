@@ -15,14 +15,14 @@ class Time extends React.Component {
 			default: {
 				timeWrapper: {
 					background: 'white',
-					padding: '28px',
+					padding: '24px',
 					textAlign: 'center',
 				},
 				time: {
 					color: DEFAULT_TEXT_COLOR,
 					// fontWeight: '500',
 					display: 'inline-block',
-					fontSize: '52px',
+					fontSize: '56px',
 				},
 				meridiem: {
 					color: DEFAULT_TEXT_COLOR,

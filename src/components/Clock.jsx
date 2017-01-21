@@ -15,7 +15,8 @@ const CLOCK_HAND_LENGTH = 90
 const NUMBER_INCREMENTS = 12
 const NUMBER_INCREMENTS_VALUE = 360 / NUMBER_INCREMENTS
 
-const NUM_SIZE = 32
+const NUM_SIZE = 36
+const NUMBER_INNER_POSITION = 24
 
 const { cos, sin, tan, atan2 } = Math
 const pi = Math.PI
@@ -35,6 +36,19 @@ function deg(rad){
 window.rad = rad
 window.deg = deg
 
+const CLOCK_DATA = {
+	hour: {
+		numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+		increments: 12
+	},
+	minute: {
+		// TODO - change this to string
+		numbers: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 0],
+		increments: 60
+	}
+}
+
+import { spring, TransitionMotion, presets } from 'react-motion';
 /*
 	TODO
 	- add circle showing what is currently selected
@@ -81,6 +95,7 @@ class Clock extends React.Component {
 		})
 	}
 	render(){
+		const props = this.props
 		const styles = css({
 			default: {
 				clockWrapper: {
@@ -101,7 +116,7 @@ class Clock extends React.Component {
 					display: 'inline-block',
 					position: 'absolute',
 					color: '#898989',
-					fontSize: '15px',
+					fontSize: '18px',
 					pointerEvents: 'none',
 
 					// background: '#E6F7FF',
@@ -131,48 +146,140 @@ class Clock extends React.Component {
 		});
 
 		// number of possible increments (60 for minutes, 12 for hours)
-		const INCREMENT = this.props.increments
-		const INCREMENT_VALUE = 360 / INCREMENT
 
+		const type = props.type
 		
-		// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-		const numbers = this.props.numbers
-		const formattedNumbers = numbers.map((n, i, items) => {
-			// console.log( loop(i, items.length) )
-			// console.log( 'left is', sin( rad(n * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2 )
-			const num = i + 1;
-			return (
-				<span
-					key={n}
-					style={{
-						...styles.numberPositioning,
-						// top: 75,
-						// left: 225,
-						// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
-						// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
-						left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
-						top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
-						// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS  + ( sin(rad(n * 30)) > 0 ? -NUM_SIZE / 2 : 0 ),
-						// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
-					}}
-					// even={true}
-					// {...loop(i, items.length)}
-				>
-					{n}
-				</span>
-			)
-		})
 		
-		const selected = this.props.val
+
+		function formatNumbers(type){
+			const data = CLOCK_DATA[type]
+			return {
+				type,
+				items: data.numbers.map((n, i) => {
+					// console.log( 'left is', sin( rad(n * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2 )
+					const num = i + 1;
+					return (
+						<span
+							key={n}
+							style={{
+								...styles.numberPositioning,
+								// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
+								// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
+								left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
+								top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - 20) + CLOCK_RADIUS - NUM_SIZE / 2,
+								// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS  + ( sin(rad(n * 30)) > 0 ? -NUM_SIZE / 2 : 0 ),
+								// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
+							}}
+						>
+							{n}
+						</span>
+					)
+				})
+			}
+		}
+		
+		const stepAnimations = [type === 'hour' ? 'hour' : 'minute'];
+		// const formattedNumbers = formatNumbers(current.numbers)
+		// const stepAnimations = [this.state.isSubmitting ? submitStep : currentStep]
+		
+		const HOUR_TRANSLATE = -10
+		const MINUTE_TRANSLATE = 50
+
+		function format(){
+			const stepAnimationOptions = {
+				willEnter(transition){
+					const fin = transition.data === 'hour' ? HOUR_TRANSLATE : MINUTE_TRANSLATE;
+					return {
+						opacity: 0,
+						// translateY: 50
+						// translate: 30,
+						translate: fin,
+						// scale: 0.8
+					}
+				},
+				willLeave(transition){
+					const fin = transition.data === 'hour' ? HOUR_TRANSLATE : MINUTE_TRANSLATE;
+					return {
+						opacity: spring(0),
+						// translateY: spring(50)
+						translate: spring(fin),
+						// scale: spring(0.8)
+					}
+				},
+				// where step is: 	{ type: type, items: [...] }
+				styles: stepAnimations.map(type => {
+					return {
+						key: type,
+						style: {
+							opacity: spring(1),
+							translate: spring(NUMBER_INNER_POSITION, presets.gentle),
+							// translate: spring(NUMBER_INNER_POSITION, presets.stiff),
+							translate: spring(NUMBER_INNER_POSITION),
+							// translate: spring(NUMBER_INNER_POSITION, {stiffness: 120, damping: 15}),
+							// scale: spring(1)
+						},
+						data: type
+					}
+				})
+			}
+			return <TransitionMotion {...stepAnimationOptions}>
+				{interpolatedStyles =>
+					<div className="parent">
+						{interpolatedStyles.map(config => {
+							const data = CLOCK_DATA[config.data]
+
+							return data.numbers.map((n, i) => {
+								const num = i + 1;
+								return (
+									<span
+										key={n}
+										style={{
+											...styles.numberPositioning,
+											opacity: config.style.opacity,
+											// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
+											// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
+											left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - config.style.translate) + CLOCK_RADIUS - NUM_SIZE / 2,
+											top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - config.style.translate) + CLOCK_RADIUS - NUM_SIZE / 2,
+											// left: sin( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS  + ( sin(rad(n * 30)) > 0 ? -NUM_SIZE / 2 : 0 ),
+											// top: cos( rad(n * -30 - 180) ) * CLOCK_RADIUS + CLOCK_RADIUS,
+										}}
+									>
+										{n}
+									</span>
+								)
+							})
+							// return config.data.items
+							/*<config.data.component
+								className="new-recipe__section-child-animation"
+								changeStepHandler={this.changeStepHandler}
+								// {...config.data.additionalProps}
+								style={{
+									position: 'absolute',
+									// opacity: config.style.opacity,
+									transform: `translateY(${config.style.translateY}px)`,
+									// transform: `translateY(${config.style.translateY}px) scale(${config.style.scale})`
+								}}
+								key={config.key}
+							/>*/
+						})}
+					</div>
+				}
+			</TransitionMotion>
+		}
+
+
+		const current = CLOCK_DATA[type]
+		const INCREMENT_VALUE = 360 / current.increments
+
+		const selected = props.val[type]
 		const handRotation = selected * INCREMENT_VALUE
-		// const handRotation = 0
-
 
 		return (
 			<div style={styles.clockWrapper}>
 				{/*<div style={styles.clock} onClick={this.handleClick.bind(this)}>*/}
+				{/*formattedNumbers*/}
 				<div style={styles.clock} onMouseDown={this.mousedown.bind(this)}>
-					{formattedNumbers}
+					{format.call(this)}
 
 					{/* x + y lines */}
 					<span style={{
@@ -220,7 +327,7 @@ class Clock extends React.Component {
 								stroke="#BCEAFF"
 								
 							/>
-							<circle cx={CLOCK_RADIUS} cy={19} r={NUM_SIZE / 2}
+							<circle cx={CLOCK_RADIUS} cy={24} r={NUM_SIZE / 2}
 								fill='#E6F7FF'
 								// fill="transparent"
 								// strokeWidth="1" stroke="red"
@@ -291,6 +398,8 @@ class Clock extends React.Component {
 		document.addEventListener('mousemove', this.dragHandler, false)
 		document.addEventListener('mouseup', this.stopDragHandler, false)
 		this.clock.addEventListener('mouseleave', this.stopDragHandler, false)
+
+		// TODO - add touch
 	}
 	drag(e){
 		this.handlePoint(e.clientX, e.clientY)
@@ -321,15 +430,17 @@ class Clock extends React.Component {
 		}
 
 		// TODO - move this const to state
-		const INCREMENT = this.props.increments
-		const INCREMENT_VALUE = 360 / INCREMENT
+		const type = this.props.type
+		const data = CLOCK_DATA[type]
+		const INCREMENT_VALUE = 360 / data.increments
 
 		const selected = Math.round( d / INCREMENT_VALUE )
 
 		// this.setState({
 		// 	selected
 		// })
-		this.props.update(selected)
+		// const data = CLOCK_DATA[this.props.type]
+		this.props.update(type, selected)
 	}
 }
 
