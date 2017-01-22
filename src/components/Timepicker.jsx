@@ -5,11 +5,41 @@ import Time from './Time'
 
 import css from 'reactcss'
 
+function parseTime(time){
+	// if valid color, return parsed version, other return 12:00
+	return {
+		hour: 12,
+		minute: 0,
+		meridian: 'pm'
+	}
+}
+
 class Timepicker  extends React.Component {
-	/*constructor(props){
+	constructor(props){
 		super(props)
-		this.state = {}
-	}*/
+
+		// TODO - init with any number passed in
+		this.state = {
+			minute: 10,
+			hour: 8,
+
+			// need better name
+			selectedType: 'hour'
+		}
+	}
+
+	handleChange(type, val){
+
+	}
+	// TODO - need better naming
+	changeType(newType){
+		const currentType = this.state.type;
+		if (currentType === newType){
+			return;
+		}
+		this.setState({ type: newType })
+	}
+
 	render(){
 		const styles = css({
 			default: {
@@ -41,50 +71,21 @@ class Timepicker  extends React.Component {
 		return (
 			<div style={styles.timePicker}>
 				<Time />
-				<ClockWrapper />
+				<ClockWrapper/>
 
 				<span style={styles.doneButton}>Done</span>
 				
-
 			</div>
 		)
 	}
-				/*<div style={{
-					border: '1px solid #DDD',
-					margin: '50px'
-				}}>
-
-					<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"
-						style={{
-							border: '1px solid red'
-						}}
-					>
-						<line x1="120" y1="120" x2="120" y2="0"
-							// transformOrigin="0px 0px" 
-							strokeWidth="1" 
-							stroke="black"
-							transform="rotate(0 120 120)"
-						/>
-					</svg>
-
-
-
-
-
-				</div>*/
 }
-/*const Timepicker = ({}) => {
-	return (
-		<div>
-			timepicker
 
-			<Clock />
-		</div>
-	)
-}*/
 
 Timepicker.propTypes = {
-
+	time: PropTypes.string,
+	onChange: PropTypes.func,
+	displayDone: PropTypes.bool,
+	doneOnClick: PropTypes.func
 }
 
 export default Timepicker

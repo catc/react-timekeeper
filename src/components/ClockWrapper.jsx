@@ -8,7 +8,7 @@ class ClockWrapper extends React.Component {
 
 		this.state = {
 			minute: 10,
-			hour: 2,
+			hour: 8,
 
 			type: 'hour'
 		}
@@ -33,32 +33,16 @@ class ClockWrapper extends React.Component {
 	}
 
 	render(){
-		// TODO - change this to string
-		const hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-		const minutes = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 0]
-
-		/*const hourClock = {
-			type: 'hour',
-			component: <Clock
-				numbers={hours}
-				val={this.state.hour}
-				update={this.updateHour}
-				increments={12}
-			/>
-		}
-		const minuteClock = {
-			type: 'minute',
-			component: <Clock
-				numbers={minutes}
-				val={this.state.minute}
-				update={this.updateMinute}
-				increments={60}
-			/>
-		}*/
 		const val = {
 			hour: this.state.hour,
 			minute: this.state.minute
 		}
+
+		/*
+			TODO
+			- move select logic here
+			- and move remaining numbers/positioning and animations to Clock.jsx
+		*/
 
 		return (
 			<div>
