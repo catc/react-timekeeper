@@ -1,43 +1,64 @@
 import React, { PropTypes } from 'react'
 
+import parseTime from '../helpers/parse-time'
 import ClockWrapper from './ClockWrapper'
 import Time from './Time'
 
 import css from 'reactcss'
 
-function parseTime(time){
-	// if valid color, return parsed version, other return 12:00
-	return {
-		hour: 12,
-		minute: 0,
-		meridian: 'pm'
-	}
-}
-
 class Timepicker  extends React.Component {
 	constructor(props){
 		super(props)
 
-		// TODO - init with any number passed in
 		this.state = {
-			minute: 10,
-			hour: 8,
+			...parseTime(props.time),
+			unit: 'hour'
+		}
 
-			// need better name
-			selectedType: 'hour'
+		this.changeHour =  this.handleTimeChange.bind(this, 'hour')
+		this.changeMinute =  this.handleTimeChange.bind(this, 'minute')
+		this.changeUnit =  this.changeUnit.bind(this)
+	}
+
+	componentWillReceiveProps(nextProps){
+		if (nextProps.time){
+			this.setState({
+				time: parseTime(nextProps.time)
+			})
 		}
 	}
 
-	handleChange(type, val){
-
+	getTime(){
+		const state = this.state;
+		const meridiemAdd = state.meridiem === 'pm' ? 12 : 0
+		return {
+			formatted: `${state.hour}:${state.minute} ${state.meridiem}`,
+			formattedSimple: `${state.hour}:${state.minute}`,
+			formatted24: `${state.hour + meridiemAdd}:${state.minute}`,
+			hour: state.hour,
+			hour24: state.hour + meridiemAdd,
+			minute: state.minute,
+			meridiem: state.meridiem
+		}
 	}
-	// TODO - need better naming
-	changeType(newType){
-		const currentType = this.state.type;
-		if (currentType === newType){
+
+	handleTimeChange(unit, val){
+		console.debug( 'change ', unit, ' with new: ', val )
+
+		this.setState({
+			[unit]: val
+		})
+
+		this.props.onChange && this.props.onChange( this.getTime() )
+	}
+
+
+	changeUnit(newUnit){
+		const currentUnit = this.state.unit;
+		if (currentUnit === newUnit){
 			return;
 		}
-		this.setState({ type: newType })
+		this.setState({ unit: newUnit })
 	}
 
 	render(){
@@ -68,13 +89,31 @@ class Timepicker  extends React.Component {
 			}
 		})
 
+		const state = this.state
 		return (
 			<div style={styles.timePicker}>
-				<Time />
-				<ClockWrapper/>
-
-				<span style={styles.doneButton}>Done</span>
+				{state.unit}
+				<Time
+					unit={state.unit}
+					hour={state.hour}
+					minute={state.minute}
+					meridiem={state.meridiem}
+				/>
 				
+				<ClockWrapper
+					unit={state.unit}
+					hour={state.hour}
+					minute={state.minute}
+					meridiem={state.meridiem}
+
+					changeUnit={this.changeUnit}
+					changeHour={this.changeHour}
+					changeMinute={this.changeMinute}
+
+					// TODO - pass in format
+				/>
+				
+				<span style={styles.doneButton}>Done</span>
 			</div>
 		)
 	}
@@ -82,10 +121,13 @@ class Timepicker  extends React.Component {
 
 
 Timepicker.propTypes = {
+	// TODO - update props based on API in readme
 	time: PropTypes.string,
+	format: PropTypes.number,
 	onChange: PropTypes.func,
 	displayDone: PropTypes.bool,
-	doneOnClick: PropTypes.func
+	doneOnClick: PropTypes.func,
+	closeOnMinuteSelect: PropTypes.bool
 }
 
 export default Timepicker

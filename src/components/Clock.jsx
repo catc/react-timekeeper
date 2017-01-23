@@ -26,8 +26,8 @@ const NUMBER_SIZE = 36
 // positioning of numbers within circle
 const NUMBER_INNER_POSITION = 24
 
-function animationPosition(type){
-	return type === 'hour' ? NUMBER_INNER_POSITION - 34 : NUMBER_INNER_POSITION + 28;
+function animationPosition(unit){
+	return unit === 'hour' ? NUMBER_INNER_POSITION - 34 : NUMBER_INNER_POSITION + 28;
 }
 
 const { cos, sin, atan2 } = Math
@@ -68,6 +68,7 @@ const CLOCK_DATA = {
 class Clock extends React.Component {
 	constructor(props){
 		super(props)
+
 		this.state = {
 			// selected: 2,
 
@@ -157,8 +158,8 @@ class Clock extends React.Component {
 		
 
 		function numbersAnimation(){
-			const type = props.type
-			const animationItems = [type === 'hour' ? 'hour' : 'minute'];
+			const unit = props.unit
+			const animationItems = [unit === 'hour' ? 'hour' : 'minute'];
 
 			const animationOptions = {
 				willEnter(transition){
@@ -181,9 +182,9 @@ class Clock extends React.Component {
 						// scale: spring(0.8)
 					}
 				},
-				styles: animationItems.map(type => {
+				styles: animationItems.map(unit => {
 					return {
-						key: type,
+						key: unit,
 						style: {
 							opacity: spring(1),
 							handOpacity: spring(1, {stiffness: 120, damping: 40}),
@@ -194,15 +195,15 @@ class Clock extends React.Component {
 							// translate: spring(NUMBER_INNER_POSITION, {stiffness: 120, damping: 15}),
 							// scale: spring(1)
 						},
-						data: type
+						data: unit
 					}
 				})
 			}
 
-			const current = CLOCK_DATA[type]
+			const current = CLOCK_DATA[unit]
 			const INCREMENT_VALUE = 360 / current.increments
 
-			const selected = props.val[type]
+			const selected = props.val[unit]
 			const handRotation = selected * INCREMENT_VALUE
 
 			return <TransitionMotion {...animationOptions}>
@@ -332,8 +333,8 @@ class Clock extends React.Component {
 		}
 
 		// TODO - move this const to state
-		const type = this.props.type
-		const data = CLOCK_DATA[type]
+		const unit = this.props.unit
+		const data = CLOCK_DATA[unit]
 		const INCREMENT_VALUE = 360 / data.increments
 
 		const selected = Math.round( d / INCREMENT_VALUE )
@@ -341,8 +342,13 @@ class Clock extends React.Component {
 		// this.setState({
 		// 	selected
 		// })
-		// const data = CLOCK_DATA[this.props.type]
-		this.props.update(type, selected)
+		// const data = CLOCK_DATA[this.props.unit]
+		if (unit === 'hour'){
+			this.props.changeHour(selected)
+		} else if (unit === 'minute'){
+			this.props.changeMinute(selected)
+		}
+		// this.props.update(unit, selected)
 	}
 }
 

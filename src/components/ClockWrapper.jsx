@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import Clock from './Clock'
 
 class ClockWrapper extends React.Component {
-	constructor(props){
+	/*constructor(props){
 		super(props)
 
 		this.state = {
@@ -17,25 +17,27 @@ class ClockWrapper extends React.Component {
 		// this.updateHour = this.updateTime.bind(this, 'hour')
 		this.updateTime = this.updateTime.bind(this)
 		this.changeType = this.changeType.bind(this)
-	}
+	}*/
 
-	updateTime(key, val){
+	/*updateTime(key, val){
 		this.setState({
 			[key]: val
 		})
-	}
-	changeType(){
+	}*/
+	/*changeType(){
 		let newType = 'hour'
 		if (this.state.type === 'hour'){
 			newType = 'minute'
 		}
 		this.setState({ type: newType })
-	}
+	}*/
 
 	render(){
+		const props = this.props
+		
 		const val = {
-			hour: this.state.hour,
-			minute: this.state.minute
+			hour: this.props.hour,
+			minute: this.props.minute
 		}
 
 		/*
@@ -46,15 +48,25 @@ class ClockWrapper extends React.Component {
 
 		return (
 			<div>
-				{this.state.hour}:{this.state.minute}
+				<button onClick={() => {
+					if (props.unit === 'hour'){
+						props.changeUnit('minute')
+					} else {
+						props.changeUnit('hour')
+					}
+				}}>UPDATE TYPE</button>
 				<br/>
-				<button onClick={this.changeType}>UPDATE TYPE</button>
 				<br/>
 				<Clock
-					type={this.state.type}
+					// type={this.state.type}
 					// numbers={hours}
+					unit={props.unit}
 					val={val}
-					update={this.updateTime}
+					// update={this.updateTime}
+
+					changeUnit={props.changeUnit}
+					changeHour={props.changeHour}
+					changeMinute={props.changeMinute}
 					// update={this.updateHour}
 					// increments={12}
 				/>

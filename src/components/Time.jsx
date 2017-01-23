@@ -34,11 +34,14 @@ class Time extends React.Component {
 				}
 			}
 		})
+		const props = this.props
+		const formattedMinute = ('0' + props.minute).slice(-2)
+
 		return <div style={styles.timeWrapper}>
-			<span style={styles.time}>8</span>	
+			<span style={styles.time}>{props.hour}</span>
 			<span style={styles.time}>:</span>
-			<span style={styles.time}>06</span>
-			<span style={styles.meridiem}>am</span>
+			<span style={styles.time}>{formattedMinute}</span>
+			<span style={styles.meridiem}>{props.meridiem}</span>
 		</div>
 	}
 }
