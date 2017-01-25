@@ -18,6 +18,7 @@ class Timepicker  extends React.Component {
 		this.changeHour =  this.handleTimeChange.bind(this, 'hour')
 		this.changeMinute =  this.handleTimeChange.bind(this, 'minute')
 		this.changeUnit =  this.changeUnit.bind(this)
+		this.changeMeridiem = this.handleMeridiemChange.bind(this)
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -51,7 +52,15 @@ class Timepicker  extends React.Component {
 
 		this.props.onChange && this.props.onChange( this.getTime() )
 	}
+	handleMeridiemChange(val){
+		if (val !== this.state.meridiem){
+			this.setState({
+				meridiem: val
+			})
 
+			this.props.onChange && this.props.onChange( this.getTime() )
+		}
+	}
 
 	changeUnit(newUnit){
 		const currentUnit = this.state.unit;
@@ -92,14 +101,17 @@ class Timepicker  extends React.Component {
 		})
 
 		const state = this.state
+		const props = this.props
 		return (
-			<div style={styles.timePicker}>
-				{state.unit}
+			<div style={styles.timePicker} className="one">
 				<Time
 					unit={state.unit}
 					hour={state.hour}
 					minute={state.minute}
 					meridiem={state.meridiem}
+					
+					changeMeridiem={this.changeMeridiem}
+					changeUnit={this.changeUnit}
 				/>
 				
 				<ClockWrapper
@@ -107,12 +119,11 @@ class Timepicker  extends React.Component {
 					hour={state.hour}
 					minute={state.minute}
 					meridiem={state.meridiem}
+					hourFormat={props.hourFormat}
 
-					changeUnit={this.changeUnit}
 					changeHour={this.changeHour}
 					changeMinute={this.changeMinute}
-
-					// TODO - pass in format
+					changeMeridiem={this.changeMeridiem}
 				/>
 				
 				<span style={styles.doneButton}>Done</span>
@@ -123,10 +134,11 @@ class Timepicker  extends React.Component {
 
 
 Timepicker.propTypes = {
-	// TODO - update props based on API in readme
 	time: PropTypes.string,
-	format: PropTypes.number,
+	hourFormat: PropTypes.number,
 	onChange: PropTypes.func,
+	
+	// TODO - update props based on API in readme
 	displayDone: PropTypes.bool,
 	doneOnClick: PropTypes.func,
 	closeOnMinuteSelect: PropTypes.bool

@@ -2,6 +2,8 @@
 Time picker based on the style of the [Android Google Keep](https://play.google.com/store/apps/details?id=com.google.android.keep) app.
 
 ### TODO
+- add format support
+- add remaining apis
 - public to npm
 	- add .npmignore
 	- add script to copy everything to lib
@@ -9,7 +11,7 @@ Time picker based on the style of the [Android Google Keep](https://play.google.
 	- packages
 - tests
 	- https://semaphoreci.com/community/tutorials/snapshot-testing-react-components-with-jest
-
+- remove console.logs/debugs
 
 ## API
 Timepickeer component props:
@@ -43,7 +45,7 @@ Pass a function to be called when time is changed. Used to store time state in p
 
 ```javascript
 {
-	formatted: '4:55 pm',	// 12 hour
+	formatted: '4:55 pm',	// 12 hour format
 	formattedSimple: '4:55', 	// similar to formatted (12h), but no meridiem
 	formatted24: '16:55',
 	hour: 4,
@@ -67,3 +69,10 @@ Whether or not to trigger "Done" button click when the user selects minutes. Sim
 
 #### `hourFormat` (number)
 Hour format - accepts either `12` (default) or `24`.
+
+
+## Development
+1. Clone the repo
+2. `npm install`
+3. `npm run dev`
+4. Navigate to `localhost:3002`

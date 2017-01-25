@@ -1,13 +1,8 @@
 import React, { PropTypes } from 'react'
-import { spring, TransitionMotion, presets } from 'react-motion';
+import { spring, TransitionMotion } from 'react-motion';
+import css from 'reactcss'
 
-// TODO - remove this depdency
-import css, {loop} from 'reactcss'
-
-import calcRelativePositioning from '../helpers/relative'
-/*const Clock = ({}) => {
-	return <div>Clock: 0 5 10 15 20 25...</div>
-}*/
+import calcOffset from '../helpers/offset'
 
 // radius of clock, in px
 const CLOCK_RADIUS = 120
@@ -58,21 +53,10 @@ const CLOCK_DATA = {
 */
 
 class Clock extends React.Component {
-	constructor(props){
-		super(props)
-
-		this.state = {}
-	}
-
 	render(){
 		const props = this.props
 		const styles = css({
 			default: {
-				clockWrapper: {
-					// background: 'purple'
-					textAlign: 'center',
-					padding: '20px 0'
-				},
 				clock: {
 					display: 'inline-block',
 					borderRadius: '200px',
@@ -183,7 +167,6 @@ class Clock extends React.Component {
 										/>
 									</g>
 								</svg>
-
 							</div>
 						})}
 					</div>
@@ -193,23 +176,15 @@ class Clock extends React.Component {
 
 
 		return (
-			<div style={styles.clockWrapper}>
-				{/* formatted numbers + clock hand */}
-				<div style={styles.clock} onMouseDown={this.mousedown.bind(this)}>
-					{ renderNumbersAndClockhand.call(this) }
-				</div>
+			<div style={styles.clock} onMouseDown={this.mousedown.bind(this)}>
+				{ renderNumbersAndClockhand.call(this) }
 			</div>
 		)
 	}
 	
-	handlePoint(clientX, clientY, el){
-		// const { minX, minY } = this.state
-		// TODO - cache?
-		// TODO - fix if parent has absolute positioning
-		const { minX, minY } = calcRelativePositioning(this.clock)
-
-		const x = clientX + minX - CLOCK_RADIUS
-		const y = -clientY - minY + CLOCK_RADIUS
+	handlePoint(clientX, clientY){
+		const x = clientX - CLOCK_RADIUS
+		const y = -clientY + CLOCK_RADIUS
 
 		const a = atan2(y, x)
 		let d = 90 - deg(a)
@@ -217,9 +192,7 @@ class Clock extends React.Component {
 			d = 360 + d
 		}
 
-		// TODO - move this const to state
 		const unit = this.props.unit
-
 		const selected = Math.round( d / 360 * CLOCK_DATA[unit].increments )
 
 		if (unit === 'hour'){
@@ -230,7 +203,9 @@ class Clock extends React.Component {
 	}
 
 	mousedown(e){
-		this.handlePoint(e.clientX, e.clientY, e.target)
+		// calculate time based on area clicked
+		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
+		this.handlePoint(offsetX, offsetY)
 
 		// bind handlers
 		this.dragHandler = this.drag.bind(this)
@@ -244,11 +219,12 @@ class Clock extends React.Component {
 		// TODO - add touch
 	}
 	drag(e){
-		this.handlePoint(e.clientX, e.clientY)
+		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
+		this.handlePoint(offsetX, offsetY)
+
 		e.preventDefault()
 		return false
 	}
-
 	stopDragHandler(){
 		document.removeEventListener('mousemove', this.dragHandler, false)
 		document.removeEventListener('mouseup', this.stopDragHandler, false)
@@ -261,12 +237,13 @@ class Clock extends React.Component {
 	}
 }
 
+
+
 Clock.propTypes = {
 	hour: PropTypes.number.isRequired,
 	minute: PropTypes.number.isRequired,
 	unit: PropTypes.string.isRequired,
 	
-	changeUnit: PropTypes.func.isRequired,
 	changeHour: PropTypes.func.isRequired,
 	changeMinute: PropTypes.func.isRequired
 }
