@@ -45,6 +45,11 @@ class Timepicker  extends React.Component {
 
 	handleTimeChange(unit, val){
 		console.debug( 'change ', unit, ' with new: ', val )
+		if (unit === 'hour' && val === 0){
+			val = 12
+		} else if (unit === 'minute' && val === 60){
+			val = 0
+		}
 
 		this.setState({
 			[unit]: val
@@ -87,7 +92,7 @@ class Timepicker  extends React.Component {
 				},
 				doneButton: {
 					display: 'block',
-					color: '#000000',
+					color: '#444',
 					textTransform: 'uppercase',
 					borderTop: '1px solid #CCC',
 					textAlign: 'center',
@@ -103,13 +108,35 @@ class Timepicker  extends React.Component {
 		const state = this.state
 		const props = this.props
 		return (
-			<div style={styles.timePicker} className="one">
+			<div style={styles.timePicker} className="react-timekeeper">
+				<style>{`
+					.react-timekeeper {
+						-webkit-tap-highlight-color:transparent;
+					}
+					.react-timepicker-button-reset {
+						background: 0;
+						border: 0;
+						box-shadow: none;
+						text-shadow: none;
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						cursor: pointer;
+					}
+					.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
+						outline: none;
+					}
+					.react-timepicker-button-reset::-moz-focus-inner {
+						border: 0;
+						padding: 0;
+					}
+				`}</style>
+
 				<Time
 					unit={state.unit}
 					hour={state.hour}
 					minute={state.minute}
 					meridiem={state.meridiem}
-					
+
 					changeMeridiem={this.changeMeridiem}
 					changeUnit={this.changeUnit}
 				/>

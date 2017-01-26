@@ -130,6 +130,13 @@ class Clock extends React.Component {
 					<div>
 						{interpolatedStyles.map(config => {
 							const data = CLOCK_DATA[config.data]
+
+							let showIntermediateValueDisplay;
+							if (config.data === 'minute' && props.minute%5){
+								showIntermediateValueDisplay = <circle cx={CLOCK_RADIUS} cy={24} r={4}
+									fill='#ade2fb'
+								/>
+							}
 							
 							return <div style={{position: 'absolute'}} key={config.data} ref={el => this.clock = el}>
 								{data.numbers.map((numberString, i) => {
@@ -165,6 +172,7 @@ class Clock extends React.Component {
 										<circle cx={CLOCK_RADIUS} cy={24} r={NUMBER_SIZE / 2}
 											fill='#E6F7FF'
 										/>
+										{showIntermediateValueDisplay}
 									</g>
 								</svg>
 							</div>
@@ -176,6 +184,7 @@ class Clock extends React.Component {
 
 
 		return (
+			// TODO - bind mousedown in constructor
 			<div style={styles.clock} onMouseDown={this.mousedown.bind(this)}>
 				{ renderNumbersAndClockhand.call(this) }
 			</div>

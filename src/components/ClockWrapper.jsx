@@ -27,6 +27,7 @@ class ClockWrapper extends React.Component {
 					color: '#898989',
 					display: 'inline-block',
 					// position: 'absolute',
+					padding: 0,
 					cursor: 'pointer',
 					borderRadius: '99px',
 					width: meridiemSelectSize,
@@ -69,20 +70,22 @@ class ClockWrapper extends React.Component {
 
 				{props.hourFormat === 24 ? '' :
 					<div style={styles.meridiemWrapper}>
-						<span
+						<button
+							className="react-timepicker-button-reset"
 							style={{
 								...styles.meridiem,
 								...styles.leftMeridiem
 							}}
 							onClick={() => { props.changeMeridiem('am') }}
-						>AM</span>
-						<span
+						>AM</button>
+						<button
+							className="react-timepicker-button-reset"
 							style={{
 								...styles.meridiem,
 								...styles.rightMeridiem
 							}}
 							onClick={() => { props.changeMeridiem('pm') }}
-						>PM</span>
+						>PM</button>
 					</div>
 				}
 			</div>

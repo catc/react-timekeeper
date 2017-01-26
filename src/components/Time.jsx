@@ -23,16 +23,16 @@ class Time extends React.Component {
 	render(){
 		const props = this.props;
 
+
+
 		const styles = css({
 			default: {
 				wrapper: {
 					background: 'white',
 					padding: '24px',
-					textAlign: 'center',
 				},
 				timeWrapper: {
-					width: '220px',
-					left: '26px',
+					left: '28px',
 					position: 'relative'
 				},
 				colon: {
@@ -40,6 +40,7 @@ class Time extends React.Component {
 					// fontWeight: '500',
 					display: 'inline-block',
 					fontSize: '56px',
+					verticalAlign: '2px'
 				},
 				time: {
 					color: DEFAULT_TEXT_COLOR,
@@ -49,13 +50,19 @@ class Time extends React.Component {
 					cursor: 'pointer',
 					userSelect: 'none',
 				},
+				hour: {
+					width: '80px',
+					textAlign: 'right'
+				},
 				meridiem: {
 					color: DEFAULT_TEXT_COLOR,
 					display: 'inline-block',
 					fontSize: '13px',
 					textTransform: 'uppercase',
-					marginLeft: '8px',
+					marginLeft: '2px',
 					fontWeight: '500',
+					padding: '10px 8px',
+					verticalAlign: '1px'
 				}
 			},
 			isHour: {
@@ -74,23 +81,32 @@ class Time extends React.Component {
 		})
 		const formattedMinute = ('0' + props.minute).slice(-2)
 
-		return <div style={styles.wrapper}>
-			<div style={styles.timeWrapper}>
-				<span style={{
-					...styles.time,
-					...styles.hour
-				}} onClick={this.changeUnitToHour}>{props.hour}</span>
-				
-				<span style={styles.colon}>:</span>
-				
-				<span style={{
-					...styles.time,
-					...styles.minute
-				}} onClick={this.changeUnitToMinute}>{formattedMinute}</span>
-				
-				<button onClick={this.toggleMeridiem} style={styles.meridiem}>{props.meridiem}</button>
+		return (
+			<div style={styles.wrapper}>
+
+				<div style={styles.timeWrapper}>
+					<span style={{
+						...styles.time,
+						...styles.hour
+					}} onClick={this.changeUnitToHour}>{props.hour}</span>
+					
+					<span style={styles.colon}>:</span>
+					
+					<span style={{
+						...styles.time,
+						...styles.minute
+					}} onClick={this.changeUnitToMinute}>{formattedMinute}</span>
+					
+					<button
+						onClick={this.toggleMeridiem}
+						style={styles.meridiem}
+						className="react-timepicker-button-reset"
+					>
+						{props.meridiem}
+					</button>
+				</div>
 			</div>
-		</div>
+		)
 	}
 }
 
