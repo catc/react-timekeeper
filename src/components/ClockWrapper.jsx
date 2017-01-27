@@ -7,7 +7,7 @@ class ClockWrapper extends React.Component {
 	render(){
 		const props = this.props
 
-		const meridiemSelectSize = 46;
+		const MERIDIEM_SELECT_SIZE = 46;
 		const styles = css({
 			default: {
 				clockWrapper: {
@@ -20,6 +20,8 @@ class ClockWrapper extends React.Component {
 					textAlign: 'left',
 					padding: '0 30px',
 					marginTop: '-20px',
+					position: 'relative',
+					zIndex: 10
 				},
 				meridiem: {
 					background: 'white',
@@ -30,11 +32,11 @@ class ClockWrapper extends React.Component {
 					padding: 0,
 					cursor: 'pointer',
 					borderRadius: '99px',
-					width: meridiemSelectSize,
-					height: meridiemSelectSize,
+					width: MERIDIEM_SELECT_SIZE,
+					height: MERIDIEM_SELECT_SIZE,
 
 					textAlign: 'center',
-					lineHeight: meridiemSelectSize + 'px',
+					lineHeight: MERIDIEM_SELECT_SIZE + 'px',
 					transition: '0.15s ease-out'
 				},
 				leftMeridiem: {},
@@ -44,12 +46,12 @@ class ClockWrapper extends React.Component {
 			},
 			leftM: {
 				leftMeridiem: {
-					background: '#E6F7FF'
+					background: '#E1EFF6'
 				}
 			},
 			rightM: {
 				rightMeridiem: {
-					background: '#E6F7FF'
+					background: '#E1EFF6'
 				}
 			}
 		}, {

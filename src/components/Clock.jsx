@@ -20,7 +20,6 @@ const NUMBER_SIZE = 36
 
 // positioning of numbers within circle
 const NUMBER_INNER_POSITION = 24
-
 function animationPosition(unit){
 	return unit === 'hour' ? NUMBER_INNER_POSITION - 34 : NUMBER_INNER_POSITION + 28;
 }
@@ -47,12 +46,12 @@ const CLOCK_DATA = {
 	}
 }
 
-/*
-	TODO
-	- add touchMove
-*/
-
 class Clock extends React.Component {
+	constructor(props){
+		super(props)
+		this.mousedown = this.mousedown.bind(this)
+		this.touchstart = this.touchstart.bind(this)
+	}
 	render(){
 		const props = this.props
 		const styles = css({
@@ -155,6 +154,8 @@ class Clock extends React.Component {
 										</span>
 									)
 								})}
+
+								{/* place svg over and set z-index on numbers to prevent highlighting numbers on drag */}
 								<svg width={CLOCK_SIZE} height={CLOCK_SIZE} viewBox={`0 0 ${CLOCK_SIZE} ${CLOCK_SIZE}`} xmlns="http://www.w3.org/2000/svg"
 									style={{
 										...styles.clockHand,
@@ -184,8 +185,11 @@ class Clock extends React.Component {
 
 
 		return (
-			// TODO - bind mousedown in constructor
-			<div style={styles.clock} onMouseDown={this.mousedown.bind(this)}>
+			<div
+				style={styles.clock}
+				onMouseDown={this.mousedown}
+				onTouchStart={this.touchstart}
+			>
 				{ renderNumbersAndClockhand.call(this) }
 			</div>
 		)
@@ -217,27 +221,50 @@ class Clock extends React.Component {
 		this.handlePoint(offsetX, offsetY)
 
 		// bind handlers
-		this.dragHandler = this.drag.bind(this)
+		this.mousedragHandler = this.mousedrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
 
 		// add listeners
-		document.addEventListener('mousemove', this.dragHandler, false)
+		document.addEventListener('mousemove', this.mousedragHandler, false)
 		document.addEventListener('mouseup', this.stopDragHandler, false)
 		this.clock.addEventListener('mouseleave', this.stopDragHandler, false)
-
-		// TODO - add touch
 	}
-	drag(e){
+	mousedrag(e){
 		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
 		this.handlePoint(offsetX, offsetY)
 
 		e.preventDefault()
 		return false
 	}
+	touchstart(){
+		// bind handlers
+		this.touchdragHandler = this.touchdrag.bind(this)
+		this.stopDragHandler = this.stopDragHandler.bind(this)
+
+		window.blockMenuHeaderScroll = false
+
+		document.addEventListener('touchmove', this.touchdragHandler, false)
+		document.addEventListener('touchend', this.stopDragHandler, false)
+		document.addEventListener('touchcancel', this.stopDragHandler, false)
+	}
+	touchdrag(e){
+		const touch = e.targetTouches[0];
+		const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
+		this.handlePoint(offsetX, offsetY)
+
+		e.preventDefault()
+		return false
+	}
 	stopDragHandler(){
-		document.removeEventListener('mousemove', this.dragHandler, false)
+		document.removeEventListener('mousemove', this.mousedragHandler, false)
 		document.removeEventListener('mouseup', this.stopDragHandler, false)
 		this.clock.removeEventListener('mouseleave', this.stopDragHandler, false)
+
+		// new
+		document.removeEventListener('touchmove', this.touchdragHandler, false);
+		document.addEventListener('touchend', this.stopDragHandler, false)
+		document.addEventListener('touchcancel', this.stopDragHandler, false)
+		window.blockMenuHeaderScroll = false
 	}
 
 	componentWillUnmount(){
