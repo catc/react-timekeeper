@@ -1,6 +1,11 @@
 import React, { PropTypes } from 'react'
-
 import css from 'reactcss'
+
+import TimeDropdown from './TimeDropdown'
+
+import {
+	CLOCK_DATA
+} from '../helpers/constants'
 
 const DEFAULT_TEXT_COLOR = '#8C8C8C';
 const SELECTED_TEXT_COLOR = '#8EDDFD';
@@ -8,9 +13,13 @@ const SELECTED_TEXT_COLOR = '#8EDDFD';
 class Time extends React.Component {
 	constructor(props){
 		super(props)
+		this.state = {}
+
 		this.toggleMeridiem = this.toggleMeridiem.bind(this)
-		this.changeUnitToHour = props.changeUnit.bind(null, 'hour')
-		this.changeUnitToMinute = props.changeUnit.bind(null, 'minute')
+		this.hourClick = this.hourClick.bind(this)
+		this.minuteClick = this.minuteClick.bind(this)
+		this.closeHourSelect = this.closeHourSelect.bind(this)
+		this.closeMinuteSelect = this.closeMinuteSelect.bind(this)
 	}
 	toggleMeridiem(){
 		if (this.props.meridiem === 'am'){
@@ -20,19 +29,39 @@ class Time extends React.Component {
 		}
 	}
 
+	hourClick(){
+		if (this.props.unit !== 'hour'){
+			this.props.changeUnit('hour')
+		} else {
+			this.setState({ showHourSelect: !this.state.showHourSelect })
+		}
+	}
+	closeHourSelect(){
+		this.setState({ showHourSelect: false })
+	}
+	minuteClick(){
+		if (this.props.unit !== 'minute'){
+			this.props.changeUnit('minute')
+		} else {
+			this.setState({ showMinuteSelect: !this.state.showMinuteSelect })
+		}
+	}
+	closeMinuteSelect(){
+		this.setState({ showMinuteSelect: false })
+	}
+
 	render(){
 		const props = this.props;
-
-
 
 		const styles = css({
 			default: {
 				wrapper: {
 					background: 'white',
-					padding: '24px',
+					padding: '20px 24px',
+					borderRadius: '3px 3px 0 0',
 				},
 				timeWrapper: {
-					left: '28px',
+					left: '22px',
 					position: 'relative'
 				},
 				colon: {
@@ -40,19 +69,26 @@ class Time extends React.Component {
 					// fontWeight: '500',
 					display: 'inline-block',
 					fontSize: '56px',
-					verticalAlign: '2px'
+					verticalAlign: '2px',
+					margin: '0 5px'
 				},
 				time: {
 					color: DEFAULT_TEXT_COLOR,
 					// fontWeight: '500',
 					display: 'inline-block',
-					fontSize: '56px',
+					fontSize: '60px',
 					cursor: 'pointer',
 					userSelect: 'none',
 				},
-				hour: {
+				hourWrapper: {
 					width: '80px',
-					textAlign: 'right'
+					textAlign: 'right',
+					position: 'relative',
+					display: 'inline-block'
+				},
+				minuteWrapper: {
+					position: 'relative',
+					display: 'inline-block',
 				},
 				meridiem: {
 					color: DEFAULT_TEXT_COLOR,
@@ -63,7 +99,7 @@ class Time extends React.Component {
 					fontWeight: '500',
 					padding: '10px 8px',
 					verticalAlign: '1px'
-				}
+				},
 			},
 			isHour: {
 				hour: {
@@ -79,23 +115,60 @@ class Time extends React.Component {
 			isHour: props.unit === 'hour',
 			isMinute: props.unit === 'minute'
 		})
+
 		const formattedMinute = ('0' + props.minute).slice(-2)
 
 		return (
 			<div style={styles.wrapper}>
 
 				<div style={styles.timeWrapper}>
-					<span style={{
-						...styles.time,
-						...styles.hour
-					}} onClick={this.changeUnitToHour}>{props.hour}</span>
+
+					<div style={styles.hourWrapper}>
+						<span
+							style={{
+								...styles.time,
+								...styles.hour
+							}}
+							onClick={this.hourClick}
+						>
+							{props.hour}
+						</span>
+
+						{this.state.showHourSelect ?
+							<TimeDropdown
+								type='hour'
+								updateVal={props.changeHour}
+								val={props.hour}
+								options={ CLOCK_DATA[props.unit].dropdownOptions }
+								close={this.closeHourSelect}
+							/>
+						: ''}
+					</div>
 					
 					<span style={styles.colon}>:</span>
 					
-					<span style={{
-						...styles.time,
-						...styles.minute
-					}} onClick={this.changeUnitToMinute}>{formattedMinute}</span>
+					<div style={styles.minuteWrapper}>
+						<span
+							style={{
+								...styles.time,
+								...styles.minute
+							}}
+							onClick={this.minuteClick}
+						>
+							{formattedMinute}
+						</span>
+
+						{this.state.showMinuteSelect ?
+							<TimeDropdown
+								type='minute'
+								updateVal={props.changeMinute}
+								val={props.minute}
+								options={ CLOCK_DATA[props.unit].dropdownOptions }
+								close={this.closeMinuteSelect}
+							/>
+						: ''}
+					</div>
+
 					
 					<button
 						onClick={this.toggleMeridiem}
@@ -111,6 +184,7 @@ class Time extends React.Component {
 }
 
 Time.propTypes = {
+	unit: PropTypes.string.isRequired,
 	meridiem: PropTypes.string.isRequired,
 
 	changeUnit: PropTypes.func.isRequired,

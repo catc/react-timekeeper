@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react'
-
+import debounce from 'lodash/debounce'
 import parseTime from '../helpers/parse-time'
 import ClockWrapper from './ClockWrapper'
 import Time from './Time'
 
+
+// TODO - replace reactcss with this
+import Radium, { StyleRoot } from 'radium'
 import css from 'reactcss'
 
-class Timepicker  extends React.Component {
+class Timepicker extends React.Component {
 	constructor(props){
 		super(props)
 
@@ -19,6 +22,10 @@ class Timepicker  extends React.Component {
 		this.changeMinute =  this.handleTimeChange.bind(this, 'minute')
 		this.changeUnit =  this.changeUnit.bind(this)
 		this.changeMeridiem = this.handleMeridiemChange.bind(this)
+
+		this.updateParent = debounce(() => {
+			this.props.onChange(this.getTime())
+		}, 80)
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -32,10 +39,11 @@ class Timepicker  extends React.Component {
 	getTime(){
 		const state = this.state;
 		const meridiemAdd = state.meridiem === 'pm' ? 12 : 0
+		const paddedMinute = ('0' + state.minute).slice(-2)
 		return {
-			formatted: `${state.hour}:${state.minute} ${state.meridiem}`,
-			formattedSimple: `${state.hour}:${state.minute}`,
-			formatted24: `${state.hour + meridiemAdd}:${state.minute}`,
+			formatted: `${state.hour}:${paddedMinute} ${state.meridiem}`,
+			formattedSimple: `${state.hour}:${paddedMinute}`,
+			formatted24: `${state.hour + meridiemAdd}:${paddedMinute}`,
 			hour: state.hour,
 			hour24: state.hour + meridiemAdd,
 			minute: state.minute,
@@ -44,7 +52,10 @@ class Timepicker  extends React.Component {
 	}
 
 	handleTimeChange(unit, val){
-		console.debug( 'change ', unit, ' with new: ', val )
+		val = parseInt(val, 10);
+		if (isNaN(val)){
+			return
+		}
 		if (unit === 'hour' && val === 0){
 			val = 12
 		} else if (unit === 'minute' && val === 60){
@@ -55,15 +66,17 @@ class Timepicker  extends React.Component {
 			[unit]: val
 		})
 
-		this.props.onChange && this.props.onChange( this.getTime() )
+		// update on parent
+		this.props.onChange && this.updateParent()
 	}
 	handleMeridiemChange(val){
 		if (val !== this.state.meridiem){
 			this.setState({
 				meridiem: val
 			})
-
-			this.props.onChange && this.props.onChange( this.getTime() )
+			
+			// update on parent
+			this.props.onChange && this.updateParent()
 		}
 	}
 
@@ -92,7 +105,7 @@ class Timepicker  extends React.Component {
 				},
 				doneButton: {
 					display: 'block',
-					color: '#444',
+					color: '#8c8c8c',
 					textTransform: 'uppercase',
 					borderTop: '1px solid #CCC',
 					textAlign: 'center',
@@ -100,7 +113,7 @@ class Timepicker  extends React.Component {
 					padding: '20px 0',
 					fontSize: '14px',
 					letterSpacing: '0.5px',
-					fontWeight: 500
+					// fontWeight: 500
 				}
 			}
 		})
@@ -108,53 +121,60 @@ class Timepicker  extends React.Component {
 		const state = this.state
 		const props = this.props
 		return (
-			<div style={styles.timePicker} className="react-timekeeper">
-				<style>{`
-					.react-timekeeper {
-						-webkit-tap-highlight-color:transparent;
-					}
-					.react-timepicker-button-reset {
-						background: 0;
-						border: 0;
-						box-shadow: none;
-						text-shadow: none;
-						-webkit-appearance: none;
-						-moz-appearance: none;
-						cursor: pointer;
-					}
-					.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
-						outline: none;
-					}
-					.react-timepicker-button-reset::-moz-focus-inner {
-						border: 0;
-						padding: 0;
-					}
-				`}</style>
+			<StyleRoot>
+				<div style={styles.timePicker} className="react-timekeeper">
+					<style>{`
+						.react-timekeeper {
+							-webkit-tap-highlight-color:transparent;
+						}
+						.react-timepicker-button-reset {
+							background: 0;
+							border: 0;
+							box-shadow: none;
+							text-shadow: none;
+							-webkit-appearance: none;
+							-moz-appearance: none;
+							cursor: pointer;
+						}
+						.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
+							outline: none;
+						}
+						.react-timepicker-button-reset::-moz-focus-inner {
+							border: 0;
+							padding: 0;
+						}
+						.react-timekeeper-noscroll {
+							overflow: hidden;
+						}
+					`}</style>
 
-				<Time
-					unit={state.unit}
-					hour={state.hour}
-					minute={state.minute}
-					meridiem={state.meridiem}
+					<Time
+						unit={state.unit}
+						hour={state.hour}
+						minute={state.minute}
+						meridiem={state.meridiem}
 
-					changeMeridiem={this.changeMeridiem}
-					changeUnit={this.changeUnit}
-				/>
-				
-				<ClockWrapper
-					unit={state.unit}
-					hour={state.hour}
-					minute={state.minute}
-					meridiem={state.meridiem}
-					hourFormat={props.hourFormat}
+						changeMeridiem={this.changeMeridiem}
+						changeHour={this.changeHour}
+						changeMinute={this.changeMinute}
+						changeUnit={this.changeUnit}
+					/>
+					
+					<ClockWrapper
+						unit={state.unit}
+						hour={state.hour}
+						minute={state.minute}
+						meridiem={state.meridiem}
+						hourFormat={props.hourFormat}
 
-					changeHour={this.changeHour}
-					changeMinute={this.changeMinute}
-					changeMeridiem={this.changeMeridiem}
-				/>
-				
-				<span style={styles.doneButton}>Done</span>
-			</div>
+						changeHour={this.changeHour}
+						changeMinute={this.changeMinute}
+						changeMeridiem={this.changeMeridiem}
+					/>
+					
+					<span style={styles.doneButton}>Done</span>
+				</div>
+			</StyleRoot>
 		)
 	}
 }

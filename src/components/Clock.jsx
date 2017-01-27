@@ -4,6 +4,10 @@ import css from 'reactcss'
 
 import calcOffset from '../helpers/offset'
 
+import {
+	CLOCK_DATA
+} from '../helpers/constants'
+
 // radius of clock, in px
 const CLOCK_RADIUS = 120
 const CLOCK_SIZE = CLOCK_RADIUS * 2
@@ -34,17 +38,6 @@ function deg(rad){
 	return rad * (180 / pi)
 }
 
-const CLOCK_DATA = {
-	hour: {
-		numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-		increments: 12
-	},
-	minute: {
-		// TODO - change this to string
-		numbers: ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'],
-		increments: 60
-	}
-}
 
 class Clock extends React.Component {
 	constructor(props){
