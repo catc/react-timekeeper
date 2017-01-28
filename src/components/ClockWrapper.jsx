@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import css from 'reactcss'
+import Radium from 'radium'
 
 import Clock from './Clock'
 
@@ -8,57 +8,45 @@ class ClockWrapper extends React.Component {
 		const props = this.props
 
 		const MERIDIEM_SELECT_SIZE = 46;
-		const styles = css({
-			default: {
-				clockWrapper: {
-					textAlign: 'center',
-					padding: '16px 0 14px',
-					// background: '#f9f9f9',
-					background: '#f4f4f4',
-				},
-				meridiemWrapper: {
-					textAlign: 'left',
-					padding: '0 30px',
-					marginTop: '-20px',
-					position: 'relative',
-					zIndex: 10
-				},
-				meridiem: {
-					background: 'white',
-					fontSize: '16px',
-					color: '#898989',
-					display: 'inline-block',
-					// position: 'absolute',
-					padding: 0,
-					cursor: 'pointer',
-					borderRadius: '99px',
-					width: MERIDIEM_SELECT_SIZE,
-					height: MERIDIEM_SELECT_SIZE,
 
-					textAlign: 'center',
-					lineHeight: MERIDIEM_SELECT_SIZE + 'px',
-					transition: '0.15s ease-out'
-				},
-				leftMeridiem: {},
-				rightMeridiem: {
-					float: 'right'
-				}
+		const styles = {
+			clockWrapper: {
+				textAlign: 'center',
+				padding: '16px 0 14px',
+				// background: '#f9f9f9',
+				background: '#f4f4f4',
 			},
-			leftM: {
-				leftMeridiem: {
-					background: '#E1EFF6'
-				}
+			meridiemWrapper: {
+				textAlign: 'left',
+				padding: '0 30px',
+				marginTop: '-20px',
+				position: 'relative',
+				zIndex: 10
 			},
-			rightM: {
-				rightMeridiem: {
-					background: '#E1EFF6'
-				}
+			meridiem: {
+				background: 'white',
+				fontSize: '16px',
+				color: '#898989',
+				display: 'inline-block',
+				// position: 'absolute',
+				padding: 0,
+				cursor: 'pointer',
+				borderRadius: '99px',
+				width: MERIDIEM_SELECT_SIZE,
+				height: MERIDIEM_SELECT_SIZE,
+
+				textAlign: 'center',
+				lineHeight: MERIDIEM_SELECT_SIZE + 'px',
+				transition: '0.15s ease-out'
+			},
+			meridiemRight: {
+				float: 'right',
+			},
+			meridiemSelected: {
+				background: '#E1EFF6'
 			}
-		}, {
-			leftM: props.meridiem === 'am',
-			rightM: props.meridiem === 'pm'
-		});
-
+		}
+		
 		return (
 			<div style={styles.clockWrapper}>
 				<Clock
@@ -74,18 +62,19 @@ class ClockWrapper extends React.Component {
 					<div style={styles.meridiemWrapper}>
 						<button
 							className="react-timepicker-button-reset"
-							style={{
-								...styles.meridiem,
-								...styles.leftMeridiem
-							}}
+							style={[
+								styles.meridiem,
+								props.meridiem === 'am' && styles.meridiemSelected
+							]}
 							onClick={() => { props.changeMeridiem('am') }}
 						>AM</button>
 						<button
 							className="react-timepicker-button-reset"
-							style={{
-								...styles.meridiem,
-								...styles.rightMeridiem
-							}}
+							style={[
+								styles.meridiem,
+								styles.meridiemRight,
+								props.meridiem === 'pm' && styles.meridiemSelected
+							]}
 							onClick={() => { props.changeMeridiem('pm') }}
 						>PM</button>
 					</div>
@@ -107,4 +96,4 @@ ClockWrapper.propTypes = {
 	changeMeridiem: PropTypes.func.isRequired
 }
 
-export default ClockWrapper
+export default Radium(ClockWrapper)

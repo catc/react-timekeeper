@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { spring, TransitionMotion } from 'react-motion';
+import Radium from 'radium'
 import css from 'reactcss'
 
 import calcOffset from '../helpers/offset'
@@ -47,41 +48,37 @@ class Clock extends React.Component {
 	}
 	render(){
 		const props = this.props
-		const styles = css({
-			default: {
-				clock: {
-					display: 'inline-block',
-					borderRadius: '200px',
-					background: 'white',
-					width: `${CLOCK_SIZE}px`,
-					height: `${CLOCK_SIZE}px`,
-					position: 'relative',
-					cursor: 'pointer',
-				},
-				numberPositioning: {
-					display: 'inline-block',
-					position: 'absolute',
-					color: '#898989',
-					fontSize: '18px',
-					pointerEvents: 'none',
 
-					// background: '#E6F7FF',
-					// border: '1px solid green',
-					// background: '#00acff',
-					borderRadius: '99px',
-					width: NUMBER_SIZE,
-					height: NUMBER_SIZE,
-
-					textAlign: 'center',
-					lineHeight: NUMBER_SIZE + 'px',
-					
-					zIndex: 5,
-				},
-				clockHand: {
-					position: 'relative'
-				}
+		const styles = {
+			clock: {
+				display: 'inline-block',
+				borderRadius: '200px',
+				background: 'white',
+				width: `${CLOCK_SIZE}px`,
+				height: `${CLOCK_SIZE}px`,
+				position: 'relative',
+				cursor: 'pointer',
 			},
-		});
+			numberPositioning: {
+				display: 'inline-block',
+				position: 'absolute',
+				color: '#898989',
+				fontSize: '18px',
+				pointerEvents: 'none',
+
+				borderRadius: '99px',
+				width: NUMBER_SIZE,
+				height: NUMBER_SIZE,
+
+				textAlign: 'center',
+				lineHeight: NUMBER_SIZE + 'px',
+				
+				zIndex: 5,
+			},
+			clockHand: {
+				position: 'relative'
+			}
+		}
 
 		function renderNumbersAndClockhand(){
 			const unit = props.unit
@@ -277,4 +274,4 @@ Clock.propTypes = {
 	changeMinute: PropTypes.func.isRequired
 }
 
-export default Clock
+export default Radium(Clock)

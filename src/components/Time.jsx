@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
-import css from 'reactcss'
+import Radium from 'radium'
 
 import TimeDropdown from './TimeDropdown'
-
 import {
 	CLOCK_DATA
 } from '../helpers/constants'
@@ -53,68 +52,56 @@ class Time extends React.Component {
 	render(){
 		const props = this.props;
 
-		const styles = css({
-			default: {
-				wrapper: {
-					background: 'white',
-					padding: '20px 24px',
-					borderRadius: '3px 3px 0 0',
-				},
-				timeWrapper: {
-					left: '22px',
-					position: 'relative'
-				},
-				colon: {
-					color: DEFAULT_TEXT_COLOR,
-					// fontWeight: '500',
-					display: 'inline-block',
-					fontSize: '56px',
-					verticalAlign: '2px',
-					margin: '0 5px'
-				},
-				time: {
-					color: DEFAULT_TEXT_COLOR,
-					// fontWeight: '500',
-					display: 'inline-block',
-					fontSize: '60px',
-					cursor: 'pointer',
-					userSelect: 'none',
-				},
-				hourWrapper: {
-					width: '80px',
-					textAlign: 'right',
-					position: 'relative',
-					display: 'inline-block'
-				},
-				minuteWrapper: {
-					position: 'relative',
-					display: 'inline-block',
-				},
-				meridiem: {
-					color: DEFAULT_TEXT_COLOR,
-					display: 'inline-block',
-					fontSize: '13px',
-					textTransform: 'uppercase',
-					marginLeft: '2px',
-					fontWeight: '500',
-					padding: '10px 8px',
-					verticalAlign: '1px'
-				},
+		const styles = {
+			wrapper: {
+				background: 'white',
+				padding: '20px 24px',
+				borderRadius: '3px 3px 0 0',
 			},
-			isHour: {
-				hour: {
-					color: SELECTED_TEXT_COLOR
-				}
+			timeWrapper: {
+				left: '22px',
+				position: 'relative'
 			},
-			isMinute: {
-				minute: {
-					color: SELECTED_TEXT_COLOR
-				}
-			}
-		}, {
-			isHour: props.unit === 'hour',
-			isMinute: props.unit === 'minute'
-		})
+			colon: {
+				color: DEFAULT_TEXT_COLOR,
+				// fontWeight: '500',
+				display: 'inline-block',
+				fontSize: '56px',
+				verticalAlign: '2px',
+				margin: '0 5px'
+			},
+			time: {
+				color: DEFAULT_TEXT_COLOR,
+				// fontWeight: '500',
+				display: 'inline-block',
+				fontSize: '60px',
+				cursor: 'pointer',
+				userSelect: 'none',
+			},
+			'timeSelected': {
+				color: SELECTED_TEXT_COLOR
+			},
+			hourWrapper: {
+				width: '80px',
+				textAlign: 'right',
+				position: 'relative',
+				display: 'inline-block'
+			},
+			minuteWrapper: {
+				position: 'relative',
+				display: 'inline-block',
+			},
+			meridiem: {
+				color: DEFAULT_TEXT_COLOR,
+				display: 'inline-block',
+				fontSize: '13px',
+				textTransform: 'uppercase',
+				marginLeft: '2px',
+				fontWeight: '500',
+				padding: '10px 8px',
+				verticalAlign: '1px'
+			},
+		}
 
 		const formattedMinute = ('0' + props.minute).slice(-2)
 
@@ -125,10 +112,10 @@ class Time extends React.Component {
 
 					<div style={styles.hourWrapper}>
 						<span
-							style={{
-								...styles.time,
-								...styles.hour
-							}}
+							style={[
+								styles.time,
+								props.unit === 'hour' && styles.timeSelected
+							]}
 							onClick={this.hourClick}
 						>
 							{props.hour}
@@ -149,10 +136,10 @@ class Time extends React.Component {
 					
 					<div style={styles.minuteWrapper}>
 						<span
-							style={{
-								...styles.time,
-								...styles.minute
-							}}
+							style={[
+								styles.time,
+								props.unit === 'minute' && styles.timeSelected
+							]}
 							onClick={this.minuteClick}
 						>
 							{formattedMinute}
@@ -191,4 +178,4 @@ Time.propTypes = {
 	changeMeridiem: PropTypes.func.isRequired
 }
 
-export default Time
+export default Radium(Time)

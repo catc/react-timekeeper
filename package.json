@@ -40,8 +40,8 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "react": "^15.4.2",
+    "lodash": "^4.17.4",
+    "radium": "^0.18.1",
     "react-motion": "^0.4.7",
-    "reactcss": "^1.1.1"
   }
 }
