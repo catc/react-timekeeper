@@ -20,7 +20,7 @@ class Timepicker extends React.Component {
 		this.changeUnit =  this.changeUnit.bind(this)
 		this.changeMeridiem = this.handleMeridiemChange.bind(this)
 
-		this.updateParent = debounce(() => {
+		this.timeChangeHandler = debounce(() => {
 			this.props.onChange(this.getTime())
 		}, 80)
 	}
@@ -48,7 +48,7 @@ class Timepicker extends React.Component {
 		}
 	}
 
-	handleTimeChange(unit, val){
+	handleTimeChange(unit, val, canChangeUnit){
 		val = parseInt(val, 10);
 		if (isNaN(val)){
 			return
@@ -63,8 +63,15 @@ class Timepicker extends React.Component {
 			[unit]: val
 		})
 
-		// update on parent
-		this.props.onChange && this.updateParent()
+		const props = this.props
+		// update time on parent
+		props.onChange && this.timeChangeHandler()
+
+		if (canChangeUnit && unit === 'hour' && props.switchToMinuteOnHourSelect){
+			this.changeUnit('minute')
+		} else if (canChangeUnit && unit === 'minute' && props.closeOnMinuteSelect){
+			props.onDoneClick && props.onDoneClick()
+		}
 	}
 	handleMeridiemChange(val){
 		if (val !== this.state.meridiem){
@@ -73,7 +80,7 @@ class Timepicker extends React.Component {
 			})
 			
 			// update on parent
-			this.props.onChange && this.updateParent()
+			this.props.onChange && this.timeChangeHandler()
 		}
 	}
 
@@ -177,12 +184,12 @@ class Timepicker extends React.Component {
 
 Timepicker.propTypes = {
 	time: PropTypes.string,
-	hourFormat: PropTypes.number,
 	onChange: PropTypes.func,
+	hourFormat: PropTypes.number,
 	
-	// TODO - update props based on API in readme
-	displayDone: PropTypes.bool,
-	doneOnClick: PropTypes.func,
+	displayDoneButton: PropTypes.bool,
+	onDoneClick: PropTypes.func,
+	switchToMinuteOnHourSelect: PropTypes.bool,
 	closeOnMinuteSelect: PropTypes.bool
 }
 

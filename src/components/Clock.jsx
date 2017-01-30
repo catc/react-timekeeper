@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { spring, TransitionMotion } from 'react-motion';
 import Radium from 'radium'
-import css from 'reactcss'
 
 import calcOffset from '../helpers/offset'
 
@@ -185,7 +184,7 @@ class Clock extends React.Component {
 		)
 	}
 	
-	handlePoint(clientX, clientY){
+	handlePoint(clientX, clientY, canChangeUnit){
 		const x = clientX - CLOCK_RADIUS
 		const y = -clientY + CLOCK_RADIUS
 
@@ -199,17 +198,13 @@ class Clock extends React.Component {
 		const selected = Math.round( d / 360 * CLOCK_DATA[unit].increments )
 
 		if (unit === 'hour'){
-			this.props.changeHour(selected)
+			this.props.changeHour(selected, canChangeUnit)
 		} else if (unit === 'minute'){
-			this.props.changeMinute(selected)
+			this.props.changeMinute(selected, canChangeUnit)
 		}
 	}
 
-	mousedown(e){
-		// calculate time based on area clicked
-		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
-		this.handlePoint(offsetX, offsetY)
-
+	mousedown(){
 		// bind handlers
 		this.mousedragHandler = this.mousedrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
@@ -245,16 +240,25 @@ class Clock extends React.Component {
 		e.preventDefault()
 		return false
 	}
-	stopDragHandler(){
+	stopDragHandler(e){
 		document.removeEventListener('mousemove', this.mousedragHandler, false)
 		document.removeEventListener('mouseup', this.stopDragHandler, false)
 		this.clock.removeEventListener('mouseleave', this.stopDragHandler, false)
 
-		// new
 		document.removeEventListener('touchmove', this.touchdragHandler, false);
 		document.addEventListener('touchend', this.stopDragHandler, false)
 		document.addEventListener('touchcancel', this.stopDragHandler, false)
 		window.blockMenuHeaderScroll = false
+
+		const evType = e.type;
+		if (evType === 'mouseup'){
+			const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
+			this.handlePoint(offsetX, offsetY, true)
+		} else if (evType === 'touchcancel' || evType === 'touchend'){
+			const touch = e.targetTouches[0];
+			const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
+			this.handlePoint(offsetX, offsetY, true)
+		}
 	}
 
 	componentWillUnmount(){
