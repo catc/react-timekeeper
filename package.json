@@ -42,6 +42,6 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "radium": "^0.18.1",
-    "react-motion": "^0.4.7",
+    "react-motion": "^0.4.7"
   }
 }

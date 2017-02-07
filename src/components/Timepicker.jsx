@@ -167,7 +167,6 @@ class Timepicker extends React.Component {
 						hour={state.hour}
 						minute={state.minute}
 						meridiem={state.meridiem}
-						hourFormat={props.hourFormat}
 
 						changeHour={this.changeHour}
 						changeMinute={this.changeMinute}
@@ -185,7 +184,6 @@ class Timepicker extends React.Component {
 Timepicker.propTypes = {
 	time: PropTypes.string,
 	onChange: PropTypes.func,
-	hourFormat: PropTypes.number,
 	
 	displayDoneButton: PropTypes.bool,
 	onDoneClick: PropTypes.func,

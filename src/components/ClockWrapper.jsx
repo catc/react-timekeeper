@@ -58,27 +58,25 @@ class ClockWrapper extends React.Component {
 					changeMinute={props.changeMinute}
 				/>
 
-				{props.hourFormat === 24 ? '' :
-					<div style={styles.meridiemWrapper}>
-						<button
-							className="react-timepicker-button-reset"
-							style={[
-								styles.meridiem,
-								props.meridiem === 'am' && styles.meridiemSelected
-							]}
-							onClick={() => { props.changeMeridiem('am') }}
-						>AM</button>
-						<button
-							className="react-timepicker-button-reset"
-							style={[
-								styles.meridiem,
-								styles.meridiemRight,
-								props.meridiem === 'pm' && styles.meridiemSelected
-							]}
-							onClick={() => { props.changeMeridiem('pm') }}
-						>PM</button>
-					</div>
-				}
+				<div style={styles.meridiemWrapper}>
+					<button
+						className="react-timepicker-button-reset"
+						style={[
+							styles.meridiem,
+							props.meridiem === 'am' && styles.meridiemSelected
+						]}
+						onClick={() => { props.changeMeridiem('am') }}
+					>AM</button>
+					<button
+						className="react-timepicker-button-reset"
+						style={[
+							styles.meridiem,
+							styles.meridiemRight,
+							props.meridiem === 'pm' && styles.meridiemSelected
+						]}
+						onClick={() => { props.changeMeridiem('pm') }}
+					>PM</button>
+				</div>
 			</div>
 		)
 	}
@@ -89,7 +87,6 @@ ClockWrapper.propTypes = {
 	hour: PropTypes.number.isRequired,
 	minute: PropTypes.number.isRequired,
 	meridiem: PropTypes.string.isRequired,
-	hourFormat: PropTypes.number,
 
 	changeHour: PropTypes.func.isRequired,
 	changeMinute: PropTypes.func.isRequired,
