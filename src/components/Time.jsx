@@ -1,21 +1,9 @@
 import React, { PropTypes } from 'react'
-import Radium, { keyframes } from 'radium'
+import Radium from 'radium'
 
 import TimeDropdown from './TimeDropdown'
-import {
-	CLOCK_DATA
-} from '../helpers/constants'
-
-const DEFAULT_TEXT_COLOR = '#8C8C8C';
-const SELECTED_TEXT_COLOR = '#8EDDFD';
-
-const popInOut = keyframes({
-	'from': { transform: 'scale(1)' },
-	'30%': { transform: 'scale(0.88)' },
-	'60%': { transform: 'scale(1.05)' },
-	'to': { transform: 'scale(1)' },
-}, 'popInOut')
-
+import { CLOCK_DATA } from '../helpers/data';
+import { popInOut } from '../helpers/animations';
 
 class Time extends React.Component {
 	constructor(props){
@@ -59,10 +47,10 @@ class Time extends React.Component {
 
 	render(){
 		const props = this.props;
-
+		const config = props.config;
 		const styles = {
 			wrapper: {
-				background: 'white',
+				background: config.TIME_BACKGROUND,
 				padding: '20px 24px',
 				borderRadius: '3px 3px 0 0',
 			},
@@ -71,7 +59,7 @@ class Time extends React.Component {
 				position: 'relative'
 			},
 			colon: {
-				color: DEFAULT_TEXT_COLOR,
+				color: config.TIME_DEFAULT_COLOR,
 				// fontWeight: '500',
 				display: 'inline-block',
 				fontSize: '56px',
@@ -79,7 +67,7 @@ class Time extends React.Component {
 				margin: '0 5px'
 			},
 			time: {
-				color: DEFAULT_TEXT_COLOR,
+				color: config.TIME_DEFAULT_COLOR,
 				// fontWeight: '500',
 				display: 'inline-block',
 				fontSize: '60px',
@@ -87,7 +75,7 @@ class Time extends React.Component {
 				userSelect: 'none',
 			},
 			'timeSelected': {
-				color: SELECTED_TEXT_COLOR,
+				color: config.TIME_SELECTED_COLOR,
 				animation: 'x 0.6s ease-out both',
 				animationName: popInOut
 			},
@@ -102,7 +90,7 @@ class Time extends React.Component {
 				display: 'inline-block',
 			},
 			meridiem: {
-				color: DEFAULT_TEXT_COLOR,
+				color: config.TIME_DEFAULT_COLOR,
 				display: 'inline-block',
 				fontSize: '13px',
 				textTransform: 'uppercase',
@@ -133,6 +121,7 @@ class Time extends React.Component {
 
 						{this.state.showHourSelect ?
 							<TimeDropdown
+								config={props.config}
 								type='hour'
 								updateVal={props.changeHour}
 								val={props.hour}
@@ -157,6 +146,7 @@ class Time extends React.Component {
 
 						{this.state.showMinuteSelect ?
 							<TimeDropdown
+								config={props.config}
 								type='minute'
 								updateVal={props.changeMinute}
 								val={props.minute}
@@ -181,6 +171,7 @@ class Time extends React.Component {
 }
 
 Time.propTypes = {
+	config: PropTypes.object.isRequired,
 	unit: PropTypes.string.isRequired,
 	meridiem: PropTypes.string.isRequired,
 

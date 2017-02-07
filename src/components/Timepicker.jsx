@@ -6,6 +6,9 @@ import parseTime from '../helpers/parse-time'
 import ClockWrapper from './ClockWrapper'
 import Time from './Time'
 
+import { CLOCK_DATA } from '../helpers/data';
+import * as defaultConfig from '../helpers/config';
+
 class Timepicker extends React.Component {
 	constructor(props){
 		super(props)
@@ -14,6 +17,10 @@ class Timepicker extends React.Component {
 			...parseTime(props.time),
 			unit: 'hour'
 		}
+
+		// override any default styles
+		const config = Object.assign({}, defaultConfig, props.config)
+		this.config = config
 
 		this.changeHour =  this.handleTimeChange.bind(this, 'hour')
 		this.changeMinute =  this.handleTimeChange.bind(this, 'minute')
@@ -93,10 +100,11 @@ class Timepicker extends React.Component {
 	}
 
 	render(){
+		const config = this.config
 		const styles = {
 			timePicker: {
-				fontFamily: '"Roboto", serif',
-				background: '#F2F2F2',
+				fontFamily: config.FONT_FAMILY,
+				background: config.TIMEPICKER_BACKGROUND,
 				borderRadius: '3px',
 				// border: '1px solid #DDD',
 				display: 'inline-block',
@@ -108,9 +116,9 @@ class Timepicker extends React.Component {
 			},
 			doneButton: {
 				display: 'block',
-				color: '#8c8c8c',
+				color: config.DONE_BUTTON_COLOR,
 				textTransform: 'uppercase',
-				borderTop: '1px solid #CCC',
+				borderTop: '1px solid ' + config.DONE_BUTTON_BORDER_COLOR,
 				textAlign: 'center',
 				cursor: 'pointer',
 				padding: '20px 0',
@@ -127,7 +135,7 @@ class Timepicker extends React.Component {
 				<div style={styles.timePicker} className="react-timekeeper">
 					<style>{`
 						.react-timekeeper {
-							-webkit-tap-highlight-color:transparent;
+							-webkit-tap-highlight-color: transparent;
 						}
 						.react-timepicker-button-reset {
 							background: 0;
@@ -151,6 +159,7 @@ class Timepicker extends React.Component {
 					`}</style>
 
 					<Time
+						config={this.config}
 						unit={state.unit}
 						hour={state.hour}
 						minute={state.minute}
@@ -163,6 +172,7 @@ class Timepicker extends React.Component {
 					/>
 					
 					<ClockWrapper
+						config={this.config}
 						unit={state.unit}
 						hour={state.hour}
 						minute={state.minute}
@@ -188,7 +198,8 @@ Timepicker.propTypes = {
 	displayDoneButton: PropTypes.bool,
 	onDoneClick: PropTypes.func,
 	switchToMinuteOnHourSelect: PropTypes.bool,
-	closeOnMinuteSelect: PropTypes.bool
+	closeOnMinuteSelect: PropTypes.bool,
+	config: PropTypes.object
 }
 
 export default Radium(Timepicker)

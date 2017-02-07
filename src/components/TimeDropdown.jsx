@@ -1,12 +1,6 @@
 import React, { PropTypes } from 'react'
-import Radium, { keyframes } from 'radium'
-
-const SELECTED_OPTION_COLOR = '#EAF8FF';
-
-const fadeIn = keyframes({
-	'0%': { opacity: 0 },
-	'100%': { opacity: 1 },
-}, 'fadeIn');
+import Radium from 'radium'
+import { fadeIn } from '../helpers/animations';
 
 class TimeDropdown extends React.Component {
 	constructor(props){
@@ -59,12 +53,13 @@ class TimeDropdown extends React.Component {
 
 	render(){
 		const props = this.props;
+		const config = props.config;
 		const styles = {
 			wrapper: {
 				position: 'absolute',
 				display: 'inline-block',
 				background: 'white',
-				border: '1px solid #f4f4f4',
+				border: '1px solid ' + config.DROPDOWN_BORDER,
 				borderRadius: '2px',
 				padding: '6px 0',
 				zIndex: '20',
@@ -92,10 +87,10 @@ class TimeDropdown extends React.Component {
 				background: 'transparent',
 				padding: '8px 30px',
 				fontSize: '18px',
-				color: '#8c8c8c',
+				color: config.DROPDOWN_COLOR,
 				cursor: 'pointer',
 				':hover': {
-					background: SELECTED_OPTION_COLOR
+					background: config.DROPDOWN_SELECTED_COLOR
 				}
 			}
 		}
@@ -115,7 +110,7 @@ class TimeDropdown extends React.Component {
 							key={opt}
 							style={{
 								...styles.option,
-								background: opt === val ? SELECTED_OPTION_COLOR : ''
+								background: opt === val ? config.DROPDOWN_SELECTED_COLOR : ''
 							}}
 							ref={el => {opt === val ? this.selected = el : ''}}
 							onClick={() => this.selectTime(opt)}
@@ -130,6 +125,7 @@ class TimeDropdown extends React.Component {
 }
 
 TimeDropdown.propTypes = {
+	config: PropTypes.object.isRequired,
 	val: PropTypes.number.isRequired,
 	options: PropTypes.array.isRequired,
 	close: PropTypes.func.isRequired,

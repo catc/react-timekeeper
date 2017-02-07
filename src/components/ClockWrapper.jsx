@@ -3,18 +3,19 @@ import Radium from 'radium'
 
 import Clock from './Clock'
 
+const MERIDIEM_SELECT_SIZE = 46;
+
 class ClockWrapper extends React.Component {
 	render(){
 		const props = this.props
-
-		const MERIDIEM_SELECT_SIZE = 46;
+		const config = props.config
 
 		const styles = {
 			clockWrapper: {
 				textAlign: 'center',
 				padding: '16px 0 14px',
 				// background: '#f9f9f9',
-				background: '#f4f4f4',
+				background: config.CLOCK_WRAPPER_BACKGROUND,
 			},
 			meridiemWrapper: {
 				textAlign: 'left',
@@ -24,11 +25,10 @@ class ClockWrapper extends React.Component {
 				zIndex: 10
 			},
 			meridiem: {
-				background: 'white',
+				background: config.CLOCK_WRAPPER_MERIDIEM_BACKGROUND,
 				fontSize: '16px',
-				color: '#898989',
+				color: config.CLOCK_WRAPPER_MERIDIEM_COLOR,
 				display: 'inline-block',
-				// position: 'absolute',
 				padding: 0,
 				cursor: 'pointer',
 				borderRadius: '99px',
@@ -43,13 +43,14 @@ class ClockWrapper extends React.Component {
 				float: 'right',
 			},
 			meridiemSelected: {
-				background: '#E1EFF6'
+				background: config.CLOCK_WRAPPER_MERIDIEM_COLOR_SELECTED
 			}
 		}
 		
 		return (
 			<div style={styles.clockWrapper}>
 				<Clock
+					config={props.config}
 					hour={props.hour}
 					minute={props.minute}
 					unit={props.unit}
@@ -83,6 +84,7 @@ class ClockWrapper extends React.Component {
 }
 
 ClockWrapper.propTypes = {
+	config: PropTypes.object.isRequired,
 	unit: PropTypes.string.isRequired,
 	hour: PropTypes.number.isRequired,
 	minute: PropTypes.number.isRequired,

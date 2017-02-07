@@ -3,10 +3,8 @@ import { spring, TransitionMotion } from 'react-motion';
 import Radium from 'radium'
 
 import calcOffset from '../helpers/offset'
+import { CLOCK_DATA } from '../helpers/data';
 
-import {
-	CLOCK_DATA
-} from '../helpers/constants'
 
 // radius of clock, in px
 const CLOCK_RADIUS = 120
@@ -46,13 +44,13 @@ class Clock extends React.Component {
 		this.touchstart = this.touchstart.bind(this)
 	}
 	render(){
-		const props = this.props
-
+		const props = this.props;
+		const config = props.config;
 		const styles = {
 			clock: {
 				display: 'inline-block',
 				borderRadius: '200px',
-				background: 'white',
+				background: config.CLOCK_BACKGROUND,
 				width: `${CLOCK_SIZE}px`,
 				height: `${CLOCK_SIZE}px`,
 				position: 'relative',
@@ -61,7 +59,7 @@ class Clock extends React.Component {
 			numberPositioning: {
 				display: 'inline-block',
 				position: 'absolute',
-				color: '#898989',
+				color: config.CLOCK_NUMBER_COLOR,
 				fontSize: '18px',
 				pointerEvents: 'none',
 
@@ -116,17 +114,17 @@ class Clock extends React.Component {
 			return <TransitionMotion {...animationOptions}>
 				{interpolatedStyles =>
 					<div>
-						{interpolatedStyles.map(config => {
-							const data = CLOCK_DATA[config.data]
+						{interpolatedStyles.map(anim => {
+							const data = CLOCK_DATA[anim.data]
 
 							let showIntermediateValueDisplay;
-							if (config.data === 'minute' && props.minute%5){
+							if (anim.data === 'minute' && props.minute%5){
 								showIntermediateValueDisplay = <circle cx={CLOCK_RADIUS} cy={24} r={4}
-									fill='#ade2fb'
+									fill={config.CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND}
 								/>
 							}
 							
-							return <div style={{position: 'absolute'}} key={config.data} ref={el => this.clock = el}>
+							return <div style={{position: 'absolute'}} key={anim.data} ref={el => this.clock = el}>
 								{data.numbers.map((numberString, i) => {
 									const num = i + 1;
 									return (
@@ -134,9 +132,9 @@ class Clock extends React.Component {
 											key={numberString}
 											style={{
 												...styles.numberPositioning,
-												opacity: config.style.opacity,
-												left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - config.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
-												top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - config.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
+												opacity: anim.style.opacity,
+												left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - anim.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
+												top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - anim.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
 											}}
 										>
 											{numberString}
@@ -148,19 +146,19 @@ class Clock extends React.Component {
 								<svg width={CLOCK_SIZE} height={CLOCK_SIZE} viewBox={`0 0 ${CLOCK_SIZE} ${CLOCK_SIZE}`} xmlns="http://www.w3.org/2000/svg"
 									style={{
 										...styles.clockHand,
-										opacity: config.style.handOpacity,
+										opacity: anim.style.handOpacity,
 									}}
 								>
 									<g transform={`rotate(${handRotation} ${CLOCK_RADIUS} ${CLOCK_RADIUS})`}>
 										<line x1={CLOCK_RADIUS} y1={CLOCK_RADIUS} x2={CLOCK_RADIUS} y2={CLOCK_RADIUS - CLOCK_HAND_LENGTH}
 											strokeWidth="1"
-											stroke="#BCEAFF"
+											stroke={config.CLOCK_HAND_ARM}
 										/>
 										<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5}
-											fill='#BCEAFF'
+											fill={config.CLOCK_HAND_ARM}
 										/>
 										<circle cx={CLOCK_RADIUS} cy={24} r={NUMBER_SIZE / 2}
-											fill='#E6F7FF'
+											fill={config.CLOCK_HAND_CIRCLE_BACKGROUND}
 										/>
 										{showIntermediateValueDisplay}
 									</g>
@@ -270,6 +268,7 @@ class Clock extends React.Component {
 
 
 Clock.propTypes = {
+	config: PropTypes.object.isRequired,
 	hour: PropTypes.number.isRequired,
 	minute: PropTypes.number.isRequired,
 	unit: PropTypes.string.isRequired,
