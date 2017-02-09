@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import Radium from 'radium'
 import { fadeIn } from '../helpers/animations';
 
-class TimeDropdown extends React.Component {
+export class TimeDropdown extends React.Component {
 	constructor(props){
 		super(props)
 

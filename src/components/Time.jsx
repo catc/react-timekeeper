@@ -5,7 +5,7 @@ import TimeDropdown from './TimeDropdown'
 import { CLOCK_DATA } from '../helpers/data';
 import { popInOut } from '../helpers/animations';
 
-class Time extends React.Component {
+export class Time extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {}
@@ -110,6 +110,7 @@ class Time extends React.Component {
 
 					<div style={styles.hourWrapper}>
 						<span
+							className="react-timepicker__hour-select"
 							style={[
 								styles.time,
 								props.unit === 'hour' && styles.timeSelected
@@ -135,6 +136,7 @@ class Time extends React.Component {
 					
 					<div style={styles.minuteWrapper}>
 						<span
+							className="react-timepicker__minute-select"
 							style={[
 								styles.time,
 								props.unit === 'minute' && styles.timeSelected
@@ -160,7 +162,7 @@ class Time extends React.Component {
 					<button
 						onClick={this.toggleMeridiem}
 						style={styles.meridiem}
-						className="react-timepicker-button-reset"
+						className="react-timepicker-button-reset react-timepicker__meridiem-toggle"
 					>
 						{props.meridiem}
 					</button>

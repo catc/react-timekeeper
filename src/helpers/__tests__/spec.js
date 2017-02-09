@@ -1,4 +1,4 @@
-import parse from './parse-time';
+import parse from '../parse-time';
 
 describe('helpers/parse-time', () => {
 	describe('pass string', () => {
