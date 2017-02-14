@@ -5,7 +5,7 @@ import Clock from './Clock'
 
 const MERIDIEM_SELECT_SIZE = 46;
 
-class ClockWrapper extends React.Component {
+export class ClockWrapper extends React.Component {
 	render(){
 		const props = this.props
 		const config = props.config
@@ -61,7 +61,7 @@ class ClockWrapper extends React.Component {
 
 				<div style={styles.meridiemWrapper}>
 					<button
-						className="react-timepicker-button-reset"
+						className="react-timepicker-button-reset type_am"
 						style={[
 							styles.meridiem,
 							props.meridiem === 'am' && styles.meridiemSelected
@@ -69,7 +69,7 @@ class ClockWrapper extends React.Component {
 						onClick={() => { props.changeMeridiem('am') }}
 					>AM</button>
 					<button
-						className="react-timepicker-button-reset"
+						className="react-timepicker-button-reset type_pm"
 						style={[
 							styles.meridiem,
 							styles.meridiemRight,

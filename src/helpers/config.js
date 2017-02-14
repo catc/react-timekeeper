@@ -2,7 +2,7 @@
 
 // main container
 export const TIMEPICKER_BACKGROUND = '#F2F2F2';
-export const FONT_FAMILY = '"Roboto", serif';
+export const FONT_FAMILY = '"Roboto", sans-serif';
 export const DONE_BUTTON_COLOR = '#8c8c8c';
 export const DONE_BUTTON_BORDER_COLOR = '#CCC';
 

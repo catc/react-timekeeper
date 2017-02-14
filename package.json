@@ -14,6 +14,8 @@
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test:update-snapshots": "npm run test -- -u",
+    "test": "node_modules/.bin/jest",
     "dev": "node ./bin/docs-dev.js",
     "build": "NODE_ENV=production node ./bin/docs-build.js"
   },

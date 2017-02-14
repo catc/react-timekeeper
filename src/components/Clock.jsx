@@ -37,7 +37,7 @@ function deg(rad){
 }
 
 
-class Clock extends React.Component {
+export class Clock extends React.Component {
 	constructor(props){
 		super(props)
 		this.mousedown = this.mousedown.bind(this)

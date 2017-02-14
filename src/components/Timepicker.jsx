@@ -6,10 +6,9 @@ import parseTime from '../helpers/parse-time'
 import ClockWrapper from './ClockWrapper'
 import Time from './Time'
 
-import { CLOCK_DATA } from '../helpers/data';
 import * as defaultConfig from '../helpers/config';
 
-class Timepicker extends React.Component {
+export class Timepicker extends React.Component {
 	constructor(props){
 		super(props)
 
@@ -129,7 +128,6 @@ class Timepicker extends React.Component {
 		}
 
 		const state = this.state
-		const props = this.props
 		return (
 			<StyleRoot>
 				<div style={styles.timePicker} className="react-timekeeper">
@@ -183,7 +181,7 @@ class Timepicker extends React.Component {
 						changeMeridiem={this.changeMeridiem}
 					/>
 					
-					<span style={styles.doneButton}>Done</span>
+					<span style={styles.doneButton} onClick={this.props.onDoneClick}>Done</span>
 				</div>
 			</StyleRoot>
 		)
