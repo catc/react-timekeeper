@@ -31,7 +31,7 @@ new devServer(webpack(docs), {
 		colors: true,
 		exclude: ['node_modules', 'components'],
 	},
-}).listen(port, 'localhost', err => {
+}).listen(port, '0.0.0.0', err => {
 	if (err) throw new Error('webpack-dev-server', err)
 	console.log('[webpack-dev-server]', 'http://localhost:' + port + '/')
 })

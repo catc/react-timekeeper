@@ -1,5 +1,9 @@
 node_modules/
 *.log
+lib/
+
 .DS_Store
 
+# temp/testing
 z_old/
+z_temp/
