@@ -1,6 +1,6 @@
 {
   "name": "react-timekeeper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Time picker based on the style of Google Keep app",
   "main": "lib/index.js",
   "repository": {
@@ -14,7 +14,7 @@
     "time picker",
     "picker",
     "hour",
-    "minute",
+    "minute"
   ],
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",

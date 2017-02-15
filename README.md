@@ -1,17 +1,25 @@
-# Keep timepicker
+# Keep Timepicker
 Time picker based on the style of the [Android Google Keep](https://play.google.com/store/apps/details?id=com.google.android.keep) app.
 
-### TODO
-- add format support
-- add remaining apis
-- public to npm
-	- add .npmignore
-	- add script to copy everything to lib
-- update package.json
-	- packages
-- tests
-	- https://semaphoreci.com/community/tutorials/snapshot-testing-react-components-with-jest
-- remove console.logs/debugs
+## Installation and Usage
+Install via:
+
+```shell
+npm install --save react-timekeeper
+```
+
+Use via:
+
+```javascript
+import Timekeeper from 'react-timekeeper';
+
+render(){
+	<Timekeeper
+		time={this.state.time}
+		// ...
+	/>
+}
+```
 
 ## API
 Timepickeer component props:
@@ -22,6 +30,7 @@ Time to set on component. Accepts time in 4 formats:
 ```javascript
 // string with meridiem
 '4:55 pm'
+'4:55pm'
 
 // string without meridiem (assumes a 24 hour format)
 '16:55'
@@ -55,10 +64,10 @@ Pass a function to be called when time is changed. Used to store time state in p
 }
 ```
 
-#### `showDoneButton` (bool)
+#### `displayDoneButton` (bool)
 Whether or not to display "Done" button on bottom of component. Also need to pass in a `onDoneButtonClick` function.
 
-#### `onDoneButtonClick` (function)
+#### `onDoneClick` (function)
 Function that is called when "Done" button is clicked. Useful for triggering some action on the parent component, like closing the timepicker.
 
 #### `switchToMinuteOnHourSelect` (bool)
@@ -67,8 +76,16 @@ Changes clock unit from hour to minute after selecting an hour. Exists mainly to
 #### `closeOnMinuteSelect` (bool)
 Whether or not to trigger "Done" button click when the user selects minutes. Similar to Google Keep functionality, where once the selects hour and minute, the picker automatically closes.
 
-#### `hourFormat` (number)
-Hour format - accepts either `12` (default) or `24`.
+#### `config` (object)
+Pass in object with any config properties to override. Currently supports overriding style properties. See [full list](https://github.com/catc/react-timekeeper/blob/master/src/helpers/config.js) of properties.
+
+```javascript
+// example
+config={{
+	TIMEPICKER_BACKGROUND: 'red',
+	FONT_FAMILY: '"Open Sans", sans-serif'
+}}
+```
 
 
 ## Development
@@ -76,3 +93,7 @@ Hour format - accepts either `12` (default) or `24`.
 2. `npm install`
 3. `npm run dev`
 4. Navigate to `localhost:3002`
+
+### Testing
+- run all tests: `npm run test`
+- update snapshots: `test:update-snapshots`
