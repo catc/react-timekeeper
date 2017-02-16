@@ -72,7 +72,7 @@ export class TimeDropdown extends React.Component {
 				animationName: fadeIn
 			},
 			'wrapper-hour': {
-				right: -8,
+				right: -16,
 			},
 			'wrapper-minute': {
 				left: -10

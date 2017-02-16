@@ -1,4 +1,4 @@
-# React Timepicker
+# React Timekeeper
 Time picker based on the style of the [Android Google Keep](https://play.google.com/store/apps/details?id=com.google.android.keep) app. [See the demo](https://catc.github.io/react-timekeeper/).
 
 ## Installation and Usage
