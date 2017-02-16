@@ -7,7 +7,7 @@ import { CLOCK_DATA } from '../helpers/data';
 
 
 // radius of clock, in px
-const CLOCK_RADIUS = 120
+const CLOCK_RADIUS = 110
 const CLOCK_SIZE = CLOCK_RADIUS * 2
 
 // clock hand length, in px
@@ -18,12 +18,12 @@ const NUMBER_INCREMENTS = 12
 const NUMBER_INCREMENTS_VALUE = 360 / NUMBER_INCREMENTS
 
 // size of circle surrounding number
-const NUMBER_SIZE = 36
+const NUMBER_SIZE = 34
 
 // positioning of numbers within circle
-const NUMBER_INNER_POSITION = 24
+const NUMBER_INNER_POSITION = 22
 function animationPosition(unit){
-	return unit === 'hour' ? NUMBER_INNER_POSITION - 34 : NUMBER_INNER_POSITION + 28;
+	return unit === 'hour' ? NUMBER_INNER_POSITION - 30 : NUMBER_INNER_POSITION + 26;
 }
 
 const { cos, sin, atan2 } = Math
@@ -60,7 +60,7 @@ export class Clock extends React.Component {
 				display: 'inline-block',
 				position: 'absolute',
 				color: config.CLOCK_NUMBER_COLOR,
-				fontSize: '18px',
+				fontSize: '16px',
 				pointerEvents: 'none',
 
 				borderRadius: '99px',
@@ -119,7 +119,7 @@ export class Clock extends React.Component {
 
 							let showIntermediateValueDisplay;
 							if (anim.data === 'minute' && props.minute%5){
-								showIntermediateValueDisplay = <circle cx={CLOCK_RADIUS} cy={24} r={4}
+								showIntermediateValueDisplay = <circle cx={CLOCK_RADIUS} cy={NUMBER_INNER_POSITION} r={4}
 									fill={config.CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND}
 								/>
 							}
@@ -157,7 +157,7 @@ export class Clock extends React.Component {
 										<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5}
 											fill={config.CLOCK_HAND_ARM}
 										/>
-										<circle cx={CLOCK_RADIUS} cy={24} r={NUMBER_SIZE / 2}
+										<circle cx={CLOCK_RADIUS} cy={NUMBER_INNER_POSITION} r={NUMBER_SIZE / 2}
 											fill={config.CLOCK_HAND_CIRCLE_BACKGROUND}
 										/>
 										{showIntermediateValueDisplay}

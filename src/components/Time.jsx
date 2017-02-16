@@ -51,7 +51,7 @@ export class Time extends React.Component {
 		const styles = {
 			wrapper: {
 				background: config.TIME_BACKGROUND,
-				padding: '20px 24px',
+				padding: '14px 16px',
 				borderRadius: '3px 3px 0 0',
 			},
 			timeWrapper: {
@@ -62,7 +62,7 @@ export class Time extends React.Component {
 				color: config.TIME_DEFAULT_COLOR,
 				// fontWeight: '500',
 				display: 'inline-block',
-				fontSize: '56px',
+				fontSize: '46px',
 				verticalAlign: '2px',
 				margin: '0 5px'
 			},
@@ -70,7 +70,7 @@ export class Time extends React.Component {
 				color: config.TIME_DEFAULT_COLOR,
 				// fontWeight: '500',
 				display: 'inline-block',
-				fontSize: '60px',
+				fontSize: '48px',
 				cursor: 'pointer',
 				userSelect: 'none',
 			},
@@ -80,7 +80,7 @@ export class Time extends React.Component {
 				animationName: popInOut
 			},
 			hourWrapper: {
-				width: '80px',
+				width: '72px',
 				textAlign: 'right',
 				position: 'relative',
 				display: 'inline-block'

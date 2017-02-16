@@ -109,7 +109,7 @@ export class Timepicker extends React.Component {
 				display: 'inline-block',
 				// boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
 				boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)', 	// bigger
-				width: '300px',
+				width: '260px',
 
 				position: 'relative'
 			},
@@ -120,8 +120,8 @@ export class Timepicker extends React.Component {
 				borderTop: '1px solid ' + config.DONE_BUTTON_BORDER_COLOR,
 				textAlign: 'center',
 				cursor: 'pointer',
-				padding: '20px 0',
-				fontSize: '14px',
+				padding: '16px 0',
+				fontSize: '13px',
 				letterSpacing: '0.5px',
 				// fontWeight: 500
 			}
@@ -129,60 +129,58 @@ export class Timepicker extends React.Component {
 
 		const state = this.state
 		return (
-			<StyleRoot>
-				<div style={styles.timePicker} className="react-timekeeper">
-					<style>{`
-						.react-timekeeper {
-							-webkit-tap-highlight-color: transparent;
-						}
-						.react-timepicker-button-reset {
-							background: 0;
-							border: 0;
-							box-shadow: none;
-							text-shadow: none;
-							-webkit-appearance: none;
-							-moz-appearance: none;
-							cursor: pointer;
-						}
-						.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
-							outline: none;
-						}
-						.react-timepicker-button-reset::-moz-focus-inner {
-							border: 0;
-							padding: 0;
-						}
-						.react-timekeeper-noscroll {
-							overflow: hidden;
-						}
-					`}</style>
+			<StyleRoot style={styles.timePicker} className="react-timekeeper">
+				<style>{`
+					.react-timekeeper {
+						-webkit-tap-highlight-color: transparent;
+					}
+					.react-timepicker-button-reset {
+						background: 0;
+						border: 0;
+						box-shadow: none;
+						text-shadow: none;
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						cursor: pointer;
+					}
+					.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
+						outline: none;
+					}
+					.react-timepicker-button-reset::-moz-focus-inner {
+						border: 0;
+						padding: 0;
+					}
+					.react-timekeeper-noscroll {
+						overflow: hidden;
+					}
+				`}</style>
 
-					<Time
-						config={this.config}
-						unit={state.unit}
-						hour={state.hour}
-						minute={state.minute}
-						meridiem={state.meridiem}
+				<Time
+					config={this.config}
+					unit={state.unit}
+					hour={state.hour}
+					minute={state.minute}
+					meridiem={state.meridiem}
 
-						changeMeridiem={this.changeMeridiem}
-						changeHour={this.changeHour}
-						changeMinute={this.changeMinute}
-						changeUnit={this.changeUnit}
-					/>
-					
-					<ClockWrapper
-						config={this.config}
-						unit={state.unit}
-						hour={state.hour}
-						minute={state.minute}
-						meridiem={state.meridiem}
+					changeMeridiem={this.changeMeridiem}
+					changeHour={this.changeHour}
+					changeMinute={this.changeMinute}
+					changeUnit={this.changeUnit}
+				/>
+				
+				<ClockWrapper
+					config={this.config}
+					unit={state.unit}
+					hour={state.hour}
+					minute={state.minute}
+					meridiem={state.meridiem}
 
-						changeHour={this.changeHour}
-						changeMinute={this.changeMinute}
-						changeMeridiem={this.changeMeridiem}
-					/>
-					
-					<span style={styles.doneButton} onClick={this.props.onDoneClick}>Done</span>
-				</div>
+					changeHour={this.changeHour}
+					changeMinute={this.changeMinute}
+					changeMeridiem={this.changeMeridiem}
+				/>
+				
+				<span style={styles.doneButton} onClick={this.props.onDoneClick}>Done</span>
 			</StyleRoot>
 		)
 	}

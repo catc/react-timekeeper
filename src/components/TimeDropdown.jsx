@@ -63,8 +63,8 @@ export class TimeDropdown extends React.Component {
 				borderRadius: '2px',
 				padding: '6px 0',
 				zIndex: '20',
-				top: 74,
-				height: '280px',
+				top: 62,
+				height: '250px',
 				overflowY: 'auto',
 				boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
 				opacity: 0,
@@ -72,7 +72,7 @@ export class TimeDropdown extends React.Component {
 				animationName: fadeIn
 			},
 			'wrapper-hour': {
-				right: -16,
+				right: -22,
 			},
 			'wrapper-minute': {
 				left: -10
@@ -85,8 +85,8 @@ export class TimeDropdown extends React.Component {
 			},
 			option: {
 				background: 'transparent',
-				padding: '8px 30px',
-				fontSize: '18px',
+				padding: '7px 30px',
+				fontSize: '16px',
 				color: config.DROPDOWN_COLOR,
 				cursor: 'pointer',
 				':hover': {

@@ -3,7 +3,7 @@
 // main container
 export const TIMEPICKER_BACKGROUND = '#F2F2F2';
 export const FONT_FAMILY = '"Roboto", sans-serif';
-export const DONE_BUTTON_COLOR = '#8c8c8c';
+export const DONE_BUTTON_COLOR = '#686868';
 export const DONE_BUTTON_BORDER_COLOR = '#CCC';
 
 // time
@@ -24,7 +24,7 @@ export const CLOCK_WRAPPER_MERIDIEM_COLOR_SELECTED = '#E1EFF6';
 
 // clock
 export const CLOCK_BACKGROUND = 'white';
-export const CLOCK_NUMBER_COLOR = '#898989';
+export const CLOCK_NUMBER_COLOR = '#999999';
 export const CLOCK_HAND_ARM = '#bceaff';
 export const CLOCK_HAND_CIRCLE_BACKGROUND = '#e6f7ff';
 export const CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND = '#ade2fb';

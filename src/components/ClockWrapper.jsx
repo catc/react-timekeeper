@@ -3,7 +3,7 @@ import Radium from 'radium'
 
 import Clock from './Clock'
 
-const MERIDIEM_SELECT_SIZE = 46;
+const MERIDIEM_SELECT_SIZE = 38;
 
 export class ClockWrapper extends React.Component {
 	render(){
@@ -13,20 +13,19 @@ export class ClockWrapper extends React.Component {
 		const styles = {
 			clockWrapper: {
 				textAlign: 'center',
-				padding: '16px 0 14px',
-				// background: '#f9f9f9',
+				padding: '18px 0 14px',
 				background: config.CLOCK_WRAPPER_BACKGROUND,
 			},
 			meridiemWrapper: {
 				textAlign: 'left',
 				padding: '0 30px',
-				marginTop: '-20px',
+				marginTop: '-16px',
 				position: 'relative',
 				zIndex: 10
 			},
 			meridiem: {
 				background: config.CLOCK_WRAPPER_MERIDIEM_BACKGROUND,
-				fontSize: '16px',
+				fontSize: '14px',
 				color: config.CLOCK_WRAPPER_MERIDIEM_COLOR,
 				display: 'inline-block',
 				padding: 0,
