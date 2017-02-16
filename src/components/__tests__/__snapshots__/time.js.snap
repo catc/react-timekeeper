@@ -4,7 +4,7 @@ exports[`Time component should render correctly 1`] = `
     Object {
       "background": undefined,
       "borderRadius": "3px 3px 0 0",
-      "padding": "20px 24px",
+      "padding": "14px 16px",
     }
   }>
   <div
@@ -20,7 +20,7 @@ exports[`Time component should render correctly 1`] = `
           "display": "inline-block",
           "position": "relative",
           "textAlign": "right",
-          "width": "80px",
+          "width": "72px",
         }
       }>
       <span
@@ -32,7 +32,7 @@ exports[`Time component should render correctly 1`] = `
               "color": undefined,
               "cursor": "pointer",
               "display": "inline-block",
-              "fontSize": "60px",
+              "fontSize": "48px",
               "userSelect": "none",
             },
             Object {
@@ -52,7 +52,7 @@ exports[`Time component should render correctly 1`] = `
         Object {
           "color": undefined,
           "display": "inline-block",
-          "fontSize": "56px",
+          "fontSize": "46px",
           "margin": "0 5px",
           "verticalAlign": "2px",
         }
@@ -75,7 +75,7 @@ exports[`Time component should render correctly 1`] = `
               "color": undefined,
               "cursor": "pointer",
               "display": "inline-block",
-              "fontSize": "60px",
+              "fontSize": "48px",
               "userSelect": "none",
             },
             false,

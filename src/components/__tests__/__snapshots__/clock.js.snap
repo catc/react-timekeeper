@@ -8,9 +8,9 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
       "borderRadius": "200px",
       "cursor": "pointer",
       "display": "inline-block",
-      "height": "240px",
+      "height": "220px",
       "position": "relative",
-      "width": "240px",
+      "width": "220px",
     }
   }>
   <div>
@@ -26,16 +26,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 149.99999999999997,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 136.99999999999997,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 18.861561236693873,
-            "width": 36,
+            "top": 16.789764466969388,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -47,16 +47,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 185.1384387633061,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 169.21023553303058,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 53.99999999999996,
-            "width": 36,
+            "top": 48.99999999999996,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -68,16 +68,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 198,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 181,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 101.99999999999999,
-            "width": 36,
+            "top": 92.99999999999999,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -89,16 +89,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 185.1384387633061,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 169.21023553303058,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 150,
-            "width": 36,
+            "top": 137,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -110,16 +110,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 150.00000000000006,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 137.00000000000006,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 185.13843876330608,
-            "width": 36,
+            "top": 169.21023553303058,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -131,16 +131,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 102.00000000000003,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 93.00000000000003,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 198,
-            "width": 36,
+            "top": 181,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -152,16 +152,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 54,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 49,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 185.1384387633061,
-            "width": 36,
+            "top": 169.21023553303058,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -173,16 +173,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 18.861561236693916,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 16.789764466969416,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 150.00000000000006,
-            "width": 36,
+            "top": 137.00000000000006,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -194,16 +194,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 6,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 5,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 102.00000000000003,
-            "width": 36,
+            "top": 93.00000000000003,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -215,16 +215,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 18.86156123669386,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 16.78976446696936,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 54.00000000000007,
-            "width": 36,
+            "top": 49.00000000000007,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -236,16 +236,16 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 54.00000000000003,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 49.00000000000003,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 18.861561236693873,
-            "width": 36,
+            "top": 16.789764466969388,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -257,51 +257,51 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 101.99999999999997,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 92.99999999999997,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 6,
-            "width": 36,
+            "top": 5,
+            "width": 34,
             "zIndex": 5,
           }
         }>
         12
       </span>
       <svg
-        height={240}
+        height={220}
         style={
           Object {
             "opacity": 1,
             "position": "relative",
           }
         }
-        viewBox="0 0 240 240"
-        width={240}
+        viewBox="0 0 220 220"
+        width={220}
         xmlns="http://www.w3.org/2000/svg">
         <g
-          transform="rotate(120 120 120)">
+          transform="rotate(120 110 110)">
           <line
             stroke={undefined}
             strokeWidth="1"
-            x1={120}
-            x2={120}
-            y1={120}
-            y2={30} />
+            x1={110}
+            x2={110}
+            y1={110}
+            y2={20} />
           <circle
-            cx={120}
-            cy={120}
+            cx={110}
+            cy={110}
             fill={undefined}
             r={1.5} />
           <circle
-            cx={120}
-            cy={24}
+            cx={110}
+            cy={22}
             fill={undefined}
-            r={18} />
+            r={17} />
         </g>
       </svg>
     </div>
@@ -319,9 +319,9 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
       "borderRadius": "200px",
       "cursor": "pointer",
       "display": "inline-block",
-      "height": "240px",
+      "height": "220px",
       "position": "relative",
-      "width": "240px",
+      "width": "220px",
     }
   }>
   <div>
@@ -337,16 +337,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 149.99999999999997,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 136.99999999999997,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 18.861561236693873,
-            "width": 36,
+            "top": 16.789764466969388,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -358,16 +358,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 185.1384387633061,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 169.21023553303058,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 53.99999999999996,
-            "width": 36,
+            "top": 48.99999999999996,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -379,16 +379,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 198,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 181,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 101.99999999999999,
-            "width": 36,
+            "top": 92.99999999999999,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -400,16 +400,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 185.1384387633061,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 169.21023553303058,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 150,
-            "width": 36,
+            "top": 137,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -421,16 +421,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 150.00000000000006,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 137.00000000000006,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 185.13843876330608,
-            "width": 36,
+            "top": 169.21023553303058,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -442,16 +442,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 102.00000000000003,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 93.00000000000003,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 198,
-            "width": 36,
+            "top": 181,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -463,16 +463,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 54,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 49,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 185.1384387633061,
-            "width": 36,
+            "top": 169.21023553303058,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -484,16 +484,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 18.861561236693916,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 16.789764466969416,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 150.00000000000006,
-            "width": 36,
+            "top": 137.00000000000006,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -505,16 +505,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 6,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 5,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 102.00000000000003,
-            "width": 36,
+            "top": 93.00000000000003,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -526,16 +526,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 18.86156123669386,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 16.78976446696936,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 54.00000000000007,
-            "width": 36,
+            "top": 49.00000000000007,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -547,16 +547,16 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 54.00000000000003,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 49.00000000000003,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 18.861561236693873,
-            "width": 36,
+            "top": 16.789764466969388,
+            "width": 34,
             "zIndex": 5,
           }
         }>
@@ -568,54 +568,54 @@ exports[`Clock component renders correctly when unit is minute 1`] = `
             "borderRadius": "99px",
             "color": undefined,
             "display": "inline-block",
-            "fontSize": "18px",
-            "height": 36,
-            "left": 101.99999999999997,
-            "lineHeight": "36px",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 92.99999999999997,
+            "lineHeight": "34px",
             "opacity": 1,
             "pointerEvents": "none",
             "position": "absolute",
             "textAlign": "center",
-            "top": 6,
-            "width": 36,
+            "top": 5,
+            "width": 34,
             "zIndex": 5,
           }
         }>
         00
       </span>
       <svg
-        height={240}
+        height={220}
         style={
           Object {
             "opacity": 1,
             "position": "relative",
           }
         }
-        viewBox="0 0 240 240"
-        width={240}
+        viewBox="0 0 220 220"
+        width={220}
         xmlns="http://www.w3.org/2000/svg">
         <g
-          transform="rotate(252 120 120)">
+          transform="rotate(252 110 110)">
           <line
             stroke={undefined}
             strokeWidth="1"
-            x1={120}
-            x2={120}
-            y1={120}
-            y2={30} />
+            x1={110}
+            x2={110}
+            y1={110}
+            y2={20} />
           <circle
-            cx={120}
-            cy={120}
+            cx={110}
+            cy={110}
             fill={undefined}
             r={1.5} />
           <circle
-            cx={120}
-            cy={24}
+            cx={110}
+            cy={22}
             fill={undefined}
-            r={18} />
+            r={17} />
           <circle
-            cx={120}
-            cy={24}
+            cx={110}
+            cy={22}
             fill={undefined}
             r={4} />
         </g>
