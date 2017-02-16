@@ -10,7 +10,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         "borderRadius": "3px",
         "boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
         "display": "inline-block",
-        "fontFamily": "\"Roboto\", serif",
+        "fontFamily": "\"Roboto\", sans-serif",
         "position": "relative",
         "width": "300px",
       }
@@ -539,6 +539,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
     </div>
     <span
       data-radium={true}
+      onClick={undefined}
       style={
         Object {
           "borderTop": "1px solid #CCC",
@@ -582,7 +583,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         "borderRadius": "3px",
         "boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
         "display": "inline-block",
-        "fontFamily": "\"Roboto\", serif",
+        "fontFamily": "\"Roboto\", sans-serif",
         "position": "relative",
         "width": "300px",
       }
@@ -1111,6 +1112,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
     </div>
     <span
       data-radium={true}
+      onClick={undefined}
       style={
         Object {
           "borderTop": "1px solid #CCC",

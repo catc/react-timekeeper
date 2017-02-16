@@ -1,5 +1,5 @@
-# Keep Timepicker
-Time picker based on the style of the [Android Google Keep](https://play.google.com/store/apps/details?id=com.google.android.keep) app.
+# React Timepicker
+Time picker based on the style of the [Android Google Keep](https://play.google.com/store/apps/details?id=com.google.android.keep) app. [See the demo](https://catc.github.io/react-timekeeper/).
 
 ## Installation and Usage
 Install via:
@@ -20,6 +20,9 @@ render(){
 	/>
 }
 ```
+
+All styles are inlined via [radium](https://github.com/FormidableLabs/radium) so no css imports are required.
+
 
 ## API
 Timepickeer component props:
@@ -94,6 +97,9 @@ config={{
 3. `npm run dev`
 4. Navigate to `localhost:3002`
 
-### Testing
+------------
+
+- build: `npm run build`
 - run all tests: `npm run test`
-- update snapshots: `test:update-snapshots`
+- update test snapshots: `npm run test:update-snapshots`
+- create lib to publish npm: `npm run lib`

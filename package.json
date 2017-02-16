@@ -1,7 +1,7 @@
 {
   "name": "react-timekeeper",
   "version": "0.0.2",
-  "description": "Time picker based on the style of Google Keep app",
+  "description": "Time picker based on the style of the Google Keep app",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
@@ -19,8 +19,8 @@
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test:update-snapshots": "npm run test -- -u",
     "test": "node_modules/.bin/jest",
+    "test:update-snapshots": "npm run test -- -u",
     "dev": "node ./bin/docs-dev.js",
     "build": "NODE_ENV=production node ./bin/docs-build.js",
     "lib": "rm -rf lib && mkdir lib && cp -a src/. lib && babel lib -d lib"
