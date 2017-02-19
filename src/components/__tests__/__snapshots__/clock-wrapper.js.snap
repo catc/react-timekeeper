@@ -343,7 +343,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
       }
     }>
     <button
-      className="react-timepicker-button-reset type_am"
+      className="react-timekeeper-button-reset type_am"
       onClick={[Function]}
       style={
         Array [
@@ -353,6 +353,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
             "color": undefined,
             "cursor": "pointer",
             "display": "inline-block",
+            "fontFamily": undefined,
             "fontSize": "14px",
             "height": 38,
             "lineHeight": "38px",
@@ -367,7 +368,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
       AM
     </button>
     <button
-      className="react-timepicker-button-reset type_pm"
+      className="react-timekeeper-button-reset type_pm"
       onClick={[Function]}
       style={
         Array [
@@ -377,6 +378,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
             "color": undefined,
             "cursor": "pointer",
             "display": "inline-block",
+            "fontFamily": undefined,
             "fontSize": "14px",
             "height": 38,
             "lineHeight": "38px",

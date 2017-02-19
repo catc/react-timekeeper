@@ -6,7 +6,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
     Object {
       "background": "#F2F2F2",
       "borderRadius": "3px",
-      "boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+      "boxShadow": "0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.19)",
       "display": "inline-block",
       "fontFamily": "\"Roboto\", sans-serif",
       "position": "relative",
@@ -17,8 +17,10 @@ exports[`Timepicker component renders correctly with no time 1`] = `
     
     					.react-timekeeper {
     						-webkit-tap-highlight-color: transparent;
+    						-webkit-font-smoothing: antialiased;
+    						font-smoothing: antialiased;
     					}
-    					.react-timepicker-button-reset {
+    					.react-timekeeper-button-reset {
     						background: 0;
     						border: 0;
     						box-shadow: none;
@@ -27,10 +29,10 @@ exports[`Timepicker component renders correctly with no time 1`] = `
     						-moz-appearance: none;
     						cursor: pointer;
     					}
-    					.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
+    					.react-timekeeper-button-reset:hover, .react-timekeeper-button-reset:focus, .react-timekeeper-button-reset:active {
     						outline: none;
     					}
-    					.react-timepicker-button-reset::-moz-focus-inner {
+    					.react-timekeeper-button-reset::-moz-focus-inner {
     						border: 0;
     						padding: 0;
     					}
@@ -52,7 +54,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
       data-radium={true}
       style={
         Object {
-          "left": "22px",
+          "left": 20,
           "position": "relative",
         }
       }>
@@ -67,7 +69,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
           }
         }>
         <span
-          className="react-timepicker__hour-select"
+          className="react-timekeeper__hour-select"
           data-radium={true}
           onClick={[Function]}
           style={
@@ -78,6 +80,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
               "cursor": "pointer",
               "display": "inline-block",
               "fontSize": "48px",
+              "lineHeight": "normal",
               "userSelect": "none",
             }
           }>
@@ -92,6 +95,8 @@ exports[`Timepicker component renders correctly with no time 1`] = `
             "color": "#8C8C8C",
             "display": "inline-block",
             "fontSize": "46px",
+            "fontWeight": "500",
+            "lineHeight": "normal",
             "margin": "0 5px",
             "verticalAlign": "2px",
           }
@@ -107,7 +112,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
           }
         }>
         <span
-          className="react-timepicker__minute-select"
+          className="react-timekeeper__minute-select"
           data-radium={true}
           onClick={[Function]}
           style={
@@ -116,6 +121,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
               "cursor": "pointer",
               "display": "inline-block",
               "fontSize": "48px",
+              "lineHeight": "normal",
               "userSelect": "none",
             }
           }>
@@ -124,15 +130,15 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         
       </div>
       <button
-        className="react-timepicker-button-reset react-timepicker__meridiem-toggle"
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
         data-radium={true}
         onClick={[Function]}
         style={
           Object {
             "color": "#8C8C8C",
             "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
             "fontSize": "13px",
-            "fontWeight": "500",
             "marginLeft": "2px",
             "padding": "10px 8px",
             "textTransform": "uppercase",
@@ -489,7 +495,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         }
       }>
       <button
-        className="react-timepicker-button-reset type_am"
+        className="react-timekeeper-button-reset type_am"
         data-radium={true}
         onClick={[Function]}
         style={
@@ -499,6 +505,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
             "color": "#898989",
             "cursor": "pointer",
             "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
             "fontSize": "14px",
             "height": 38,
             "lineHeight": "38px",
@@ -511,7 +518,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         AM
       </button>
       <button
-        className="react-timepicker-button-reset type_pm"
+        className="react-timekeeper-button-reset type_pm"
         data-radium={true}
         onClick={[Function]}
         style={
@@ -522,6 +529,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
             "cursor": "pointer",
             "display": "inline-block",
             "float": "right",
+            "fontFamily": "\"Roboto\", sans-serif",
             "fontSize": "14px",
             "height": 38,
             "lineHeight": "38px",
@@ -545,7 +553,9 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         "cursor": "pointer",
         "display": "block",
         "fontSize": "13px",
+        "fontWeight": 500,
         "letterSpacing": "0.5px",
+        "lineHeight": "normal",
         "padding": "16px 0",
         "textAlign": "center",
         "textTransform": "uppercase",
@@ -576,7 +586,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
     Object {
       "background": "#F2F2F2",
       "borderRadius": "3px",
-      "boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+      "boxShadow": "0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.19)",
       "display": "inline-block",
       "fontFamily": "\"Roboto\", sans-serif",
       "position": "relative",
@@ -587,8 +597,10 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
     
     					.react-timekeeper {
     						-webkit-tap-highlight-color: transparent;
+    						-webkit-font-smoothing: antialiased;
+    						font-smoothing: antialiased;
     					}
-    					.react-timepicker-button-reset {
+    					.react-timekeeper-button-reset {
     						background: 0;
     						border: 0;
     						box-shadow: none;
@@ -597,10 +609,10 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
     						-moz-appearance: none;
     						cursor: pointer;
     					}
-    					.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
+    					.react-timekeeper-button-reset:hover, .react-timekeeper-button-reset:focus, .react-timekeeper-button-reset:active {
     						outline: none;
     					}
-    					.react-timepicker-button-reset::-moz-focus-inner {
+    					.react-timekeeper-button-reset::-moz-focus-inner {
     						border: 0;
     						padding: 0;
     					}
@@ -622,7 +634,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
       data-radium={true}
       style={
         Object {
-          "left": "22px",
+          "left": 20,
           "position": "relative",
         }
       }>
@@ -637,7 +649,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
           }
         }>
         <span
-          className="react-timepicker__hour-select"
+          className="react-timekeeper__hour-select"
           data-radium={true}
           onClick={[Function]}
           style={
@@ -648,6 +660,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
               "cursor": "pointer",
               "display": "inline-block",
               "fontSize": "48px",
+              "lineHeight": "normal",
               "userSelect": "none",
             }
           }>
@@ -662,6 +675,8 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             "color": "#8C8C8C",
             "display": "inline-block",
             "fontSize": "46px",
+            "fontWeight": "500",
+            "lineHeight": "normal",
             "margin": "0 5px",
             "verticalAlign": "2px",
           }
@@ -677,7 +692,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
           }
         }>
         <span
-          className="react-timepicker__minute-select"
+          className="react-timekeeper__minute-select"
           data-radium={true}
           onClick={[Function]}
           style={
@@ -686,6 +701,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
               "cursor": "pointer",
               "display": "inline-block",
               "fontSize": "48px",
+              "lineHeight": "normal",
               "userSelect": "none",
             }
           }>
@@ -694,15 +710,15 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         
       </div>
       <button
-        className="react-timepicker-button-reset react-timepicker__meridiem-toggle"
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
         data-radium={true}
         onClick={[Function]}
         style={
           Object {
             "color": "#8C8C8C",
             "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
             "fontSize": "13px",
-            "fontWeight": "500",
             "marginLeft": "2px",
             "padding": "10px 8px",
             "textTransform": "uppercase",
@@ -1059,7 +1075,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         }
       }>
       <button
-        className="react-timepicker-button-reset type_am"
+        className="react-timekeeper-button-reset type_am"
         data-radium={true}
         onClick={[Function]}
         style={
@@ -1069,6 +1085,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             "color": "#898989",
             "cursor": "pointer",
             "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
             "fontSize": "14px",
             "height": 38,
             "lineHeight": "38px",
@@ -1081,7 +1098,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         AM
       </button>
       <button
-        className="react-timepicker-button-reset type_pm"
+        className="react-timekeeper-button-reset type_pm"
         data-radium={true}
         onClick={[Function]}
         style={
@@ -1092,6 +1109,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             "cursor": "pointer",
             "display": "inline-block",
             "float": "right",
+            "fontFamily": "\"Roboto\", sans-serif",
             "fontSize": "14px",
             "height": 38,
             "lineHeight": "38px",
@@ -1115,7 +1133,9 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         "cursor": "pointer",
         "display": "block",
         "fontSize": "13px",
+        "fontWeight": 500,
         "letterSpacing": "0.5px",
+        "lineHeight": "normal",
         "padding": "16px 0",
         "textAlign": "center",
         "textTransform": "uppercase",

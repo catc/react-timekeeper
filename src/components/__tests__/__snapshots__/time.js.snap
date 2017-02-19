@@ -10,7 +10,7 @@ exports[`Time component should render correctly 1`] = `
   <div
     style={
       Object {
-        "left": "22px",
+        "left": 20,
         "position": "relative",
       }
     }>
@@ -24,7 +24,7 @@ exports[`Time component should render correctly 1`] = `
         }
       }>
       <span
-        className="react-timepicker__hour-select"
+        className="react-timekeeper__hour-select"
         onClick={[Function]}
         style={
           Array [
@@ -33,6 +33,7 @@ exports[`Time component should render correctly 1`] = `
               "cursor": "pointer",
               "display": "inline-block",
               "fontSize": "48px",
+              "lineHeight": "normal",
               "userSelect": "none",
             },
             Object {
@@ -53,6 +54,8 @@ exports[`Time component should render correctly 1`] = `
           "color": undefined,
           "display": "inline-block",
           "fontSize": "46px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
           "margin": "0 5px",
           "verticalAlign": "2px",
         }
@@ -67,7 +70,7 @@ exports[`Time component should render correctly 1`] = `
         }
       }>
       <span
-        className="react-timepicker__minute-select"
+        className="react-timekeeper__minute-select"
         onClick={[Function]}
         style={
           Array [
@@ -76,6 +79,7 @@ exports[`Time component should render correctly 1`] = `
               "cursor": "pointer",
               "display": "inline-block",
               "fontSize": "48px",
+              "lineHeight": "normal",
               "userSelect": "none",
             },
             false,
@@ -86,14 +90,14 @@ exports[`Time component should render correctly 1`] = `
       
     </div>
     <button
-      className="react-timepicker-button-reset react-timepicker__meridiem-toggle"
+      className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
       onClick={[Function]}
       style={
         Object {
           "color": undefined,
           "display": "inline-block",
+          "fontFamily": undefined,
           "fontSize": "13px",
-          "fontWeight": "500",
           "marginLeft": "2px",
           "padding": "10px 8px",
           "textTransform": "uppercase",
