@@ -36,7 +36,8 @@ export class ClockWrapper extends React.Component {
 
 				textAlign: 'center',
 				lineHeight: MERIDIEM_SELECT_SIZE + 'px',
-				transition: '0.15s ease-out'
+				transition: '0.15s ease-out',
+				fontFamily: config.FONT_FAMILY,
 			},
 			meridiemRight: {
 				float: 'right',
@@ -60,7 +61,7 @@ export class ClockWrapper extends React.Component {
 
 				<div style={styles.meridiemWrapper}>
 					<button
-						className="react-timepicker-button-reset type_am"
+						className="react-timekeeper-button-reset type_am"
 						style={[
 							styles.meridiem,
 							props.meridiem === 'am' && styles.meridiemSelected
@@ -68,7 +69,7 @@ export class ClockWrapper extends React.Component {
 						onClick={() => { props.changeMeridiem('am') }}
 					>AM</button>
 					<button
-						className="react-timepicker-button-reset type_pm"
+						className="react-timekeeper-button-reset type_pm"
 						style={[
 							styles.meridiem,
 							styles.meridiemRight,

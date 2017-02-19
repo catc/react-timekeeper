@@ -44,10 +44,10 @@ export class TimeDropdown extends React.Component {
 	}
 
 	disableBodyScroll(){
-		document.body.classList.add('react-timekeeper-noscroll')
+		document.documentElement.classList.add('react-timekeeper-noscroll')
 	}
 	enableBodyScroll(){
-		document.body.classList.remove('react-timekeeper-noscroll')
+		document.documentElement.classList.remove('react-timekeeper-noscroll')
 	}
 	
 

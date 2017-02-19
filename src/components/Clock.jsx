@@ -62,14 +62,11 @@ export class Clock extends React.Component {
 				color: config.CLOCK_NUMBER_COLOR,
 				fontSize: '16px',
 				pointerEvents: 'none',
-
 				borderRadius: '99px',
 				width: NUMBER_SIZE,
 				height: NUMBER_SIZE,
-
 				textAlign: 'center',
 				lineHeight: NUMBER_SIZE + 'px',
-				
 				zIndex: 5,
 			},
 			clockHand: {
@@ -238,7 +235,7 @@ export class Clock extends React.Component {
 		e.preventDefault()
 		return false
 	}
-	stopDragHandler(e){
+	stopDragHandler(e = {}){
 		document.removeEventListener('mousemove', this.mousedragHandler, false)
 		document.removeEventListener('mouseup', this.stopDragHandler, false)
 		this.clock.removeEventListener('mouseleave', this.stopDragHandler, false)

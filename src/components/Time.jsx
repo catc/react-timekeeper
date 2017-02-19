@@ -55,24 +55,25 @@ export class Time extends React.Component {
 				borderRadius: '3px 3px 0 0',
 			},
 			timeWrapper: {
-				left: '22px',
+				left: 20,
 				position: 'relative'
 			},
 			colon: {
 				color: config.TIME_DEFAULT_COLOR,
-				// fontWeight: '500',
+				fontWeight: '500',
 				display: 'inline-block',
 				fontSize: '46px',
 				verticalAlign: '2px',
-				margin: '0 5px'
+				margin: '0 5px',
+				lineHeight: 'normal'
 			},
 			time: {
 				color: config.TIME_DEFAULT_COLOR,
-				// fontWeight: '500',
 				display: 'inline-block',
 				fontSize: '48px',
 				cursor: 'pointer',
 				userSelect: 'none',
+				lineHeight: 'normal'
 			},
 			'timeSelected': {
 				color: config.TIME_SELECTED_COLOR,
@@ -95,9 +96,9 @@ export class Time extends React.Component {
 				fontSize: '13px',
 				textTransform: 'uppercase',
 				marginLeft: '2px',
-				fontWeight: '500',
 				padding: '10px 8px',
-				verticalAlign: '1px'
+				verticalAlign: '1px',
+				fontFamily: config.FONT_FAMILY,
 			},
 		}
 
@@ -110,7 +111,7 @@ export class Time extends React.Component {
 
 					<div style={styles.hourWrapper}>
 						<span
-							className="react-timepicker__hour-select"
+							className="react-timekeeper__hour-select"
 							style={[
 								styles.time,
 								props.unit === 'hour' && styles.timeSelected
@@ -136,7 +137,7 @@ export class Time extends React.Component {
 					
 					<div style={styles.minuteWrapper}>
 						<span
-							className="react-timepicker__minute-select"
+							className="react-timekeeper__minute-select"
 							style={[
 								styles.time,
 								props.unit === 'minute' && styles.timeSelected
@@ -162,7 +163,7 @@ export class Time extends React.Component {
 					<button
 						onClick={this.toggleMeridiem}
 						style={styles.meridiem}
-						className="react-timepicker-button-reset react-timepicker__meridiem-toggle"
+						className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
 					>
 						{props.meridiem}
 					</button>

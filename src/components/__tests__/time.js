@@ -4,9 +4,9 @@ import React from 'react'
 import { Time } from '../Time';
 import renderer from 'react-test-renderer'
 
-const HOUR_SELECT_BUTTON = '.react-timepicker__hour-select'
-const MINUTE_SELECT_BUTTON = '.react-timepicker__minute-select'
-const MERIDIEM_TOGGLE = '.react-timepicker__meridiem-toggle'
+const HOUR_SELECT_BUTTON = '.react-timekeeper__hour-select'
+const MINUTE_SELECT_BUTTON = '.react-timekeeper__minute-select'
+const MERIDIEM_TOGGLE = '.react-timekeeper__meridiem-toggle'
 
 jest.mock('../TimeDropdown', () => (props => <div className={`time-dropdown-${props.type}`}></div>) )
 

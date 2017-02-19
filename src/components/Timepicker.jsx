@@ -33,9 +33,7 @@ export class Timepicker extends React.Component {
 
 	componentWillReceiveProps(nextProps){
 		if (nextProps.time){
-			this.setState({
-				time: parseTime(nextProps.time)
-			})
+			this.setState(parseTime(nextProps.time))
 		}
 	}
 
@@ -105,12 +103,10 @@ export class Timepicker extends React.Component {
 				fontFamily: config.FONT_FAMILY,
 				background: config.TIMEPICKER_BACKGROUND,
 				borderRadius: '3px',
-				// border: '1px solid #DDD',
 				display: 'inline-block',
 				// boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-				boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)', 	// bigger
+				boxShadow: '0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.19)', 	// bigger
 				width: '260px',
-
 				position: 'relative'
 			},
 			doneButton: {
@@ -123,7 +119,8 @@ export class Timepicker extends React.Component {
 				padding: '16px 0',
 				fontSize: '13px',
 				letterSpacing: '0.5px',
-				// fontWeight: 500
+				lineHeight: 'normal',
+				fontWeight: 500
 			}
 		}
 
@@ -133,8 +130,10 @@ export class Timepicker extends React.Component {
 				<style>{`
 					.react-timekeeper {
 						-webkit-tap-highlight-color: transparent;
+						-webkit-font-smoothing: antialiased;
+						font-smoothing: antialiased;
 					}
-					.react-timepicker-button-reset {
+					.react-timekeeper-button-reset {
 						background: 0;
 						border: 0;
 						box-shadow: none;
@@ -143,10 +142,10 @@ export class Timepicker extends React.Component {
 						-moz-appearance: none;
 						cursor: pointer;
 					}
-					.react-timepicker-button-reset:hover, .react-timepicker-button-reset:focus, .react-timepicker-button-reset:active {
+					.react-timekeeper-button-reset:hover, .react-timekeeper-button-reset:focus, .react-timekeeper-button-reset:active {
 						outline: none;
 					}
-					.react-timepicker-button-reset::-moz-focus-inner {
+					.react-timekeeper-button-reset::-moz-focus-inner {
 						border: 0;
 						padding: 0;
 					}
