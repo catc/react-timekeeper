@@ -67,11 +67,9 @@ Pass a function to be called when time is changed. Used to store time state in p
 }
 ```
 
-#### `displayDoneButton` (bool)
-Whether or not to display "Done" button on bottom of component. Also need to pass in a `onDoneButtonClick` function.
 
 #### `onDoneClick` (function)
-Function that is called when "Done" button is clicked. Useful for triggering some action on the parent component, like closing the timepicker.
+Displays the "Done" button and calls function when button is clicked. Useful for triggering some action on the parent component, like closing the timepicker
 
 #### `switchToMinuteOnHourSelect` (bool)
 Changes clock unit from hour to minute after selecting an hour. Exists mainly to provides a better user experience.

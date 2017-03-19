@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+
+
 module.exports = {
 	entry: [
 		'./docs/js/index.js',
@@ -21,10 +23,13 @@ module.exports = {
 			}, {
 				test: /\.jsx$/,
 				exclude: [/node_modules/],
-				loaders: ['babel-loader'],
+				loaders: [
+					'babel-loader',
+					__dirname + '/code-loader'
+				],
 			}, {
 				// overwritten in build script with extract-text-plugin
-				test: /\.scss$/,
+				test: /\.(s?)css$/,
 				loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
 			},
 		]
@@ -37,11 +42,9 @@ module.exports = {
 	resolve: {
 		alias: {
 			'react': path.resolve(__dirname, './node_modules/react'),
-			// TODO - rename this
-			'keep-timepicker': path.resolve(__dirname, './src/index.js')
+			'react-timekeeper': path.resolve(__dirname, './src/index.js')
 		},
 		extensions: ['', '.js', '.jsx'],
-		// fallback: [path.resolve(__dirname, './somewhere')]
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin({
