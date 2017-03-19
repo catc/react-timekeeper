@@ -1,5 +1,6 @@
 exports[`ClockWrapper component renders correctly 1`] = `
 <div
+  className="react-timekeeper__clock-wrapper"
   style={
     Object {
       "background": undefined,
@@ -8,6 +9,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
     }
   }>
   <div
+    className="react-timekeeper__clock"
     data-radium={true}
     onMouseDown={[Function]}
     onTouchStart={[Function]}
@@ -23,8 +25,10 @@ exports[`ClockWrapper component renders correctly 1`] = `
       }
     }>
     <div
+      className="react-timekeeper__clock-animations-wrapper"
       data-radium={true}>
       <div
+        className="react-timekeeper__clock-animations"
         data-radium={true}
         style={
           Object {
@@ -296,6 +300,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
           12
         </span>
         <svg
+          className="react-timekeeper__clock-svgs"
           data-radium={true}
           height={220}
           style={
@@ -333,6 +338,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
     </div>
   </div>
   <div
+    className="react-timekeeper__meridiem-toggle-wrapper"
     style={
       Object {
         "marginTop": "-16px",
@@ -343,7 +349,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
       }
     }>
     <button
-      className="react-timekeeper-button-reset type_am"
+      className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_am "
       onClick={[Function]}
       style={
         Array [
@@ -368,7 +374,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
       AM
     </button>
     <button
-      className="react-timekeeper-button-reset type_pm"
+      className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_pm"
       onClick={[Function]}
       style={
         Array [

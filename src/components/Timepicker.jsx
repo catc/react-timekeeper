@@ -179,7 +179,7 @@ export class Timepicker extends React.Component {
 					changeMeridiem={this.changeMeridiem}
 				/>
 				
-				<span style={styles.doneButton} onClick={this.props.onDoneClick}>Done</span>
+				{this.props.onDoneClick && <span style={styles.doneButton} onClick={this.props.onDoneClick}>Done</span> }
 			</StyleRoot>
 		)
 	}
@@ -190,7 +190,6 @@ Timepicker.propTypes = {
 	time: PropTypes.string,
 	onChange: PropTypes.func,
 	
-	displayDoneButton: PropTypes.bool,
 	onDoneClick: PropTypes.func,
 	switchToMinuteOnHourSelect: PropTypes.bool,
 	closeOnMinuteSelect: PropTypes.bool,

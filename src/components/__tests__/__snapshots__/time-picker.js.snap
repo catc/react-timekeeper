@@ -150,6 +150,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
     </div>
   </div>
   <div
+    className="react-timekeeper__clock-wrapper"
     data-radium={true}
     style={
       Object {
@@ -159,6 +160,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
       }
     }>
     <div
+      className="react-timekeeper__clock"
       data-radium={true}
       onMouseDown={[Function]}
       onTouchStart={[Function]}
@@ -174,8 +176,10 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         }
       }>
       <div
+        className="react-timekeeper__clock-animations-wrapper"
         data-radium={true}>
         <div
+          className="react-timekeeper__clock-animations"
           data-radium={true}
           style={
             Object {
@@ -447,6 +451,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
             12
           </span>
           <svg
+            className="react-timekeeper__clock-svgs"
             data-radium={true}
             height={220}
             style={
@@ -484,6 +489,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
       </div>
     </div>
     <div
+      className="react-timekeeper__meridiem-toggle-wrapper"
       data-radium={true}
       style={
         Object {
@@ -495,7 +501,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         }
       }>
       <button
-        className="react-timekeeper-button-reset type_am"
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_am "
         data-radium={true}
         onClick={[Function]}
         style={
@@ -518,7 +524,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
         AM
       </button>
       <button
-        className="react-timekeeper-button-reset type_pm"
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_pm"
         data-radium={true}
         onClick={[Function]}
         style={
@@ -543,26 +549,6 @@ exports[`Timepicker component renders correctly with no time 1`] = `
       </button>
     </div>
   </div>
-  <span
-    data-radium={true}
-    onClick={undefined}
-    style={
-      Object {
-        "borderTop": "1px solid #CCC",
-        "color": "#686868",
-        "cursor": "pointer",
-        "display": "block",
-        "fontSize": "13px",
-        "fontWeight": 500,
-        "letterSpacing": "0.5px",
-        "lineHeight": "normal",
-        "padding": "16px 0",
-        "textAlign": "center",
-        "textTransform": "uppercase",
-      }
-    }>
-    Done
-  </span>
   <style
     dangerouslySetInnerHTML={
       Object {
@@ -730,6 +716,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
     </div>
   </div>
   <div
+    className="react-timekeeper__clock-wrapper"
     data-radium={true}
     style={
       Object {
@@ -739,6 +726,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
       }
     }>
     <div
+      className="react-timekeeper__clock"
       data-radium={true}
       onMouseDown={[Function]}
       onTouchStart={[Function]}
@@ -754,8 +742,10 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         }
       }>
       <div
+        className="react-timekeeper__clock-animations-wrapper"
         data-radium={true}>
         <div
+          className="react-timekeeper__clock-animations"
           data-radium={true}
           style={
             Object {
@@ -1027,6 +1017,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             12
           </span>
           <svg
+            className="react-timekeeper__clock-svgs"
             data-radium={true}
             height={220}
             style={
@@ -1064,6 +1055,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
       </div>
     </div>
     <div
+      className="react-timekeeper__meridiem-toggle-wrapper"
       data-radium={true}
       style={
         Object {
@@ -1075,7 +1067,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         }
       }>
       <button
-        className="react-timekeeper-button-reset type_am"
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_am "
         data-radium={true}
         onClick={[Function]}
         style={
@@ -1098,7 +1090,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
         AM
       </button>
       <button
-        className="react-timekeeper-button-reset type_pm"
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_pm"
         data-radium={true}
         onClick={[Function]}
         style={
@@ -1123,26 +1115,6 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
       </button>
     </div>
   </div>
-  <span
-    data-radium={true}
-    onClick={undefined}
-    style={
-      Object {
-        "borderTop": "1px solid #CCC",
-        "color": "#686868",
-        "cursor": "pointer",
-        "display": "block",
-        "fontSize": "13px",
-        "fontWeight": 500,
-        "letterSpacing": "0.5px",
-        "lineHeight": "normal",
-        "padding": "16px 0",
-        "textAlign": "center",
-        "textTransform": "uppercase",
-      }
-    }>
-    Done
-  </span>
   <style
     dangerouslySetInnerHTML={
       Object {

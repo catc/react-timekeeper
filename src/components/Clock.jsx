@@ -110,7 +110,7 @@ export class Clock extends React.Component {
 
 			return <TransitionMotion {...animationOptions}>
 				{interpolatedStyles =>
-					<div>
+					<div className="react-timekeeper__clock-animations-wrapper">
 						{interpolatedStyles.map(anim => {
 							const data = CLOCK_DATA[anim.data]
 
@@ -121,7 +121,7 @@ export class Clock extends React.Component {
 								/>
 							}
 							
-							return <div style={{position: 'absolute'}} key={anim.data} ref={el => this.clock = el}>
+							return <div style={{position: 'absolute'}} key={anim.data} ref={el => this.clock = el} className="react-timekeeper__clock-animations">
 								{data.numbers.map((numberString, i) => {
 									const num = i + 1;
 									return (
@@ -145,6 +145,7 @@ export class Clock extends React.Component {
 										...styles.clockHand,
 										opacity: anim.style.handOpacity,
 									}}
+									className="react-timekeeper__clock-svgs"
 								>
 									<g transform={`rotate(${handRotation} ${CLOCK_RADIUS} ${CLOCK_RADIUS})`}>
 										<line x1={CLOCK_RADIUS} y1={CLOCK_RADIUS} x2={CLOCK_RADIUS} y2={CLOCK_RADIUS - CLOCK_HAND_LENGTH}
@@ -173,6 +174,7 @@ export class Clock extends React.Component {
 				style={styles.clock}
 				onMouseDown={this.mousedown}
 				onTouchStart={this.touchstart}
+				className="react-timekeeper__clock"
 			>
 				{ renderNumbersAndClockhand.call(this) }
 			</div>

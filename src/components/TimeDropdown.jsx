@@ -103,8 +103,12 @@ export class TimeDropdown extends React.Component {
 				ref={el => this.container = el}
 				onMouseEnter={this.disableBodyScroll}
 				onMouseLeave={this.enableBodyScroll}
+				className="react-timekeeper__time-dropdown"
 			>
-				<ul style={styles.options}>
+				<ul
+					style={styles.options}
+					className="react-timekeeper__time-dropdown-options"
+				>
 					{this.props.options.map(opt =>
 						<li
 							key={opt}

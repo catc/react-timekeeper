@@ -1,5 +1,6 @@
 exports[`TimeDropdown component renders correctly 1`] = `
 <div
+  className="react-timekeeper__time-dropdown"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   style={
@@ -27,6 +28,7 @@ exports[`TimeDropdown component renders correctly 1`] = `
     ]
   }>
   <ul
+    className="react-timekeeper__time-dropdown-options"
     style={
       Object {
         "listStyle": "none",
