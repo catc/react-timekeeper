@@ -8,7 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 build.module.loaders.pop()
 build.module.loaders.push({
-	test: /\.scss$/,
+	test: /\.(s?)css$/,
 	loaders: [ExtractTextPlugin.extract('style-loader'), 'css-loader', 'postcss-loader', 'sass-loader']
 })
 
