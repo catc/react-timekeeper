@@ -10,11 +10,18 @@ import 'highlight.js/styles/dracula.css'
 // import 'highlight.js/styles/atom-one-dark.css'
 // import 'highlight.js/styles/androidstudio.css'
 
+// polyfill Object.assign for ie 11
+import assign from 'lodash/assign'
+if (typeof Object.assign !== 'function') {
+	Object.assign = assign
+}
+
 // sections
 import Intro from './intro'
 import Installation from './installation'
 import Api from './api'
 import Examples from './examples'
+
 
 class Content extends React.Component {
 	componentDidMount(){
