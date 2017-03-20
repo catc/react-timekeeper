@@ -152,6 +152,13 @@ export class Timepicker extends React.Component {
 					.react-timekeeper-noscroll {
 						overflow: hidden;
 					}
+					.react-timekeeper-scrollbar-measure {
+						width: 100px;
+						height: 100px;
+						overflow: scroll;
+						position: absolute;
+						top: -9999px;
+					}
 				`}</style>
 
 				<Time

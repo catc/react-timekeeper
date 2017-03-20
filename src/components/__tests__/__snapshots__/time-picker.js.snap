@@ -39,6 +39,13 @@ exports[`Timepicker component renders correctly with no time 1`] = `
     					.react-timekeeper-noscroll {
     						overflow: hidden;
     					}
+    					.react-timekeeper-scrollbar-measure {
+    						width: 100px;
+    						height: 100px;
+    						overflow: scroll;
+    						position: absolute;
+    						top: -9999px;
+    					}
     				
   </style>
   <div
@@ -604,6 +611,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
     					}
     					.react-timekeeper-noscroll {
     						overflow: hidden;
+    					}
+    					.react-timekeeper-scrollbar-measure {
+    						width: 100px;
+    						height: 100px;
+    						overflow: scroll;
+    						position: absolute;
+    						top: -9999px;
     					}
     				
   </style>

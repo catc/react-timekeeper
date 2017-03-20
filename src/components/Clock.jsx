@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { spring, TransitionMotion } from 'react-motion';
 import Radium from 'radium'
 
-import calcOffset from '../helpers/offset'
+import { calcOffset } from '../helpers/dom'
 import { CLOCK_DATA } from '../helpers/data';
 
 

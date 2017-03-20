@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
 import Radium from 'radium'
 import { fadeIn } from '../helpers/animations';
+import { getScrollBarWidth } from '../helpers/dom'
 
+let scrollbarWidth;
 export class TimeDropdown extends React.Component {
 	constructor(props){
 		super(props)
@@ -12,6 +14,10 @@ export class TimeDropdown extends React.Component {
 
 	componentDidMount(){
 		this.container.scrollTop = this.selected.offsetTop
+
+		if (!scrollbarWidth){
+			scrollbarWidth = getScrollBarWidth()
+		}
 
 		document.addEventListener('click', this.elsewhereClick, false)
 	}
@@ -44,9 +50,11 @@ export class TimeDropdown extends React.Component {
 	}
 
 	disableBodyScroll(){
+		document.documentElement.style.paddingRight = scrollbarWidth + 'px'
 		document.documentElement.classList.add('react-timekeeper-noscroll')
 	}
 	enableBodyScroll(){
+		document.documentElement.style.paddingRight = 0
 		document.documentElement.classList.remove('react-timekeeper-noscroll')
 	}
 	
