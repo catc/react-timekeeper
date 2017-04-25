@@ -5,9 +5,9 @@ import {Github, Plug} from './icons'
 class Intro extends React.Component {
 	constructor(props){
 		super(props)
+		const date = new Date();
 		this.state = {
-			// time: '3:70'
-			demoTime: '12:45 pm',
+			demoTime: `${date.getHours()}:${date.getMinutes()}`,
 			displayDemo: true
 		}
 
