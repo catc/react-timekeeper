@@ -6,6 +6,10 @@ import Clock from './Clock'
 const MERIDIEM_SELECT_SIZE = 38;
 
 export class ClockWrapper extends React.Component {
+	componentDidMount(){
+		// force passing clockWrapperEl to child
+		this.forceUpdate()
+	}
 	render(){
 		const props = this.props
 		const config = props.config
@@ -48,7 +52,7 @@ export class ClockWrapper extends React.Component {
 		}
 		
 		return (
-			<div style={styles.clockWrapper} className="react-timekeeper__clock-wrapper">
+			<div style={styles.clockWrapper} className="react-timekeeper__clock-wrapper" ref={el => this.clockWrapperEl = el}>
 				<Clock
 					config={props.config}
 					hour={props.hour}
@@ -57,6 +61,7 @@ export class ClockWrapper extends React.Component {
 
 					changeHour={props.changeHour}
 					changeMinute={props.changeMinute}
+					clockWrapperEl={this.clockWrapperEl}
 				/>
 
 				<div style={styles.meridiemWrapper} className="react-timekeeper__meridiem-toggle-wrapper">

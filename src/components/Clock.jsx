@@ -202,14 +202,13 @@ export class Clock extends React.Component {
 	}
 
 	mousedown(){
-		// bind handlers
 		this.mousedragHandler = this.mousedrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
 
 		// add listeners
 		document.addEventListener('mousemove', this.mousedragHandler, false)
 		document.addEventListener('mouseup', this.stopDragHandler, false)
-		this.clock.addEventListener('mouseleave', this.stopDragHandler, false)
+		this.props.clockWrapperEl.addEventListener('mouseleave', this.stopDragHandler, false)
 	}
 	mousedrag(e){
 		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
@@ -240,7 +239,7 @@ export class Clock extends React.Component {
 	stopDragHandler(e = {}){
 		document.removeEventListener('mousemove', this.mousedragHandler, false)
 		document.removeEventListener('mouseup', this.stopDragHandler, false)
-		this.clock.removeEventListener('mouseleave', this.stopDragHandler, false)
+		this.props.clockWrapperEl.removeEventListener('mouseleave', this.stopDragHandler, false)
 
 		document.removeEventListener('touchmove', this.touchdragHandler, false);
 		document.addEventListener('touchend', this.stopDragHandler, false)
@@ -273,7 +272,8 @@ Clock.propTypes = {
 	unit: PropTypes.string.isRequired,
 	
 	changeHour: PropTypes.func.isRequired,
-	changeMinute: PropTypes.func.isRequired
+	changeMinute: PropTypes.func.isRequired,
+	clockWrapperEl: PropTypes.object
 }
 
 export default Radium(Clock)
