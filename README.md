@@ -1,14 +1,13 @@
 # React Timekeeper
 Time picker based on the style of the [Android Google Keep](https://play.google.com/store/apps/details?id=com.google.android.keep) app. [See the demo](https://catc.github.io/react-timekeeper/).
 
-## Installation and Usage
-Install via:
+## Installation
 
 ```shell
-npm install --save react-timekeeper
+$ npm install --save react-timekeeper
 ```
 
-Use via:
+## Usage
 
 ```javascript
 import Timekeeper from 'react-timekeeper';
@@ -58,7 +57,7 @@ Pass a function to be called when time is changed. Used to store time state in p
 ```javascript
 {
 	formatted: '4:55 pm',	// 12 hour format
-	formattedSimple: '4:55', 	// similar to formatted (12h), but no meridiem
+	formattedSimple: '4:55', // similar to formatted (12h), but no meridiem
 	formatted24: '16:55',
 	hour: 4,
 	hour24: 16,
