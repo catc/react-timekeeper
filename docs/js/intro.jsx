@@ -10,7 +10,7 @@ class Intro extends React.Component {
 		const h = date.getHours() % 12
 		const hour = h === 0 ? 12 : h
 		const min = ('0' + date.getMinutes()).slice(-2)
-		const meridiem = date.getHours > 12 ? 'PM' : 'AM'
+		const meridiem = date.getHours() > 12 ? 'PM' : 'AM'
 		const dateString = `${hour}:${min} ${meridiem}`;
 		this.state = {
 			demoTime: dateString,
