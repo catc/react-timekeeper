@@ -26,9 +26,12 @@ export class Timepicker extends React.Component {
 		this.changeUnit =  this.changeUnit.bind(this)
 		this.changeMeridiem = this.handleMeridiemChange.bind(this)
 
-		this.timeChangeHandler = debounce(() => {
-			this.props.onChange(this.getTime())
-		}, 80)
+		this.timeChangeHandler = null;
+		if (typeof props.onChange === 'function') {
+			this.timeChangeHandler = debounce(() => {
+				this.props.onChange(this.getTime())
+			}, 80)
+		}
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -65,11 +68,9 @@ export class Timepicker extends React.Component {
 
 		this.setState({
 			[unit]: val
-		})
+		}, this.timeChangeHandler) // update time on parent
 
 		const props = this.props
-		// update time on parent
-		props.onChange && this.timeChangeHandler()
 
 		if (canChangeUnit && unit === 'hour' && props.switchToMinuteOnHourSelect){
 			this.changeUnit('minute')
@@ -81,10 +82,7 @@ export class Timepicker extends React.Component {
 		if (val !== this.state.meridiem){
 			this.setState({
 				meridiem: val
-			})
-			
-			// update on parent
-			this.props.onChange && this.timeChangeHandler()
+			}, this.timeChangeHandler) // update on parent
 		}
 	}
 
