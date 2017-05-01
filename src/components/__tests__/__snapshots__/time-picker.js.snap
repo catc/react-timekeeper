@@ -10,6 +10,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
       "display": "inline-block",
       "fontFamily": "\"Roboto\", sans-serif",
       "position": "relative",
+      "userSelect": "none",
       "width": "260px",
     }
   }>
@@ -583,6 +584,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
       "display": "inline-block",
       "fontFamily": "\"Roboto\", sans-serif",
       "position": "relative",
+      "userSelect": "none",
       "width": "260px",
     }
   }>
