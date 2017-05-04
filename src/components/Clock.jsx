@@ -252,8 +252,10 @@ export class Clock extends React.Component {
 			this.handlePoint(offsetX, offsetY, true)
 		} else if (evType === 'touchcancel' || evType === 'touchend'){
 			const touch = e.targetTouches[0];
-			const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
-			this.handlePoint(offsetX, offsetY, true)
+			if (touch){
+				const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
+				this.handlePoint(offsetX, offsetY, true)
+			}
 		}
 	}
 
