@@ -370,7 +370,8 @@ exports[`ClockWrapper component renders correctly 1`] = `
           },
           false,
         ]
-      }>
+      }
+      type="button">
       AM
     </button>
     <button
@@ -400,7 +401,8 @@ exports[`ClockWrapper component renders correctly 1`] = `
             "background": undefined,
           },
         ]
-      }>
+      }
+      type="button">
       PM
     </button>
   </div>

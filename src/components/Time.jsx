@@ -132,9 +132,9 @@ export class Time extends React.Component {
 							/>
 						: ''}
 					</div>
-					
+
 					<span style={styles.colon}>:</span>
-					
+
 					<div style={styles.minuteWrapper}>
 						<span
 							className="react-timekeeper__minute-select"
@@ -159,8 +159,9 @@ export class Time extends React.Component {
 						: ''}
 					</div>
 
-					
+
 					<button
+						type="button"
 						onClick={this.toggleMeridiem}
 						style={styles.meridiem}
 						className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"

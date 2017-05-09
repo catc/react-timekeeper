@@ -152,7 +152,8 @@ exports[`Timepicker component renders correctly with no time 1`] = `
             "textTransform": "uppercase",
             "verticalAlign": "1px",
           }
-        }>
+        }
+        type="button">
         pm
       </button>
     </div>
@@ -528,7 +529,8 @@ exports[`Timepicker component renders correctly with no time 1`] = `
             "transition": "0.15s ease-out",
             "width": 38,
           }
-        }>
+        }
+        type="button">
         AM
       </button>
       <button
@@ -552,7 +554,8 @@ exports[`Timepicker component renders correctly with no time 1`] = `
             "transition": "0.15s ease-out",
             "width": 38,
           }
-        }>
+        }
+        type="button">
         PM
       </button>
     </div>
@@ -726,7 +729,8 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             "textTransform": "uppercase",
             "verticalAlign": "1px",
           }
-        }>
+        }
+        type="button">
         am
       </button>
     </div>
@@ -1102,7 +1106,8 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             "transition": "0.15s ease-out",
             "width": 38,
           }
-        }>
+        }
+        type="button">
         AM
       </button>
       <button
@@ -1126,7 +1131,8 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             "transition": "0.15s ease-out",
             "width": 38,
           }
-        }>
+        }
+        type="button">
         PM
       </button>
     </div>

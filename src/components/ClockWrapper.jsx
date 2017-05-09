@@ -50,7 +50,7 @@ export class ClockWrapper extends React.Component {
 				background: config.CLOCK_WRAPPER_MERIDIEM_COLOR_SELECTED
 			}
 		}
-		
+
 		return (
 			<div style={styles.clockWrapper} className="react-timekeeper__clock-wrapper" ref={el => this.clockWrapperEl = el}>
 				<Clock
@@ -66,6 +66,7 @@ export class ClockWrapper extends React.Component {
 
 				<div style={styles.meridiemWrapper} className="react-timekeeper__meridiem-toggle-wrapper">
 					<button
+						type="button"
 						className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_am "
 						style={[
 							styles.meridiem,
@@ -74,6 +75,7 @@ export class ClockWrapper extends React.Component {
 						onClick={() => { props.changeMeridiem('am') }}
 					>AM</button>
 					<button
+						type="button"
 						className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_pm"
 						style={[
 							styles.meridiem,
