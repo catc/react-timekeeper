@@ -103,7 +103,8 @@ exports[`Time component should render correctly 1`] = `
           "textTransform": "uppercase",
           "verticalAlign": "1px",
         }
-      }>
+      }
+      type="button">
       pm
     </button>
   </div>
