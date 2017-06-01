@@ -131,6 +131,7 @@ export class Timepicker extends React.Component {
 						-webkit-tap-highlight-color: transparent;
 						-webkit-font-smoothing: antialiased;
 						font-smoothing: antialiased;
+                                                user-select: none; 
 					}
 					.react-timekeeper-button-reset {
 						background: 0;
