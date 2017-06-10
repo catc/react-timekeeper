@@ -60,7 +60,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "radium": "^0.18.1",
+    "prop-types": "^15.5.10",
+    "radium": "^0.19.1",
     "react-motion": "^0.4.7"
   },
   "jest": {
