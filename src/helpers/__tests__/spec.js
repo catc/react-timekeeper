@@ -40,7 +40,7 @@ describe('helpers/parse-time', () => {
 			})
 		})
 
-		test('parses 24 hour format', () => {
+		test('parses 24 hour format string', () => {
 			expect( parse('8:32') ).toMatchObject({
 				hour: 8,
 				minute: 32,
@@ -54,6 +54,18 @@ describe('helpers/parse-time', () => {
 			})
 
 			expect( parse('0:30') ).toMatchObject({
+				hour: 12,
+				minute: 30,
+				meridiem: 'am'
+			})
+
+			expect( parse('12:00') ).toMatchObject({
+				hour: 12,
+				minute: 0,
+				meridiem: 'pm'
+			})
+
+			expect( parse('24:30') ).toMatchObject({
 				hour: 12,
 				minute: 30,
 				meridiem: 'am'
@@ -73,14 +85,23 @@ describe('helpers/parse-time', () => {
 	})
 
 	describe('pass object', () => {
-		test('parses time object with no meridiem', () => {
+		test('parses time object with no meridiem (24 hr format)', () => {
+			expect( parse({
+				hour: 6,
+				minute: 32
+			}) ).toMatchObject({
+				hour: 6,
+				minute: 32,
+				meridiem: 'am'
+			})
+
 			expect( parse({
 				hour: 12,
 				minute: 32
 			}) ).toMatchObject({
 				hour: 12,
 				minute: 32,
-				meridiem: 'am'
+				meridiem: 'pm'
 			})
 
 			expect( parse({
@@ -91,9 +112,18 @@ describe('helpers/parse-time', () => {
 				minute: 32,
 				meridiem: 'pm'
 			})
+
+			expect( parse({
+				hour: 24,
+				minute: 32
+			}) ).toMatchObject({
+				hour: 12,
+				minute: 32,
+				meridiem: 'am'
+			})
 		})
 
-		test('parses time object with a meridiem', () => {
+		test('parses time object with a meridiem (12 hr)', () => {
 			expect( parse({
 				hour: 8,
 				minute: 32,
@@ -112,6 +142,16 @@ describe('helpers/parse-time', () => {
 				hour: 2,
 				minute: 32,
 				meridiem: 'pm'
+			})
+
+			expect( parse({
+				hour: 0,
+				minute: 32,
+				meridiem: 'am'
+			}) ).toMatchObject({
+				hour: 12,
+				minute: 32,
+				meridiem: 'am'
 			})
 		})
 

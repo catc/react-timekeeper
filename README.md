@@ -100,3 +100,4 @@ config={{
 - run all tests: `npm run test`
 - update test snapshots: `npm run test:update-snapshots`
 - create lib to publish npm: `npm run lib`
+- run individual test: `npm run test -t SPEC_NAME`, eg: `npm run test -t spec` to run `spec.js` in `src/helpers/__tests__/spec.js`
