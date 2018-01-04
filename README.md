@@ -90,6 +90,7 @@ config={{
 
 ## Development
 1. Clone the repo
+3. `nvm use 7.10` (or anything >7.6)
 2. `npm install`
 3. `npm run dev`
 4. Navigate to `localhost:3002`
