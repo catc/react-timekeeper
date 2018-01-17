@@ -4,6 +4,7 @@ import debounce from 'lodash/debounce'
 import Radium, { StyleRoot } from 'radium'
 
 import parseTime from '../helpers/parse-time'
+import composeTime from '../helpers/compose-time'
 import ClockWrapper from './ClockWrapper'
 import Time from './Time'
 
@@ -43,17 +44,7 @@ export class Timepicker extends React.Component {
 
 	getTime(){
 		const state = this.state;
-		const meridiemAdd = state.meridiem === 'pm' ? 12 : 0
-		const paddedMinute = ('0' + state.minute).slice(-2)
-		return {
-			formatted: `${state.hour}:${paddedMinute} ${state.meridiem}`,
-			formattedSimple: `${state.hour}:${paddedMinute}`,
-			formatted24: `${state.hour + meridiemAdd}:${paddedMinute}`,
-			hour: state.hour,
-			hour24: state.hour + meridiemAdd,
-			minute: state.minute,
-			meridiem: state.meridiem
-		}
+		return composeTime(state.hour, state.minute, state.meridiem);
 	}
 
 	handleTimeChange(unit, val, canChangeUnit){
