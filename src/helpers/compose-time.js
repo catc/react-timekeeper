@@ -3,7 +3,7 @@ export default function composeTime(hour, minute, meridiem){
 	const paddedMinute = ('0' + minute).slice(-2)
 
 	let hour24 = hour;
-	if (meridiem === 'pm'){
+	if (meridiem === 'pm' && hour !== 12){
 		hour24 = hour + 12;
 	} else if (meridiem === 'am' && hour === 12){
 		hour24 = 0;
