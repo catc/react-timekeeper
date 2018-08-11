@@ -48,7 +48,8 @@ export class ClockWrapper extends React.Component {
 				float: 'right',
 			},
 			meridiemSelected: {
-				background: config.CLOCK_WRAPPER_MERIDIEM_COLOR_SELECTED
+				background: config.CLOCK_WRAPPER_MERIDIEM_BACKGROUND_COLOR_SELECTED,
+				color: config.CLOCK_WRAPPER_MERIDIEM_TEXT_COLOR_SELECTED
 			}
 		}
 

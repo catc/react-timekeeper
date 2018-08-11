@@ -399,6 +399,7 @@ exports[`ClockWrapper component renders correctly 1`] = `
           },
           Object {
             "background": undefined,
+            "color": undefined,
           },
         ]
       }
