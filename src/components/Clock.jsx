@@ -37,6 +37,8 @@ function deg(rad){
 	return rad * (180 / pi)
 }
 
+let wasDrag = false
+let dragCount = 0
 
 export class Clock extends React.Component {
 	constructor(props){
@@ -182,9 +184,9 @@ export class Clock extends React.Component {
 		)
 	}
 	
-	handlePoint(clientX, clientY, canChangeUnit){
+	handlePoint(clientX, clientY, canChangeUnit, forceCourse){
 
-		const isCourse = this.props.config.useCourseMinutes;
+		const isCourse = this.props.config.useCourseMinutes || forceCourse;
 		const x = clientX - CLOCK_RADIUS
 		const y = -clientY + CLOCK_RADIUS
 
@@ -205,6 +207,8 @@ export class Clock extends React.Component {
 	}
 
 	mousedown(){
+		this.dragCount = 0
+
 		this.mousedragHandler = this.mousedrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
 
@@ -216,11 +220,14 @@ export class Clock extends React.Component {
 	mousedrag(e){
 		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
 		this.handlePoint(offsetX, offsetY)
+		this.dragCount++
 
 		e.preventDefault()
 		return false
 	}
 	touchstart(){
+		this.dragCount = 0
+
 		// bind handlers
 		this.touchdragHandler = this.touchdrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
@@ -235,6 +242,7 @@ export class Clock extends React.Component {
 		const touch = e.targetTouches[0];
 		const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
 		this.handlePoint(offsetX, offsetY)
+		this.dragCount++
 
 		e.preventDefault()
 		return false
@@ -252,12 +260,12 @@ export class Clock extends React.Component {
 		const evType = e.type;
 		if (evType === 'mouseup'){
 			const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
-			this.handlePoint(offsetX, offsetY, true)
+			this.handlePoint(offsetX, offsetY, true, !(this.dragCount > 2))
 		} else if (evType === 'touchcancel' || evType === 'touchend'){
 			const touch = e.targetTouches[0];
 			if (touch){
 				const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
-				this.handlePoint(offsetX, offsetY, true)
+				this.handlePoint(offsetX, offsetY, true, !(this.dragCount > 2))
 			}
 		}
 	}
