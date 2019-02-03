@@ -88,7 +88,7 @@ config={{
 
 //set minutes to span to 5 minute intervals
 config={{
-	useCourseMinutes: true
+	useCoarseMinutes: true
 }}
 ```
 

@@ -190,7 +190,7 @@ class YourComponent extends React.Component {
 								time={this.state.example4Time}
 								onChange={data => this.updateDemoTime(4, data)}
 								config={{
-									useCourseMinutes: true
+									useCoarseMinutes: true
 								}}
 							/>
 						</div>
@@ -217,7 +217,7 @@ class YourComponent extends React.Component {
 					time={this.state.time}
 					onChange={this.handleTimeChange}
 					config={{
-						useCourseMinutes: true
+						useCoarseMinutes: true
 					}}
 				/>;
 			</div>
