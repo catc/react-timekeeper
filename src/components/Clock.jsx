@@ -37,7 +37,6 @@ function deg(rad){
 	return rad * (180 / pi)
 }
 
-let wasDrag = false
 let dragCount = 0
 
 export class Clock extends React.Component {
@@ -196,6 +195,12 @@ export class Clock extends React.Component {
 			d = 360 + d
 		}
 
+		//sometimes touch bleeds into please it shoudln't
+		const r = Math.sqrt(x * x + y * y)
+		if (r > CLOCK_RADIUS && this.dragCount < 2){
+			return false;
+		}
+
 		const unit = this.props.unit
 		const selected = Math.round( d / 360 * (CLOCK_DATA[unit].increments / (isCourse ? CLOCK_DATA[unit].courseMultipiler : 1)) )
 
@@ -204,11 +209,13 @@ export class Clock extends React.Component {
 		} else if (unit === 'minute'){
 			this.props.changeMinute(selected * (isCourse ? CLOCK_DATA[unit].courseMultipiler : 1), canChangeUnit)
 		}
+
+		return true;
 	}
 
 	mousedown(){
 		this.dragCount = 0
-
+		
 		this.mousedragHandler = this.mousedrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
 
@@ -221,8 +228,6 @@ export class Clock extends React.Component {
 		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
 		this.handlePoint(offsetX, offsetY, false, this.dragCount < 2)
 		this.dragCount++
-
-		console.log(e)
 
 		e.preventDefault()
 		return false
@@ -255,8 +260,8 @@ export class Clock extends React.Component {
 		this.props.clockWrapperEl.removeEventListener('mouseleave', this.stopDragHandler, false)
 
 		document.removeEventListener('touchmove', this.touchdragHandler, false);
-		document.addEventListener('touchend', this.stopDragHandler, false)
-		document.addEventListener('touchcancel', this.stopDragHandler, false)
+		document.removeEventListener('touchend', this.stopDragHandler, false)
+		document.removeEventListener('touchcancel', this.stopDragHandler, false)
 		window.blockMenuHeaderScroll = false
 
 		const evType = e.type;
@@ -264,8 +269,9 @@ export class Clock extends React.Component {
 			const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
 			this.handlePoint(offsetX, offsetY, true, !(this.dragCount > 2))
 		} else if (evType === 'touchcancel' || evType === 'touchend'){
+			//console.log(e)
 			const touch = e.targetTouches[0] || e.changedTouches[0]
-			if (touch){
+			if (touch && this.clock){
 				const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
 				this.handlePoint(offsetX, offsetY, true, !(this.dragCount > 2))
 			}
