@@ -67,7 +67,7 @@ export class Timepicker extends React.Component {
 		if (canChangeUnit && unit === 'hour' && props.switchToMinuteOnHourSelect){
 			this.changeUnit('minute')
 		} else if (canChangeUnit && unit === 'minute' && props.closeOnMinuteSelect){
-			props.onDoneClick && props.onDoneClick()
+			props.onDoneClick && props.onDoneClick(this.getTime())
 		}
 	}
 	handleMeridiemChange(val){
@@ -177,7 +177,7 @@ export class Timepicker extends React.Component {
 					changeMeridiem={this.changeMeridiem}
 				/>
 				
-				{this.props.onDoneClick && <span style={styles.doneButton} onClick={this.props.onDoneClick}>Done</span> }
+				{this.props.onDoneClick && <span style={styles.doneButton} onClick={e=>this.props.onDoneClick(this.getTime(), e)}>Done</span> }
 			</StyleRoot>
 		)
 	}
