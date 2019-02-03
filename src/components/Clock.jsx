@@ -183,6 +183,8 @@ export class Clock extends React.Component {
 	}
 	
 	handlePoint(clientX, clientY, canChangeUnit){
+
+		const isCourse = this.props.config.useCourseMinutes;
 		const x = clientX - CLOCK_RADIUS
 		const y = -clientY + CLOCK_RADIUS
 
@@ -193,12 +195,12 @@ export class Clock extends React.Component {
 		}
 
 		const unit = this.props.unit
-		const selected = Math.round( d / 360 * CLOCK_DATA[unit].increments )
+		const selected = Math.round( d / 360 * (CLOCK_DATA[unit].increments / (isCourse ? CLOCK_DATA[unit].courseMultipiler : 1)) )
 
 		if (unit === 'hour'){
-			this.props.changeHour(selected, canChangeUnit)
+			this.props.changeHour(selected * (isCourse ? CLOCK_DATA[unit].courseMultipiler : 1), canChangeUnit)
 		} else if (unit === 'minute'){
-			this.props.changeMinute(selected, canChangeUnit)
+			this.props.changeMinute(selected * (isCourse ? CLOCK_DATA[unit].courseMultipiler : 1), canChangeUnit)
 		}
 	}
 
