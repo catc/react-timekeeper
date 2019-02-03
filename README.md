@@ -85,6 +85,11 @@ config={{
 	TIMEPICKER_BACKGROUND: 'red',
 	FONT_FAMILY: '"Open Sans", sans-serif'
 }}
+
+//set minutes to span to 5 minute intervals
+config={{
+	useCourseMinutes: true
+}}
 ```
 
 
