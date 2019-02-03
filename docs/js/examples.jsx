@@ -9,6 +9,7 @@ class Installation extends React.Component {
 			example2Time: '6:50 am',
 			example2TimeDisplay: true,
 			example3Time: '2:50',
+			example4Time: '2:50',
 		}
 
 		this.updateDemoTime = this.updateDemoTime.bind(this)
@@ -137,7 +138,7 @@ class YourComponent extends React.Component {
 					<div className="examples__example-3">
 						<div className="examples__example-3-timekeeper-wrapper">
 							<TimeKeeper
-								time={this.state.example1Time}
+								time={this.state.example3Time}
 								onChange={data => this.updateDemoTime(3, data)}
 								config={{
 									TIMEPICKER_BACKGROUND: 'white',
@@ -175,6 +176,49 @@ class YourComponent extends React.Component {
 						DONE_BUTTON_BORDER_COLOR: '#ededed'
 					}}
 					onDoneClick={() => {}}
+				/>;
+			</div>
+		)
+	}
+} </code></pre>
+
+					{/* ----- */}
+					<p className="text">Snap to 5 minute increments.</p>
+					<div className="examples__example-3">
+						<div className="examples__example-3-timekeeper-wrapper">
+							<TimeKeeper
+								time={this.state.example4Time}
+								onChange={data => this.updateDemoTime(4, data)}
+								config={{
+									useCourseMinutes: true
+								}}
+							/>
+						</div>
+					</div>
+
+					<pre><code className="javascript">import React from 'react';
+import TimeKeeper from 'react-timekeeper';
+
+class YourComponent extends React.Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			time: '2:50 pm'
+		}
+		this.handleTimeChange = this.handleTimeChange.bind(this)
+	}
+	handleTimeChange(newTime){
+		this.setState({ time: newTime.formatted})
+	}
+	render(){
+		return (
+			<div>
+				<TimeKeeper
+					time={this.state.time}
+					onChange={this.handleTimeChange}
+					config={{
+						useCourseMinutes: true
+					}}
 				/>;
 			</div>
 		)
