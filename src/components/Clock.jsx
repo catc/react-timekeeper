@@ -219,7 +219,7 @@ export class Clock extends React.Component {
 	}
 	mousedrag(e){
 		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
-		this.handlePoint(offsetX, offsetY)
+		this.handlePoint(offsetX, offsetY, false, this.dragCount < 2)
 		this.dragCount++
 
 		e.preventDefault()
@@ -241,7 +241,7 @@ export class Clock extends React.Component {
 	touchdrag(e){
 		const touch = e.targetTouches[0];
 		const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
-		this.handlePoint(offsetX, offsetY)
+		this.handlePoint(offsetX, offsetY, false, this.dragCount < 2)
 		this.dragCount++
 
 		e.preventDefault()
