@@ -6,12 +6,12 @@ export const CLOCK_DATA = {
 		numbers: hours,
 		dropdownOptions: hours,
 		increments: 12,
-		coarseMultipiler: 1
+		coarseMultiplier: 1
 	},
 	minute: {
 		numbers: ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'].map(a => a.toString()),
 		dropdownOptions: minutes,
 		increments: 60,
-		coarseMultipiler: 5
+		coarseMultiplier: 5
 	}
 }
