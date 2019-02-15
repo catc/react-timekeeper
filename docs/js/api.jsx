@@ -78,7 +78,7 @@ class Installation extends React.Component {
 						{/* ----- */}
 						<h3>
 							<code className="name">onDoneClick</code>&nbsp;
-							accepts <span className="accepts">func</span>&nbsp;
+							accepts <span className="accepts">func</span> (<code className="default">newTime</code>, <code className="default">?event</code>) &nbsp;
 							(default: <code className="default">null</code>)
 						 </h3>
 						<div className="api__description">
