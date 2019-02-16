@@ -23,7 +23,8 @@
     "test:update-snapshots": "npm run test -- -u",
     "dev": "node ./bin/docs-dev.js",
     "build": "NODE_ENV=production node ./bin/docs-build.js",
-    "lib": "rm -rf lib && mkdir lib && babel src --ignore __tests__/ -d lib"
+    "lib": "rm -rf lib && mkdir lib && babel src --ignore __tests__/ -d lib",
+    "libwin": "rimraf lib && mkdir lib && babel src --ignore __tests__/ -d lib"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
@@ -53,6 +54,7 @@
     "react-dom": "^15.4.2",
     "react-hot-loader": "^1.3.1",
     "react-test-renderer": "^15.4.2",
+    "rimraf": "^2.6.3",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",

@@ -37,7 +37,6 @@ function deg(rad){
 	return rad * (180 / pi)
 }
 
-
 export class Clock extends React.Component {
 	constructor(props){
 		super(props)
@@ -182,7 +181,7 @@ export class Clock extends React.Component {
 		)
 	}
 	
-	handlePoint(clientX, clientY, canChangeUnit){
+	handlePoint(clientX, clientY, canChangeUnit, forceCoarse){
 		const x = clientX - CLOCK_RADIUS
 		const y = -clientY + CLOCK_RADIUS
 
@@ -192,17 +191,35 @@ export class Clock extends React.Component {
 			d = 360 + d
 		}
 
+		// ensure touch doesn't bleed outside of clock radius
+		const r = Math.sqrt(x * x + y * y)
+		if (r > CLOCK_RADIUS && this.dragCount < 2){
+			return false;
+		}
+
 		const unit = this.props.unit
-		const selected = Math.round( d / 360 * CLOCK_DATA[unit].increments )
+		const isCoarse = this.props.config.useCoarseMinutes || forceCoarse;
+
+		// calculate value based on current clock increments
+		let selected = Math.round(d / 360 * CLOCK_DATA[unit].increments)
+		if (isCoarse){
+			// if coarse, round up/down
+			const multiplier = CLOCK_DATA[unit].coarseMultiplier;
+			selected = Math.round(selected / multiplier) * multiplier;
+		}
 
 		if (unit === 'hour'){
 			this.props.changeHour(selected, canChangeUnit)
 		} else if (unit === 'minute'){
 			this.props.changeMinute(selected, canChangeUnit)
 		}
+
+		return true;
 	}
 
 	mousedown(){
+		this.dragCount = 0
+		
 		this.mousedragHandler = this.mousedrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
 
@@ -213,12 +230,15 @@ export class Clock extends React.Component {
 	}
 	mousedrag(e){
 		const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
-		this.handlePoint(offsetX, offsetY)
+		this.handlePoint(offsetX, offsetY, false, this.dragCount < 2)
+		this.dragCount++
 
 		e.preventDefault()
 		return false
 	}
 	touchstart(){
+		this.dragCount = 0
+
 		// bind handlers
 		this.touchdragHandler = this.touchdrag.bind(this)
 		this.stopDragHandler = this.stopDragHandler.bind(this)
@@ -232,7 +252,8 @@ export class Clock extends React.Component {
 	touchdrag(e){
 		const touch = e.targetTouches[0];
 		const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
-		this.handlePoint(offsetX, offsetY)
+		this.handlePoint(offsetX, offsetY, false, this.dragCount < 2)
+		this.dragCount++
 
 		e.preventDefault()
 		return false
@@ -243,19 +264,23 @@ export class Clock extends React.Component {
 		this.props.clockWrapperEl.removeEventListener('mouseleave', this.stopDragHandler, false)
 
 		document.removeEventListener('touchmove', this.touchdragHandler, false);
-		document.addEventListener('touchend', this.stopDragHandler, false)
-		document.addEventListener('touchcancel', this.stopDragHandler, false)
+		document.removeEventListener('touchend', this.stopDragHandler, false)
+		document.removeEventListener('touchcancel', this.stopDragHandler, false)
 		window.blockMenuHeaderScroll = false
+
+		// if user just clicks/taps a number (drag count < 2), then just assume it's a rough tap
+		// and force a rounded/coarse number (ie: 1, 2, 3, 4 is tapped, assume 0 or 5)
+		const forceCoarse = this.dragCount < 2;
 
 		const evType = e.type;
 		if (evType === 'mouseup'){
 			const { offsetX, offsetY } = calcOffset(this.clock, e.clientX, e.clientY)
-			this.handlePoint(offsetX, offsetY, true)
+			this.handlePoint(offsetX, offsetY, true, forceCoarse)
 		} else if (evType === 'touchcancel' || evType === 'touchend'){
-			const touch = e.targetTouches[0];
-			if (touch){
+			const touch = e.targetTouches[0] || e.changedTouches[0]
+			if (touch && this.clock){
 				const { offsetX, offsetY } = calcOffset(this.clock, touch.clientX, touch.clientY)
-				this.handlePoint(offsetX, offsetY, true)
+				this.handlePoint(offsetX, offsetY, true, forceCoarse)
 			}
 		}
 	}

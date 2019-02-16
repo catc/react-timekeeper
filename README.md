@@ -67,8 +67,8 @@ Pass a function to be called when time is changed. Used to store time state in p
 ```
 
 
-#### `onDoneClick` (function)
-Displays the "Done" button and calls function when button is clicked. Useful for triggering some action on the parent component, like closing the timepicker
+#### `onDoneClick` (function: `newTime` , `?event`)
+Displays the "Done" button and calls function when button is clicked. Useful for triggering some action on the parent component, like closing the timepicker. Called with update time and event (if button is clicked).
 
 #### `switchToMinuteOnHourSelect` (bool)
 Changes clock unit from hour to minute after selecting an hour. Exists mainly to provides a better user experience.
@@ -84,6 +84,11 @@ Pass in object with any config properties to override. Currently supports overri
 config={{
 	TIMEPICKER_BACKGROUND: 'red',
 	FONT_FAMILY: '"Open Sans", sans-serif'
+}}
+
+//set minutes to span to 5 minute intervals
+config={{
+	useCoarseMinutes: true
 }}
 ```
 
