@@ -313,6 +313,573 @@ exports[`Clock component renders correctly when unit is hour 1`] = `
 </div>
 `;
 
+exports[`Clock component renders correctly when unit is hour24 1`] = `
+<div
+  className="react-timekeeper__clock"
+  onMouseDown={[Function]}
+  onTouchStart={[Function]}
+  style={
+    Object {
+      "background": undefined,
+      "borderRadius": "200px",
+      "cursor": "pointer",
+      "display": "inline-block",
+      "height": "220px",
+      "position": "relative",
+      "width": "220px",
+    }
+  }>
+  <div
+    className="react-timekeeper__clock-animations-wrapper">
+    <div
+      className="react-timekeeper__clock-animations"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 128.49999999999997,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 31.512196331304843,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        1
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 154.48780366869514,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 57.49999999999997,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        2
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 164,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 92.99999999999999,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        3
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 154.48780366869514,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 128.5,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        4
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 128.50000000000003,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 154.4878036686951,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        5
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 93.00000000000001,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 164,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        6
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 57.5,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 154.48780366869514,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        7
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 31.512196331304878,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 128.50000000000006,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        8
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 22,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 93.00000000000003,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        9
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 31.51219633130482,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 57.50000000000006,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        10
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 57.500000000000014,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 31.512196331304843,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        11
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 92.99999999999997,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 22,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        12
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 155.22539674441623,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 30.774603255583855,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        13
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 178.001472713438,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 70.22392403097817,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        14
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 178.00147271343803,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 115.77607596902178,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        15
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 155.22539674441617,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 155.2253967444162,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        16
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 115.77607596902186,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 178.001472713438,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        17
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 70.22392403097824,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 178.00147271343803,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        18
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 30.77460325558379,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 155.22539674441617,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        19
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 7.998527286561995,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 115.77607596902186,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        20
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 7.998527286561966,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 70.22392403097825,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        21
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 30.774603255583834,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 30.774603255583806,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        22
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 70.22392403097814,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 7.998527286561995,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        23
+      </span>
+      <span
+        style={
+          Object {
+            "borderRadius": "99px",
+            "color": undefined,
+            "display": "inline-block",
+            "fontSize": "16px",
+            "height": 34,
+            "left": 115.77607596902175,
+            "lineHeight": "34px",
+            "opacity": 1,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": 7.998527286561966,
+            "width": 34,
+            "zIndex": 5,
+          }
+        }>
+        0
+      </span>
+      <svg
+        className="react-timekeeper__clock-svgs"
+        height={220}
+        style={
+          Object {
+            "opacity": 1,
+            "position": "relative",
+          }
+        }
+        viewBox="0 0 220 220"
+        width={220}
+        xmlns="http://www.w3.org/2000/svg">
+        <g
+          transform="rotate(75 110 110)">
+          <line
+            stroke={undefined}
+            strokeWidth="1"
+            x1={110}
+            x2={110}
+            y1={110}
+            y2={20} />
+          <circle
+            cx={110}
+            cy={110}
+            fill={undefined}
+            r={1.5} />
+          <circle
+            cx={110}
+            cy={22}
+            fill={undefined}
+            r={17} />
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Clock component renders correctly when unit is minute 1`] = `
 <div
   className="react-timekeeper__clock"

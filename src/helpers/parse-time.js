@@ -10,7 +10,7 @@ const defaultTime = {
 // parse and normalize time to 12h format with meridiem
 export default function parseTime(time){
 	time = time || defaultTime;
-	
+
 	let hour;
 	let minute;
 	let meridiem = 'am'
@@ -53,8 +53,11 @@ export default function parseTime(time){
 		throw new Error('Time out of range');
 	}
 
+	let hour24 = meridiem === 'pm' && hour < 12 ? hour + 12 : meridiem === 'am' && hour === 12 ? 0 : hour
+
 	return {
 		hour,
+		hour24,
 		minute,
 		meridiem
 	}

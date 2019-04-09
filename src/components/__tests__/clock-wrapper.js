@@ -6,27 +6,47 @@ import { ClockWrapper } from '../ClockWrapper';
 
 describe('ClockWrapper component', () => {
 	const hour = 12;
+	const hour24 = 16;
 	const minute = 30;
 	const unit = 'hour';
+	const unit24 = 'hour24';
 
 	const changeHour = jest.fn();
 	const changeMinute = jest.fn();
 	const changeMeridiem = jest.fn();
 
-	test('renders correctly', () => {
-		const tree = renderer.create(
-			<ClockWrapper
-				config={{}}
-				unit={unit}
-				hour={hour}
-				minute={minute}
-				meridiem="pm"
-				changeHour={changeHour}
-				changeMinute={changeMinute}
-				changeMeridiem={changeMeridiem}
-			/>
-		).toJSON()
-		expect(tree).toMatchSnapshot()
+	describe('renders correctly', () => {
+		test('when unit is hour', () => {
+			const tree = renderer.create(
+				<ClockWrapper
+					config={{}}
+					unit={unit}
+					hour={hour}
+					minute={minute}
+					meridiem="pm"
+					changeHour={changeHour}
+					changeMinute={changeMinute}
+					changeMeridiem={changeMeridiem}
+				/>
+			).toJSON()
+			expect(tree).toMatchSnapshot()
+		})
+		test('when unit is hour24', () => {
+			const tree = renderer.create(
+				<ClockWrapper
+					config={{}}
+					unit={unit24}
+					hour24={hour24}
+					minute={minute}
+					changeHour={changeHour}
+					changeMinute={changeMinute}
+					// props to suppress proptypes warnings
+                    meridiem="pm"
+					changeMeridiem={changeMeridiem}
+				/>
+			).toJSON()
+			expect(tree).toMatchSnapshot()
+		})
 	})
 
 	test('triggers change meridiem', () => {

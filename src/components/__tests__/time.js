@@ -36,6 +36,42 @@ describe('Time component', () => {
 			timeRendered.find(HOUR_SELECT_BUTTON).simulate('click');
 			expect( timeRendered.find(`.time-dropdown-${unit}`).length ).toEqual(1);
 		})
+
+		// should be present
+		test('meridiem is visible', () => {
+			expect( timeRendered.find(MERIDIEM_TOGGLE).length ).toEqual(1);
+		})
+	})
+
+	describe('current unit is hour24', () => {
+		const unit = 'hour24'
+		const timeRendered = mount(
+			<Time
+				config={{}}
+				mode={'hour24'}
+				unit={unit}
+				changeUnit={changeUnit}
+				// props to suppress proptypes warnings
+                meridiem='am'
+				changeMeridiem={jest.fn()}
+			/>
+		)
+
+		test('minute is selected', () => {
+			timeRendered.find(MINUTE_SELECT_BUTTON).simulate('click');
+			expect(changeUnit).lastCalledWith('minute');
+		})
+
+        // should open TimeDropdown
+		test('hour is selected', () => {
+			timeRendered.find(HOUR_SELECT_BUTTON).simulate('click');
+			expect( timeRendered.find('.time-dropdown-hour').length ).toEqual(1);
+		})
+
+        // should not be present
+		test('meridiem is hidden', () => {
+			expect( timeRendered.find(MERIDIEM_TOGGLE).length ).toEqual(0);
+		})
 	})
 
 	describe('current unit is minute', () => {

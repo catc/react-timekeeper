@@ -1,3 +1,1917 @@
+exports[`Timepicker component renders correctly with 24-hours time passed in, and rendered in 24-hours mode 1`] = `
+<div
+  className="react-timekeeper"
+  data-radium={true}
+  style={
+    Object {
+      "background": "#F2F2F2",
+      "borderRadius": "3px",
+      "boxShadow": "0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.19)",
+      "display": "inline-block",
+      "fontFamily": "\"Roboto\", sans-serif",
+      "position": "relative",
+      "userSelect": "none",
+      "width": "260px",
+    }
+  }>
+  <style>
+    
+    					.react-timekeeper {
+    						-webkit-tap-highlight-color: transparent;
+    						-webkit-font-smoothing: antialiased;
+    						font-smoothing: antialiased;
+    					}
+    					.react-timekeeper-button-reset {
+    						background: 0;
+    						border: 0;
+    						box-shadow: none;
+    						text-shadow: none;
+    						-webkit-appearance: none;
+    						-moz-appearance: none;
+    						cursor: pointer;
+    					}
+    					.react-timekeeper-button-reset:hover, .react-timekeeper-button-reset:focus, .react-timekeeper-button-reset:active {
+    						outline: none;
+    					}
+    					.react-timekeeper-button-reset::-moz-focus-inner {
+    						border: 0;
+    						padding: 0;
+    					}
+    					.react-timekeeper-noscroll {
+    						overflow: hidden;
+    					}
+    					.react-timekeeper-scrollbar-measure {
+    						width: 100px;
+    						height: 100px;
+    						overflow: scroll;
+    						position: absolute;
+    						top: -9999px;
+    					}
+    				
+  </style>
+  <div
+    data-radium={true}
+    style={
+      Object {
+        "background": "white",
+        "borderRadius": "3px 3px 0 0",
+        "padding": "14px 16px",
+      }
+    }>
+    <div
+      data-radium={true}
+      style={
+        Object {
+          "left": 30,
+          "position": "relative",
+        }
+      }>
+      <div
+        data-radium={true}
+        style={
+          Object {
+            "display": "inline-block",
+            "position": "relative",
+            "textAlign": "right",
+            "width": "72px",
+          }
+        }>
+        <span
+          className="react-timekeeper__hour-select"
+          data-radium={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "animation": "x 0.6s ease-out both",
+              "animationName": "popInOut-radium-animation-a878a005",
+              "color": "#8EDDFD",
+              "cursor": "pointer",
+              "display": "inline-block",
+              "fontSize": "48px",
+              "lineHeight": "normal",
+              "userSelect": "none",
+            }
+          }>
+          17
+        </span>
+        
+      </div>
+      <span
+        data-radium={true}
+        style={
+          Object {
+            "color": "#8C8C8C",
+            "display": "inline-block",
+            "fontSize": "46px",
+            "fontWeight": "500",
+            "lineHeight": "normal",
+            "margin": "0 5px",
+            "verticalAlign": "2px",
+          }
+        }>
+        :
+      </span>
+      <div
+        data-radium={true}
+        style={
+          Object {
+            "display": "inline-block",
+            "position": "relative",
+          }
+        }>
+        <span
+          className="react-timekeeper__minute-select"
+          data-radium={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#8C8C8C",
+              "cursor": "pointer",
+              "display": "inline-block",
+              "fontSize": "48px",
+              "lineHeight": "normal",
+              "userSelect": "none",
+            }
+          }>
+          04
+        </span>
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="react-timekeeper__clock-wrapper"
+    data-radium={true}
+    style={
+      Object {
+        "background": "#f4f4f4",
+        "padding": "18px 0 14px",
+        "textAlign": "center",
+      }
+    }>
+    <div
+      className="react-timekeeper__clock"
+      data-radium={true}
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "background": "white",
+          "borderRadius": "200px",
+          "cursor": "pointer",
+          "display": "inline-block",
+          "height": "220px",
+          "position": "relative",
+          "width": "220px",
+        }
+      }>
+      <div
+        className="react-timekeeper__clock-animations-wrapper"
+        data-radium={true}>
+        <div
+          className="react-timekeeper__clock-animations"
+          data-radium={true}
+          style={
+            Object {
+              "position": "absolute",
+            }
+          }>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 128.49999999999997,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 31.512196331304843,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            1
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 154.48780366869514,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 57.49999999999997,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            2
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 164,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 92.99999999999999,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            3
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 154.48780366869514,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 128.5,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            4
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 128.50000000000003,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 154.4878036686951,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            5
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 93.00000000000001,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 164,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            6
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 57.5,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 154.48780366869514,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            7
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 31.512196331304878,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 128.50000000000006,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            8
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 22,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 93.00000000000003,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            9
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 31.51219633130482,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 57.50000000000006,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            10
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 57.500000000000014,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 31.512196331304843,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            11
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 92.99999999999997,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 22,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            12
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 155.22539674441623,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 30.774603255583855,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            13
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 178.001472713438,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 70.22392403097817,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            14
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 178.00147271343803,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 115.77607596902178,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            15
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 155.22539674441617,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 155.2253967444162,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            16
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 115.77607596902186,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 178.001472713438,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            17
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 70.22392403097824,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 178.00147271343803,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            18
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 30.77460325558379,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 155.22539674441617,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            19
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 7.998527286561995,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 115.77607596902186,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            20
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 7.998527286561966,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 70.22392403097825,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            21
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 30.774603255583834,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 30.774603255583806,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            22
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 70.22392403097814,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 7.998527286561995,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            23
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 115.77607596902175,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 7.998527286561966,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            0
+          </span>
+          <svg
+            className="react-timekeeper__clock-svgs"
+            data-radium={true}
+            height={220}
+            style={
+              Object {
+                "opacity": 1,
+                "position": "relative",
+              }
+            }
+            viewBox="0 0 220 220"
+            width={220}
+            xmlns="http://www.w3.org/2000/svg">
+            <g
+              data-radium={true}
+              transform="rotate(165 110 110)">
+              <line
+                stroke="#bceaff"
+                strokeWidth="1"
+                x1={110}
+                x2={110}
+                y1={110}
+                y2={20} />
+              <circle
+                cx={110}
+                cy={110}
+                fill="#bceaff"
+                r={1.5} />
+              <circle
+                cx={110}
+                cy={22}
+                fill="#e6f7ff"
+                r={17} />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "@keyframes popInOut-radium-animation-a878a005 {
+      from{transform: scale(1);}
+      30%{transform: scale(0.88);}
+      60%{transform: scale(1.05);}
+      to{transform: scale(1);}
+      }
+      ",
+      }
+    } />
+</div>
+`;
+
+exports[`Timepicker component renders correctly with 24-hours time passed in, but rendered in am/pm mode 1`] = `
+<div
+  className="react-timekeeper"
+  data-radium={true}
+  style={
+    Object {
+      "background": "#F2F2F2",
+      "borderRadius": "3px",
+      "boxShadow": "0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.19)",
+      "display": "inline-block",
+      "fontFamily": "\"Roboto\", sans-serif",
+      "position": "relative",
+      "userSelect": "none",
+      "width": "260px",
+    }
+  }>
+  <style>
+    
+    					.react-timekeeper {
+    						-webkit-tap-highlight-color: transparent;
+    						-webkit-font-smoothing: antialiased;
+    						font-smoothing: antialiased;
+    					}
+    					.react-timekeeper-button-reset {
+    						background: 0;
+    						border: 0;
+    						box-shadow: none;
+    						text-shadow: none;
+    						-webkit-appearance: none;
+    						-moz-appearance: none;
+    						cursor: pointer;
+    					}
+    					.react-timekeeper-button-reset:hover, .react-timekeeper-button-reset:focus, .react-timekeeper-button-reset:active {
+    						outline: none;
+    					}
+    					.react-timekeeper-button-reset::-moz-focus-inner {
+    						border: 0;
+    						padding: 0;
+    					}
+    					.react-timekeeper-noscroll {
+    						overflow: hidden;
+    					}
+    					.react-timekeeper-scrollbar-measure {
+    						width: 100px;
+    						height: 100px;
+    						overflow: scroll;
+    						position: absolute;
+    						top: -9999px;
+    					}
+    				
+  </style>
+  <div
+    data-radium={true}
+    style={
+      Object {
+        "background": "white",
+        "borderRadius": "3px 3px 0 0",
+        "padding": "14px 16px",
+      }
+    }>
+    <div
+      data-radium={true}
+      style={
+        Object {
+          "left": 20,
+          "position": "relative",
+        }
+      }>
+      <div
+        data-radium={true}
+        style={
+          Object {
+            "display": "inline-block",
+            "position": "relative",
+            "textAlign": "right",
+            "width": "72px",
+          }
+        }>
+        <span
+          className="react-timekeeper__hour-select"
+          data-radium={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "animation": "x 0.6s ease-out both",
+              "animationName": "popInOut-radium-animation-a878a005",
+              "color": "#8EDDFD",
+              "cursor": "pointer",
+              "display": "inline-block",
+              "fontSize": "48px",
+              "lineHeight": "normal",
+              "userSelect": "none",
+            }
+          }>
+          5
+        </span>
+        
+      </div>
+      <span
+        data-radium={true}
+        style={
+          Object {
+            "color": "#8C8C8C",
+            "display": "inline-block",
+            "fontSize": "46px",
+            "fontWeight": "500",
+            "lineHeight": "normal",
+            "margin": "0 5px",
+            "verticalAlign": "2px",
+          }
+        }>
+        :
+      </span>
+      <div
+        data-radium={true}
+        style={
+          Object {
+            "display": "inline-block",
+            "position": "relative",
+          }
+        }>
+        <span
+          className="react-timekeeper__minute-select"
+          data-radium={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#8C8C8C",
+              "cursor": "pointer",
+              "display": "inline-block",
+              "fontSize": "48px",
+              "lineHeight": "normal",
+              "userSelect": "none",
+            }
+          }>
+          04
+        </span>
+        
+      </div>
+      <button
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
+        data-radium={true}
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "#8C8C8C",
+            "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
+            "fontSize": "13px",
+            "marginLeft": "2px",
+            "padding": "10px 8px",
+            "textTransform": "uppercase",
+            "verticalAlign": "1px",
+          }
+        }
+        type="button">
+        pm
+      </button>
+    </div>
+  </div>
+  <div
+    className="react-timekeeper__clock-wrapper"
+    data-radium={true}
+    style={
+      Object {
+        "background": "#f4f4f4",
+        "padding": "18px 0 14px",
+        "textAlign": "center",
+      }
+    }>
+    <div
+      className="react-timekeeper__clock"
+      data-radium={true}
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "background": "white",
+          "borderRadius": "200px",
+          "cursor": "pointer",
+          "display": "inline-block",
+          "height": "220px",
+          "position": "relative",
+          "width": "220px",
+        }
+      }>
+      <div
+        className="react-timekeeper__clock-animations-wrapper"
+        data-radium={true}>
+        <div
+          className="react-timekeeper__clock-animations"
+          data-radium={true}
+          style={
+            Object {
+              "position": "absolute",
+            }
+          }>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 136.99999999999997,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 16.789764466969388,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            1
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 169.21023553303058,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 48.99999999999996,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            2
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 181,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 92.99999999999999,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            3
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 169.21023553303058,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 137,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            4
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 137.00000000000006,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 169.21023553303058,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            5
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 93.00000000000003,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 181,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            6
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 49,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 169.21023553303058,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            7
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 16.789764466969416,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 137.00000000000006,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            8
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 5,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 93.00000000000003,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            9
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 16.78976446696936,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 49.00000000000007,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            10
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 49.00000000000003,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 16.789764466969388,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            11
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 92.99999999999997,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 5,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            12
+          </span>
+          <svg
+            className="react-timekeeper__clock-svgs"
+            data-radium={true}
+            height={220}
+            style={
+              Object {
+                "opacity": 1,
+                "position": "relative",
+              }
+            }
+            viewBox="0 0 220 220"
+            width={220}
+            xmlns="http://www.w3.org/2000/svg">
+            <g
+              data-radium={true}
+              transform="rotate(150 110 110)">
+              <line
+                stroke="#bceaff"
+                strokeWidth="1"
+                x1={110}
+                x2={110}
+                y1={110}
+                y2={20} />
+              <circle
+                cx={110}
+                cy={110}
+                fill="#bceaff"
+                r={1.5} />
+              <circle
+                cx={110}
+                cy={22}
+                fill="#e6f7ff"
+                r={17} />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      className="react-timekeeper__meridiem-toggle-wrapper"
+      data-radium={true}
+      style={
+        Object {
+          "marginTop": "-16px",
+          "padding": "0 30px",
+          "position": "relative",
+          "textAlign": "left",
+          "zIndex": 10,
+        }
+      }>
+      <button
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_am "
+        data-radium={true}
+        onClick={[Function]}
+        style={
+          Object {
+            "background": "white",
+            "borderRadius": "99px",
+            "color": "#898989",
+            "cursor": "pointer",
+            "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
+            "fontSize": "14px",
+            "height": 38,
+            "lineHeight": "38px",
+            "padding": 0,
+            "textAlign": "center",
+            "transition": "0.15s ease-out",
+            "width": 38,
+          }
+        }
+        type="button">
+        AM
+      </button>
+      <button
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_pm"
+        data-radium={true}
+        onClick={[Function]}
+        style={
+          Object {
+            "background": "#E1EFF6",
+            "borderRadius": "99px",
+            "color": "#898989",
+            "cursor": "pointer",
+            "display": "inline-block",
+            "float": "right",
+            "fontFamily": "\"Roboto\", sans-serif",
+            "fontSize": "14px",
+            "height": 38,
+            "lineHeight": "38px",
+            "padding": 0,
+            "textAlign": "center",
+            "transition": "0.15s ease-out",
+            "width": 38,
+          }
+        }
+        type="button">
+        PM
+      </button>
+    </div>
+  </div>
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "@keyframes popInOut-radium-animation-a878a005 {
+      from{transform: scale(1);}
+      30%{transform: scale(0.88);}
+      60%{transform: scale(1.05);}
+      to{transform: scale(1);}
+      }
+      ",
+      }
+    } />
+</div>
+`;
+
+exports[`Timepicker component renders correctly with am-time passed in 1`] = `
+<div
+  className="react-timekeeper"
+  data-radium={true}
+  style={
+    Object {
+      "background": "#F2F2F2",
+      "borderRadius": "3px",
+      "boxShadow": "0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.19)",
+      "display": "inline-block",
+      "fontFamily": "\"Roboto\", sans-serif",
+      "position": "relative",
+      "userSelect": "none",
+      "width": "260px",
+    }
+  }>
+  <style>
+    
+    					.react-timekeeper {
+    						-webkit-tap-highlight-color: transparent;
+    						-webkit-font-smoothing: antialiased;
+    						font-smoothing: antialiased;
+    					}
+    					.react-timekeeper-button-reset {
+    						background: 0;
+    						border: 0;
+    						box-shadow: none;
+    						text-shadow: none;
+    						-webkit-appearance: none;
+    						-moz-appearance: none;
+    						cursor: pointer;
+    					}
+    					.react-timekeeper-button-reset:hover, .react-timekeeper-button-reset:focus, .react-timekeeper-button-reset:active {
+    						outline: none;
+    					}
+    					.react-timekeeper-button-reset::-moz-focus-inner {
+    						border: 0;
+    						padding: 0;
+    					}
+    					.react-timekeeper-noscroll {
+    						overflow: hidden;
+    					}
+    					.react-timekeeper-scrollbar-measure {
+    						width: 100px;
+    						height: 100px;
+    						overflow: scroll;
+    						position: absolute;
+    						top: -9999px;
+    					}
+    				
+  </style>
+  <div
+    data-radium={true}
+    style={
+      Object {
+        "background": "white",
+        "borderRadius": "3px 3px 0 0",
+        "padding": "14px 16px",
+      }
+    }>
+    <div
+      data-radium={true}
+      style={
+        Object {
+          "left": 20,
+          "position": "relative",
+        }
+      }>
+      <div
+        data-radium={true}
+        style={
+          Object {
+            "display": "inline-block",
+            "position": "relative",
+            "textAlign": "right",
+            "width": "72px",
+          }
+        }>
+        <span
+          className="react-timekeeper__hour-select"
+          data-radium={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "animation": "x 0.6s ease-out both",
+              "animationName": "popInOut-radium-animation-a878a005",
+              "color": "#8EDDFD",
+              "cursor": "pointer",
+              "display": "inline-block",
+              "fontSize": "48px",
+              "lineHeight": "normal",
+              "userSelect": "none",
+            }
+          }>
+          6
+        </span>
+        
+      </div>
+      <span
+        data-radium={true}
+        style={
+          Object {
+            "color": "#8C8C8C",
+            "display": "inline-block",
+            "fontSize": "46px",
+            "fontWeight": "500",
+            "lineHeight": "normal",
+            "margin": "0 5px",
+            "verticalAlign": "2px",
+          }
+        }>
+        :
+      </span>
+      <div
+        data-radium={true}
+        style={
+          Object {
+            "display": "inline-block",
+            "position": "relative",
+          }
+        }>
+        <span
+          className="react-timekeeper__minute-select"
+          data-radium={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#8C8C8C",
+              "cursor": "pointer",
+              "display": "inline-block",
+              "fontSize": "48px",
+              "lineHeight": "normal",
+              "userSelect": "none",
+            }
+          }>
+          42
+        </span>
+        
+      </div>
+      <button
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
+        data-radium={true}
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "#8C8C8C",
+            "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
+            "fontSize": "13px",
+            "marginLeft": "2px",
+            "padding": "10px 8px",
+            "textTransform": "uppercase",
+            "verticalAlign": "1px",
+          }
+        }
+        type="button">
+        am
+      </button>
+    </div>
+  </div>
+  <div
+    className="react-timekeeper__clock-wrapper"
+    data-radium={true}
+    style={
+      Object {
+        "background": "#f4f4f4",
+        "padding": "18px 0 14px",
+        "textAlign": "center",
+      }
+    }>
+    <div
+      className="react-timekeeper__clock"
+      data-radium={true}
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "background": "white",
+          "borderRadius": "200px",
+          "cursor": "pointer",
+          "display": "inline-block",
+          "height": "220px",
+          "position": "relative",
+          "width": "220px",
+        }
+      }>
+      <div
+        className="react-timekeeper__clock-animations-wrapper"
+        data-radium={true}>
+        <div
+          className="react-timekeeper__clock-animations"
+          data-radium={true}
+          style={
+            Object {
+              "position": "absolute",
+            }
+          }>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 136.99999999999997,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 16.789764466969388,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            1
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 169.21023553303058,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 48.99999999999996,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            2
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 181,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 92.99999999999999,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            3
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 169.21023553303058,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 137,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            4
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 137.00000000000006,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 169.21023553303058,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            5
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 93.00000000000003,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 181,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            6
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 49,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 169.21023553303058,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            7
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 16.789764466969416,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 137.00000000000006,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            8
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 5,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 93.00000000000003,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            9
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 16.78976446696936,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 49.00000000000007,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            10
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 49.00000000000003,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 16.789764466969388,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            11
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 92.99999999999997,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 5,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            12
+          </span>
+          <svg
+            className="react-timekeeper__clock-svgs"
+            data-radium={true}
+            height={220}
+            style={
+              Object {
+                "opacity": 1,
+                "position": "relative",
+              }
+            }
+            viewBox="0 0 220 220"
+            width={220}
+            xmlns="http://www.w3.org/2000/svg">
+            <g
+              data-radium={true}
+              transform="rotate(180 110 110)">
+              <line
+                stroke="#bceaff"
+                strokeWidth="1"
+                x1={110}
+                x2={110}
+                y1={110}
+                y2={20} />
+              <circle
+                cx={110}
+                cy={110}
+                fill="#bceaff"
+                r={1.5} />
+              <circle
+                cx={110}
+                cy={22}
+                fill="#e6f7ff"
+                r={17} />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      className="react-timekeeper__meridiem-toggle-wrapper"
+      data-radium={true}
+      style={
+        Object {
+          "marginTop": "-16px",
+          "padding": "0 30px",
+          "position": "relative",
+          "textAlign": "left",
+          "zIndex": 10,
+        }
+      }>
+      <button
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_am "
+        data-radium={true}
+        onClick={[Function]}
+        style={
+          Object {
+            "background": "#E1EFF6",
+            "borderRadius": "99px",
+            "color": "#898989",
+            "cursor": "pointer",
+            "display": "inline-block",
+            "fontFamily": "\"Roboto\", sans-serif",
+            "fontSize": "14px",
+            "height": 38,
+            "lineHeight": "38px",
+            "padding": 0,
+            "textAlign": "center",
+            "transition": "0.15s ease-out",
+            "width": 38,
+          }
+        }
+        type="button">
+        AM
+      </button>
+      <button
+        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_pm"
+        data-radium={true}
+        onClick={[Function]}
+        style={
+          Object {
+            "background": "white",
+            "borderRadius": "99px",
+            "color": "#898989",
+            "cursor": "pointer",
+            "display": "inline-block",
+            "float": "right",
+            "fontFamily": "\"Roboto\", sans-serif",
+            "fontSize": "14px",
+            "height": 38,
+            "lineHeight": "38px",
+            "padding": 0,
+            "textAlign": "center",
+            "transition": "0.15s ease-out",
+            "width": 38,
+          }
+        }
+        type="button">
+        PM
+      </button>
+    </div>
+  </div>
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "@keyframes popInOut-radium-animation-a878a005 {
+      from{transform: scale(1);}
+      30%{transform: scale(0.88);}
+      60%{transform: scale(1.05);}
+      to{transform: scale(1);}
+      }
+      ",
+      }
+    } />
+</div>
+`;
+
 exports[`Timepicker component renders correctly with no time 1`] = `
 <div
   className="react-timekeeper"
@@ -575,7 +2489,7 @@ exports[`Timepicker component renders correctly with no time 1`] = `
 </div>
 `;
 
-exports[`Timepicker component renders correctly with time passed in 1`] = `
+exports[`Timepicker component renders correctly with pm-time passed in, but rendered in 24-hours mode 1`] = `
 <div
   className="react-timekeeper"
   data-radium={true}
@@ -639,7 +2553,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
       data-radium={true}
       style={
         Object {
-          "left": 20,
+          "left": 30,
           "position": "relative",
         }
       }>
@@ -669,7 +2583,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
               "userSelect": "none",
             }
           }>
-          6
+          23
         </span>
         
       </div>
@@ -710,29 +2624,10 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
               "userSelect": "none",
             }
           }>
-          42
+          56
         </span>
         
       </div>
-      <button
-        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
-        data-radium={true}
-        onClick={[Function]}
-        style={
-          Object {
-            "color": "#8C8C8C",
-            "display": "inline-block",
-            "fontFamily": "\"Roboto\", sans-serif",
-            "fontSize": "13px",
-            "marginLeft": "2px",
-            "padding": "10px 8px",
-            "textTransform": "uppercase",
-            "verticalAlign": "1px",
-          }
-        }
-        type="button">
-        am
-      </button>
     </div>
   </div>
   <div
@@ -781,13 +2676,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 136.99999999999997,
+                "left": 128.49999999999997,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 16.789764466969388,
+                "top": 31.512196331304843,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -803,13 +2698,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 169.21023553303058,
+                "left": 154.48780366869514,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 48.99999999999996,
+                "top": 57.49999999999997,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -825,7 +2720,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 181,
+                "left": 164,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
@@ -847,13 +2742,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 169.21023553303058,
+                "left": 154.48780366869514,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 137,
+                "top": 128.5,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -869,13 +2764,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 137.00000000000006,
+                "left": 128.50000000000003,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 169.21023553303058,
+                "top": 154.4878036686951,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -891,13 +2786,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 93.00000000000003,
+                "left": 93.00000000000001,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 181,
+                "top": 164,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -913,13 +2808,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 49,
+                "left": 57.5,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 169.21023553303058,
+                "top": 154.48780366869514,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -935,13 +2830,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 16.789764466969416,
+                "left": 31.512196331304878,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 137.00000000000006,
+                "top": 128.50000000000006,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -957,7 +2852,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 5,
+                "left": 22,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
@@ -979,13 +2874,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 16.78976446696936,
+                "left": 31.51219633130482,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 49.00000000000007,
+                "top": 57.50000000000006,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -1001,13 +2896,13 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "display": "inline-block",
                 "fontSize": "16px",
                 "height": 34,
-                "left": 49.00000000000003,
+                "left": 57.500000000000014,
                 "lineHeight": "34px",
                 "opacity": 1,
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 16.789764466969388,
+                "top": 31.512196331304843,
                 "width": 34,
                 "zIndex": 5,
               }
@@ -1029,12 +2924,276 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
                 "pointerEvents": "none",
                 "position": "absolute",
                 "textAlign": "center",
-                "top": 5,
+                "top": 22,
                 "width": 34,
                 "zIndex": 5,
               }
             }>
             12
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 155.22539674441623,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 30.774603255583855,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            13
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 178.001472713438,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 70.22392403097817,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            14
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 178.00147271343803,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 115.77607596902178,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            15
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 155.22539674441617,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 155.2253967444162,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            16
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 115.77607596902186,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 178.001472713438,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            17
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 70.22392403097824,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 178.00147271343803,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            18
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 30.77460325558379,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 155.22539674441617,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            19
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 7.998527286561995,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 115.77607596902186,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            20
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 7.998527286561966,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 70.22392403097825,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            21
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 30.774603255583834,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 30.774603255583806,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            22
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 70.22392403097814,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 7.998527286561995,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            23
+          </span>
+          <span
+            data-radium={true}
+            style={
+              Object {
+                "borderRadius": "99px",
+                "color": "#999999",
+                "display": "inline-block",
+                "fontSize": "16px",
+                "height": 34,
+                "left": 115.77607596902175,
+                "lineHeight": "34px",
+                "opacity": 1,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "textAlign": "center",
+                "top": 7.998527286561966,
+                "width": 34,
+                "zIndex": 5,
+              }
+            }>
+            0
           </span>
           <svg
             className="react-timekeeper__clock-svgs"
@@ -1051,7 +3210,7 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
             xmlns="http://www.w3.org/2000/svg">
             <g
               data-radium={true}
-              transform="rotate(180 110 110)">
+              transform="rotate(345 110 110)">
               <line
                 stroke="#bceaff"
                 strokeWidth="1"
@@ -1073,68 +3232,6 @@ exports[`Timepicker component renders correctly with time passed in 1`] = `
           </svg>
         </div>
       </div>
-    </div>
-    <div
-      className="react-timekeeper__meridiem-toggle-wrapper"
-      data-radium={true}
-      style={
-        Object {
-          "marginTop": "-16px",
-          "padding": "0 30px",
-          "position": "relative",
-          "textAlign": "left",
-          "zIndex": 10,
-        }
-      }>
-      <button
-        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_am "
-        data-radium={true}
-        onClick={[Function]}
-        style={
-          Object {
-            "background": "#E1EFF6",
-            "borderRadius": "99px",
-            "color": "#898989",
-            "cursor": "pointer",
-            "display": "inline-block",
-            "fontFamily": "\"Roboto\", sans-serif",
-            "fontSize": "14px",
-            "height": 38,
-            "lineHeight": "38px",
-            "padding": 0,
-            "textAlign": "center",
-            "transition": "0.15s ease-out",
-            "width": 38,
-          }
-        }
-        type="button">
-        AM
-      </button>
-      <button
-        className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle type_pm"
-        data-radium={true}
-        onClick={[Function]}
-        style={
-          Object {
-            "background": "white",
-            "borderRadius": "99px",
-            "color": "#898989",
-            "cursor": "pointer",
-            "display": "inline-block",
-            "float": "right",
-            "fontFamily": "\"Roboto\", sans-serif",
-            "fontSize": "14px",
-            "height": 38,
-            "lineHeight": "38px",
-            "padding": 0,
-            "textAlign": "center",
-            "transition": "0.15s ease-out",
-            "width": 38,
-          }
-        }
-        type="button">
-        PM
-      </button>
     </div>
   </div>
   <style

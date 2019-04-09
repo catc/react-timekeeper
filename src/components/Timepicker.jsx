@@ -4,7 +4,7 @@ import debounce from 'lodash/debounce'
 import Radium, { StyleRoot } from 'radium'
 
 import parseTime from '../helpers/parse-time'
-import composeTime from '../helpers/compose-time'
+import {composeTime, composeTime24} from '../helpers/compose-time'
 import ClockWrapper from './ClockWrapper'
 import Time from './Time'
 
@@ -16,14 +16,14 @@ export class Timepicker extends React.Component {
 
 		this.state = {
 			...parseTime(props.time),
-			unit: 'hour'
+			unit: props.hourMode
 		}
 
 		// override any default styles
 		const config = Object.assign({}, defaultConfig, props.config)
 		this.config = config
 
-		this.changeHour =  this.handleTimeChange.bind(this, 'hour')
+		this.changeHour =  this.handleTimeChange.bind(this, props.hourMode)
 		this.changeMinute =  this.handleTimeChange.bind(this, 'minute')
 		this.changeUnit =  this.changeUnit.bind(this)
 		this.changeMeridiem = this.handleMeridiemChange.bind(this)
@@ -45,7 +45,10 @@ export class Timepicker extends React.Component {
 
 	getTime(){
 		const state = this.state;
-		return composeTime(state.hour, state.minute, state.meridiem);
+		if (this.props.hourMode === 'hour24')
+			return composeTime24(state.hour24, state.minute);
+		else
+			return composeTime(state.hour, state.minute, state.meridiem);
 	}
 
 	handleTimeChange(unit, val, canChangeUnit){
@@ -65,7 +68,7 @@ export class Timepicker extends React.Component {
 
 		const props = this.props
 
-		if (canChangeUnit && unit === 'hour' && props.switchToMinuteOnHourSelect){
+		if (canChangeUnit && unit === props.hourMode && props.switchToMinuteOnHourSelect){
 			this.changeUnit('minute')
 		} else if (canChangeUnit && unit === 'minute' && props.closeOnMinuteSelect){
 			props.onDoneClick && props.onDoneClick(this.getTime(), null)
@@ -87,7 +90,7 @@ export class Timepicker extends React.Component {
 		if (currentUnit === newUnit){
 			return;
 		}
-		this.setState({ unit: newUnit })
+		this.setState({ unit: newUnit === 'hour' ? this.props.hourMode : newUnit })
 	}
 
 	render(){
@@ -158,8 +161,10 @@ export class Timepicker extends React.Component {
 
 				<Time
 					config={this.config}
+					mode={this.props.hourMode}
 					unit={state.unit}
 					hour={state.hour}
+					hour24={state.hour24}
 					minute={state.minute}
 					meridiem={state.meridiem}
 
@@ -171,8 +176,10 @@ export class Timepicker extends React.Component {
 				
 				<ClockWrapper
 					config={this.config}
+                    mode={this.props.hourMode}
 					unit={state.unit}
 					hour={state.hour}
+					hour24={state.hour24}
 					minute={state.minute}
 					meridiem={state.meridiem}
 
@@ -190,12 +197,17 @@ export class Timepicker extends React.Component {
 
 Timepicker.propTypes = {
 	time: PropTypes.string,
+	hourMode: PropTypes.oneOf(['hour', 'hour24']),
 	onChange: PropTypes.func,
 	
 	onDoneClick: PropTypes.func,
 	switchToMinuteOnHourSelect: PropTypes.bool,
 	closeOnMinuteSelect: PropTypes.bool,
 	config: PropTypes.object
+}
+
+Timepicker.defaultProps = {
+	hourMode: 'hour'
 }
 
 export default Radium(Timepicker)

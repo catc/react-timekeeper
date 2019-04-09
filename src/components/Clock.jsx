@@ -24,7 +24,7 @@ const NUMBER_SIZE = 34
 // positioning of numbers within circle
 const NUMBER_INNER_POSITION = 22
 function animationPosition(unit){
-	return unit === 'hour' ? NUMBER_INNER_POSITION - 30 : NUMBER_INNER_POSITION + 26;
+	return unit === 'hour' || unit === 'hour24' ? NUMBER_INNER_POSITION - 30 : NUMBER_INNER_POSITION + 26;
 }
 
 const { cos, sin, atan2 } = Math
@@ -76,7 +76,7 @@ export class Clock extends React.Component {
 
 		function renderNumbersAndClockhand(){
 			const unit = props.unit
-			const animationItems = [unit === 'hour' ? 'hour' : 'minute'];
+			const animationItems = [unit === 'hour' || unit === 'hour24' ? unit : 'minute'];
 
 			const animationOptions = {
 				willEnter(transition){
@@ -106,7 +106,18 @@ export class Clock extends React.Component {
 				})
 			}
 
-			const handRotation = props[unit] * (360 / CLOCK_DATA[unit].increments)
+			let handRotation = props[unit] * (360 / CLOCK_DATA[unit].increments)
+			let handleAdjust = 0
+			if (unit === 'hour24'){
+				if (props[unit] > 12) {
+					handRotation = (props[unit] - 12) * (360 / CLOCK_DATA[unit].increments * 2) + (360 / CLOCK_DATA[unit].increments)
+				} else if (props[unit] === 0) {
+					handRotation = (360 / CLOCK_DATA[unit].increments)
+				} else {
+					handRotation = props[unit] * (360 / CLOCK_DATA[unit].increments * 2)
+					handleAdjust = NUMBER_SIZE / 2
+				}
+			}
 
 			return <TransitionMotion {...animationOptions}>
 				{interpolatedStyles =>
@@ -120,18 +131,19 @@ export class Clock extends React.Component {
 									fill={config.CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND}
 								/>
 							}
-							
+
 							return <div style={{position: 'absolute'}} key={anim.data} ref={el => this.clock = el} className="react-timekeeper__clock-animations">
 								{data.numbers.map((numberString, i) => {
-									const num = i + 1;
+									const num = i + (anim.data === 'hour24' && i >= 12 ? 1.5 : 1)
+									const adjust_radius = anim.data === 'hour24' && i < 12 ? -NUMBER_SIZE / 2 : 0
 									return (
 										<span
 											key={numberString}
 											style={{
 												...styles.numberPositioning,
 												opacity: anim.style.opacity,
-												left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - anim.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
-												top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS - anim.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
+												left: sin( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS + adjust_radius - anim.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
+												top: cos( rad(num * -NUMBER_INCREMENTS_VALUE - 180) ) * (CLOCK_RADIUS + adjust_radius - anim.style.translate) + CLOCK_RADIUS - NUMBER_SIZE / 2,
 											}}
 										>
 											{numberString}
@@ -148,14 +160,14 @@ export class Clock extends React.Component {
 									className="react-timekeeper__clock-svgs"
 								>
 									<g transform={`rotate(${handRotation} ${CLOCK_RADIUS} ${CLOCK_RADIUS})`}>
-										<line x1={CLOCK_RADIUS} y1={CLOCK_RADIUS} x2={CLOCK_RADIUS} y2={CLOCK_RADIUS - CLOCK_HAND_LENGTH}
+										<line x1={CLOCK_RADIUS} y1={CLOCK_RADIUS} x2={CLOCK_RADIUS} y2={CLOCK_RADIUS - CLOCK_HAND_LENGTH + handleAdjust}
 											strokeWidth="1"
 											stroke={config.CLOCK_HAND_ARM}
 										/>
 										<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5}
 											fill={config.CLOCK_HAND_ARM}
 										/>
-										<circle cx={CLOCK_RADIUS} cy={NUMBER_INNER_POSITION} r={NUMBER_SIZE / 2}
+										<circle cx={CLOCK_RADIUS} cy={NUMBER_INNER_POSITION + handleAdjust} r={NUMBER_SIZE / 2}
 											fill={config.CLOCK_HAND_CIRCLE_BACKGROUND}
 										/>
 										{showIntermediateValueDisplay}
@@ -202,13 +214,15 @@ export class Clock extends React.Component {
 
 		// calculate value based on current clock increments
 		let selected = Math.round(d / 360 * CLOCK_DATA[unit].increments)
-		if (isCoarse){
+		if (isCoarse || unit === 'hour24'){
 			// if coarse, round up/down
 			const multiplier = CLOCK_DATA[unit].coarseMultiplier;
 			selected = Math.round(selected / multiplier) * multiplier;
+			if (unit === 'hour24')
+				selected = [12, 0, 1, 13, 2, 14, 3, 15, 4, 16, 5, 17, 6, 18, 7, 19, 8, 20, 9, 21, 10, 22, 11, 23, 12][selected]
 		}
 
-		if (unit === 'hour'){
+		if (unit === 'hour' || unit === 'hour24'){
 			this.props.changeHour(selected, canChangeUnit)
 		} else if (unit === 'minute'){
 			this.props.changeMinute(selected, canChangeUnit)
@@ -295,7 +309,8 @@ export class Clock extends React.Component {
 
 Clock.propTypes = {
 	config: PropTypes.object.isRequired,
-	hour: PropTypes.number.isRequired,
+	hour: PropTypes.number,
+	hour24: PropTypes.number,
 	minute: PropTypes.number.isRequired,
 	unit: PropTypes.string.isRequired,
 	

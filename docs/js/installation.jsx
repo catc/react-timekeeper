@@ -1,27 +1,7 @@
 import React from 'react'
 
 class Installation extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			// time: '3:70'
-			demoTime: '12:45 pm',
-			displayDemo: true
-		}
-
-		this.updateDemoTime = this.updateDemoTime.bind(this)
-	}
-	updateDemoTime(data){
-		this.setState({ demoTime: data.formatted})
-	}
-	toggleDemoDisplay(val){
-		this.setState({displayDemo: val})
-	}
-
-
 	render(){
-		const state = this.state
-
 		return (
 			<section className="installation docs-section" id="docs">
 				<h2>Installation and Usage</h2>
@@ -39,6 +19,18 @@ import TimeKeeper from 'react-timekeeper';
 class YourComponent extends React.Component {
 	render(){
 		return <TimeKeeper />;
+	}
+} </code></pre>
+
+				<p className="text">
+					And in order to activate the 24 hour format, just add the 'hourMode' parameter.
+				</p>
+				<pre><code className="javascript">import React from 'react';
+import TimeKeeper from 'react-timekeeper';
+
+class YourComponent extends React.Component {
+	render(){
+		return <TimeKeeper hourMode={'hour24'} />;
 	}
 } </code></pre>
 			</section>

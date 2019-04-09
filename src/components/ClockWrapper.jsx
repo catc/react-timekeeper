@@ -58,6 +58,7 @@ export class ClockWrapper extends React.Component {
 				<Clock
 					config={props.config}
 					hour={props.hour}
+					hour24={props.hour24}
 					minute={props.minute}
 					unit={props.unit}
 
@@ -66,6 +67,7 @@ export class ClockWrapper extends React.Component {
 					clockWrapperEl={this.clockWrapperEl}
 				/>
 
+				{props.mode === 'hour' &&
 				<div style={styles.meridiemWrapper} className="react-timekeeper__meridiem-toggle-wrapper">
 					<button
 						type="button"
@@ -87,6 +89,7 @@ export class ClockWrapper extends React.Component {
 						onClick={() => { props.changeMeridiem('pm') }}
 					>PM</button>
 				</div>
+				}
 			</div>
 		)
 	}
@@ -94,14 +97,20 @@ export class ClockWrapper extends React.Component {
 
 ClockWrapper.propTypes = {
 	config: PropTypes.object.isRequired,
+	mode: PropTypes.oneOf(['hour', 'hour24']),
 	unit: PropTypes.string.isRequired,
-	hour: PropTypes.number.isRequired,
+	hour: PropTypes.number,
+	hour24: PropTypes.number,
 	minute: PropTypes.number.isRequired,
 	meridiem: PropTypes.string.isRequired,
 
 	changeHour: PropTypes.func.isRequired,
 	changeMinute: PropTypes.func.isRequired,
 	changeMeridiem: PropTypes.func.isRequired
+}
+
+ClockWrapper.defaultProps = {
+	mode: 'hour'
 }
 
 export default Radium(ClockWrapper)

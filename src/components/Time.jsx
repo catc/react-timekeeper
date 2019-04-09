@@ -26,8 +26,8 @@ export class Time extends React.Component {
 	}
 
 	hourClick(){
-		if (this.props.unit !== 'hour'){
-			this.props.changeUnit('hour')
+		if (this.props.unit !== this.props.mode){
+			this.props.changeUnit(this.props.mode)
 		} else {
 			this.setState({ showHourSelect: !this.state.showHourSelect })
 		}
@@ -56,7 +56,7 @@ export class Time extends React.Component {
 				borderRadius: '3px 3px 0 0',
 			},
 			timeWrapper: {
-				left: 20,
+				left: props.unit === 'hour' ? 20 : 30,
 				position: 'relative'
 			},
 			colon: {
@@ -115,11 +115,11 @@ export class Time extends React.Component {
 							className="react-timekeeper__hour-select"
 							style={[
 								styles.time,
-								props.unit === 'hour' && styles.timeSelected
+								props.unit === props.mode && styles.timeSelected
 							]}
 							onClick={this.hourClick}
 						>
-							{props.hour}
+							{props[props.mode]}
 						</span>
 
 						{this.state.showHourSelect ?
@@ -160,7 +160,7 @@ export class Time extends React.Component {
 						: ''}
 					</div>
 
-
+					{props.mode !== 'hour24' &&
 					<button
 						type="button"
 						onClick={this.toggleMeridiem}
@@ -169,6 +169,7 @@ export class Time extends React.Component {
 					>
 						{props.meridiem}
 					</button>
+					}
 				</div>
 			</div>
 		)
@@ -177,11 +178,16 @@ export class Time extends React.Component {
 
 Time.propTypes = {
 	config: PropTypes.object.isRequired,
+	mode: PropTypes.oneOf(['hour', 'hour24']),
 	unit: PropTypes.string.isRequired,
 	meridiem: PropTypes.string.isRequired,
 
 	changeUnit: PropTypes.func.isRequired,
 	changeMeridiem: PropTypes.func.isRequired
+}
+
+Time.defaultProps = {
+	mode: 'hour'
 }
 
 export default Radium(Time)
