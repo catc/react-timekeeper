@@ -1,5 +1,7 @@
-const config = require('./webpack.config.js')
+const path = require('path')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const config = require('./webpack.config.js')
 
 const BR = '----------------------'
 const COLORS = {
@@ -10,6 +12,36 @@ const COLORS = {
 
 // update config
 config.mode = 'production'
+config.module.rules[1] = {
+	test: /\.(s?)css$/,
+	loaders: [
+		{
+			loader: MiniCssExtractPlugin.loader,
+			options: {
+				publicPath: (resourcePath, context) => {
+					// publicPath is the relative path of the resource to the context
+					// e.g. for ./css/admin/main.css the publicPath will be ../../
+					// while for ./css/main.css the publicPath will be ../
+					return path.relative(path.dirname(resourcePath), context) + '/'
+				},
+			},
+		},
+		'css-loader',
+		{
+			loader: 'postcss-loader',
+			options: {
+				ident: 'postcss',
+				plugins: [require('autoprefixer')(), require('cssnano')()],
+			},
+		},
+		'sass-loader',
+	],
+}
+config.plugins.push(
+	new MiniCssExtractPlugin({
+		filename: 'style.css',
+	}),
+)
 
 // build
 webpack(config, (err, stats) => {

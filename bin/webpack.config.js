@@ -17,20 +17,6 @@ const config = {
 
 	module: {
 		rules: [
-			// JUST TS
-			// {
-			// 	test: /\.(j|t)sx?$/,
-			// 	exclude: [/node_modules/],
-			// 	loader: 'awesome-typescript-loader',
-			// },
-
-			/*
-				TODO
-				- DONE see if need to check for hot inside app
-				- remove awesome-typescript-loader from dependencies
-				- see if need polyfill
-				- DONE see if need class properties
-			*/
 			{
 				test: /\.(j|t)sx?$/,
 				exclude: [/node_modules/],
@@ -56,7 +42,22 @@ const config = {
 					},
 				},
 			},
-			// TODO - add scss
+			{
+				// overwritten in build script with extract-text-plugin
+				test: /\.(s?)css$/,
+				loaders: [
+					'style-loader',
+					'css-loader',
+					{
+						loader: 'postcss-loader',
+						options: {
+							ident: 'postcss',
+							plugins: [require('autoprefixer')()],
+						},
+					},
+					'sass-loader',
+				],
+			},
 		],
 	},
 

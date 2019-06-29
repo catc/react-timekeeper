@@ -16,11 +16,21 @@
 
 	<title>React Timekeeper</title>
 
-	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700|Roboto+Condensed:400,700|Roboto+Mono" rel="stylesheet"> -->
-	<!-- <link rel="stylesheet" href="./build/style.css"> -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700|Roboto+Condensed:400,700|Roboto+Mono">
+	<link rel="stylesheet" href="./build/style.css">
 </head>
 
 <body>
+	<script type="text/javascript">
+		if (location.hostname === 'localhost'){
+			[].forEach.call(document.styleSheets, s => {
+				if (s.href && s.href.includes('build')){
+					s.disabled = true
+				}
+			})
+		}
+	</script>
+
 	<div id="root"></div>
 
 	<script src="./build/bundle.js" type="text/javascript"></script>
