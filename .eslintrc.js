@@ -45,6 +45,7 @@ module.exports = {
 		'import/newline-after-import': 1,
 		'import/first': 2,
 		'import/imports-first': 2,
+		'import/no-unresolved': 0, // let typescript handle imports
 
 		// typescript
 		'@typescript-eslint/no-unused-vars': 0,

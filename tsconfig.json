@@ -25,25 +25,19 @@
 			"es2018",
 			"dom"
 		],
-		// to resolve to src/
 		"baseUrl": ".",
 		"paths": {
-			"*": [
-				"docs/*",
-			],
-			"@lib": [
-				"src/*"
+			// also see webpack config resolve.alias
+			"@tk": [
+				"src/"
 			]
 		},
 	},
-	"include": [
-		"src"
-	],
 	"exclude": [
 		"node_modules",
 		"**/node_modules/*",
 		"**/staticresources/*",
-		"src/data",
-		"docs/"
-	]
+		"docs/build",
+		"lib"
+	],
 }

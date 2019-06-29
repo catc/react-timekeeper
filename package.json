@@ -19,16 +19,15 @@
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./bin/dev.js",
-    "build": "node ./bin/build.js",
-    "test": "node_modules/.bin/jest",
-    "test:update-snapshots": "npm run test -- -u",
-    "dev_old": "node ./bin/docs-dev.js",
-    "build_old": "NODE_ENV=production node ./bin/docs-build.js",
-    "lib": "rm -rf lib && mkdir lib && babel src --ignore __tests__/ -d lib",
-    "libwin": "rimraf lib && mkdir lib && babel src --ignore __tests__/ -d lib"
+    "docs:dev": "node ./bin/dev.js",
+    "docs:build": "node ./bin/build.js",
+    "_clean": "rimraf lib && mkdir lib",
+    "_build": "babel src --extensions '.tsx' --extensions '.ts' -d lib",
+    "lib": "npm run _clean && npm run _build",
+    "test": "TODO"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
@@ -53,6 +52,7 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.18.2",
     "react-hot-loader": "^4.11.1",
+    "rimraf": "^2.6.3",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "typescript": "^3.5.2",
@@ -67,8 +67,31 @@
     "react-dom": "^16.8.6"
   },
   "eslintIgnore": [
+    "lib/",
     "docs/build/",
     "node_modules/"
   ],
-  "jest": {}
+  "jest": {},
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "browsers": "last 2 versions"
+          }
+        }
+      ],
+      "@babel/preset-typescript",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  }
 }
