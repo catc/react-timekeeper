@@ -2,20 +2,6 @@ import React, { useState } from 'react'
 
 import Clockwrapper from './Clockwrapper'
 
-function typeset() {
-	return (
-		<div>
-			<button
-				onClick={() => {
-					setType(type === 'hours' ? 'minutes' : 'hours')
-				}}
-			>
-				change type - {type}
-			</button>
-		</div>
-	)
-}
-
 export default function TimePicker() {
 	const [mode, setMode] = useState('hour')
 
