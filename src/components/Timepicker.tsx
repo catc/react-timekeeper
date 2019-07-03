@@ -1,17 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default class Something extends React.Component {
-	state = {
-		foo: 'fooo',
-	}
+import Clockwrapper from './Clockwrapper'
 
-	render() {
-		return (
-			<div>
-				react timekeeper - {this.state.foo}
-				<br />
-				<button onClick={() => this.setState({ foo: Math.random() })}>Change</button>
+function typeset() {
+	return (
+		<div>
+			<button
+				onClick={() => {
+					setType(type === 'hours' ? 'minutes' : 'hours')
+				}}
+			>
+				change type - {type}
+			</button>
+		</div>
+	)
+}
+
+export default function TimePicker() {
+	const [mode, setMode] = useState('hour')
+
+	return (
+		<div style={{ padding: 50 }}>
+			<button
+				onClick={() => {
+					setMode(mode === 'hour' ? 'minute' : 'hour')
+				}}
+			>
+				change type - {mode}
+			</button>
+			<br />
+			<br />
+			<br />
+			<br />
+
+			<div className="clock">
+				<Clockwrapper mode={mode} />
 			</div>
-		)
-	}
+		</div>
+	)
 }

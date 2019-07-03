@@ -30,7 +30,14 @@ const config = {
 						cacheDirectory: true,
 						babelrc: false,
 						presets: [
-							['@babel/preset-env', { targets: { browsers: 'last 2 versions' } }],
+							[
+								'@babel/preset-env',
+								{
+									targets: {
+										browsers: ['>0.5%', 'not ie 11', 'not op_mini all'],
+									},
+								},
+							],
 							'@babel/preset-typescript',
 							'@babel/preset-react',
 						],

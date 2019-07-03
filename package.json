@@ -64,8 +64,10 @@
     "node": "10.16.0"
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-spring": "^8.0.25"
   },
   "eslintIgnore": [
     "lib/",
@@ -79,7 +81,7 @@
         "@babel/preset-env",
         {
           "targets": {
-            "browsers": "last 2 versions"
+            "browsers": [">0.5%", "not ie 11", "not op_mini all"]
           }
         }
       ],

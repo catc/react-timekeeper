@@ -6,5 +6,6 @@ lib/
 .awcache/
 
 # temp/testing
+__*
 z_old/
 z_temp/
