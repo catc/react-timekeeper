@@ -1,57 +1,39 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useTransition } from 'react-spring'
+import React, { useState, useRef, useCallback } from 'react'
 
-import { HourNumbers, MinuteNumbers } from './Numbers'
-import {
-	NUMBER_INNER_POSITION,
-	INITIAL_HOUR_TRANSFORM,
-	INITIAL_MINUTE_TRANSFORM,
-} from '../helpers/constants'
-
-// TODO - move in separate functions?
-function exitPosition(unit: string): number {
-	return unit === 'hour' ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
-}
-
-function initialPosition(unit: string): number {
-	return unit === 'minute' ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
-}
+import Clock from './Clock'
+import useClockEvents from '../hooks/handle-clock-events'
 
 interface Props {
 	mode: string
 }
 
-export default function ClockWrapper5({ mode }: Props) {
-	const firstTime = useRef(true)
-	const transitions = useTransition(mode, null, {
-		unique: true,
-		from: firstTime.current ? {} : { opacity: 0, translate: initialPosition(mode) },
-		enter: {
-			opacity: 1,
-			translate: NUMBER_INNER_POSITION,
-		},
-		leave: {
-			opacity: 0,
-			translate: exitPosition(mode),
-		},
-	})
+/*
+	TODO
+	- handle events and pass up
+*/
+export default function ClockWrapper({ mode }: Props) {
+	const wrapper = useRef<HTMLDivElement | null>(null)
+	const clock = useRef<HTMLDivElement | null>(null)
 
-	useEffect(() => {
-		// don't show intial animation on first render - ie: {from : ...}
-		firstTime.current = false
-	}, [])
+	const { mousedown, touchstart } = useClockEvents(wrapper, clock)
 
 	return (
-		<div className="clock-wrapper">
-			{transitions.map(({ item, key, props }) => {
-				return item === 'hour' ? (
-					<HourNumbers anim={props} key={key} />
-				) : (
-					<MinuteNumbers anim={props} key={key} />
-				)
-			})}
+		<div
+			ref={wrapper}
+			onMouseDown={mousedown}
+			onTouchStart={touchstart}
+			// TODO - replace styles with emotion
+			className="react-timekeeper__clock clock"
+		>
+			<Clock mode={mode} clockEl={clock} />
 
-			{/* TODO - add clock hand */}
+			<button
+				onClick={() => {
+					console.log('checking...', clock)
+				}}
+			>
+				Check
+			</button>
 		</div>
 	)
 }

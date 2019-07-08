@@ -1,9 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
-import Clockwrapper from './Clockwrapper'
+import ClockWrapper from './ClockWrapper'
+
+/*
+	TODO
+	- handle actions here
+*/
 
 export default function TimePicker() {
 	const [mode, setMode] = useState('hour')
+
+	const [show, setShow] = useState(true)
+
+	const handleChange = useCallback(() => {
+		return function(a, b, c) {
+			console.log('it was changed', a, b, c)
+		}
+	}, [])
 
 	return (
 		<div style={{ padding: 50 }}>
@@ -19,9 +32,17 @@ export default function TimePicker() {
 			<br />
 			<br />
 
-			<div className="clock">
-				<Clockwrapper mode={mode} />
-			</div>
+			{show ? (
+				<div className="">
+					<ClockWrapper mode={mode} />
+
+					<br />
+					<br />
+					<button onClick={() => setShow(false)}>Hide</button>
+				</div>
+			) : (
+				<button onClick={() => setShow(true)}>Show</button>
+			)}
 		</div>
 	)
 }

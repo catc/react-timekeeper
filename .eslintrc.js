@@ -52,6 +52,7 @@ module.exports = {
 		'@typescript-eslint/explicit-member-accessibility': 0,
 		'@typescript-eslint/explicit-function-return-type': [0],
 		'@typescript-eslint/no-var-requires': 0,
+		'@typescript-eslint/no-use-before-define': [2, { functions: false}],
 
 		// react hooks
 		'react-hooks/rules-of-hooks': 1,
@@ -93,7 +94,7 @@ module.exports = {
 		'quote-props': [1, 'as-needed'],
 		'eol-last': 1,
 		curly: 2,
-		eqeqeq: 1,
+		eqeqeq: [1, 'smart'],
 		'no-eval': 2,
 		'no-use-before-define': [1, 'nofunc'],
 		quotes: [
