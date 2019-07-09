@@ -2,20 +2,30 @@ import React, { useState, useRef, useCallback } from 'react'
 
 import Clock from './Clock'
 import useClockEvents from '../hooks/handle-clock-events'
+import { MODE } from '../helpers/constants'
 
 interface Props {
-	mode: string
+	mode: MODE
+	handleChange: () => void
 }
 
 /*
 	TODO
 	- handle events and pass up
+
+	LEFT OFF AT
+	- incorporate `handlePoint`
+	- incorporate `handleChange` in `TimePicker` component that calls parent
+		- add time helper functions
+
+	- use emotion + figure out styles
+	- add clock hand
 */
-export default function ClockWrapper({ mode }: Props) {
+export default function ClockWrapper({ mode, handleChange }: Props) {
 	const wrapper = useRef<HTMLDivElement | null>(null)
 	const clock = useRef<HTMLDivElement | null>(null)
 
-	const { mousedown, touchstart } = useClockEvents(wrapper, clock)
+	const { mousedown, touchstart } = useClockEvents(wrapper, clock, handleChange)
 
 	return (
 		<div
@@ -26,14 +36,6 @@ export default function ClockWrapper({ mode }: Props) {
 			className="react-timekeeper__clock clock"
 		>
 			<Clock mode={mode} clockEl={clock} />
-
-			<button
-				onClick={() => {
-					console.log('checking...', clock)
-				}}
-			>
-				Check
-			</button>
 		</div>
 	)
 }

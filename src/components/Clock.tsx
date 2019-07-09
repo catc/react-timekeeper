@@ -6,20 +6,21 @@ import {
 	NUMBER_INNER_POSITION,
 	INITIAL_HOUR_TRANSFORM,
 	INITIAL_MINUTE_TRANSFORM,
+	MODE,
 } from '../helpers/constants'
 import { ElementRef } from '../helpers/types'
 
 // TODO - move in separate functions?
-function exitPosition(unit: string): number {
-	return unit === 'hour' ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
+function exitPosition(unit: MODE): number {
+	return unit === MODE.HOURS_12 ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
 }
 
-function initialPosition(unit: string): number {
-	return unit === 'minute' ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
+function initialPosition(unit: MODE): number {
+	return unit === MODE.MINUTES ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
 }
 
 interface Props {
-	mode: string
+	mode: MODE
 	clockEl: ElementRef
 }
 
@@ -46,7 +47,7 @@ export default function ClockWrapper5({ mode, clockEl }: Props) {
 	return (
 		<div className="clock-wrapper" ref={clockEl}>
 			{transitions.map(({ item, key, props }) => {
-				return item === 'hour' ? (
+				return item === MODE.HOURS_12 ? (
 					<HourNumbers anim={props} key={key} />
 				) : (
 					<MinuteNumbers anim={props} key={key} />

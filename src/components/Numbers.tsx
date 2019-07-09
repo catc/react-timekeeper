@@ -13,6 +13,7 @@ interface NumberProps {
 }
 
 // TODO - split up functions into separate files
+// TODO - better yet, have 1 function that does both?
 export function HourNumbers({ anim }: NumberProps) {
 	const { opacity, translate } = anim
 	return (

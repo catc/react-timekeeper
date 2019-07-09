@@ -1,5 +1,33 @@
-export const HOURS_12 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((a) => a.toString())
 export const MINUTES = ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'].map((a) => a.toString())
+export const HOURS_12 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((a) => a.toString())
+export const HOURS_24 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((a) => a.toString())
+
+// export type MODE = 'MINUTES' | 'HOURS_12' | 'HOURS_24'
+export enum MODE {
+	'MINUTES' = 'MINUTES',
+	'HOURS_12' = 'HOURS_12',
+	'HOURS_24' = 'HOURS_24',
+}
+
+// interface ClockValue {
+// 	numbers: string[]
+// }
+
+console.log(MODE.MINUTES)
+export const CLOCK_VALUES = {
+	[MODE.MINUTES]: {
+		increments: 60,
+		numbers: MINUTES,
+	},
+	[MODE.HOURS_12]: {
+		increments: 12,
+		numbers: HOURS_12,
+	},
+	[MODE.HOURS_24]: {
+		increments: 24,
+		numbers: HOURS_24,
+	},
+}
 
 // radius of clock, in px
 export const CLOCK_RADIUS = 110

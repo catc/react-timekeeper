@@ -6,7 +6,7 @@ const pi = Math.PI
 function rad(deg: number): number {
 	return deg / (180 / pi)
 }
-function deg(rad: number): number {
+export function deg(rad: number): number {
 	return rad * (180 / pi)
 }
 
