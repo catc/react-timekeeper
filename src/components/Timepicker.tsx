@@ -16,7 +16,7 @@ const defaultProps = {
 }
 
 export default function TimePicker({ useCoarseMinutes }: Props = defaultProps) {
-	const [time, setTime] = useState({ hour: 5, minute: 35 })
+	const [time, setTime] = useState({ hour: 5, minute: 55 })
 	const [mode, setMode] = useState(MODE.HOURS_12)
 
 	const handleTimeChange = useCallback(
@@ -26,7 +26,7 @@ export default function TimePicker({ useCoarseMinutes }: Props = defaultProps) {
 			// TODO - is this necessary
 			val = parseInt(val, 10)
 			if (isNaN(val)) {
-				console.log('DEBUG :: NOT A NUMBER!')
+				console.error('DEBUG :: NOT A NUMBER!')
 				return
 			}
 
@@ -136,7 +136,7 @@ export default function TimePicker({ useCoarseMinutes }: Props = defaultProps) {
 			<br />
 			<br />
 			{/* pass in value */}
-			<ClockWrapper mode={mode} handleChange={handleChange} />
+			<ClockWrapper time={time} mode={mode} handleChange={handleChange} />
 		</div>
 	)
 }

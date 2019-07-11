@@ -2,6 +2,11 @@ import { MutableRefObject } from 'react'
 
 export type ElementRef = MutableRefObject<HTMLDivElement | null>
 
+export interface Time {
+	hour: number
+	minute: number
+}
+
 export interface Time12 {
 	hour: number
 	minute: number

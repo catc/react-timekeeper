@@ -12,12 +12,17 @@ interface NumberProps {
 	}
 }
 
+// TODO - move this to styles
+
+// zIndex required to be on top of clockhand
+const s = { position: 'absolute', left: 0, top: 0, zIndex: 5 }
+
 // TODO - split up functions into separate files
 // TODO - better yet, have 1 function that does both?
 export function HourNumbers({ anim }: NumberProps) {
 	const { opacity, translate } = anim
 	return (
-		<animated.div style={{ opacity: opacity }}>
+		<animated.div style={{ opacity: opacity, ...s }}>
 			{HOURS_12.map((val, i) => {
 				return (
 					<animated.span
@@ -40,7 +45,7 @@ export function HourNumbers({ anim }: NumberProps) {
 export function MinuteNumbers({ anim }: NumberProps) {
 	const { opacity, translate } = anim
 	return (
-		<animated.div style={{ opacity: opacity }}>
+		<animated.div style={{ opacity: opacity, ...s }}>
 			{MINUTES.map((val, i) => {
 				return (
 					<animated.span

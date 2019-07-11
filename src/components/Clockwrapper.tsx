@@ -21,7 +21,7 @@ interface Props {
 	- use emotion + figure out styles
 	- add clock hand
 */
-export default function ClockWrapper({ mode, handleChange }: Props) {
+export default function ClockWrapper({ mode, handleChange, time }: Props) {
 	const wrapper = useRef<HTMLDivElement | null>(null)
 	const clock = useRef<HTMLDivElement | null>(null)
 
@@ -35,7 +35,7 @@ export default function ClockWrapper({ mode, handleChange }: Props) {
 			// TODO - replace styles with emotion
 			className="react-timekeeper__clock clock"
 		>
-			<Clock mode={mode} clockEl={clock} />
+			<Clock time={time} mode={mode} clockEl={clock} />
 		</div>
 	)
 }

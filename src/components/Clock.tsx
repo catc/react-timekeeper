@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTransition } from 'react-spring'
 
+import ClockHand from './ClockHand'
 import { HourNumbers, MinuteNumbers } from './Numbers'
 import {
 	NUMBER_INNER_POSITION,
@@ -24,7 +25,7 @@ interface Props {
 	clockEl: ElementRef
 }
 
-export default function ClockWrapper5({ mode, clockEl }: Props) {
+export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 	const firstTime = useRef(true)
 	const transitions = useTransition(mode, null, {
 		unique: true,
@@ -54,7 +55,8 @@ export default function ClockWrapper5({ mode, clockEl }: Props) {
 				)
 			})}
 
-			{/* TODO - add clock hand */}
+			{/* place svg over and set z-index on numbers to prevent highlighting numbers on drag */}
+			<ClockHand time={time} mode={mode} />
 		</div>
 	)
 }
