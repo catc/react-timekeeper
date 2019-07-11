@@ -22,17 +22,19 @@
     "docs:dev": "node ./bin/dev.js",
     "docs:build": "node ./bin/build.js",
     "_clean": "rimraf lib && mkdir lib",
-    "_build": "babel src --extensions '.tsx' --extensions '.ts' -d lib",
-    "lib": "npm run _clean && npm run _build",
+    "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib",
+    "lib": " npm run _clean && npm run _build",
     "test": "TODO"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.5.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@emotion/babel-preset-css-prop": "^10.0.14",
     "@hot-loader/react-dom": "^16.8.4",
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
@@ -64,6 +66,7 @@
     "node": "10.16.0"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.14",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -74,27 +77,5 @@
     "docs/build/",
     "node_modules/"
   ],
-  "jest": {},
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "browsers": [">0.5%", "not ie 11", "not op_mini all"]
-          }
-        }
-      ],
-      "@babel/preset-typescript",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties",
-        {
-          "loose": true
-        }
-      ]
-    ]
-  }
+  "jest": {}
 }
