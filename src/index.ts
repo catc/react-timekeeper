@@ -1,3 +1,3 @@
-import Timepicker from './components/Timepicker'
+import TimeKeeper from './components/TimeKeeperWrapper'
 
-export default Timepicker
+export default TimeKeeper

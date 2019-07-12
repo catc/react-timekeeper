@@ -17,10 +17,8 @@ interface Props {
 	- incorporate `handlePoint`
 	- incorporate `handleChange` in `TimePicker` component that calls parent
 		- add time helper functions
-
-	- use emotion + figure out styles
-	- add clock hand
 */
+
 export default function ClockWrapper({ mode, handleChange, time }: Props) {
 	const wrapper = useRef<HTMLDivElement | null>(null)
 	const clock = useRef<HTMLDivElement | null>(null)

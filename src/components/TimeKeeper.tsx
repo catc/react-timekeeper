@@ -1,23 +1,24 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
+import { Global, css, jsx } from '@emotion/core'
 
+import globalStyle from './styles/global'
+import style from './styles/main'
+import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
 import { TimeInput } from '../helpers/types'
 import { MODE, CLOCK_VALUES, HOURS_12 } from '../helpers/constants'
 
-interface Props {
+export interface Props {
 	onChange: (t: TimeInput) => void
 	// TODO - check out props from previous implementation
 	useCoarseMinutes?: boolean
 }
 
-const defaultProps = {
-	onChange: () => {},
-	useCoarseMinutes: false,
-}
-
-export default function TimePicker({ useCoarseMinutes }: Props = defaultProps) {
+export default function TimeKeeper({ useCoarseMinutes }: Props) {
 	const [time, setTime] = useState({ hour: 5, minute: 55 })
 	const [mode, setMode] = useState(MODE.HOURS_12)
+
+	const config = useConfig()
 
 	const handleTimeChange = useCallback(
 		(val: number, canChangeUnit: boolean) => {
@@ -122,21 +123,26 @@ export default function TimePicker({ useCoarseMinutes }: Props = defaultProps) {
 	}
 
 	return (
-		<div style={{ padding: 50 }}>
-			{time.hour}:{time.minute}
-			<button
-				onClick={() => {
-					setMode(mode === MODE.HOURS_12 ? MODE.MINUTES : MODE.HOURS_12)
-				}}
-			>
-				change type - {mode}
-			</button>
-			<br />
-			<br />
-			<br />
-			<br />
-			{/* pass in value */}
-			<ClockWrapper time={time} mode={mode} handleChange={handleChange} />
-		</div>
+		<>
+			<Global styles={css(globalStyle)} />
+
+			<div className="react-timekeeper" css={[style, config.styles.main]}>
+				{time.hour}:{time.minute}
+				<button
+					onClick={() => {
+						setMode(mode === MODE.HOURS_12 ? MODE.MINUTES : MODE.HOURS_12)
+					}}
+				>
+					change type - {mode}
+				</button>
+				<br />
+				<br />
+				<br />
+				<br />
+				{/* TODO - top bar */}
+				<ClockWrapper time={time} mode={mode} handleChange={handleChange} />
+				{/* TODO - done button */}
+			</div>
+		</>
 	)
 }
