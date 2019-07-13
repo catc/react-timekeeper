@@ -5,7 +5,7 @@ import globalStyle from './styles/global'
 import style from './styles/main'
 import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
-import { TimeInput, ChangeTimeFn } from '../helpers/types'
+import { TimeInput, ChangeTimeFn, Time } from '../helpers/types'
 import { MODE, CLOCK_VALUES, HOURS_12 } from '../helpers/constants'
 import useHandleTime from '../hooks/handle-time'
 
@@ -15,61 +15,32 @@ export interface Props {
 }
 
 export default function TimeKeeper({ onChange, time: parentTime }: Props) {
-	const { time, setTime } = useHandleTime(parentTime, onChange)
 	const [mode, setMode] = useState(MODE.HOURS_12)
+	const { time, updateTime } = useHandleTime(parentTime, onChange, mode)
 
 	const config = useConfig()
 
-	/*
-		- calls time update on component and parent
-		- handles any mode switching or closing
-	*/
-	const updateTime = useCallback(
+	// handle any unit autochanges or closeos
+	const handleTimeUpdateSideEffects = useCallback(() => {
+		const isHourMode = mode === MODE.HOURS_12 || mode === MODE.HOURS_24
+		const isMinuteMode = mode === MODE.MINUTES
+		if (config.switchToMinuteOnHourSelect && isHourMode) {
+			setMode(MODE.MINUTES)
+		} else if (config.closeOnMinuteSelect && isMinuteMode) {
+			config.onDoneClick && config.onDoneClick()
+		}
+	}, [config, mode, setMode])
+
+	// actually do the updates
+	const handleUpdates = useCallback(
 		(val: number, canAutoChangeUnit: boolean) => {
-			// TODO - is this necessary?
-			val = parseInt(val, 10)
-			if (isNaN(val)) {
-				console.error('DEBUG :: NOT A NUMBER!')
-				return
-			}
+			updateTime(val)
 
-			// const increments = CLOCK_VALUES[mode].increments
-			let unit: 'hour' | 'minute'
-			switch (mode) {
-				case MODE.HOURS_12:
-					unit = 'hour'
-					if (val === 0) {
-						val = 12
-					}
-					break
-				case MODE.MINUTES:
-					unit = 'minute'
-					if (val === 60) {
-						val = 0
-					}
-					break
-				// TODO - add support for 24 hrs
-			}
-
-			// TODO - fix type
-			// update individual value on component
-			const newTime = { ...time, [unit]: val }
-			setTime(newTime)
-
-			// handle any unit autochanges or closeos
-			if (!canAutoChangeUnit) {
-				return
-			}
-
-			const isHourMode = mode === MODE.HOURS_12 || mode === MODE.HOURS_24
-			const isMinuteMode = mode === MODE.MINUTES
-			if (config.switchToMinuteOnHourSelect && isHourMode) {
-				setMode(MODE.MINUTES)
-			} else if (config.closeOnMinuteSelect && isMinuteMode) {
-				config.onDoneClick && config.onDoneClick()
+			if (canAutoChangeUnit) {
+				handleTimeUpdateSideEffects()
 			}
 		},
-		[config, mode, setTime, time],
+		[handleTimeUpdateSideEffects, updateTime],
 	)
 
 	/*
@@ -127,9 +98,9 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 			} */
 
 			// update time officially on this component
-			updateTime(selected, canAutoChangeUnit)
+			handleUpdates(selected, canAutoChangeUnit)
 		},
-		[updateTime, mode],
+		[handleUpdates, mode],
 	)
 
 	return (

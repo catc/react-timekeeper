@@ -2,6 +2,7 @@ import { MutableRefObject } from 'react'
 
 export type ElementRef = MutableRefObject<HTMLDivElement | null>
 
+// assumes 24 hour time
 export interface Time {
 	hour: number
 	minute: number
@@ -27,8 +28,8 @@ export interface TimeOutput {
 	formatted12: string
 	formattedSimple: string
 	formatted24: string
+	hour: number
 	hour12: number
-	hour24: number
 	minute: number
 	meridiem: string
 }

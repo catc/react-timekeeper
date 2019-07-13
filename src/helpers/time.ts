@@ -43,7 +43,6 @@ export function parseTime(time: TimeInput): Time {
 		}
 		hour = time.hour
 		minute = time.minute
-
 		if (time.meridiem) {
 			meridiem = time.meridiem.toLowerCase()
 		}
@@ -97,7 +96,7 @@ export function composeTime(hour: number, minute: number): TimeOutput {
 		formatted24: `${hour24}:${paddedMinute}`,
 		formatted12: `${hour12}:${paddedMinute} ${meridiem}`,
 		formattedSimple: `${hour12}:${paddedMinute}`,
-		hour24: hour24,
+		hour: hour24,
 		hour12: hour12,
 		minute: minute,
 		meridiem: meridiem,
