@@ -7,27 +7,27 @@ export interface Time {
 	minute: number
 }
 
-export interface Time12 {
-	hour: number
-	minute: number
-	meridiem: string
-}
-
 export interface Time24 {
 	hour: number
 	minute: number
 }
 
-export type TimeInput = string | Time12 | Time24
+export interface Time12 extends Time24 {
+	meridiem: string
+}
+
+// time passed in from parent
+export type TimeInput = string | Time24 | Time12
 
 // function passed in from parent
 export type ChangeTimeFn = (t: TimeInput) => void
 
+// time passed to parent
 export interface TimeOutput {
-	formatted: string
+	formatted12: string
 	formattedSimple: string
 	formatted24: string
-	hour: number
+	hour12: number
 	hour24: number
 	minute: number
 	meridiem: string
