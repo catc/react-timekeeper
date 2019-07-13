@@ -26,14 +26,17 @@ export const CLOCK_VALUES = {
 	[MODE.MINUTES]: {
 		increments: 60,
 		numbers: MINUTES,
+		coarseIncrements: 5,
 	},
 	[MODE.HOURS_12]: {
 		increments: 12,
 		numbers: HOURS_12,
+		coarseIncrements: 1,
 	},
 	[MODE.HOURS_24]: {
 		increments: 24,
 		numbers: HOURS_24,
+		coarseIncrements: 1,
 	},
 }
 

@@ -1,30 +1,32 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Global, css, jsx } from '@emotion/core'
 
 import globalStyle from './styles/global'
 import style from './styles/main'
 import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
-import { TimeInput } from '../helpers/types'
+import { TimeInput, ChangeTimeFn } from '../helpers/types'
 import { MODE, CLOCK_VALUES, HOURS_12 } from '../helpers/constants'
+import useHandleTime from '../hooks/handle-time'
 
 export interface Props {
-	onChange: (t: TimeInput) => void
-	// TODO - check out props from previous implementation
-	useCoarseMinutes?: boolean
+	time: TimeInput
+	onChange: ChangeTimeFn
 }
 
-export default function TimeKeeper({ useCoarseMinutes }: Props) {
-	const [time, setTime] = useState({ hour: 5, minute: 55 })
+export default function TimeKeeper({ onChange, time: parentTime }: Props) {
+	const { time, setTime } = useHandleTime(parentTime, onChange)
 	const [mode, setMode] = useState(MODE.HOURS_12)
 
 	const config = useConfig()
 
-	const handleTimeChange = useCallback(
-		(val: number, canChangeUnit: boolean) => {
-			// const unit = mode;
-
-			// TODO - is this necessary
+	/*
+		- calls time update on component and parent
+		- handles any mode switching or closing
+	*/
+	const updateTime = useCallback(
+		(val: number, canAutoChangeUnit: boolean) => {
+			// TODO - is this necessary?
 			val = parseInt(val, 10)
 			if (isNaN(val)) {
 				console.error('DEBUG :: NOT A NUMBER!')
@@ -32,7 +34,7 @@ export default function TimeKeeper({ useCoarseMinutes }: Props) {
 			}
 
 			// const increments = CLOCK_VALUES[mode].increments
-			let unit
+			let unit: 'hour' | 'minute'
 			switch (mode) {
 				case MODE.HOURS_12:
 					unit = 'hour'
@@ -49,78 +51,86 @@ export default function TimeKeeper({ useCoarseMinutes }: Props) {
 				// TODO - add support for 24 hrs
 			}
 
+			// TODO - fix type
+			// update individual value on component
 			const newTime = { ...time, [unit]: val }
 			setTime(newTime)
 
-			// TODO - call props function to update time on parent (with formatted time)
-			// if (mode === MODE.HOURS_12) {
+			// handle any unit autochanges or closeos
+			if (!canAutoChangeUnit) {
+				return
+			}
 
-			// } else if (mode === MODE){
-
-			// }
-			// if (mode === HOUR)
-			// console.log('WOULD CHANGE', unit, val, canChangeUnit)
-			return
-			// val = parseInt(val, 10)
-			// if (isNaN(val)) {
-			// 	return
-			// }
-			// if (unit === 'hour' && val === 0) {
-			// 	val = 12
-			// } else if (unit === 'minute' && val === 60) {
-			// 	val = 0
-			// }
-
-			// this.setState(
-			// 	{
-			// 		[unit]: val,
-			// 	},
-			// 	this.timeChangeHandler,
-			// ) // update time on parent
-
-			// const props = this.props
-
-			// if (canChangeUnit && unit === 'hour' && props.switchToMinuteOnHourSelect) {
-			// 	this.changeUnit('minute')
-			// } else if (canChangeUnit && unit === 'minute' && props.closeOnMinuteSelect) {
-			// 	props.onDoneClick && props.onDoneClick(this.getTime(), null)
-			// }
+			const isHourMode = mode === MODE.HOURS_12 || mode === MODE.HOURS_24
+			const isMinuteMode = mode === MODE.MINUTES
+			if (config.switchToMinuteOnHourSelect && isHourMode) {
+				setMode(MODE.MINUTES)
+			} else if (config.closeOnMinuteSelect && isMinuteMode) {
+				config.onDoneClick && config.onDoneClick()
+			}
 		},
-		[mode, time],
+		[config, mode, setTime, time],
 	)
 
-	const handleChange = useCallback(
-		(delta, forceCoarse, canChangeUnit = false) => {
-			const isCoarse = useCoarseMinutes || forceCoarse // TODO - change naming between forced and props
+	/*
+		LOGIC AROUND COARSE
+		- on drag, if count < 2, do not force coarse
+		- on mouseup, if count < 2 do not force coarse
+		- handlepoint
+			- if config OR forceCoarse arg, then coarse it
+			- since now providing option for coarse... need a more sophisticated method?
+		- coarse is just rounding number to an increment before setting unit
 
+		LOGIC AROUND CAN CHANGE UNIT
+		- on drag, CAN NOT change unit
+		- on mouseup, can change unit
+		- AFTER time has been set, then determine if need to change unit
+			- based on this and user input
+	*/
+
+	/*
+		converts angle into time, also factors in any rounding to the closest increment
+	*/
+	const calculateTimeValue = useCallback(
+		(angle, { canAutoChangeUnit = false, wasTapped = false }) => {
 			/*
-				LEFT OFF HERE
-				- check out prop/argument signature to timepicker component
-				- add handleChange function
-				- add time helpers and update parent component value
-				- on parent change time, have effect that changes state here
+				TODO
+				- if coarse, avoid the double calculation
+				- first check if coarse, and then do one or either
 			*/
 
 			// calculate value based on current clock increments
 			const increments = CLOCK_VALUES[mode].increments
-			let selected = Math.round((delta / 360) * increments)
+			let selected = Math.round((angle / 360) * increments)
 
-			if (isCoarse) {
-				// TODO
-				// if coarse, round up/down
-				// const multiplier = CLOCK_DATA[unit].coarseMultiplier;
-				// selected = Math.round(selected / multiplier) * multiplier;
-			}
+			/*
+				TODO
+				- clean up this logic, make it reusable for hours as well
+				- add hours coarse as well
+					- add a coarse object to config?
+					- but pass in to component as separate?
+				- fade out numbers depending on whether is has coarse value
+					- for this, should calculate all numbers and determine
+					which ones are faded out and cache
+			*/
 
-			// return console.log('selected is', selected, check, mode)
-			handleTimeChange(selected, canChangeUnit)
+			/* if (mode === MODE.MINUTES) {
+				const coarseMinutes = config.coarseMinutes
+				const roundValue = coarseMinutes > 1 || wasTapped
+				if (roundValue) {
+					// number was just tapped so account for fat finger
+					// or coarse increments are enabled
+					const multiplier = coarseMinutes > 1 ? coarseMinutes : 5
+					// const multiplier = CLOCK_DATA[unit].coarseMultiplier;
+					selected = Math.round(selected / multiplier) * multiplier
+				}
+			} */
+
+			// update time officially on this component
+			updateTime(selected, canAutoChangeUnit)
 		},
-		[handleTimeChange, mode, useCoarseMinutes],
+		[updateTime, mode],
 	)
-
-	function updateTime() {
-		console.log('would update time...')
-	}
 
 	return (
 		<>
@@ -140,7 +150,7 @@ export default function TimeKeeper({ useCoarseMinutes }: Props) {
 				<br />
 				<br />
 				{/* TODO - top bar */}
-				<ClockWrapper time={time} mode={mode} handleChange={handleChange} />
+				<ClockWrapper time={time} mode={mode} calculateTimeValue={calculateTimeValue} />
 				{/* TODO - done button */}
 			</div>
 		</>

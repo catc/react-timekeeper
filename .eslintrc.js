@@ -41,6 +41,9 @@ module.exports = {
 		node: true,
 	},
 	rules: {
+		// prettier
+		'prettier/prettier': 1,
+
 		// imports
 		'import/newline-after-import': 1,
 		'import/first': 2,

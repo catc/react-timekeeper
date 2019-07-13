@@ -20,6 +20,9 @@ export interface Time24 {
 
 export type TimeInput = string | Time12 | Time24
 
+// function passed in from parent
+export type ChangeTimeFn = (t: TimeInput) => void
+
 export interface TimeOutput {
 	formatted: string
 	formattedSimple: string

@@ -7,8 +7,16 @@ import { ElementRef } from '../helpers/types'
 
 const { atan2 } = Math
 
-// TODO - add `handleChange` fn type
-export default function useClockEvents(wrapper: ElementRef, clock: ElementRef, handleChange) {
+type HandleChangeFn = (
+	delta: number,
+	{ canAutoChangeUnit, wasTapped }: { canAutoChangeUnit: boolean; wasTapped: boolean },
+) => void
+
+export default function useClockEvents(
+	wrapper: ElementRef,
+	clock: ElementRef,
+	handleChange: HandleChangeFn,
+) {
 	const dragCount = useRef(0)
 	const cleanup = useCallback(_removeHandlers, [])
 
@@ -24,7 +32,7 @@ export default function useClockEvents(wrapper: ElementRef, clock: ElementRef, h
 	function handleMouseDrag(e: MouseEvent) {
 		if (clock.current) {
 			const { offsetX, offsetY } = calcOffset(clock.current, e.clientX, e.clientY)
-			handlePoint(offsetX, offsetY, false, dragCount.current < 2)
+			calculatePoint(offsetX, offsetY, false)
 		}
 		dragCount.current++
 
@@ -47,7 +55,7 @@ export default function useClockEvents(wrapper: ElementRef, clock: ElementRef, h
 		if (clock.current) {
 			const touch = e.targetTouches[0]
 			const { offsetX, offsetY } = calcOffset(clock.current, touch.clientX, touch.clientY)
-			handlePoint(offsetX, offsetY, false, dragCount.current < 2)
+			calculatePoint(offsetX, offsetY, false)
 		}
 		dragCount.current++
 
@@ -93,31 +101,27 @@ export default function useClockEvents(wrapper: ElementRef, clock: ElementRef, h
 			return
 		}
 
-		// if user just clicks/taps a number (drag count < 2), then just assume it's a rough tap
-		// and force a rounded/coarse number (ie: 1, 2, 3, 4 is tapped, assume 0 or 5)
-		const forceCoarse = dragCount.current < 2
-
 		const { offsetX, offsetY } = calcOffset(clock.current, e.clientX, e.clientY)
-		handlePoint(offsetX, offsetY, true, forceCoarse)
+		calculatePoint(offsetX, offsetY, true)
 	}
 	function _handleTouchEnd(e: TouchEvent) {
-		const forceCoarse = dragCount.current < 2
-
 		const touch = e.targetTouches[0] || e.changedTouches[0]
 		if (touch && clock.current) {
 			const { offsetX, offsetY } = calcOffset(clock.current, touch.clientX, touch.clientY)
-			handlePoint(offsetX, offsetY, true, forceCoarse)
+			calculatePoint(offsetX, offsetY, true)
 		}
 	}
-	function handlePoint(
+	function calculatePoint(
 		clientX: number,
 		clientY: number,
-		// TODO - see if can remove arg or move elsewhere
-		canChangeUnit: boolean,
-		// TODO - can probably get rid of forceCoarse and just do the `dragCount.current < 2` check here (make sure it works correctly though)
-		forceCoarse: boolean,
+		// determines if change is due to mouseup/touchend in order to
+		// automatically change unit (eg: hour -> minute) if enabled
+		// prevents changing unit if dragging along clock
+		canAutoChangeUnit: boolean,
 	) {
-		// console.log('would handle point', clientX, clientY, forceCoarse)
+		// if user just clicks/taps a number (drag count < 2), then just assume it's a rough tap
+		// and force a rounded/coarse number (ie: 1, 2, 3, 4 is tapped, assume 0 or 5)
+		const wasTapped = dragCount.current < 2
 
 		const x = clientX - CLOCK_RADIUS
 		const y = -clientY + CLOCK_RADIUS
@@ -134,26 +138,8 @@ export default function useClockEvents(wrapper: ElementRef, clock: ElementRef, h
 			return false
 		}
 
-		// TODO - figure out `canChangeUnit` argument
-		handleChange(d, forceCoarse)
-
-		// TODO
-		/* const unit = this.props.unit
-		const isCoarse = this.props.config.useCoarseMinutes || forceCoarse;
-
-		// calculate value based on current clock increments
-		let selected = Math.round(d / 360 * CLOCK_DATA[unit].increments)
-		if (isCoarse) {
-			// if coarse, round up/down
-			const multiplier = CLOCK_DATA[unit].coarseMultiplier;
-			selected = Math.round(selected / multiplier) * multiplier;
-		}
-
-		if (unit === 'hour') {
-			this.props.changeHour(selected, canChangeUnit)
-		} else if (unit === 'minute') {
-			this.props.changeMinute(selected, canChangeUnit)
-		} */
+		// update time on main
+		handleChange(d, { canAutoChangeUnit, wasTapped })
 	}
 
 	// will destroy cleanup

@@ -8,29 +8,78 @@ export interface Styles {
 	main?: Style
 }
 
+type DoneClickFn = null | (() => void)
+
 interface Config {
+	coarseMinutes: number
 	styles: Styles
+	switchToMinuteOnHourSelect: boolean
+	closeOnMinuteSelect: boolean
+	onDoneClick: DoneClickFn
 }
 
-const configContext = createContext(genConfig())
-
-function genConfig(styles = {} /* any other config stuff */) {
+function genConfig({
+	styles = {},
+	coarseMinutes = 1,
+	switchToMinuteOnHourSelect = false,
+	closeOnMinuteSelect = false,
+	onDoneClick = null,
+}: ConfigProps): Config {
+	if (coarseMinutes < 1) {
+		throw new Error('coarseMinutes must be at least 1')
+	}
 	return {
 		styles,
+		coarseMinutes,
+		switchToMinuteOnHourSelect,
+		closeOnMinuteSelect,
+		onDoneClick,
 	}
 }
 
-interface Props {
-	children: ReactElement
-	styles?: {}
+export interface ConfigProps {
+	styles?: Styles
+	coarseMinutes?: number
+	switchToMinuteOnHourSelect?: boolean
+	closeOnMinuteSelect?: boolean
+	onDoneClick?: DoneClickFn
 }
 
-export function ConfigProvider({ children, styles }: Props) {
-	const [config, setConfig] = useState(genConfig(styles))
+interface Props extends ConfigProps {
+	children: ReactElement
+}
+
+const configContext = createContext(genConfig({}))
+
+export function ConfigProvider({
+	children,
+	styles,
+	coarseMinutes,
+	switchToMinuteOnHourSelect,
+	closeOnMinuteSelect,
+	onDoneClick,
+}: Props) {
+	const [config, setConfig] = useState(
+		genConfig({
+			styles,
+			coarseMinutes,
+			switchToMinuteOnHourSelect,
+			closeOnMinuteSelect,
+			onDoneClick,
+		}),
+	)
 
 	useEffect(() => {
-		setConfig(genConfig(styles))
-	}, [styles])
+		setConfig(
+			genConfig({
+				styles,
+				coarseMinutes,
+				switchToMinuteOnHourSelect,
+				closeOnMinuteSelect,
+				onDoneClick,
+			}),
+		)
+	}, [styles, coarseMinutes, switchToMinuteOnHourSelect, closeOnMinuteSelect, onDoneClick])
 
 	return <configContext.Provider value={config}>{children}</configContext.Provider>
 }

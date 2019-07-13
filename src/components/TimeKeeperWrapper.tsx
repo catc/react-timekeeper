@@ -1,19 +1,28 @@
 import React from 'react'
 import TimeKeeper, { Props as TimeKeeperProps } from './TimeKeeper'
-import { ConfigProvider, Styles } from '../hooks/config'
+import { ConfigProvider, Styles, ConfigProps } from '../hooks/config'
 
-interface Props extends TimeKeeperProps {
-	styles?: Styles
-}
+interface Props extends TimeKeeperProps, ConfigProps {}
 
 export default function TimepickerWithConfig({
-	onChange = () => {},
-	useCoarseMinutes = false,
+	time,
+	onChange,
+	// config props:
+	coarseMinutes,
 	styles = {},
+	switchToMinuteOnHourSelect,
+	closeOnMinuteSelect,
+	onDoneClick,
 }: Props) {
 	return (
-		<ConfigProvider styles={styles}>
-			<TimeKeeper onChange={onChange} useCoarseMinutes={useCoarseMinutes} />
+		<ConfigProvider
+			styles={styles}
+			coarseMinutes={coarseMinutes}
+			switchToMinuteOnHourSelect={switchToMinuteOnHourSelect}
+			closeOnMinuteSelect={closeOnMinuteSelect}
+			onDoneClick={onDoneClick}
+		>
+			<TimeKeeper onChange={onChange} time={time} />
 		</ConfigProvider>
 	)
 }

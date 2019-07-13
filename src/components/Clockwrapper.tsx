@@ -6,7 +6,7 @@ import { MODE } from '../helpers/constants'
 
 interface Props {
 	mode: MODE
-	handleChange: () => void
+	calculateTimeValue: () => void
 }
 
 /*
@@ -15,15 +15,15 @@ interface Props {
 
 	LEFT OFF AT
 	- incorporate `handlePoint`
-	- incorporate `handleChange` in `TimePicker` component that calls parent
+	- incorporate `calculateTimeValue` in `TimePicker` component that calls parent
 		- add time helper functions
 */
 
-export default function ClockWrapper({ mode, handleChange, time }: Props) {
+export default function ClockWrapper({ mode, calculateTimeValue, time }: Props) {
 	const wrapper = useRef<HTMLDivElement | null>(null)
 	const clock = useRef<HTMLDivElement | null>(null)
 
-	const { mousedown, touchstart } = useClockEvents(wrapper, clock, handleChange)
+	const { mousedown, touchstart } = useClockEvents(wrapper, clock, calculateTimeValue)
 
 	return (
 		<div
