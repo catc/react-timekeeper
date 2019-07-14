@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import debounce from 'lodash.debounce'
 
-import { parseTime, composeTime } from '../helpers/time'
+import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
 import { TimeInput, ChangeTimeFn, Time } from '../helpers/types'
 import { MODE } from '../helpers/constants'
 
@@ -10,13 +10,37 @@ import { MODE } from '../helpers/constants'
 	and updating parent on change
 */
 export default function useHandleTime(parentTime: TimeInput, onChange: ChangeTimeFn, mode: MODE) {
-	const [time, setTime] = useState(parseTime(parentTime))
+	// need meridiem for context when 12h mode, so can tell
+	// if user is changing hours before or after 12pm
+	const [meridiem, setMeridiem] = useState(() => parseMeridiem(parentTime))
+	const [time, setTime] = useState(() => {
+		return parseTime(parentTime)
+	})
+
+	// update 24 hour time on meridiem change
+	function updateMeridiem(newMeridiem: string) {
+		if (meridiem === newMeridiem) {
+			return
+		}
+		const newTime: Time = { minute: time.minute, hour: 0 }
+		setMeridiem(newMeridiem)
+		if (newMeridiem === 'am') {
+			newTime.hour = time.hour - 12
+			actuallySetTime(newTime)
+		} else if (newMeridiem === 'pm') {
+			newTime.hour = time.hour + 12
+			actuallySetTime(newTime)
+		}
+	}
 
 	// handle time update if parent changes
 	useEffect(() => {
 		const parsed = parseTime(parentTime)
 		setTime(parsed)
-	}, [parentTime])
+		if (mode === MODE.HOURS_12) {
+			setMeridiem(parseMeridiem(parentTime))
+		}
+	}, [mode, parentTime])
 
 	// minor pre-optimization - allows to compose time
 	// only when actually about to update on parent (prolly unnecessary)
@@ -33,66 +57,62 @@ export default function useHandleTime(parentTime: TimeInput, onChange: ChangeTim
 	}, [onChange])
 
 	// update time on component and then on parent
-	const actuallySetTime = useCallback(
-		(newTime) => {
-			// set time on timekeeper
-			setTime(newTime)
-			refTime.current = newTime
+	function actuallySetTime(newTime: Time) {
+		// set time on timekeeper
+		setTime(newTime)
+		refTime.current = newTime
 
-			// set time on parent
-			debounceUpdateParent()
-		},
-		[debounceUpdateParent],
-	)
+		// set time on parent
+		debounceUpdateParent()
+	}
 
 	/*
 		- calls time update on component and parent
 		- handles any mode switching or closing
 	*/
-	const updateTime = useCallback(
-		(val: number) => {
-			// TODO - is this necessary?
-			// val = parseInt(val, 10)
-			// if (isNaN(val)) {
-			// 	console.error('DEBUG :: NOT A NUMBER!')
-			// 	return
-			// }
+	const updateTime = (val: number) => {
+		// TODO - is this necessary?
+		// val = parseInt(val, 10)
+		// if (isNaN(val)) {
+		// 	console.error('DEBUG :: NOT A NUMBER!')
+		// 	return
+		// }
 
-			// const increments = CLOCK_VALUES[mode].increments
-			let unit: 'hour' | 'minute'
-			switch (mode) {
-				// TODO - finish adding support for 24 hrs
-				case MODE.HOURS_24:
-					unit = 'hour'
-					if (val === 24) {
-						val = 0
-					}
-					break
-				case MODE.HOURS_12:
-					unit = 'hour'
-					if (val === 0) {
-						val = 12
-					}
-					break
-				case MODE.MINUTES:
-					unit = 'minute'
-					if (val === 60) {
-						val = 0
-					}
-					break
-				default:
-					unit = 'hour'
-			}
+		// const increments = CLOCK_VALUES[mode].increments
+		let unit: 'hour' | 'minute'
+		switch (mode) {
+			// TODO - finish adding support for 24 hrs
+			case MODE.HOURS_24:
+				unit = 'hour'
+				if (val === 24) {
+					val = 0
+				}
+				break
+			case MODE.HOURS_12:
+				unit = 'hour'
+				if (val === 12) {
+					val = 0
+				}
+				val += meridiem === 'pm' ? 12 : 0
+				break
+			case MODE.MINUTES:
+				unit = 'minute'
+				if (val === 60) {
+					val = 0
+				}
+				break
+			default:
+				unit = 'hour'
+		}
 
-			// generate new time and update timekeeper state
-			const newTime: Time = { ...time, [unit]: val }
-			actuallySetTime(newTime)
-		},
-		[actuallySetTime, mode, time],
-	)
+		// generate new time and update timekeeper state
+		const newTime: Time = { ...time, [unit]: val }
+		actuallySetTime(newTime)
+	}
 
 	return {
 		time,
 		updateTime,
+		updateMeridiem,
 	}
 }

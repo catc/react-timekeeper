@@ -3,19 +3,18 @@ import { useEffect, useRef, useCallback } from 'react'
 import { CLOCK_RADIUS } from '../helpers/constants'
 import { calcOffset } from '../helpers/dom'
 import { deg } from '../helpers/math'
-import { ElementRef } from '../helpers/types'
+import { ElementRef, CalcTimeFromAngle } from '../helpers/types'
 
 const { atan2 } = Math
 
-type HandleChangeFn = (
-	delta: number,
-	{ canAutoChangeUnit, wasTapped }: { canAutoChangeUnit: boolean; wasTapped: boolean },
-) => void
-
+/*
+	solely responsible for transforming click
+	events into angles
+*/
 export default function useClockEvents(
 	wrapper: ElementRef,
 	clock: ElementRef,
-	handleChange: HandleChangeFn,
+	handleChange: CalcTimeFromAngle,
 ) {
 	const dragCount = useRef(0)
 	const cleanup = useCallback(_removeHandlers, [])

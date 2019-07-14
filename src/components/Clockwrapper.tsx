@@ -6,21 +6,14 @@ import Meridiems from './Meridiems'
 import useClockEvents from '../hooks/handle-clock-events'
 import { MODE } from '../helpers/constants'
 import { CLOCK_WRAPPER_BACKGROUND } from './styles/constants'
+import { CalcTimeFromAngle, Time } from 'src/helpers/types'
 
 interface Props {
 	mode: MODE
-	calculateTimeValue: () => void
+	time: Time
+	calculateTimeValue: CalcTimeFromAngle
+	updateMeridiem: (meridiem: string) => void
 }
-
-/*
-	TODO
-	- handle events and pass up
-
-	LEFT OFF AT
-	- incorporate `handlePoint`
-	- incorporate `calculateTimeValue` in `TimePicker` component that calls parent
-		- add time helper functions
-*/
 
 const style = css`
 	text-align: center;
@@ -28,7 +21,7 @@ const style = css`
 	background: ${CLOCK_WRAPPER_BACKGROUND};
 `
 
-export default function ClockWrapper({ mode, calculateTimeValue, time }: Props) {
+export default function ClockWrapper({ mode, calculateTimeValue, time, updateMeridiem }: Props) {
 	const wrapper = useRef<HTMLDivElement | null>(null)
 	const clock = useRef<HTMLDivElement | null>(null)
 
@@ -44,7 +37,7 @@ export default function ClockWrapper({ mode, calculateTimeValue, time }: Props) 
 		>
 			<Clock time={time} mode={mode} clockEl={clock} />
 
-			<Meridiems time={time} />
+			<Meridiems time={time} updateMeridiem={updateMeridiem} />
 		</div>
 	)
 }

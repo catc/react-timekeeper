@@ -1,6 +1,3 @@
-// TODO - move some of these to their respective component styles
-// only need to keep stuff like 'react-timekeeper-noscroll' and such (actual global styles)
-
 const style = `
 	.react-timekeeper-button-reset {
 		background: 0;

@@ -79,6 +79,11 @@ export function parseTime(time: TimeInput): Time {
 	}
 }
 
+export function parseMeridiem(time: TimeInput): string {
+	const parsed = parseTime(time)
+	return parsed.hour >= 12 ? 'pm' : 'am'
+}
+
 // formats time output to poss to parent
 export function composeTime(hour: number, minute: number): TimeOutput {
 	const paddedMinute = ('0' + minute).slice(-2)

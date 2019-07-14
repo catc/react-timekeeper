@@ -16,7 +16,7 @@ export interface Props {
 
 export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 	const [mode, setMode] = useState(MODE.HOURS_12)
-	const { time, updateTime } = useHandleTime(parentTime, onChange, mode)
+	const { time, updateTime, updateMeridiem } = useHandleTime(parentTime, onChange, mode)
 
 	const config = useConfig()
 
@@ -121,7 +121,12 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 				<br />
 				<br />
 				{/* TODO - top bar */}
-				<ClockWrapper time={time} mode={mode} calculateTimeValue={calculateTimeValue} />
+				<ClockWrapper
+					time={time}
+					mode={mode}
+					calculateTimeValue={calculateTimeValue}
+					updateMeridiem={updateMeridiem}
+				/>
 				{/* TODO - done button */}
 			</div>
 		</>

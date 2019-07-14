@@ -1,6 +1,6 @@
 import React from 'react'
 import TimeKeeper, { Props as TimeKeeperProps } from './TimeKeeper'
-import { ConfigProvider, Styles, ConfigProps } from '../hooks/config'
+import { ConfigProvider, ConfigProps } from '../hooks/config'
 
 interface Props extends TimeKeeperProps, ConfigProps {}
 
