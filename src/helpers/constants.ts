@@ -22,6 +22,8 @@ export function getTimeValue(mode: MODE, time: Time): number {
 	return time[unit]
 }
 
+export function hasCoarseValue(mode: MODE, config): boolean {}
+
 export const CLOCK_VALUES = {
 	[MODE.MINUTES]: {
 		increments: 60,

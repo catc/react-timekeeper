@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTransition } from 'react-spring'
+import { css, jsx } from '@emotion/core'
 
 import ClockHand from './ClockHand'
 import { HourNumbers, MinuteNumbers } from './Numbers'
@@ -8,6 +9,7 @@ import {
 	INITIAL_HOUR_TRANSFORM,
 	INITIAL_MINUTE_TRANSFORM,
 	MODE,
+	CLOCK_SIZE,
 } from '../helpers/constants'
 import { ElementRef } from '../helpers/types'
 
@@ -24,6 +26,16 @@ interface Props {
 	mode: MODE
 	clockEl: ElementRef
 }
+
+const style = css`
+	display: inline-block;
+	border-radius: 200px;
+	background: white;
+	width: ${CLOCK_SIZE}px;
+	height: ${CLOCK_SIZE}px;
+	position: relative;
+	cursor: pointer;
+`
 
 export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 	const firstTime = useRef(true)
@@ -46,7 +58,7 @@ export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 	}, [])
 
 	return (
-		<div className="clock-wrapper" ref={clockEl}>
+		<div className="react-timekeeper__clock" css={style} ref={clockEl}>
 			{transitions.map(({ item, key, props }) => {
 				return item === MODE.HOURS_12 ? (
 					<HourNumbers anim={props} key={key} />

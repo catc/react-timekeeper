@@ -11,19 +11,18 @@ import {
 	CLOCK_VALUES,
 	getTimeValue,
 } from '../helpers/constants'
-
-export const CLOCK_BACKGROUND = 'white'
-export const CLOCK_NUMBER_COLOR = '#999999'
-export const CLOCK_HAND_ARM = '#bceaff'
-export const CLOCK_HAND_CIRCLE_BACKGROUND = '#e6f7ff'
-export const CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND = '#ade2fb'
+import {
+	CLOCK_HAND_ARM,
+	CLOCK_HAND_CIRCLE_BACKGROUND,
+	CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND,
+} from './styles/constants'
 
 interface Props {
 	mode: MODE
 	time: Time
 }
 
-function rotate(r) {
+function rotate(r: number) {
 	return `rotate(${r} ${CLOCK_RADIUS} ${CLOCK_RADIUS})`
 }
 
@@ -45,19 +44,19 @@ export default function ClockHand({ mode, time }: Props) {
 		)
 	}
 
+	// TODO - experiment with animated clockhand between modes
 	return (
 		<svg
 			width={CLOCK_SIZE}
 			height={CLOCK_SIZE}
 			viewBox={`0 0 ${CLOCK_SIZE} ${CLOCK_SIZE}`}
 			xmlns="http://www.w3.org/2000/svg"
-			style={{ overflow: 'visible' }}
-			// className="clock-hand"
+			className="react-timekeeper__clock-hand"
+			// style={{ overflow: 'visible' }}
 			// style={{
 			// 	...styles.clockHand,
 			// 	opacity: anim.style.handOpacity,
 			// }}
-			className="clock-hand react-timekeeper__clock-svgs"
 		>
 			<g transform={rotate(t)}>
 				<line
@@ -66,16 +65,14 @@ export default function ClockHand({ mode, time }: Props) {
 					x2={CLOCK_RADIUS}
 					y2={CLOCK_RADIUS - CLOCK_HAND_LENGTH}
 					strokeWidth="1"
-					// stroke={config.CLOCK_HAND_ARM}
-					stroke={CLOCK_HAND_ARM} // TODO
+					stroke={CLOCK_HAND_ARM}
 				/>
 				<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5} fill={CLOCK_HAND_ARM} />
 				<circle
 					cx={CLOCK_RADIUS}
 					cy={NUMBER_INNER_POSITION}
 					r={NUMBER_SIZE / 2}
-					// fill={config.CLOCK_HAND_CIRCLE_BACKGROUND}
-					fill={CLOCK_HAND_CIRCLE_BACKGROUND} // TODO
+					fill={CLOCK_HAND_CIRCLE_BACKGROUND}
 				/>
 				{showIntermediateValueDisplay}
 			</g>
