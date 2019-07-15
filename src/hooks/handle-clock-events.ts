@@ -1,8 +1,8 @@
 import { useEffect, useRef, useCallback } from 'react'
 
-import { CLOCK_RADIUS } from '../helpers/constants'
+import { CLOCK_RADIUS, INNER_NUMBER_RADIUS } from '../helpers/constants'
 import { calcOffset } from '../helpers/dom'
-import { deg } from '../helpers/math'
+import { deg, isInnerNumberClick } from '../helpers/math'
 import { ElementRef, CalcTimeFromAngle } from '../helpers/types'
 
 const { atan2 } = Math
@@ -138,7 +138,7 @@ export default function useClockEvents(
 		}
 
 		// update time on main
-		handleChange(d, { canAutoChangeUnit, wasTapped })
+		handleChange(d, { canAutoChangeUnit, wasTapped, isInnerClick: isInnerNumberClick(x, y) })
 	}
 
 	// will destroy cleanup

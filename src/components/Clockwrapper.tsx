@@ -1,6 +1,7 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useRef } from 'react'
 import { css, jsx } from '@emotion/core'
 
+import useConfig from '../hooks/config'
 import Clock from './Clock'
 import Meridiems from './Meridiems'
 import useClockEvents from '../hooks/handle-clock-events'
@@ -22,6 +23,8 @@ const style = css`
 `
 
 export default function ClockWrapper({ mode, calculateTimeValue, time, updateMeridiem }: Props) {
+	const { hour24Mode } = useConfig()
+
 	const wrapper = useRef<HTMLDivElement | null>(null)
 	const clock = useRef<HTMLDivElement | null>(null)
 
@@ -37,8 +40,7 @@ export default function ClockWrapper({ mode, calculateTimeValue, time, updateMer
 		>
 			<Clock time={time} mode={mode} clockEl={clock} />
 
-			{/* TODO - hide meridiems if 24 hour mode */}
-			<Meridiems time={time} updateMeridiem={updateMeridiem} />
+			{!hour24Mode && <Meridiems time={time} updateMeridiem={updateMeridiem} />}
 		</div>
 	)
 }

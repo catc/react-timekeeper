@@ -16,7 +16,7 @@ export interface Props {
 
 export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 	const config = useConfig()
-	const [mode, setMode] = useState(MODE.HOURS_12)
+	const [mode, setMode] = useState(config.hour24Mode ? MODE.HOURS_24 : MODE.HOURS_12)
 	const { time, updateTime, updateMeridiem } = useHandleTime(
 		parentTime,
 		onChange,
@@ -67,16 +67,24 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 		converts angle into time, also factors in any rounding to the closest increment
 	*/
 	const calculateTimeValue = useCallback(
-		(angle, { canAutoChangeUnit = false, wasTapped = false }) => {
+		(angle, { canAutoChangeUnit = false, wasTapped = false, isInnerClick = false }) => {
 			/*
 				TODO
 				- if coarse, avoid the double calculation
 				- first check if coarse, and then do one or either
 			*/
 
-			// calculate value based on current clock increments
-			const increments = CLOCK_VALUES[mode].increments
-			let selected = Math.round((angle / 360) * increments)
+			let selected = 0
+			if (mode === MODE.HOURS_24 && config.hour24Mode) {
+				// console.log('inner?', isInnerClick)
+				angle += isInnerClick ? 0 : 360
+				// assume theres 2 circles, one for 1->12 and 13->24
+				selected = Math.round((angle / 720) * 24)
+			} else {
+				// calculate value based on current clock increments
+				const increments = CLOCK_VALUES[mode].increments
+				selected = Math.round((angle / 360) * increments)
+			}
 
 			/*
 				TODO
@@ -104,7 +112,7 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 			// update time officially on this component
 			handleUpdates(selected, canAutoChangeUnit)
 		},
-		[handleUpdates, mode],
+		[config.hour24Mode, handleUpdates, mode],
 	)
 
 	return (
@@ -115,7 +123,13 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 				{time.hour}:{time.minute}
 				<button
 					onClick={() => {
-						setMode(mode === MODE.HOURS_12 ? MODE.MINUTES : MODE.HOURS_12)
+						let m
+						if (mode === MODE.HOURS_24 || mode === MODE.HOURS_12) {
+							m = MODE.MINUTES
+						} else {
+							m = config.hour24Mode ? MODE.HOURS_24 : MODE.HOURS_12
+						}
+						setMode(m)
 					}}
 				>
 					change type - {mode}

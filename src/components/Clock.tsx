@@ -3,23 +3,28 @@ import { useTransition } from 'react-spring'
 import { css, jsx } from '@emotion/core'
 
 import ClockHand from './ClockHand'
-import { HourNumbers, MinuteNumbers } from './Numbers'
+import Numbers, { HourNumbers, MinuteNumbers } from './Numbers'
 import {
 	NUMBER_INNER_POSITION,
 	INITIAL_HOUR_TRANSFORM,
 	INITIAL_MINUTE_TRANSFORM,
 	MODE,
-	CLOCK_SIZE,
+	INNER_NUMBER_POSITIONING,
+	INNER_NUMBER_RADIUS,
+	isHourMode,
+	isMinuteMode,
 } from '../helpers/constants'
 import { ElementRef } from '../helpers/types'
+import style from './styles/clock'
+import useConfig from '../hooks/config'
 
 // TODO - move in separate functions?
-function exitPosition(unit: MODE): number {
-	return unit === MODE.HOURS_12 ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
+function exitPosition(mode: MODE): number {
+	return isHourMode(mode) ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
 }
 
-function initialPosition(unit: MODE): number {
-	return unit === MODE.MINUTES ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
+function initialPosition(mode: MODE): number {
+	return !isHourMode(mode) ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
 }
 
 interface Props {
@@ -27,28 +32,27 @@ interface Props {
 	clockEl: ElementRef
 }
 
-const style = css`
-	display: inline-block;
-	border-radius: 200px;
-	background: white;
-	width: ${CLOCK_SIZE}px;
-	height: ${CLOCK_SIZE}px;
-	position: relative;
-	cursor: pointer;
-`
-
 export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 	const firstTime = useRef(true)
+	const { hour24Mode } = useConfig()
+
+	// TODO - tweak transitions property styles based on mode (12hr vs 24hour)
 	const transitions = useTransition(mode, null, {
 		unique: true,
-		from: firstTime.current ? {} : { opacity: 0, translate: initialPosition(mode) },
+		from: !firstTime.current && {
+			opacity: 0,
+			translate: initialPosition(mode),
+			translateInner: INNER_NUMBER_POSITIONING.initial,
+		},
 		enter: {
 			opacity: 1,
 			translate: NUMBER_INNER_POSITION,
+			translateInner: INNER_NUMBER_POSITIONING.enter,
 		},
 		leave: {
 			opacity: 0,
 			translate: exitPosition(mode),
+			translateInner: INNER_NUMBER_POSITIONING.exit,
 		},
 	})
 
@@ -59,16 +63,33 @@ export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 
 	return (
 		<div className="react-timekeeper__clock" css={style} ref={clockEl}>
-			{transitions.map(({ item, key, props }) => {
-				return item === MODE.HOURS_12 ? (
-					<HourNumbers anim={props} key={key} />
-				) : (
+			{transitions.map(({ item: mode, key, props }) => {
+				return isMinuteMode(mode) ? (
 					<MinuteNumbers anim={props} key={key} />
+				) : (
+					<HourNumbers anim={props} key={key} mode={mode} hour24Mode={hour24Mode} />
 				)
 			})}
 
 			{/* place svg over and set z-index on numbers to prevent highlighting numbers on drag */}
 			<ClockHand time={time} mode={mode} />
+
+			<span
+				css={css`
+					background: rgba(255, 2, 2, 0.2);
+					width: ${INNER_NUMBER_RADIUS * 2}px;
+					height: ${INNER_NUMBER_RADIUS * 2}px;
+					display: inline-block;
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					transform: translate(-50%, -50%);
+					border-radius: 500px;
+					pointer-events: none;
+				`}
+			>
+				{' '}
+			</span>
 		</div>
 	)
 }

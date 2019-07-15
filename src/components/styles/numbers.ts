@@ -2,11 +2,23 @@ import { css, jsx } from '@emotion/core'
 import { CLOCK_NUMBER_COLOR } from './constants'
 import { NUMBER_SIZE } from '../../helpers/constants'
 
-export const numbersStyle = css`
+interface Props {
+	hour24Mode?: boolean
+	inner?: boolean
+	outer?: boolean
+}
+
+function calcSize(hour24Mode: boolean, inner: boolean, outer: boolean): number {
+	if (!hour24Mode) {
+		return 16
+	}
+	return inner ? 15 : 13
+}
+
+export const numbersStyle = ({ hour24Mode, inner, outer }: Props) => css`
 	display: inline-block;
 	position: absolute;
 	color: ${CLOCK_NUMBER_COLOR};
-	font-size: 16px;
 	pointer-events: none;
 	border-radius: 99px;
 	width: ${NUMBER_SIZE}px;
@@ -14,6 +26,7 @@ export const numbersStyle = css`
 	text-align: center;
 	line-height: ${NUMBER_SIZE}px;
 	z-index: 5;
+	font-size: ${calcSize(hour24Mode, inner, outer)}px;
 `
 
 // z-index required to be on top of clockhand

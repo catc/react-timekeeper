@@ -1,0 +1,14 @@
+import { css, jsx } from '@emotion/core'
+import { CLOCK_SIZE } from '../../helpers/constants'
+
+const styles = css`
+	display: inline-block;
+	border-radius: 200px;
+	background: white;
+	width: ${CLOCK_SIZE}px;
+	height: ${CLOCK_SIZE}px;
+	position: relative;
+	cursor: pointer;
+`
+
+export default styles

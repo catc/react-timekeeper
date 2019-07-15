@@ -3,7 +3,8 @@ import { Time } from './types'
 export const MINUTES = ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'].map((a) => a.toString())
 export const MINUTES_60 = Array.from(Array(60), (_, i) => (i + 1).toString())
 export const HOURS_12 = Array.from(Array(12), (_, i) => (i + 1).toString())
-export const HOURS_24 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((a) => a.toString())
+// export const HOURS_24 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((a) => a.toString())
+export const HOURS_24 = Array.from(Array(23), (_, i) => (i + 1).toString()).concat('00')
 
 // export type MODE = 'MINUTES' | 'HOURS_12' | 'HOURS_24'
 export enum MODE {
@@ -22,6 +23,15 @@ export function getTimeValue(mode: MODE, time: Time): number {
 	return time[unit]
 }
 
+export function isHourMode(mode: MODE): boolean {
+	return mode === MODE.HOURS_12 || mode === MODE.HOURS_24
+}
+
+export function isMinuteMode(mode: MODE): boolean {
+	return mode === MODE.MINUTES
+}
+
+// TODO
 export function hasCoarseValue(mode: MODE, config): boolean {}
 
 export const CLOCK_VALUES = {
@@ -36,8 +46,11 @@ export const CLOCK_VALUES = {
 		coarseIncrements: 1,
 	},
 	[MODE.HOURS_24]: {
-		increments: 24,
-		numbers: HOURS_24,
+		// increments: 24,
+		increments: 12,
+		// numbers: HOURS_24,
+		numbers: HOURS_24.slice(12),
+		numbersInner: HOURS_24.slice(0, 12),
 		coarseIncrements: 1,
 	},
 }
@@ -62,3 +75,11 @@ export const NUMBER_INNER_POSITION = 22
 // initial position of hours/minutes before animating to final position
 export const INITIAL_HOUR_TRANSFORM = NUMBER_INNER_POSITION - 30
 export const INITIAL_MINUTE_TRANSFORM = NUMBER_INNER_POSITION + 26
+
+export const INNER_NUMBER_RADIUS = 65
+
+export const INNER_NUMBER_POSITIONING = {
+	initial: 40,
+	enter: 55,
+	exit: 75,
+}

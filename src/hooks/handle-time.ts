@@ -85,7 +85,6 @@ export default function useHandleTime(
 		// const increments = CLOCK_VALUES[mode].increments
 		let unit: 'hour' | 'minute'
 		switch (mode) {
-			// TODO - finish adding support for 24 hrs
 			case MODE.HOURS_24:
 				unit = 'hour'
 				if (val === 24) {
