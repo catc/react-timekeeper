@@ -7,7 +7,7 @@ import {
 	CLOCK_RADIUS,
 	CLOCK_HAND_LENGTH,
 	NUMBER_SIZE,
-	NUMBER_INNER_POSITION,
+	NUMBER_OUTER_POSITION,
 	INNER_NUMBER_CLOCK_HAND_LENGTH,
 	MODE,
 	CLOCK_VALUES,
@@ -38,7 +38,7 @@ export default function ClockHand({ mode, time }: Props) {
 		showIntermediateValueDisplay = (
 			<circle
 				cx={CLOCK_RADIUS}
-				cy={NUMBER_INNER_POSITION}
+				cy={NUMBER_OUTER_POSITION}
 				r={4}
 				fill={CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND}
 			/>
@@ -48,7 +48,7 @@ export default function ClockHand({ mode, time }: Props) {
 	// positioning of line and circle under number
 	let positioning = {
 		handLength: CLOCK_RADIUS - CLOCK_HAND_LENGTH,
-		circlePosition: NUMBER_INNER_POSITION,
+		circlePosition: NUMBER_OUTER_POSITION,
 		circleRadius: NUMBER_SIZE / 2,
 	}
 	// support inner numbers on 24 hour mode

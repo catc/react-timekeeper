@@ -1,8 +1,8 @@
 import { useEffect, useRef, useCallback } from 'react'
 
-import { CLOCK_RADIUS } from '../helpers/constants'
+import { CLOCK_RADIUS, INNER_NUMBER_RADIUS } from '../helpers/constants'
 import { calcOffset, CalcOffsetFn } from '../helpers/dom'
-import { deg, isInnerNumberClick } from '../helpers/math'
+import { deg, isWithinRadius } from '../helpers/math'
 import { ElementRef, CalcTimeFromAngle } from '../helpers/types'
 
 const { atan2 } = Math
@@ -32,6 +32,8 @@ export default function useClockEvents(
 
 		if (clock.current) {
 			calcOffsetCache.current = calcOffset(clock.current)
+			clock.current.style.cursor = '-webkit-grabbing'
+			clock.current.style.cursor = 'grabbing'
 		}
 	}
 	function handleMouseDrag(e: MouseEvent) {
@@ -107,6 +109,7 @@ export default function useClockEvents(
 		if (!clock.current) {
 			return
 		}
+		clock.current.style.cursor = ''
 
 		const { offsetX, offsetY } = calcOffsetCache.current!(e.clientX, e.clientY)
 		calculatePoint(offsetX, offsetY, true)
@@ -140,13 +143,13 @@ export default function useClockEvents(
 		}
 
 		// ensure touch doesn't bleed outside of clock radius
-		const r = Math.sqrt(x * x + y * y)
-		if (r > CLOCK_RADIUS && dragCount.current < 2) {
+		if (isWithinRadius(x, y, CLOCK_RADIUS) && dragCount.current < 2) {
 			return false
 		}
+		const isInnerClick = isWithinRadius(x, y, INNER_NUMBER_RADIUS)
 
 		// update time on main
-		handleChange(d, { canAutoChangeUnit, wasTapped, isInnerClick: isInnerNumberClick(x, y) })
+		handleChange(d, { canAutoChangeUnit, wasTapped, isInnerClick })
 	}
 
 	// will destroy cleanup

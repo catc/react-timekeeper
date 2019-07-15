@@ -50,11 +50,11 @@ export const NUMBER_INCREMENTS_VALUE = 360 / NUMBER_INCREMENTS
 export const NUMBER_SIZE = 34
 
 // positioning of numbers within circle
-export const NUMBER_INNER_POSITION = 22
+export const NUMBER_OUTER_POSITION = 22
 
 // initial position of hours/minutes before animating to final position
-export const INITIAL_HOUR_TRANSFORM = NUMBER_INNER_POSITION - 30
-export const INITIAL_MINUTE_TRANSFORM = NUMBER_INNER_POSITION + 26
+export const INITIAL_HOUR_TRANSFORM = NUMBER_OUTER_POSITION - 30
+export const INITIAL_MINUTE_TRANSFORM = NUMBER_OUTER_POSITION + 26
 
 // radius of invisible inner circle for 24 hour numbers
 export const INNER_NUMBER_RADIUS = 65

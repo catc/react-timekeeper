@@ -1,9 +1,4 @@
-import {
-	NUMBER_INCREMENTS_VALUE,
-	CLOCK_RADIUS,
-	NUMBER_SIZE,
-	INNER_NUMBER_RADIUS,
-} from './constants'
+import { NUMBER_INCREMENTS_VALUE, CLOCK_RADIUS, NUMBER_SIZE } from './constants'
 
 const { cos, sin } = Math
 const pi = Math.PI
@@ -39,6 +34,6 @@ export function transform(index: number, t: number): string {
 	return `translate(${x}px, ${y}px)`
 }
 
-export function isInnerNumberClick(x: number, y: number): boolean {
-	return x ** 2 + y ** 2 < INNER_NUMBER_RADIUS ** 2
+export function isWithinRadius(x: number, y: number, radius: number): boolean {
+	return Math.sqrt(x * x + y * y) < radius
 }

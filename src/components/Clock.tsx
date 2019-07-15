@@ -5,7 +5,7 @@ import { css, jsx } from '@emotion/core'
 import ClockHand from './ClockHand'
 import { HourNumbers, MinuteNumbers } from './Numbers'
 import {
-	NUMBER_INNER_POSITION,
+	NUMBER_OUTER_POSITION,
 	INITIAL_HOUR_TRANSFORM,
 	INITIAL_MINUTE_TRANSFORM,
 	MODE,
@@ -46,7 +46,7 @@ export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 		},
 		enter: {
 			opacity: 1,
-			translate: NUMBER_INNER_POSITION,
+			translate: NUMBER_OUTER_POSITION,
 			translateInner: INNER_NUMBER_POSITIONING.enter,
 		},
 		leave: {

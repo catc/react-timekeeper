@@ -14,7 +14,9 @@
     "time picker",
     "picker",
     "hour",
-    "minute"
+    "24 hour",
+    "minute",
+    "react spring"
   ],
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
@@ -72,7 +74,6 @@
   "dependencies": {
     "@emotion/core": "^10.0.14",
     "lodash.debounce": "^4.0.8",
-    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-spring": "^8.0.25"
