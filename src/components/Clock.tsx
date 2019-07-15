@@ -14,7 +14,7 @@ import {
 	isHourMode,
 	isMinuteMode,
 } from '../helpers/constants'
-import { ElementRef } from '../helpers/types'
+import { ElementRef, Time } from '../helpers/types'
 import style from './styles/clock'
 import useConfig from '../hooks/config'
 
@@ -30,6 +30,7 @@ function initialPosition(mode: MODE): number {
 interface Props {
 	mode: MODE
 	clockEl: ElementRef
+	time: Time
 }
 
 export default function ClockWrapper5({ mode, clockEl, time }: Props) {

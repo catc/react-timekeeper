@@ -1,24 +1,25 @@
-import React, { useRef, useEffect } from 'react'
-import { animated, AnimatedValue, ForwardedProps, useTransition } from 'react-spring'
+import React from 'react'
+import { animated, AnimatedValue, ForwardedProps } from 'react-spring'
 
-import { HOURS_12, MINUTES, CLOCK_VALUES, MODE } from '../helpers/constants'
+import { MINUTES, CLOCK_VALUES, MODE } from '../helpers/constants'
 import { transform } from '../helpers/math'
 import { numbersStyle, numbersWrapperStyle } from './styles/numbers'
 
 // TODO - fix types... typescript is hard
-interface NumberProps {
+interface MinuteProps {
 	anim: {
 		opacity: AnimatedValue<ForwardedProps<{ opacity: number }>>
 		translate: AnimatedValue<ForwardedProps<{ translate: number }>>
 		translateInner: AnimatedValue<ForwardedProps<{ translate: number }>>
 	}
-	mode?: MODE
-	hour24Mode?: boolean
 }
 
-// TODO - split up functions into separate files
-// TODO - better yet, have 1 function that does both?
-export function HourNumbers({ anim, mode, hour24Mode }: NumberProps) {
+interface HourProps extends MinuteProps {
+	mode: MODE
+	hour24Mode: boolean
+}
+
+export function HourNumbers({ anim, mode, hour24Mode }: HourProps) {
 	const { opacity, translate, translateInner } = anim
 	const { numbers: numbersOuter, numbersInner } = CLOCK_VALUES[mode]
 
@@ -56,7 +57,7 @@ export function HourNumbers({ anim, mode, hour24Mode }: NumberProps) {
 	)
 }
 
-export function MinuteNumbers({ anim }: NumberProps) {
+export function MinuteNumbers({ anim }: MinuteProps) {
 	const { opacity, translate } = anim
 	return (
 		<animated.div style={{ opacity: opacity }} css={numbersWrapperStyle}>

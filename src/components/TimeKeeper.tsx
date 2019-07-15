@@ -6,7 +6,7 @@ import style from './styles/main'
 import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
 import { TimeInput, ChangeTimeFn, Time } from '../helpers/types'
-import { MODE, CLOCK_VALUES, HOURS_12 } from '../helpers/constants'
+import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import useHandleTime from '../hooks/handle-time'
 
 export interface Props {
@@ -76,12 +76,12 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 
 			const increments = CLOCK_VALUES[mode].increments
 			/*
-				calculate value based on current clock increments
-				- % to normalize angle - eg: left side of 0 gives 12, right side of 0 gives 0
+				calculate time value based on current clock increments
+				- % is to normalize angle - otherwise left side of 0 gives 12, right side of 0 gives 0
 			*/
 			let selected = Math.round((angle / 360) * increments) % increments
 			if (mode === MODE.HOURS_24 && config.hour24Mode) {
-				// fix 12pm and midnight, both angle -> selected return 0
+				// fixes 12pm and midnight, both angle -> selected return 0
 				// for midnight need a final selected of 0, and for noon need 12
 				if (!isInnerClick && selected !== 0) {
 					selected += 12
