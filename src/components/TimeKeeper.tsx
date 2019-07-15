@@ -15,10 +15,14 @@ export interface Props {
 }
 
 export default function TimeKeeper({ onChange, time: parentTime }: Props) {
-	const [mode, setMode] = useState(MODE.HOURS_12)
-	const { time, updateTime, updateMeridiem } = useHandleTime(parentTime, onChange, mode)
-
 	const config = useConfig()
+	const [mode, setMode] = useState(MODE.HOURS_12)
+	const { time, updateTime, updateMeridiem } = useHandleTime(
+		parentTime,
+		onChange,
+		mode,
+		config.hour24Mode,
+	)
 
 	// handle any unit autochanges or closeos
 	const handleTimeUpdateSideEffects = useCallback(() => {

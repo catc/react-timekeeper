@@ -37,6 +37,7 @@ export default function ClockWrapper({ mode, calculateTimeValue, time, updateMer
 		>
 			<Clock time={time} mode={mode} clockEl={clock} />
 
+			{/* TODO - hide meridiems if 24 hour mode */}
 			<Meridiems time={time} updateMeridiem={updateMeridiem} />
 		</div>
 	)

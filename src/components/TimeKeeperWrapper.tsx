@@ -13,6 +13,7 @@ export default function TimepickerWithConfig({
 	switchToMinuteOnHourSelect,
 	closeOnMinuteSelect,
 	onDoneClick,
+	hour24Mode,
 }: Props) {
 	return (
 		<ConfigProvider
@@ -21,6 +22,7 @@ export default function TimepickerWithConfig({
 			switchToMinuteOnHourSelect={switchToMinuteOnHourSelect}
 			closeOnMinuteSelect={closeOnMinuteSelect}
 			onDoneClick={onDoneClick}
+			hour24Mode={hour24Mode}
 		>
 			<TimeKeeper onChange={onChange} time={time} />
 		</ConfigProvider>

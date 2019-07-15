@@ -9,7 +9,12 @@ import { MODE } from '../helpers/constants'
 	responsible for managing time state for this component
 	and updating parent on change
 */
-export default function useHandleTime(parentTime: TimeInput, onChange: ChangeTimeFn, mode: MODE) {
+export default function useHandleTime(
+	parentTime: TimeInput,
+	onChange: ChangeTimeFn,
+	mode: MODE,
+	is24HourMode: boolean,
+) {
 	// need meridiem for context when 12h mode, so can tell
 	// if user is changing hours before or after 12pm
 	const [meridiem, setMeridiem] = useState(() => parseMeridiem(parentTime))
@@ -37,15 +42,14 @@ export default function useHandleTime(parentTime: TimeInput, onChange: ChangeTim
 	useEffect(() => {
 		const parsed = parseTime(parentTime)
 		setTime(parsed)
-		if (mode === MODE.HOURS_12) {
+		if (!is24HourMode) {
 			setMeridiem(parseMeridiem(parentTime))
 		}
-	}, [mode, parentTime])
+	}, [is24HourMode, mode, parentTime])
 
-	// minor pre-optimization - allows to compose time
-	// only when actually about to update on parent (prolly unnecessary)
+	// minor pre-optimization - only run `composeTime`
+	// when about to actually update time on parent
 	const refTime = useRef(time)
-
 	const debounceUpdateParent = useMemo(() => {
 		if (typeof onChange === 'function') {
 			return debounce(() => {
@@ -93,7 +97,9 @@ export default function useHandleTime(parentTime: TimeInput, onChange: ChangeTim
 				if (val === 12) {
 					val = 0
 				}
-				val += meridiem === 'pm' ? 12 : 0
+				if (meridiem === 'pm') {
+					val += 12
+				}
 				break
 			case MODE.MINUTES:
 				unit = 'minute'
