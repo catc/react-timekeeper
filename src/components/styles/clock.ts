@@ -9,6 +9,7 @@ const styles = css`
 	height: ${CLOCK_SIZE}px;
 	position: relative;
 	cursor: pointer;
+	touch-action: none;
 `
 
 export default styles
