@@ -7,12 +7,13 @@ import {
 	CLOCK_HAND_LENGTH,
 	NUMBER_SIZE,
 	NUMBER_INNER_POSITION,
+	INNER_NUMBER_CLOCK_HAND_LENGTH,
 	MODE,
 	CLOCK_VALUES,
 	getTimeValue,
 } from '../helpers/constants'
 import {
-	CLOCK_HAND_ARM,
+	CLOCK_HAND_ARM as CLOCK_HAND_ARM_FILL,
 	CLOCK_HAND_CIRCLE_BACKGROUND,
 	CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND,
 } from './styles/constants'
@@ -44,6 +45,32 @@ export default function ClockHand({ mode, time }: Props) {
 		)
 	}
 
+	// positioning of line and circle under number
+	let positioning = {
+		handLength: CLOCK_RADIUS - CLOCK_HAND_LENGTH,
+		circlePosition: NUMBER_INNER_POSITION,
+		circleRadius: NUMBER_SIZE / 2,
+	}
+	// support inner numbers on 24 hour mode
+	if (mode === MODE.HOURS_24) {
+		const h = time.hour
+		positioning.handLength = isOuter(h)
+			? positioning.handLength
+			: CLOCK_RADIUS - INNER_NUMBER_CLOCK_HAND_LENGTH
+		positioning.circlePosition = isOuter(h)
+			? positioning.circlePosition
+			: INNER_NUMBER_CLOCK_HAND_LENGTH
+		// TODO
+		positioning.circleRadius = NUMBER_SIZE / 2
+	}
+
+	function isOuter(h: number): boolean {
+		if (h === 0 || h > 12) {
+			return true
+		}
+		return false
+	}
+
 	// TODO - experiment with animated clockhand between modes
 	return (
 		<svg
@@ -60,19 +87,20 @@ export default function ClockHand({ mode, time }: Props) {
 		>
 			<g transform={rotate(t)}>
 				<line
+					stroke={CLOCK_HAND_ARM_FILL}
 					x1={CLOCK_RADIUS}
 					y1={CLOCK_RADIUS}
 					x2={CLOCK_RADIUS}
-					y2={CLOCK_RADIUS - CLOCK_HAND_LENGTH}
+					y2={positioning.handLength}
 					strokeWidth="1"
-					stroke={CLOCK_HAND_ARM}
 				/>
-				<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5} fill={CLOCK_HAND_ARM} />
+				<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5} fill={CLOCK_HAND_ARM_FILL} />
 				<circle
-					cx={CLOCK_RADIUS}
-					cy={NUMBER_INNER_POSITION}
-					r={NUMBER_SIZE / 2}
 					fill={CLOCK_HAND_CIRCLE_BACKGROUND}
+					cx={CLOCK_RADIUS}
+					cy={positioning.circlePosition}
+					r={positioning.circleRadius}
+					opacity="0.7"
 				/>
 				{showIntermediateValueDisplay}
 			</g>

@@ -74,16 +74,20 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 				- first check if coarse, and then do one or either
 			*/
 
-			let selected = 0
+			const increments = CLOCK_VALUES[mode].increments
+			/*
+				calculate value based on current clock increments
+				- % to normalize angle - eg: left side of 0 gives 12, right side of 0 gives 0
+			*/
+			let selected = Math.round((angle / 360) * increments) % increments
 			if (mode === MODE.HOURS_24 && config.hour24Mode) {
-				// console.log('inner?', isInnerClick)
-				angle += isInnerClick ? 0 : 360
-				// assume theres 2 circles, one for 1->12 and 13->24
-				selected = Math.round((angle / 720) * 24)
-			} else {
-				// calculate value based on current clock increments
-				const increments = CLOCK_VALUES[mode].increments
-				selected = Math.round((angle / 360) * increments)
+				// fix 12pm and midnight, both angle -> selected return 0
+				// for midnight need a final selected of 0, and for noon need 12
+				if (!isInnerClick && selected !== 0) {
+					selected += 12
+				} else if (isInnerClick && selected === 0) {
+					selected += 12
+				}
 			}
 
 			/*

@@ -36,5 +36,8 @@ export interface TimeOutput {
 
 export type CalcTimeFromAngle = (
 	angle: number,
-	{ canAutoChangeUnit, wasTapped }: { canAutoChangeUnit: boolean; wasTapped: boolean },
+	{
+		canAutoChangeUnit,
+		wasTapped,
+	}: { canAutoChangeUnit: boolean; wasTapped: boolean; isInnerClick: boolean },
 ) => void

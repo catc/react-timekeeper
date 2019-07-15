@@ -34,6 +34,9 @@ export function isMinuteMode(mode: MODE): boolean {
 // TODO
 export function hasCoarseValue(mode: MODE, config): boolean {}
 
+/*
+	- increments is how many splits on clock, visible or invisible
+*/
 export const CLOCK_VALUES = {
 	[MODE.MINUTES]: {
 		increments: 60,
@@ -46,14 +49,16 @@ export const CLOCK_VALUES = {
 		coarseIncrements: 1,
 	},
 	[MODE.HOURS_24]: {
-		// increments: 24,
 		increments: 12,
-		// numbers: HOURS_24,
 		numbers: HOURS_24.slice(12),
 		numbersInner: HOURS_24.slice(0, 12),
 		coarseIncrements: 1,
 	},
 }
+
+// TODO - use these
+export const HOUR_24_INNER_FONT_SIZE = 15
+export const HOUR_24_OUTER_FONT_SIZE = 13
 
 // radius of clock, in px
 export const CLOCK_RADIUS = 110
@@ -76,8 +81,11 @@ export const NUMBER_INNER_POSITION = 22
 export const INITIAL_HOUR_TRANSFORM = NUMBER_INNER_POSITION - 30
 export const INITIAL_MINUTE_TRANSFORM = NUMBER_INNER_POSITION + 26
 
+// radius of invisible inner circle for 24 hour numbers
 export const INNER_NUMBER_RADIUS = 65
+export const INNER_NUMBER_CLOCK_HAND_LENGTH = 55
 
+// 24 hour mode inner number positioning (animations)
 export const INNER_NUMBER_POSITIONING = {
 	initial: 40,
 	enter: 55,

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react'
 
-import { CLOCK_RADIUS, INNER_NUMBER_RADIUS } from '../helpers/constants'
+import { CLOCK_RADIUS } from '../helpers/constants'
 import { calcOffset } from '../helpers/dom'
 import { deg, isInnerNumberClick } from '../helpers/math'
 import { ElementRef, CalcTimeFromAngle } from '../helpers/types'

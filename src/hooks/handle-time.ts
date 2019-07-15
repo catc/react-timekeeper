@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce'
 
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
 import { TimeInput, ChangeTimeFn, Time } from '../helpers/types'
-import { MODE } from '../helpers/constants'
+import { MODE, isHourMode } from '../helpers/constants'
 
 /*
 	responsible for managing time state for this component
@@ -31,10 +31,10 @@ export default function useHandleTime(
 		setMeridiem(newMeridiem)
 		if (newMeridiem === 'am') {
 			newTime.hour = time.hour - 12
-			actuallySetTime(newTime)
+			_actuallySetTime(newTime)
 		} else if (newMeridiem === 'pm') {
 			newTime.hour = time.hour + 12
-			actuallySetTime(newTime)
+			_actuallySetTime(newTime)
 		}
 	}
 
@@ -61,7 +61,7 @@ export default function useHandleTime(
 	}, [onChange])
 
 	// update time on component and then on parent
-	function actuallySetTime(newTime: Time) {
+	function _actuallySetTime(newTime: Time) {
 		// set time on timekeeper
 		setTime(newTime)
 		refTime.current = newTime
@@ -82,37 +82,20 @@ export default function useHandleTime(
 		// 	return
 		// }
 
-		// const increments = CLOCK_VALUES[mode].increments
 		let unit: 'hour' | 'minute'
-		switch (mode) {
-			case MODE.HOURS_24:
-				unit = 'hour'
-				if (val === 24) {
-					val = 0
-				}
-				break
-			case MODE.HOURS_12:
-				unit = 'hour'
-				if (val === 12) {
-					val = 0
-				}
-				if (meridiem === 'pm') {
-					val += 12
-				}
-				break
-			case MODE.MINUTES:
-				unit = 'minute'
-				if (val === 60) {
-					val = 0
-				}
-				break
-			default:
-				unit = 'hour'
+		if (isHourMode(mode)) {
+			unit = 'hour'
+		} else {
+			unit = 'minute'
+		}
+
+		if (mode === MODE.HOURS_12 && meridiem === 'pm') {
+			val += 12
 		}
 
 		// generate new time and update timekeeper state
 		const newTime: Time = { ...time, [unit]: val }
-		actuallySetTime(newTime)
+		_actuallySetTime(newTime)
 	}
 
 	return {
