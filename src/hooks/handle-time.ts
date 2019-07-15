@@ -3,7 +3,8 @@ import debounce from 'lodash.debounce'
 
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
 import { TimeInput, ChangeTimeFn, Time } from '../helpers/types'
-import { MODE, isHourMode } from '../helpers/constants'
+import { MODE } from '../helpers/constants'
+import { isHourMode } from '../helpers/utils'
 
 /*
 	responsible for managing time state for this component

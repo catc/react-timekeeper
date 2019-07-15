@@ -5,7 +5,7 @@ import {
 	INNER_NUMBER_RADIUS,
 } from './constants'
 
-const { cos, sin, atan2 } = Math
+const { cos, sin } = Math
 const pi = Math.PI
 
 function rad(deg: number): number {

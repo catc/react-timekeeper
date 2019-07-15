@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
 
 import { Time } from '../helpers/types'
+import { getTimeValue } from '../helpers/utils'
 import {
 	CLOCK_SIZE,
 	CLOCK_RADIUS,
@@ -10,7 +11,6 @@ import {
 	INNER_NUMBER_CLOCK_HAND_LENGTH,
 	MODE,
 	CLOCK_VALUES,
-	getTimeValue,
 } from '../helpers/constants'
 import {
 	CLOCK_HAND_ARM as CLOCK_HAND_ARM_FILL,

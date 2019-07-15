@@ -5,9 +5,10 @@ import globalStyle from './styles/global'
 import style from './styles/main'
 import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
-import { TimeInput, ChangeTimeFn, Time } from '../helpers/types'
+import { TimeInput, ChangeTimeFn } from '../helpers/types'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import useHandleTime from '../hooks/handle-time'
+import { isHourMode, isMinuteMode } from '../helpers/utils'
 
 export interface Props {
 	time: TimeInput
@@ -26,11 +27,9 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 
 	// handle any unit autochanges or closeos
 	const handleTimeUpdateSideEffects = useCallback(() => {
-		const isHourMode = mode === MODE.HOURS_12 || mode === MODE.HOURS_24
-		const isMinuteMode = mode === MODE.MINUTES
-		if (config.switchToMinuteOnHourSelect && isHourMode) {
+		if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
 			setMode(MODE.MINUTES)
-		} else if (config.closeOnMinuteSelect && isMinuteMode) {
+		} else if (config.closeOnMinuteSelect && isMinuteMode(mode)) {
 			config.onDoneClick && config.onDoneClick()
 		}
 	}, [config, mode, setMode])

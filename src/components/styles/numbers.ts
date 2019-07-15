@@ -8,6 +8,7 @@ interface Props {
 	outer?: boolean
 }
 
+// TODO - better function and move this elsewhere (with other anim related stuff?)
 function calcSize(hour24Mode: boolean, inner: boolean, outer: boolean): number {
 	if (!hour24Mode) {
 		return 16

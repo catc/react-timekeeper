@@ -81,6 +81,7 @@ export function parseTime(time: TimeInput): Time {
 
 export function parseMeridiem(time: TimeInput): string {
 	const parsed = parseTime(time)
+	// assumes time is 0 -> 23, where 0 is midnight
 	return parsed.hour >= 12 ? 'pm' : 'am'
 }
 

@@ -1,38 +1,13 @@
-import { Time } from './types'
-
 export const MINUTES = ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'].map((a) => a.toString())
 export const MINUTES_60 = Array.from(Array(60), (_, i) => (i + 1).toString())
 export const HOURS_12 = Array.from(Array(12), (_, i) => (i + 1).toString())
-// export const HOURS_24 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((a) => a.toString())
 export const HOURS_24 = Array.from(Array(23), (_, i) => (i + 1).toString()).concat('00')
 
-// export type MODE = 'MINUTES' | 'HOURS_12' | 'HOURS_24'
 export enum MODE {
 	'MINUTES' = 'MINUTES',
 	'HOURS_12' = 'HOURS_12',
 	'HOURS_24' = 'HOURS_24',
 }
-
-function modeToUnit(mode: MODE): 'hour' | 'minute' {
-	return mode === MODE.MINUTES ? 'minute' : 'hour'
-}
-
-// TODO - move this to time helpers?
-export function getTimeValue(mode: MODE, time: Time): number {
-	const unit = modeToUnit(mode)
-	return time[unit]
-}
-
-export function isHourMode(mode: MODE): boolean {
-	return mode === MODE.HOURS_12 || mode === MODE.HOURS_24
-}
-
-export function isMinuteMode(mode: MODE): boolean {
-	return mode === MODE.MINUTES
-}
-
-// TODO
-export function hasCoarseValue(mode: MODE, config): boolean {}
 
 /*
 	- increments is how many splits on clock, visible or invisible

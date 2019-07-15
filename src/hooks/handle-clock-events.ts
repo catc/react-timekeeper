@@ -1,21 +1,23 @@
 import { useEffect, useRef, useCallback } from 'react'
 
 import { CLOCK_RADIUS } from '../helpers/constants'
-import { calcOffset } from '../helpers/dom'
+import { calcOffset, CalcOffsetFn } from '../helpers/dom'
 import { deg, isInnerNumberClick } from '../helpers/math'
 import { ElementRef, CalcTimeFromAngle } from '../helpers/types'
 
 const { atan2 } = Math
 
 /*
-	solely responsible for transforming click
-	events into angles
+	solely responsible for transforming click events into
+	angles (which are later converted into time depending
+	on current mode and other restrictions)
 */
 export default function useClockEvents(
 	wrapper: ElementRef,
 	clock: ElementRef,
 	handleChange: CalcTimeFromAngle,
 ) {
+	const calcOffsetCache: React.MutableRefObject<null | CalcOffsetFn> = useRef(null)
 	const dragCount = useRef(0)
 	const cleanup = useCallback(_removeHandlers, [])
 
@@ -27,10 +29,15 @@ export default function useClockEvents(
 		document.addEventListener('mousemove', handleMouseDrag, false)
 		document.addEventListener('mouseup', handleStopDrag, false)
 		wrapper.current && wrapper.current.addEventListener('mouseleave', handleStopDrag, false)
+
+		if (clock.current) {
+			calcOffsetCache.current = calcOffset(clock.current)
+		}
 	}
 	function handleMouseDrag(e: MouseEvent) {
-		if (clock.current) {
-			const { offsetX, offsetY } = calcOffset(clock.current, e.clientX, e.clientY)
+		if (calcOffsetCache.current) {
+			const { offsetX, offsetY } = calcOffsetCache.current(e.clientX, e.clientY)
+			// console.log(offsetX, offsetY)
 			calculatePoint(offsetX, offsetY, false)
 		}
 		dragCount.current++
@@ -43,17 +50,19 @@ export default function useClockEvents(
 	function handleTouchStart() {
 		dragCount.current = 0
 
-		window.blockMenuHeaderScroll = false // TODO - still used?
-
-		// // add listeners
+		// add listeners
 		document.addEventListener('touchmove', touchDragHandler, false)
 		document.addEventListener('touchend', handleStopDrag, false)
 		document.addEventListener('touchcancel', handleStopDrag, false)
+
+		if (clock.current) {
+			calcOffsetCache.current = calcOffset(clock.current)
+		}
 	}
 	function touchDragHandler(e: TouchEvent) {
-		if (clock.current) {
+		if (calcOffsetCache.current) {
 			const touch = e.targetTouches[0]
-			const { offsetX, offsetY } = calcOffset(clock.current, touch.clientX, touch.clientY)
+			const { offsetX, offsetY } = calcOffsetCache.current(touch.clientX, touch.clientY)
 			calculatePoint(offsetX, offsetY, false)
 		}
 		dragCount.current++
@@ -91,7 +100,6 @@ export default function useClockEvents(
 		document.removeEventListener('touchmove', touchDragHandler, false)
 		document.removeEventListener('touchend', handleStopDrag, false)
 		document.removeEventListener('touchcancel', handleStopDrag, false)
-		window.blockMenuHeaderScroll = false // TODO - still used?
 	}
 
 	// handle mouse + touch changes
@@ -100,13 +108,13 @@ export default function useClockEvents(
 			return
 		}
 
-		const { offsetX, offsetY } = calcOffset(clock.current, e.clientX, e.clientY)
+		const { offsetX, offsetY } = calcOffsetCache.current!(e.clientX, e.clientY)
 		calculatePoint(offsetX, offsetY, true)
 	}
 	function _handleTouchEnd(e: TouchEvent) {
 		const touch = e.targetTouches[0] || e.changedTouches[0]
-		if (touch && clock.current) {
-			const { offsetX, offsetY } = calcOffset(clock.current, touch.clientX, touch.clientY)
+		if (touch && calcOffsetCache.current) {
+			const { offsetX, offsetY } = calcOffsetCache.current(touch.clientX, touch.clientY)
 			calculatePoint(offsetX, offsetY, true)
 		}
 	}

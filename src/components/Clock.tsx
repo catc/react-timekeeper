@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useTransition } from 'react-spring'
 import { css, jsx } from '@emotion/core'
 
 import ClockHand from './ClockHand'
-import Numbers, { HourNumbers, MinuteNumbers } from './Numbers'
+import { HourNumbers, MinuteNumbers } from './Numbers'
 import {
 	NUMBER_INNER_POSITION,
 	INITIAL_HOUR_TRANSFORM,
@@ -11,9 +11,8 @@ import {
 	MODE,
 	INNER_NUMBER_POSITIONING,
 	INNER_NUMBER_RADIUS,
-	isHourMode,
-	isMinuteMode,
 } from '../helpers/constants'
+import { isHourMode, isMinuteMode } from '../helpers/utils'
 import { ElementRef, Time } from '../helpers/types'
 import style from './styles/clock'
 import useConfig from '../hooks/config'

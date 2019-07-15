@@ -7,16 +7,19 @@ export function getScrollBarWidth() {
 	return width
 }
 
-// TODO - cache `getComputed` style once per mousedown init
-// TODO - fix lint errors
-export function calcOffset(el: HTMLDivElement, clientX: number, clientY: number) {
-	const style = window.getComputedStyle(el, null)
-	const borderLeftWidth = parseInt(style['borderLeftWidth'], 10) || 0
-	const borderTopWidth = parseInt(style['borderTopWidth'], 10) || 0
-	const rect = el.getBoundingClientRect()
+export type CalcOffsetFn = (x: number, y: number) => { offsetX: number; offsetY: number }
 
-	return {
-		offsetX: clientX - borderLeftWidth - rect.left,
-		offsetY: clientY - borderTopWidth - rect.top,
+export function calcOffset(el: HTMLDivElement): CalcOffsetFn {
+	const style = window.getComputedStyle(el, null)
+
+	return function(clientX: number, clientY: number): { offsetX: number; offsetY: number } {
+		const borderLeftWidth = parseInt(style.borderLeftWidth!, 10) || 0
+		const borderTopWidth = parseInt(style.borderTopWidth!, 10) || 0
+		const rect = el.getBoundingClientRect()
+
+		return {
+			offsetX: clientX - borderLeftWidth - rect.left,
+			offsetY: clientY - borderTopWidth - rect.top,
+		}
 	}
 }
