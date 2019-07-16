@@ -5,12 +5,12 @@ import { getTimeValue } from '../helpers/utils'
 import {
 	CLOCK_SIZE,
 	CLOCK_RADIUS,
-	CLOCK_HAND_LENGTH,
-	NUMBER_SIZE,
 	NUMBER_OUTER_POSITION,
-	INNER_NUMBER_CLOCK_HAND_LENGTH,
 	MODE,
 	CLOCK_VALUES,
+	getClockHandCirclePosition,
+	getClockHandCircleRadius,
+	getClockHandLength,
 } from '../helpers/constants'
 import {
 	CLOCK_HAND_ARM as CLOCK_HAND_ARM_FILL,
@@ -45,31 +45,12 @@ export default function ClockHand({ mode, time }: Props) {
 		)
 	}
 
-	// positioning of line and circle under number
-	let positioning = {
-		handLength: CLOCK_RADIUS - CLOCK_HAND_LENGTH,
-		circlePosition: NUMBER_OUTER_POSITION,
-		circleRadius: NUMBER_SIZE / 2,
-	}
-	// support inner numbers on 24 hour mode
-	if (mode === MODE.HOURS_24) {
-		const h = time.hour
-		positioning.handLength = isOuter(h)
-			? positioning.handLength
-			: CLOCK_RADIUS - INNER_NUMBER_CLOCK_HAND_LENGTH
-		positioning.circlePosition = isOuter(h)
-			? positioning.circlePosition
-			: INNER_NUMBER_CLOCK_HAND_LENGTH
-		// TODO
-		positioning.circleRadius = NUMBER_SIZE / 2
-	}
-
-	function isOuter(h: number): boolean {
-		if (h === 0 || h > 12) {
-			return true
-		}
-		return false
-	}
+	// clockhand positioning
+	const h = time.hour
+	const inner = h > 0 && h <= 12
+	const handLength = getClockHandLength(mode, inner)
+	const circlePosition = getClockHandCirclePosition(mode, inner)
+	const circleRadius = getClockHandCircleRadius(mode, inner)
 
 	// TODO - experiment with animated clockhand between modes
 	return (
@@ -91,16 +72,15 @@ export default function ClockHand({ mode, time }: Props) {
 					x1={CLOCK_RADIUS}
 					y1={CLOCK_RADIUS}
 					x2={CLOCK_RADIUS}
-					y2={positioning.handLength}
+					y2={handLength}
 					strokeWidth="1"
 				/>
 				<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5} fill={CLOCK_HAND_ARM_FILL} />
 				<circle
 					fill={CLOCK_HAND_CIRCLE_BACKGROUND}
 					cx={CLOCK_RADIUS}
-					cy={positioning.circlePosition}
-					r={positioning.circleRadius}
-					opacity="0.7"
+					cy={circlePosition}
+					r={circleRadius}
 				/>
 				{showIntermediateValueDisplay}
 			</g>

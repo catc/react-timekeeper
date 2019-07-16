@@ -1,7 +1,0 @@
-/*
-	numbers animations
-*/
-
-/*
-	clockhand related
- */

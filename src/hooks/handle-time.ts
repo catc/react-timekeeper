@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import debounce from 'lodash.debounce'
 
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'

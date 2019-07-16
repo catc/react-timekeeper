@@ -143,7 +143,7 @@ export default function useClockEvents(
 		}
 
 		// ensure touch doesn't bleed outside of clock radius
-		if (isWithinRadius(x, y, CLOCK_RADIUS) && dragCount.current < 2) {
+		if (!isWithinRadius(x, y, CLOCK_RADIUS) && dragCount.current < 2) {
 			return false
 		}
 		const isInnerClick = isWithinRadius(x, y, INNER_NUMBER_RADIUS)

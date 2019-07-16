@@ -1,7 +1,9 @@
-import { NUMBER_INCREMENTS_VALUE, CLOCK_RADIUS, NUMBER_SIZE } from './constants'
+import { VISIBLE_NUMBERS_PER_CIRCLE, CLOCK_RADIUS, NUMBER_RADIUS_REGULAR } from './constants'
 
 const { cos, sin } = Math
 const pi = Math.PI
+
+const ANGLE_PER_INCREMENT = 360 / VISIBLE_NUMBERS_PER_CIRCLE
 
 function rad(deg: number): number {
 	return deg / (180 / pi)
@@ -13,17 +15,17 @@ export function deg(rad: number): number {
 // translate number position
 function translateX(index: number, transform: number): number {
 	return (
-		sin(rad(index * -NUMBER_INCREMENTS_VALUE - 180)) * (CLOCK_RADIUS - transform) +
+		sin(rad(index * -ANGLE_PER_INCREMENT - 180)) * (CLOCK_RADIUS - transform) +
 		CLOCK_RADIUS -
-		NUMBER_SIZE / 2
+		NUMBER_RADIUS_REGULAR / 2
 	)
 }
 
 function translateY(index: number, transform: number): number {
 	return (
-		cos(rad(index * -NUMBER_INCREMENTS_VALUE - 180)) * (CLOCK_RADIUS - transform) +
+		cos(rad(index * -ANGLE_PER_INCREMENT - 180)) * (CLOCK_RADIUS - transform) +
 		CLOCK_RADIUS -
-		NUMBER_SIZE / 2
+		NUMBER_RADIUS_REGULAR / 2
 	)
 }
 
