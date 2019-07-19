@@ -58,6 +58,7 @@ module.exports = {
 		'@typescript-eslint/no-var-requires': 0,
 		'@typescript-eslint/no-use-before-define': [2, { functions: false}],
 		'@typescript-eslint/no-non-null-assertion': 0,
+		'@typescript-eslint/no-explicit-any': 0,
 
 		// react hooks
 		'react-hooks/rules-of-hooks': 1,
@@ -128,12 +129,13 @@ module.exports = {
 		],
 		'object-curly-spacing': [1, 'always'],
 		'no-var': 1,
+
 		'space-before-function-paren': [
 			1,
 			{
 				anonymous: 'never',
 				named: 'never',
-				asyncArrow: 'never',
+				asyncArrow: 'ignore',
 			},
 		],
 		// 'comma-dangle': [1, 'always-multiline'], // conflicts with prettier

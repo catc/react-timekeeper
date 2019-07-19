@@ -18,4 +18,5 @@ export function isMinuteMode(mode: MODE): boolean {
 	return mode === MODE.MINUTES
 }
 
+// TODO
 export function hasCoarseValue(mode: MODE, config): boolean {}

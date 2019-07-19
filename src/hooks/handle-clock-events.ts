@@ -39,7 +39,6 @@ export default function useClockEvents(
 	function handleMouseDrag(e: MouseEvent) {
 		if (calcOffsetCache.current) {
 			const { offsetX, offsetY } = calcOffsetCache.current(e.clientX, e.clientY)
-			// console.log(offsetX, offsetY)
 			calculatePoint(offsetX, offsetY, false)
 		}
 		dragCount.current++
@@ -122,8 +121,8 @@ export default function useClockEvents(
 		}
 	}
 	function calculatePoint(
-		clientX: number,
-		clientY: number,
+		offsetX: number,
+		offsetY: number,
 		// determines if change is due to mouseup/touchend in order to
 		// automatically change unit (eg: hour -> minute) if enabled
 		// prevents changing unit if dragging along clock
@@ -133,8 +132,8 @@ export default function useClockEvents(
 		// and force a rounded/coarse number (ie: 1, 2, 3, 4 is tapped, assume 0 or 5)
 		const wasTapped = dragCount.current < 2
 
-		const x = clientX - CLOCK_RADIUS
-		const y = -clientY + CLOCK_RADIUS
+		const x = offsetX - CLOCK_RADIUS
+		const y = -offsetY + CLOCK_RADIUS
 
 		const a = atan2(y, x)
 		let d = 90 - deg(a)
