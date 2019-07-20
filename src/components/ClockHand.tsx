@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
+import { animated, useSpring } from 'react-spring'
 
 import { Time } from '../helpers/types'
 import { getTimeValue } from '../helpers/utils'
@@ -27,12 +28,91 @@ function rotate(r: number) {
 	return `rotate(${r} ${CLOCK_RADIUS} ${CLOCK_RADIUS})`
 }
 
-export default function ClockHand({ mode, time }: Props) {
+function getAngle(mode: MODE, time: Time) {
 	const increments = CLOCK_VALUES[mode].increments
 	const value = getTimeValue(mode, time)
-	const t = value * (360 / increments)
+	return value * (360 / increments)
+}
+
+function timeIsDifferent(prev: Time, now: Time): boolean {
+	return prev.hour !== now.hour || prev.minute !== now.minute
+}
+
+// TODO - move elsewhere?
+// calculates the shortest angle between the prev and next angle
+// to animate to
+function calcAnimationAngle(prev: number, next: number): number {
+	if (Math.abs(next - prev) > 180) {
+		let diff = 0
+		if (prev > next) {
+			diff = next + 360 - prev
+		} else {
+			diff = ((next - prev + 180) % 360) - 180
+		}
+
+		return prev + diff
+	}
+	return next
+}
+
+/*
+	TODO
+	- DONE apply memo
+	- suppport 24h mode
+	- support arm length/number radius?
+	- split up components into multiple parts
+	- explore disabling animation during `switchToMinuteOnHourSelect`
+		- or better yet, on hour select - go straight from old value to minute value
+			- need to re-write handle-time hook and timekeeper
+				- have to convert to reducer to be able to set new time AND mode at the same time
+			- if `switchToMinuteOnHourSelect` AND previous mode was hours, then rotate
+			the clockhand from the OLD hour (not newly selected hour)
+				- would execute when timeIsDifferent AND modeIsDifferent only
+	- DONE fix tests
+*/
+
+function ClockHand({ mode, time }: Props) {
+	const prevTime = useRef(time)
+	const prevMode = useRef(mode)
+	const prevAngle = useRef(getAngle(mode, time))
+
+	console.log('rerender')
+
+	const [anim, set] = useSpring(() => {
+		return {
+			immediate: true,
+			rotation: getAngle(mode, time),
+		}
+	})
+	const { rotation } = anim
+
+	useEffect(() => {
+		if (timeIsDifferent(prevTime.current, time)) {
+			const angle = getAngle(mode, time)
+			prevTime.current = time
+			prevAngle.current = angle
+
+			set({
+				immediate: true,
+				rotation: angle,
+			})
+		} else if (prevMode.current !== mode) {
+			prevMode.current = mode
+
+			// calculate angle to transition oto
+			const prev = prevAngle.current
+			const next = getAngle(mode, time)
+			const angle = calcAnimationAngle(prev, next)
+
+			set({
+				immediate: false,
+				rotation: angle,
+			})
+		}
+	}, [mode, set, time])
 
 	// mini circle on clockhand between increments on minutes
+	const value = getTimeValue(mode, time)
 	let showIntermediateValueDisplay
 	if (mode === MODE.MINUTES && value % 5) {
 		showIntermediateValueDisplay = (
@@ -52,7 +132,6 @@ export default function ClockHand({ mode, time }: Props) {
 	const circlePosition = getClockHandCirclePosition(mode, inner)
 	const circleRadius = getClockHandCircleRadius(mode, inner)
 
-	// TODO - experiment with animated clockhand between modes
 	return (
 		<svg
 			width={CLOCK_SIZE}
@@ -61,12 +140,8 @@ export default function ClockHand({ mode, time }: Props) {
 			xmlns="http://www.w3.org/2000/svg"
 			className="react-timekeeper__clock-hand"
 			// style={{ overflow: 'visible' }}
-			// style={{
-			// 	...styles.clockHand,
-			// 	opacity: anim.style.handOpacity,
-			// }}
 		>
-			<g transform={rotate(t)}>
+			<animated.g transform={rotation.interpolate((a) => rotate(a))}>
 				<line
 					stroke={CLOCK_HAND_ARM_FILL}
 					x1={CLOCK_RADIUS}
@@ -83,7 +158,12 @@ export default function ClockHand({ mode, time }: Props) {
 					r={circleRadius}
 				/>
 				{showIntermediateValueDisplay}
-			</g>
+			</animated.g>
 		</svg>
 	)
 }
+
+function isSameProps(prevProps: Props, nextProps: Props) {
+	return prevProps.mode === nextProps.mode && !timeIsDifferent(prevProps.time, nextProps.time)
+}
+export default memo(ClockHand, isSameProps)
