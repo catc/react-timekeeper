@@ -32,8 +32,6 @@ export default function useClockEvents(
 
 		if (clock.current) {
 			calcOffsetCache.current = calcOffset(clock.current)
-			clock.current.style.cursor = '-webkit-grabbing'
-			clock.current.style.cursor = 'grabbing'
 		}
 	}
 	function handleMouseDrag(e: MouseEvent) {
@@ -42,6 +40,11 @@ export default function useClockEvents(
 			calculatePoint(offsetX, offsetY, false)
 		}
 		dragCount.current++
+
+		if (dragCount.current === 1 && clock.current) {
+			clock.current.style.cursor = '-webkit-grabbing'
+			clock.current.style.cursor = 'grabbing'
+		}
 
 		e.preventDefault()
 		return false

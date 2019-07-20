@@ -47,8 +47,8 @@ export const INNER_NUMBER_RADIUS = 77
 
 // font sizes
 const NUMBER_REGULAR_FONT_SIZE = 16
-const HOUR_24_INNER_FONT_SIZE = 16
-const HOUR_24_OUTER_FONT_SIZE = 14
+const HOUR_24_INNER_FONT_SIZE = 15
+const HOUR_24_OUTER_FONT_SIZE = 13
 export function getFontSize(hour24Mode: boolean, inner: boolean): number {
 	if (!hour24Mode) {
 		return NUMBER_REGULAR_FONT_SIZE
@@ -59,7 +59,7 @@ export function getFontSize(hour24Mode: boolean, inner: boolean): number {
 // size of circle surrounding individual numbers
 // loosely based on font sizes above
 export const NUMBER_RADIUS_REGULAR = 34
-const NUMBER_RADIUS_HOUR_24_OUTER = 30
+const NUMBER_RADIUS_HOUR_24_OUTER = 32
 const NUMBER_RADIUS_HOUR_24_INNER = 28
 
 // positioning of numbers
