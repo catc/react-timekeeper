@@ -7,44 +7,14 @@ import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
 import { TimeInput, ChangeTimeFn } from '../helpers/types'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
-import useHandleTime from '../hooks/handle-time'
-import { isHourMode, isMinuteMode } from '../helpers/utils'
+// import useHandleTime from '../hooks/handle-time'
+// import { isHourMode, isMinuteMode } from '../helpers/utils'
+import useTimekeeperState from '../hooks/state-context'
 
-export interface Props {
-	time: TimeInput
-	onChange: ChangeTimeFn
-}
-
-export default function TimeKeeper({ onChange, time: parentTime }: Props) {
+export default function TimeKeeper() {
 	const config = useConfig()
-	const [mode, setMode] = useState(config.hour24Mode ? MODE.HOURS_24 : MODE.HOURS_12)
-	const { time, updateTime, updateMeridiem } = useHandleTime(
-		parentTime,
-		onChange,
-		mode,
-		config.hour24Mode,
-	)
 
-	// handle any unit autochanges or closeos
-	const handleTimeUpdateSideEffects = useCallback(() => {
-		if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
-			setMode(MODE.MINUTES)
-		} else if (config.closeOnMinuteSelect && isMinuteMode(mode)) {
-			config.onDoneClick && config.onDoneClick()
-		}
-	}, [config, mode, setMode])
-
-	// actually do the updates
-	const handleUpdates = useCallback(
-		(val: number, canAutoChangeUnit: boolean) => {
-			updateTime(val)
-
-			if (canAutoChangeUnit) {
-				handleTimeUpdateSideEffects()
-			}
-		},
-		[handleTimeUpdateSideEffects, updateTime],
-	)
+	const { mode, time, updateTime, updateMeridiem, setMode } = useTimekeeperState()
 
 	/*
 		LOGIC AROUND COARSE
@@ -113,9 +83,9 @@ export default function TimeKeeper({ onChange, time: parentTime }: Props) {
 			} */
 
 			// update time officially on this component
-			handleUpdates(selected, canAutoChangeUnit)
+			updateTime(selected, canAutoChangeUnit)
 		},
-		[config.hour24Mode, handleUpdates, mode],
+		[config.hour24Mode, mode, updateTime],
 	)
 
 	return (

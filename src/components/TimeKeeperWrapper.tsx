@@ -1,6 +1,7 @@
 import React from 'react'
 import TimeKeeper, { Props as TimeKeeperProps } from './TimeKeeper'
 import { ConfigProvider, ConfigProps } from '../hooks/config'
+import { StateProvider } from '../hooks/state-context'
 
 interface Props extends TimeKeeperProps, ConfigProps {}
 
@@ -24,7 +25,9 @@ export default function TimepickerWithConfig({
 			onDoneClick={onDoneClick}
 			hour24Mode={hour24Mode}
 		>
-			<TimeKeeper onChange={onChange} time={time} />
+			<StateProvider onChange={onChange} time={time}>
+				<TimeKeeper onChange={onChange} time={time} />
+			</StateProvider>
 		</ConfigProvider>
 	)
 }

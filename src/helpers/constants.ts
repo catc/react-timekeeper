@@ -9,6 +9,11 @@ export enum MODE {
 	'HOURS_24' = 'HOURS_24',
 }
 
+export enum MERIDIEM {
+	'am' = 'am',
+	'pm' = 'pm',
+}
+
 /*
 	- increments is how many splits on clock, visible or invisible
 */
