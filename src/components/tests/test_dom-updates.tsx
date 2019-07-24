@@ -18,16 +18,29 @@ describe('dom updates correctly', () => {
 
 			triggerMouseClick(wrapper, coords)
 
-			const line = wrapper.find(ClockHand).find('line')
-			expect(line.prop('y2')).toEqual(expectedLength)
+			const html: string = wrapper
+				.find(ClockHand)
+				.find('line')
+				.html()
+
+			const y2 = html.toString().match(/y2\="(.*?)"/)[1]
+
+			/*
+				TODO
+				- should be able to do `line.prop('y2')` but props aren't updating
+				while dom is... wait for react-spring to update to 9 and see if
+				it fixes it
+				- in the meantime, render dom, get string and parse out y2 value
+			*/
+			expect(parseInt(y2, 10)).toEqual(expectedLength)
 		}
 
-		test('handles inner 24', () => {
+		test('handles inner 3', () => {
 			const len = getClockHandLength(MODE.HOURS_24, true)
 			testClockHandLength(HOUR_3_INNER, len)
 		})
 
-		test('handles outer 24', () => {
+		test('handles outer 3', () => {
 			const len = getClockHandLength(MODE.HOURS_24, false)
 			testClockHandLength(HOUR_3_OUTER, len)
 		})

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { animated, useSpring } from 'react-spring'
 
 import { Time } from '../helpers/types'
@@ -36,40 +36,26 @@ function getAngle(mode: MODE, time: Time) {
 	return value * (360 / increments)
 }
 
-function timeIsDifferent(prev: Time, now: Time): boolean {
-	return prev.hour !== now.hour || prev.minute !== now.minute
-}
-
-/*
-	TODO
-	- DONE apply memo
-		- reinvestigate if even necessary
-	- suppport 24h mode weirdness
-	- support arm length/number radius?
-	- split up components into multiple parts
-	- explore disabling animation during `switchToMinuteOnHourSelect`
-		- or better yet, on hour select - go straight from old value to minute value
-			- need to re-write handle-time hook and timekeeper
-				- have to convert to reducer to be able to set new time AND mode at the same time
-			- if `switchToMinuteOnHourSelect` AND previous mode was hours, then rotate
-			the clockhand from the OLD hour (not newly selected hour)
-				- would execute when timeIsDifferent AND modeIsDifferent only
-	- fix tests
-	- clean up overall
-*/
-
 export default function ClockHand({ mode, time }: Props) {
 	const config = useConfig()
 	const prevState = useRef({ time, mode })
 	const dragCount = useRef(0)
 
+	// clockhand positioning
+	const inner = time.hour > 0 && time.hour <= 12
+	const handLength = getClockHandLength(mode, inner)
+	const circlePosition = getClockHandCirclePosition(mode, inner)
+	const circleRadius = getClockHandCircleRadius(mode, inner)
+
 	const [anim, setAnim] = useSpring(() => {
 		return {
 			immediate: true,
 			rotation: getAngle(mode, time),
+			length: handLength,
+			position: circlePosition,
 		}
 	})
-	const { rotation } = anim
+	const { rotation, length, position } = anim
 
 	useEffect(() => {
 		const current = rotation.value
@@ -84,6 +70,8 @@ export default function ClockHand({ mode, time }: Props) {
 			setAnim({
 				immediate: false,
 				rotation: finalAngle,
+				length: handLength,
+				position: circlePosition,
 			})
 		} else if (!isSameTime(prevState.current.time, time)) {
 			// time changed, no animation necessary - just update clockhand
@@ -98,9 +86,19 @@ export default function ClockHand({ mode, time }: Props) {
 			setAnim({
 				immediate: true,
 				rotation: next,
+				length: handLength,
+				position: circlePosition,
 			})
 		}
-	}, [config.switchToMinuteOnHourSelect, mode, rotation, setAnim, time])
+	}, [
+		circlePosition,
+		config.switchToMinuteOnHourSelect,
+		handLength,
+		mode,
+		rotation,
+		setAnim,
+		time,
+	])
 
 	// mini circle on clockhand between increments on minutes
 	const value = getTimeValue(mode, time)
@@ -116,13 +114,6 @@ export default function ClockHand({ mode, time }: Props) {
 		)
 	}
 
-	// clockhand positioning
-	const h = time.hour
-	const inner = h > 0 && h <= 12
-	const handLength = getClockHandLength(mode, inner)
-	const circlePosition = getClockHandCirclePosition(mode, inner)
-	const circleRadius = getClockHandCircleRadius(mode, inner)
-
 	return (
 		<svg
 			width={CLOCK_SIZE}
@@ -133,19 +124,19 @@ export default function ClockHand({ mode, time }: Props) {
 			// style={{ overflow: 'visible' }}
 		>
 			<animated.g transform={rotation.interpolate((a) => rotate(a))}>
-				<line
+				<animated.line
 					stroke={CLOCK_HAND_ARM_FILL}
 					x1={CLOCK_RADIUS}
 					y1={CLOCK_RADIUS}
 					x2={CLOCK_RADIUS}
-					y2={handLength}
+					y2={length}
 					strokeWidth="1"
 				/>
 				<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5} fill={CLOCK_HAND_ARM_FILL} />
-				<circle
+				<animated.circle
 					fill={CLOCK_HAND_CIRCLE_BACKGROUND}
 					cx={CLOCK_RADIUS}
-					cy={circlePosition}
+					cy={position}
 					r={circleRadius}
 				/>
 				{showIntermediateValueDisplay}
