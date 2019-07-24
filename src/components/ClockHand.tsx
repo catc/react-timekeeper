@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef } from 'react'
 import { animated, useSpring } from 'react-spring'
 
 import { Time } from '../helpers/types'
-import { getTimeValue, isHourMode } from '../helpers/utils'
+import { getTimeValue, isHourMode, isSameTime } from '../helpers/utils'
 import {
 	CLOCK_SIZE,
 	CLOCK_RADIUS,
@@ -40,25 +40,6 @@ function timeIsDifferent(prev: Time, now: Time): boolean {
 	return prev.hour !== now.hour || prev.minute !== now.minute
 }
 
-// TODO - move elsewhere?
-// calculates the shortest angle between the prev and next angle
-// to animate to
-/* function calcAnimationAngle(prev: number, next: number): number {
-	if (Math.abs(next - prev) > 180) {
-		let diff = 0
-		if (prev > next) {
-			// TODO - need % here too
-			diff = next + 360 - prev
-		} else {
-			diff = ((next - prev + 180) % 360) - 180
-		}
-
-		// return (prev + diff) % 360
-		return prev + diff
-	}
-	return next
-} */
-
 /*
 	TODO
 	- DONE apply memo
@@ -77,33 +58,12 @@ function timeIsDifferent(prev: Time, now: Time): boolean {
 	- clean up overall
 */
 
-function ClockHand({ mode, time }: Props) {
+export default function ClockHand({ mode, time }: Props) {
 	const config = useConfig()
-
-	// const hand = useRef(null)
 	const prevState = useRef({ time, mode })
 	const dragCount = useRef(0)
 
-	// const prevTime = useRef(time)
-	// const prevMode = useRef(mode)
-	// const prevAngle = useRef(getAngle(mode, time))
-
-	// const usePrevAngle = useRef(false)
-	// const prevAngle = useRef([getAngle(mode, time), getAngle(mode, time)])
-	// function updatePrevAngle(angle) {
-	// 	prevAngle.current[1] = prevAngle.current[0]
-	// 	prevAngle.current[0] = angle
-	// }
-
-	/* useEffect(() => {
-		setTimeout(() => {
-			window.go = () => {
-				console.log(hand.current.transform.animVal[0])
-			}
-		}, 300)
-	}, []) */
-
-	const [anim, set] = useSpring(() => {
+	const [anim, setAnim] = useSpring(() => {
 		return {
 			immediate: true,
 			rotation: getAngle(mode, time),
@@ -112,62 +72,35 @@ function ClockHand({ mode, time }: Props) {
 	const { rotation } = anim
 
 	useEffect(() => {
-		// const prev = prevAngle.current
-		// const angle = getAngle(mode, time)
-
-		// if (prev === angle) {
-		// 	console.log('same angle')
-		// 	return
-		// }
-
 		const current = rotation.value
 		const next = getAngle(mode, time)
-
-		if (current === next) {
-			// TODO - see if this affects anything, i think it does
-			return
-		}
 
 		if (prevState.current.mode !== mode) {
 			dragCount.current = 0
 			prevState.current.mode = mode
-			// prevTime.current = time
 
-			// const prev = prevAngle.current
-			// // const next = getAngle(mode, time)
-			// const next = angle
+			// mode changed, animate clockhand to next mode angle
 			const finalAngle = calcAnimationAngle(current, next)
-			console.log('MODE CHANGED, from', current, finalAngle)
-
-			set({
+			setAnim({
 				immediate: false,
 				rotation: finalAngle,
 			})
-			// prevAngle.current = next
-
-			// TODO - check if need to set prevTime as well
-		} else if (timeIsDifferent(prevState.current.time, time)) {
-			// console.log('TIME CHANGED', prevTime.current, time)
+		} else if (!isSameTime(prevState.current.time, time)) {
+			// time changed, no animation necessary - just update clockhand
 			prevState.current.time = time
 			dragCount.current++
 
-			// console.log('time was', prevTime.current, 'and is now', time, 'with mode', mode)
+			// if on hour mode and `switchToMinuteOnHourSelect` is enabled, don't display
+			// change in time, just wait for mode to change (to avoid weird animation)
 			if (isHourMode(mode) && config.switchToMinuteOnHourSelect && dragCount.current < 2) {
-				console.log('JUST WAIT')
 				return
 			}
-			// if (isHourMode(mode) && config.switchToMinuteOnHourSelect && dragCount.current < 2) {
-			// 	// usePrevAngle.current = true
-			// } else {
-			// }
-			// console.log('TIME CHANGED - NOT HOUR MODE')
-			// prevAngle.current = angle
-			set({
+			setAnim({
 				immediate: true,
 				rotation: next,
 			})
 		}
-	}, [config.switchToMinuteOnHourSelect, mode, rotation, set, time])
+	}, [config.switchToMinuteOnHourSelect, mode, rotation, setAnim, time])
 
 	// mini circle on clockhand between increments on minutes
 	const value = getTimeValue(mode, time)
@@ -220,8 +153,3 @@ function ClockHand({ mode, time }: Props) {
 		</svg>
 	)
 }
-
-function isSameProps(prevProps: Props, nextProps: Props) {
-	return prevProps.mode === nextProps.mode && !timeIsDifferent(prevProps.time, nextProps.time)
-}
-export default memo(ClockHand, isSameProps)

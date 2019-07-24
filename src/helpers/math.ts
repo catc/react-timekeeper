@@ -45,50 +45,27 @@ function normalize(angle: number): number {
 	return ((angle % 360) + 360) % 360
 }
 
-// calculates the shortest angle between the prev and next angle
-// to animate to - positive spins clockwise, negative is ccw
-
-// 330 -> 240 ==> -120
-
 /*
+	calculates the shortest angle between the prev and next angle
+	to animate to - positive spins clockwise, negative is ccw
+
 	- prev is the previous angle - can literally be almost any value,
 	eg: 480 is valid
 	- next is the angle to rotate to - is always between 0-360
 	- must return an angle relative to the previous, so once again
 	this value can be any negative or positive value (like prev)
+
+	function normalizes each angle, creates an upper and lower bound
+	based on previous angle and figures out which direction is shorter
+	for next - then diff and add/subtract to previous angle
 */
-
-export function calcAnimationAngle_phase(a: number, b: number): number {
-	// Phase Sync
-	if (b - a > 360) {
-		b = a + ((b - a) % 360)
-	} else if (b - a < -360) {
-		b = a - ((b - a) % 360)
-	}
-
-	// Case 1
-	if (a > b) {
-		if (a - b <= 180) {
-			return b
-		} else {
-			return b + 360
-		}
-	} else {
-		// Case 2
-		if (b - a <= 180) {
-			return b
-		} else {
-			return b - 360
-		}
-	}
-}
-
 export function calcAnimationAngle(prev: number, next: number): number {
 	const p = normalize(prev)
 	const n = normalize(next)
 
 	let lower = p
 	let upper = p
+	// TODO - implement without while loops
 	while (n < lower) {
 		lower -= 360
 	}

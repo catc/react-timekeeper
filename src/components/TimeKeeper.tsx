@@ -7,6 +7,8 @@ import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
 import { TimeInput, ChangeTimeFn } from '../helpers/types'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
+
+import { isHourMode, isMinuteMode } from '../helpers/utils'
 // import useHandleTime from '../hooks/handle-time'
 // import { isHourMode, isMinuteMode } from '../helpers/utils'
 import useTimekeeperState from '../hooks/state-context'
@@ -15,6 +17,20 @@ export default function TimeKeeper() {
 	const config = useConfig()
 
 	const { mode, time, updateTime, updateMeridiem, setMode } = useTimekeeperState()
+
+	function handleChange(val: number, canAutoChangeUnit: boolean) {
+		// update time officially on this component
+		updateTime(val)
+
+		// handle any unit autochanges or done click
+		if (canAutoChangeUnit) {
+			if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
+				setMode(MODE.MINUTES)
+			} else if (config.closeOnMinuteSelect && isMinuteMode(mode)) {
+				config.onDoneClick && config.onDoneClick()
+			}
+		}
+	}
 
 	/*
 		LOGIC AROUND COARSE
@@ -35,31 +51,33 @@ export default function TimeKeeper() {
 	/*
 		converts angle into time, also factors in any rounding to the closest increment
 	*/
-	const calculateTimeValue = useCallback(
-		(angle, { canAutoChangeUnit = false, wasTapped = false, isInnerClick = false }) => {
-			/*
-				TODO
-				- if coarse, avoid the double calculation
-				- first check if coarse, and then do one or either
-			*/
+	function calculateTimeValue(
+		angle: number,
+		{ canAutoChangeUnit = false, wasTapped = false, isInnerClick = false },
+	) {
+		/*
+			TODO
+			- if coarse, avoid the double calculation
+			- first check if coarse, and then do one or either
+		*/
 
-			const increments = CLOCK_VALUES[mode].increments
-			/*
+		const increments = CLOCK_VALUES[mode].increments
+		/*
 				calculate time value based on current clock increments
 				- % is to normalize angle - otherwise left side of 0 gives 12, right side of 0 gives 0
 			*/
-			let selected = Math.round((angle / 360) * increments) % increments
-			if (mode === MODE.HOURS_24 && config.hour24Mode) {
-				// fixes 12pm and midnight, both angle -> selected return 0
-				// for midnight need a final selected of 0, and for noon need 12
-				if (!isInnerClick && selected !== 0) {
-					selected += 12
-				} else if (isInnerClick && selected === 0) {
-					selected += 12
-				}
+		let selected = Math.round((angle / 360) * increments) % increments
+		if (mode === MODE.HOURS_24 && config.hour24Mode) {
+			// fixes 12pm and midnight, both angle -> selected return 0
+			// for midnight need a final selected of 0, and for noon need 12
+			if (!isInnerClick && selected !== 0) {
+				selected += 12
+			} else if (isInnerClick && selected === 0) {
+				selected += 12
 			}
+		}
 
-			/*
+		/*
 				TODO
 				- clean up this logic, make it reusable for hours as well
 				- add hours coarse as well
@@ -70,7 +88,7 @@ export default function TimeKeeper() {
 					which ones are faded out and cache
 			*/
 
-			/* if (mode === MODE.MINUTES) {
+		/* if (mode === MODE.MINUTES) {
 				const coarseMinutes = config.coarseMinutes
 				const roundValue = coarseMinutes > 1 || wasTapped
 				if (roundValue) {
@@ -82,11 +100,8 @@ export default function TimeKeeper() {
 				}
 			} */
 
-			// update time officially on this component
-			updateTime(selected, canAutoChangeUnit)
-		},
-		[config.hour24Mode, mode, updateTime],
-	)
+		handleChange(selected, canAutoChangeUnit)
+	}
 
 	return (
 		<>
