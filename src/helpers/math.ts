@@ -39,3 +39,66 @@ export function transform(index: number, t: number): string {
 export function isWithinRadius(x: number, y: number, radius: number): boolean {
 	return Math.sqrt(x * x + y * y) < radius
 }
+
+// normalize any angles to 0-360 deg
+function normalize(angle: number): number {
+	return ((angle % 360) + 360) % 360
+}
+
+// calculates the shortest angle between the prev and next angle
+// to animate to - positive spins clockwise, negative is ccw
+
+// 330 -> 240 ==> -120
+
+/*
+	- prev is the previous angle - can literally be almost any value,
+	eg: 480 is valid
+	- next is the angle to rotate to - is always between 0-360
+	- must return an angle relative to the previous, so once again
+	this value can be any negative or positive value (like prev)
+*/
+
+export function calcAnimationAngle_phase(a: number, b: number): number {
+	// Phase Sync
+	if (b - a > 360) {
+		b = a + ((b - a) % 360)
+	} else if (b - a < -360) {
+		b = a - ((b - a) % 360)
+	}
+
+	// Case 1
+	if (a > b) {
+		if (a - b <= 180) {
+			return b
+		} else {
+			return b + 360
+		}
+	} else {
+		// Case 2
+		if (b - a <= 180) {
+			return b
+		} else {
+			return b - 360
+		}
+	}
+}
+
+export function calcAnimationAngle(prev: number, next: number): number {
+	const p = normalize(prev)
+	const n = normalize(next)
+
+	let lower = p
+	let upper = p
+	while (n < lower) {
+		lower -= 360
+	}
+	while (n >= upper) {
+		upper += 360
+	}
+
+	if (upper - n < n - lower) {
+		return prev - (upper - n)
+	} else {
+		return prev + (n - lower)
+	}
+}

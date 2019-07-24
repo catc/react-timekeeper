@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef } from 'react'
 import { animated, useSpring } from 'react-spring'
 
 import { Time } from '../helpers/types'
-import { getTimeValue } from '../helpers/utils'
+import { getTimeValue, isHourMode } from '../helpers/utils'
 import {
 	CLOCK_SIZE,
 	CLOCK_RADIUS,
@@ -18,6 +18,8 @@ import {
 	CLOCK_HAND_CIRCLE_BACKGROUND,
 	CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND,
 } from './styles/constants'
+import useConfig from '../hooks/config'
+import { calcAnimationAngle } from '../helpers/math'
 
 interface Props {
 	mode: MODE
@@ -41,24 +43,27 @@ function timeIsDifferent(prev: Time, now: Time): boolean {
 // TODO - move elsewhere?
 // calculates the shortest angle between the prev and next angle
 // to animate to
-function calcAnimationAngle(prev: number, next: number): number {
+/* function calcAnimationAngle(prev: number, next: number): number {
 	if (Math.abs(next - prev) > 180) {
 		let diff = 0
 		if (prev > next) {
+			// TODO - need % here too
 			diff = next + 360 - prev
 		} else {
 			diff = ((next - prev + 180) % 360) - 180
 		}
 
+		// return (prev + diff) % 360
 		return prev + diff
 	}
 	return next
-}
+} */
 
 /*
 	TODO
 	- DONE apply memo
-	- suppport 24h mode
+		- reinvestigate if even necessary
+	- suppport 24h mode weirdness
 	- support arm length/number radius?
 	- split up components into multiple parts
 	- explore disabling animation during `switchToMinuteOnHourSelect`
@@ -68,15 +73,35 @@ function calcAnimationAngle(prev: number, next: number): number {
 			- if `switchToMinuteOnHourSelect` AND previous mode was hours, then rotate
 			the clockhand from the OLD hour (not newly selected hour)
 				- would execute when timeIsDifferent AND modeIsDifferent only
-	- DONE fix tests
+	- fix tests
+	- clean up overall
 */
 
 function ClockHand({ mode, time }: Props) {
-	const prevTime = useRef(time)
-	const prevMode = useRef(mode)
-	const prevAngle = useRef(getAngle(mode, time))
+	const config = useConfig()
 
-	console.log('rerender')
+	// const hand = useRef(null)
+	const prevState = useRef({ time, mode })
+	const dragCount = useRef(0)
+
+	// const prevTime = useRef(time)
+	// const prevMode = useRef(mode)
+	// const prevAngle = useRef(getAngle(mode, time))
+
+	// const usePrevAngle = useRef(false)
+	// const prevAngle = useRef([getAngle(mode, time), getAngle(mode, time)])
+	// function updatePrevAngle(angle) {
+	// 	prevAngle.current[1] = prevAngle.current[0]
+	// 	prevAngle.current[0] = angle
+	// }
+
+	/* useEffect(() => {
+		setTimeout(() => {
+			window.go = () => {
+				console.log(hand.current.transform.animVal[0])
+			}
+		}, 300)
+	}, []) */
 
 	const [anim, set] = useSpring(() => {
 		return {
@@ -87,29 +112,62 @@ function ClockHand({ mode, time }: Props) {
 	const { rotation } = anim
 
 	useEffect(() => {
-		if (timeIsDifferent(prevTime.current, time)) {
-			const angle = getAngle(mode, time)
-			prevTime.current = time
-			prevAngle.current = angle
+		// const prev = prevAngle.current
+		// const angle = getAngle(mode, time)
 
-			set({
-				immediate: true,
-				rotation: angle,
-			})
-		} else if (prevMode.current !== mode) {
-			prevMode.current = mode
+		// if (prev === angle) {
+		// 	console.log('same angle')
+		// 	return
+		// }
 
-			// calculate angle to transition oto
-			const prev = prevAngle.current
-			const next = getAngle(mode, time)
-			const angle = calcAnimationAngle(prev, next)
+		const current = rotation.value
+		const next = getAngle(mode, time)
+
+		if (current === next) {
+			// TODO - see if this affects anything, i think it does
+			return
+		}
+
+		if (prevState.current.mode !== mode) {
+			dragCount.current = 0
+			prevState.current.mode = mode
+			// prevTime.current = time
+
+			// const prev = prevAngle.current
+			// // const next = getAngle(mode, time)
+			// const next = angle
+			const finalAngle = calcAnimationAngle(current, next)
+			console.log('MODE CHANGED, from', current, finalAngle)
 
 			set({
 				immediate: false,
-				rotation: angle,
+				rotation: finalAngle,
+			})
+			// prevAngle.current = next
+
+			// TODO - check if need to set prevTime as well
+		} else if (timeIsDifferent(prevState.current.time, time)) {
+			// console.log('TIME CHANGED', prevTime.current, time)
+			prevState.current.time = time
+			dragCount.current++
+
+			// console.log('time was', prevTime.current, 'and is now', time, 'with mode', mode)
+			if (isHourMode(mode) && config.switchToMinuteOnHourSelect && dragCount.current < 2) {
+				console.log('JUST WAIT')
+				return
+			}
+			// if (isHourMode(mode) && config.switchToMinuteOnHourSelect && dragCount.current < 2) {
+			// 	// usePrevAngle.current = true
+			// } else {
+			// }
+			// console.log('TIME CHANGED - NOT HOUR MODE')
+			// prevAngle.current = angle
+			set({
+				immediate: true,
+				rotation: next,
 			})
 		}
-	}, [mode, set, time])
+	}, [config.switchToMinuteOnHourSelect, mode, rotation, set, time])
 
 	// mini circle on clockhand between increments on minutes
 	const value = getTimeValue(mode, time)

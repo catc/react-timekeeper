@@ -63,19 +63,30 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		}
 	})
 	const { mode, time, meridiem } = state
+	const refTime = useRef(time)
 
 	// handle time update if parent changes
 	useEffect(() => {
+		const newTime = parseTime(parentTime)
+		// TODO - clean up
+		if (!timeIsDifferent(newTime, refTime.current)) {
+			console.log('useless')
+			return
+		}
 		const action: any = { type: 'SET_TIME', time: parseTime(parentTime) }
 		if (!config.hour24Mode) {
 			action.meridiem = parseMeridiem(parentTime)
 		}
 		dispatch(action)
-	}, [config.hour24Mode, mode, parentTime])
+
+		function timeIsDifferent(prev: Time, now: Time): boolean {
+			return prev.hour !== now.hour || prev.minute !== now.minute
+		}
+		// }, [config.hour24Mode, parentTime, time])
+	}, [config.hour24Mode, parentTime])
 
 	// minor pre-optimization - only run `composeTime`
 	// when about to actually update time on parent
-	const refTime = useRef(time)
 	const debounceUpdateParent = useMemo(() => {
 		if (typeof onChange === 'function') {
 			return debounce(() => {
@@ -102,6 +113,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 
 	// update time on component and then on parent
 	function _actuallySetTime(newTime: Time, meridiem?: MERIDIEM) {
+		// console.log('setting new time', newTime)
 		// update component global state
 		dispatch({ type: 'SET_TIME', time: newTime, meridiem: meridiem })
 		refTime.current = newTime
@@ -110,6 +122,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		debounceUpdateParent()
 	}
 
+	// TODOO - remove canAutoChangeUnit argument, move logic to timekeeper
 	function updateTime(val: number, canAutoChangeUnit: boolean) {
 		// account for max number being 12 during 12h mode
 		if (mode === MODE.HOURS_12 && meridiem === 'pm') {
@@ -118,6 +131,11 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 
 		// generate new time and update timekeeper state
 		const unit = isHourMode(mode) ? 'hour' : 'minute'
+		// TODO - do check that new time is DIFFERENT from previous time (store in ref?)
+		// if (refTime.current[unit] === val) {
+		// 	console.log('ignore set')
+		// 	return
+		// }
 		const newTime: Time = { ...time, [unit]: val }
 		_actuallySetTime(newTime)
 
@@ -127,6 +145,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		}
 	}
 
+	// TODO - move this back to timekeeper
 	function _handleTimeUpdateSideEffects() {
 		if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
 			dispatch({ type: 'SET_MODE', mode: MODE.MINUTES })
