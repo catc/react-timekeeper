@@ -71,24 +71,6 @@ export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 
 			{/* place svg over and set z-index on numbers to prevent highlighting numbers on drag */}
 			<ClockHand time={time} mode={mode} />
-
-			{/* TODO - remove this */}
-			<span
-				css={css`
-					// background: rgba(255, 2, 2, 0.1);
-					width: ${INNER_NUMBER_RADIUS * 2}px;
-					height: ${INNER_NUMBER_RADIUS * 2}px;
-					display: inline-block;
-					position: absolute;
-					left: 50%;
-					top: 50%;
-					transform: translate(-50%, -50%);
-					border-radius: 500px;
-					pointer-events: none;
-				`}
-			>
-				{' '}
-			</span>
 		</div>
 	)
 }

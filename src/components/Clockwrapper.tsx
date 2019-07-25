@@ -6,7 +6,7 @@ import Clock from './Clock'
 import Meridiems from './Meridiems'
 import useClockEvents from '../hooks/handle-clock-events'
 import { MODE } from '../helpers/constants'
-import { CLOCK_WRAPPER_BACKGROUND } from './styles/constants'
+import style from './styles/clock-wrapper'
 import { CalcTimeFromAngle, Time } from 'src/helpers/types'
 
 interface Props {
@@ -15,12 +15,6 @@ interface Props {
 	calculateTimeValue: CalcTimeFromAngle
 	updateMeridiem: (meridiem: string) => void
 }
-
-const style = css`
-	text-align: center;
-	padding: 18px 0 14px;
-	background: ${CLOCK_WRAPPER_BACKGROUND};
-`
 
 export default function ClockWrapper({ mode, calculateTimeValue, time, updateMeridiem }: Props) {
 	const { hour24Mode } = useConfig()

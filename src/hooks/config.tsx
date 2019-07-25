@@ -9,14 +9,16 @@ export interface Styles {
 }
 
 type DoneClickFn = null | (() => void)
+type DoneButton = null | ReactElement
 
 interface Config {
 	coarseMinutes: number
 	styles: Styles
 	switchToMinuteOnHourSelect: boolean
 	closeOnMinuteSelect: boolean
-	onDoneClick: DoneClickFn
 	hour24Mode: boolean
+	onDoneClick: DoneClickFn
+	doneButton: DoneButton
 }
 
 function genConfig({
@@ -24,8 +26,9 @@ function genConfig({
 	coarseMinutes = 1,
 	switchToMinuteOnHourSelect = false,
 	closeOnMinuteSelect = false,
-	onDoneClick = null,
 	hour24Mode = false,
+	onDoneClick = null,
+	doneButton = null,
 }: ConfigProps): Config {
 	if (coarseMinutes < 1) {
 		throw new Error('coarseMinutes must be at least 1')
@@ -35,8 +38,9 @@ function genConfig({
 		coarseMinutes,
 		switchToMinuteOnHourSelect,
 		closeOnMinuteSelect,
-		onDoneClick,
 		hour24Mode,
+		onDoneClick,
+		doneButton,
 	}
 }
 
@@ -45,8 +49,9 @@ export interface ConfigProps {
 	coarseMinutes?: number
 	switchToMinuteOnHourSelect?: boolean
 	closeOnMinuteSelect?: boolean
-	onDoneClick?: DoneClickFn
 	hour24Mode?: boolean
+	onDoneClick?: DoneClickFn
+	doneButton?: DoneButton
 }
 
 interface Props extends ConfigProps {
@@ -61,8 +66,9 @@ export function ConfigProvider({
 	coarseMinutes,
 	switchToMinuteOnHourSelect,
 	closeOnMinuteSelect,
-	onDoneClick,
 	hour24Mode,
+	onDoneClick,
+	doneButton,
 }: Props) {
 	const [config, setConfig] = useState(() =>
 		genConfig({
@@ -72,6 +78,7 @@ export function ConfigProvider({
 			closeOnMinuteSelect,
 			onDoneClick,
 			hour24Mode,
+			doneButton,
 		}),
 	)
 
@@ -84,6 +91,7 @@ export function ConfigProvider({
 				closeOnMinuteSelect,
 				onDoneClick,
 				hour24Mode,
+				doneButton,
 			}),
 		)
 	}, [
@@ -93,6 +101,7 @@ export function ConfigProvider({
 		closeOnMinuteSelect,
 		onDoneClick,
 		hour24Mode,
+		doneButton,
 	])
 
 	return <configContext.Provider value={config}>{children}</configContext.Provider>

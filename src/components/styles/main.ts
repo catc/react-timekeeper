@@ -7,7 +7,6 @@ const timepicker = css`
 
 	font-family: 'Roboto', sans-serif;
 	background: white;
-	background: white;
 	borderradius: 3px;
 	display: inline-block;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13), 0 3px 6px rgba(0, 0, 0, 0.19);

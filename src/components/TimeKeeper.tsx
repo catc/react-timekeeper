@@ -7,6 +7,7 @@ import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
 import { TimeInput, ChangeTimeFn } from '../helpers/types'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
+import DoneButton from './DoneButton'
 
 import { isHourMode, isMinuteMode } from '../helpers/utils'
 // import useHandleTime from '../hooks/handle-time'
@@ -133,7 +134,7 @@ export default function TimeKeeper() {
 					calculateTimeValue={calculateTimeValue}
 					updateMeridiem={updateMeridiem}
 				/>
-				{/* TODO - done button */}
+				<DoneButton />
 			</div>
 		</>
 	)
