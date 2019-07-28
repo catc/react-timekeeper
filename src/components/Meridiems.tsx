@@ -2,19 +2,17 @@ import React, { useCallback } from 'react'
 import { jsx } from '@emotion/core'
 
 import { meridiemWrapper, meridiem } from './styles/meridiems'
-import { Time } from 'src/helpers/types'
+import useTimekeeperState from '../hooks/state-context'
+import { MERIDIEM } from '../helpers/constants'
 
-interface Props {
-	time: Time
-	updateMeridiem: (meridiem: string) => void
-}
+export default function Meridiems() {
+	const { time, updateMeridiem } = useTimekeeperState()
 
-export default function Meridiems({ time, updateMeridiem }: Props) {
 	const setAM = useCallback(() => {
-		updateMeridiem('am')
+		updateMeridiem(MERIDIEM.am)
 	}, [updateMeridiem])
 	const setPM = useCallback(() => {
-		updateMeridiem('pm')
+		updateMeridiem(MERIDIEM.pm)
 	}, [updateMeridiem])
 
 	const isPM = time.hour >= 12

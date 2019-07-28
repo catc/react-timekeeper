@@ -1,24 +1,23 @@
-import React, { useState, useCallback } from 'react'
+import React from 'react'
 import { Global, css, jsx } from '@emotion/core'
 
 import globalStyle from './styles/global'
 import style from './styles/main'
 import useConfig from '../hooks/config'
 import ClockWrapper from './ClockWrapper'
-import { TimeInput, ChangeTimeFn } from '../helpers/types'
+// import { TimeInput, ChangeTimeFn } from '../helpers/types'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import DoneButton from './DoneButton'
-
 import { isHourMode, isMinuteMode } from '../helpers/utils'
-// import useHandleTime from '../hooks/handle-time'
-// import { isHourMode, isMinuteMode } from '../helpers/utils'
 import useTimekeeperState from '../hooks/state-context'
+import TopBar from './TopBar'
 
 export default function TimeKeeper() {
 	const config = useConfig()
 
-	const { mode, time, updateTime, updateMeridiem, setMode } = useTimekeeperState()
+	const { mode, time, updateTime, setMode } = useTimekeeperState()
 
+	// TODO - move all this to clock wrapper
 	function handleChange(val: number, canAutoChangeUnit: boolean) {
 		// update time officially on this component
 		updateTime(val)
@@ -127,13 +126,8 @@ export default function TimeKeeper() {
 				<br />
 				<br />
 				<br />
-				{/* TODO - top bar */}
-				<ClockWrapper
-					time={time}
-					mode={mode}
-					calculateTimeValue={calculateTimeValue}
-					updateMeridiem={updateMeridiem}
-				/>
+				<TopBar />
+				<ClockWrapper time={time} mode={mode} calculateTimeValue={calculateTimeValue} />
 				<DoneButton />
 			</div>
 		</>

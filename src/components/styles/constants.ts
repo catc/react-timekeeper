@@ -20,16 +20,3 @@ export const CLOCK_WRAPPER_MERIDIEM_TEXT_COLOR_SELECTED = '#898989'
 
 // main container
 export const TIMEPICKER_BACKGROUND = '#F2F2F2'
-
-// time
-export const TIME_BACKGROUND = 'white'
-export const TIME_DEFAULT_COLOR = '#8C8C8C'
-export const TIME_SELECTED_COLOR = '#8EDDFD'
-
-// time dropdown
-export const DROPDOWN_BORDER = '#f4f4f4'
-export const DROPDOWN_COLOR = '#8c8c8c'
-export const DROPDOWN_SELECTED_COLOR = '#EAF8FF'
-
-// clock wrapper
-// export const CLOCK_WRAPPER_MERIDIEM_BACKGROUND = 'white'

@@ -68,7 +68,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 	// handle time update if parent changes
 	useEffect(() => {
 		const newTime = parseTime(parentTime)
-		if (!isSameTime(newTime, refTime.current)) {
+		if (isSameTime(newTime, refTime.current)) {
 			return
 		}
 		const action: any = { type: 'SET_TIME', time: parseTime(parentTime) }
@@ -113,6 +113,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		debounceUpdateParent()
 	}
 
+	// this method is called only due to changes in clock actions
 	function updateTime(val: number) {
 		// account for max number being 12 during 12h mode
 		if (mode === MODE.HOURS_12 && meridiem === 'pm') {
@@ -130,9 +131,16 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		_actuallySetTime(newTime)
 	}
 
-	const setMode = useCallback((mode: MODE) => {
-		dispatch({ type: 'SET_MODE', mode })
-	}, [])
+	const setMode = useCallback(
+		(mode: MODE) => {
+			let m = mode
+			if (isHourMode(mode)) {
+				m = config.hour24Mode ? MODE.HOURS_24 : MODE.HOURS_12
+			}
+			dispatch({ type: 'SET_MODE', mode: m })
+		},
+		[config.hour24Mode],
+	)
 
 	// TODO - memoize?
 	const value = {

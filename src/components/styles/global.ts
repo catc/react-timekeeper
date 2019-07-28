@@ -1,3 +1,5 @@
+// TODO - see what's actually used
+
 const style = `
 	.react-timekeeper-button-reset {
 		background: 0;

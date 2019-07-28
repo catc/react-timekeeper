@@ -13,10 +13,9 @@ interface Props {
 	mode: MODE
 	time: Time
 	calculateTimeValue: CalcTimeFromAngle
-	updateMeridiem: (meridiem: string) => void
 }
 
-export default function ClockWrapper({ mode, calculateTimeValue, time, updateMeridiem }: Props) {
+export default function ClockWrapper({ mode, calculateTimeValue, time }: Props) {
 	const { hour24Mode } = useConfig()
 
 	const wrapper = useRef<HTMLDivElement | null>(null)
@@ -34,7 +33,7 @@ export default function ClockWrapper({ mode, calculateTimeValue, time, updateMer
 		>
 			<Clock time={time} mode={mode} clockEl={clock} />
 
-			{!hour24Mode && <Meridiems time={time} updateMeridiem={updateMeridiem} />}
+			{!hour24Mode && <Meridiems />}
 		</div>
 	)
 }

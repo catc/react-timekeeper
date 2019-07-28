@@ -1,7 +1,7 @@
 export const MINUTES = ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'].map((a) => a.toString())
-export const MINUTES_60 = Array.from(Array(60), (_, i) => (i + 1).toString())
-export const HOURS_12 = Array.from(Array(12), (_, i) => (i + 1).toString())
-export const HOURS_24 = Array.from(Array(23), (_, i) => (i + 1).toString()).concat('00')
+const MINUTES_60 = Array.from(Array(60), (_, i) => (i + 1).toString())
+const HOURS_12 = Array.from(Array(12), (_, i) => (i + 1).toString())
+const HOURS_24 = Array.from(Array(23), (_, i) => (i + 1).toString()).concat('00')
 
 export enum MODE {
 	'MINUTES' = 'MINUTES',
@@ -22,17 +22,20 @@ export const CLOCK_VALUES = {
 		increments: 60,
 		numbers: MINUTES,
 		coarseIncrements: 5,
+		dropdown: MINUTES_60,
 	},
 	[MODE.HOURS_12]: {
 		increments: 12,
 		numbers: HOURS_12,
 		coarseIncrements: 1,
+		dropdown: HOURS_12,
 	},
 	[MODE.HOURS_24]: {
 		increments: 12,
 		numbers: HOURS_24.slice(12),
 		numbersInner: HOURS_24.slice(0, 12),
 		coarseIncrements: 1,
+		dropdown: HOURS_24,
 	},
 }
 
