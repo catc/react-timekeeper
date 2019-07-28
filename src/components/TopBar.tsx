@@ -6,10 +6,8 @@ import useTimekeeperState from '../hooks/state-context'
 import useConfig from '../hooks/config'
 import * as styles from './styles/top-bar'
 import { MODE, MERIDIEM } from '../helpers/constants'
-import { isHourMode, isMinuteMode } from '../helpers/utils'
+import { isHourMode } from '../helpers/utils'
 
-// TODO - test with 24 hr
-// TODO - center time if 24h mode (no meridiem)
 export default function TopBar() {
 	const { hour24Mode } = useConfig()
 	const { mode, time, updateMeridiem, setMode } = useTimekeeperState()

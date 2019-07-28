@@ -66,5 +66,4 @@ export const meridiem = css`
 	margin-left: 2px;
 	padding: 10px 8px;
 	vertical-align: 1px;
-	// fontFamily: config.FONT_FAMILY;
 `

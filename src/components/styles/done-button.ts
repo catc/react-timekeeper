@@ -1,5 +1,8 @@
 import { css, jsx } from '@emotion/core'
-import { DONE_BUTTON_COLOR, DONE_BUTTON_BORDER_COLOR, CLOCK_WRAPPER_BACKGROUND } from './constants'
+import { CLOCK_WRAPPER_BACKGROUND } from './constants'
+
+export const DONE_BUTTON_COLOR = '#686868'
+export const DONE_BUTTON_BORDER_COLOR = '#CCC'
 
 const doneButton = css`
 	background: ${CLOCK_WRAPPER_BACKGROUND};

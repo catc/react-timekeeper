@@ -108,24 +108,6 @@ export default function TimeKeeper() {
 			<Global styles={css(globalStyle)} />
 
 			<div className="react-timekeeper" css={[style, config.styles.main]}>
-				{time.hour}:{time.minute}
-				<button
-					onClick={() => {
-						let m
-						if (mode === MODE.HOURS_24 || mode === MODE.HOURS_12) {
-							m = MODE.MINUTES
-						} else {
-							m = config.hour24Mode ? MODE.HOURS_24 : MODE.HOURS_12
-						}
-						setMode(m)
-					}}
-				>
-					change type - {mode}
-				</button>
-				<br />
-				<br />
-				<br />
-				<br />
 				<TopBar />
 				<ClockWrapper time={time} mode={mode} calculateTimeValue={calculateTimeValue} />
 				<DoneButton />

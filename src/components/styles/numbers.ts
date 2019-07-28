@@ -1,6 +1,7 @@
 import { css, jsx } from '@emotion/core'
-import { CLOCK_NUMBER_COLOR } from './constants'
 import { NUMBER_RADIUS_REGULAR, getFontSize } from '../../helpers/constants'
+
+const CLOCK_NUMBER_COLOR = '#999999'
 
 interface Props {
 	hour24Mode?: boolean

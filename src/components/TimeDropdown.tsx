@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, MutableRefObject } from 'react'
 
 import * as styles from './styles/time-dropdown'
 import { getScrollBarWidth } from '../helpers/dom'
@@ -13,11 +13,13 @@ interface Props {
 
 let scrollbarWidth: null | number = null
 
+type ElementLiRef = MutableRefObject<HTMLLIElement | null>
+
 export default function TimeDropdown({ close }: Props) {
 	const { updateTime, mode, time } = useTimekeeperState()
 
 	const container: ElementRef = useRef(null)
-	const selectedOption: ElementRef = useRef(null)
+	const selectedOption: ElementLiRef = useRef(null)
 
 	const options = CLOCK_VALUES[mode].dropdown
 	const selected = getTimeValue(mode, time).toString()
@@ -87,7 +89,6 @@ export default function TimeDropdown({ close }: Props) {
 			<ul css={styles.options}>
 				{options.map((o) => (
 					<li
-						// TODO - fix type - add specific element ref for `li`
 						ref={(el) => (selected === o ? (selectedOption.current = el) : '')}
 						css={styles.option(selected === o)}
 						key={o}
