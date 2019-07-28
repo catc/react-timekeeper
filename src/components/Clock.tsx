@@ -16,6 +16,7 @@ import { isHourMode, isMinuteMode } from '../helpers/utils'
 import { ElementRef, Time } from '../helpers/types'
 import style from './styles/clock'
 import useConfig from '../hooks/config'
+import useTimekeeperState from '../hooks/state-context'
 
 function exitPosition(mode: MODE): number {
 	return isHourMode(mode) ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
@@ -26,14 +27,13 @@ function initialPosition(mode: MODE): number {
 }
 
 interface Props {
-	mode: MODE
 	clockEl: ElementRef
-	time: Time
 }
 
-export default function ClockWrapper5({ mode, clockEl, time }: Props) {
+export default function ClockWrapper5({ clockEl }: Props) {
 	const firstTime = useRef(true)
 	const { hour24Mode } = useConfig()
+	const { mode, time } = useTimekeeperState()
 
 	const transitions = useTransition(mode, null, {
 		unique: true,
@@ -61,11 +61,20 @@ export default function ClockWrapper5({ mode, clockEl, time }: Props) {
 
 	return (
 		<div className="react-timekeeper__clock" css={style} ref={clockEl}>
-			{transitions.map(({ item: mode, key, props }) => {
-				return isMinuteMode(mode) ? (
+			{transitions.map(({ item: currentMode, key, props }) => {
+				// TODO - weird hot reloading issue, remove later
+				if (!currentMode) {
+					return null
+				}
+				return isMinuteMode(currentMode) ? (
 					<MinuteNumbers anim={props} key={key} />
 				) : (
-					<HourNumbers anim={props} key={key} mode={mode} hour24Mode={hour24Mode} />
+					<HourNumbers
+						anim={props}
+						key={key}
+						mode={currentMode}
+						hour24Mode={hour24Mode}
+					/>
 				)
 			})}
 

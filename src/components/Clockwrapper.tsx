@@ -10,8 +10,6 @@ import style from './styles/clock-wrapper'
 import { CalcTimeFromAngle, Time } from 'src/helpers/types'
 
 interface Props {
-	mode: MODE
-	time: Time
 	calculateTimeValue: CalcTimeFromAngle
 }
 
@@ -31,7 +29,7 @@ export default function ClockWrapper({ mode, calculateTimeValue, time }: Props) 
 			className="react-timekeeper__clock-wrapper"
 			css={style}
 		>
-			<Clock time={time} mode={mode} clockEl={clock} />
+			<Clock clockEl={clock} />
 
 			{!hour24Mode && <Meridiems />}
 		</div>

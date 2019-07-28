@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { css, jsx } from '@emotion/core'
+import { jsx } from '@emotion/core'
 
 import TimeDropdown from './TimeDropdown'
 import useTimekeeperState from '../hooks/state-context'
