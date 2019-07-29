@@ -1,4 +1,6 @@
 import { css, jsx, keyframes } from '@emotion/core'
+import { isMinuteMode } from '../../helpers/utils'
+import { MODE } from '../../helpers/constants'
 
 const DROPDOWN_BORDER = '#f4f4f4'
 const DROPDOWN_COLOR = '#8c8c8c'
@@ -6,13 +8,17 @@ const DROPDOWN_SELECTED_COLOR = '#EAF8FF'
 
 const hour = `right: -22px;`
 const minute = `right: -10px;`
+const hour24 = `
+	left: 50%;
+	transform: translateX(-50%);
+`
 
 const fadeIn = keyframes`
 	0% { opacity: 0; }
 	100% { opacity: 1; }
 `
 
-export const wrapper = (type: string) => css`
+export const wrapper = (hour24Mode: boolean, mode: MODE) => css`
 	position: absolute;
 	display: inline-block;
 	background: white;
@@ -26,7 +32,8 @@ export const wrapper = (type: string) => css`
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 	opacity: 0;
 	animation: ${fadeIn} 0.2s ease-out both;
-	${type === 'minute' ? minute : hour}
+
+	${hour24Mode ? hour24 : isMinuteMode(mode) ? minute : hour}
 `
 
 export const options = css`

@@ -40,38 +40,36 @@ export default function TopBar() {
 	const closeDropdown = () => setOpen(null)
 
 	return (
-		// TODO - see if can clean up number of divs
-		<div css={styles.wrapper}>
-			<div css={styles.timeWrapper}>
-				<div css={styles.hourWrapper}>
-					<span css={[styles.time(isHour)]} onClick={() => timeClick('hour')}>
-						{hour}
-					</span>
-
-					{open === 'hour' && <TimeDropdown close={closeDropdown} />}
-				</div>
-
-				<span css={styles.colon}>:</span>
-
-				<div css={styles.minuteWrapper}>
-					<span css={styles.time(!isHour)} onClick={() => timeClick('minute')}>
-						{formattedMinute}
-					</span>
-
-					{open === 'minute' && <TimeDropdown close={closeDropdown} />}
-				</div>
-
-				{!hour24Mode && (
-					<button
-						type="button"
-						onClick={toggleMeridiem}
-						css={styles.meridiem}
-						className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
-					>
-						{meridiem}
-					</button>
-				)}
+		<div css={styles.wrapper(hour24Mode)}>
+			{/* hour */}
+			<div css={styles.hourWrapper(hour24Mode)}>
+				<span css={[styles.time(isHour)]} onClick={() => timeClick('hour')}>
+					{hour}
+				</span>
+				{open === 'hour' && <TimeDropdown close={closeDropdown} />}
 			</div>
+
+			<span css={styles.colon}>:</span>
+
+			{/* minute */}
+			<div css={styles.minuteWrapper(hour24Mode)}>
+				<span css={styles.time(!isHour)} onClick={() => timeClick('minute')}>
+					{formattedMinute}
+				</span>
+				{open === 'minute' && <TimeDropdown close={closeDropdown} />}
+			</div>
+
+			{/* meridiem */}
+			{!hour24Mode && (
+				<button
+					type="button"
+					onClick={toggleMeridiem}
+					css={styles.meridiem}
+					className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
+				>
+					{meridiem}
+				</button>
+			)}
 		</div>
 	)
 }

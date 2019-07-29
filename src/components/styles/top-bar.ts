@@ -3,27 +3,31 @@ import { css, jsx, keyframes } from '@emotion/core'
 const TIME_DEFAULT_COLOR = '#8C8C8C'
 const TIME_SELECTED_COLOR = '#8EDDFD'
 
-export const wrapper = css`
+export const wrapper = (is24hr: boolean) => css`
 	background: white;
 	padding: 14px 16px;
 	border-radius: 3px 3px 0 0;
-`
-
-export const timeWrapper = css`
-	left: 20px;
 	position: relative;
+
+	${is24hr &&
+		`
+		display: flex;
+		justify-content: center;
+	`}
 `
 
-export const hourWrapper = css`
+export const hourWrapper = (is24hr: boolean) => css`
 	width: 72px;
 	text-align: right;
 	position: relative;
 	display: inline-block;
+	${!is24hr && 'margin-left: 20px;'}
 `
 
-export const minuteWrapper = css`
+export const minuteWrapper = (is24hr: boolean) => css`
 	position: relative;
 	display: inline-block;
+	${is24hr && 'width: 72px;'}
 `
 
 export const colon = css`
