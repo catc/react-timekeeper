@@ -13,7 +13,7 @@ interface Props {
 	calculateTimeValue: CalcTimeFromAngle
 }
 
-export default function ClockWrapper({ mode, calculateTimeValue, time }: Props) {
+export default function ClockWrapper({ calculateTimeValue  }: Props) {
 	const { hour24Mode } = useConfig()
 
 	const wrapper = useRef<HTMLDivElement | null>(null)

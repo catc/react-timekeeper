@@ -4,6 +4,7 @@ import { act } from 'react-dom/test-utils'
 
 import ClockWrapper from '../ClockWrapper'
 import TimeKeeperWrapper from '../TimeKeeperWrapper'
+import TopBar from '../TopBar'
 
 export const noop = () => {}
 
@@ -16,6 +17,16 @@ export function update() {
 	act(() => {
 		jest.runAllTimers()
 	})
+}
+
+export function waitForUpdates(wrapper: ReactWrapper) {
+	// mock timers so animations finish
+	act(() => {
+		jest.runAllTimers()
+	})
+
+	// update enzyme wrapper
+	wrapper.update()
 }
 
 interface MouseEvent {
@@ -33,13 +44,7 @@ export function triggerMouseClick(wrapper: ReactWrapper, opts: MouseEvent = {}) 
 		document.dispatchEvent(e)
 	})
 
-	// mock timers so animations finish
-	act(() => {
-		jest.runAllTimers()
-	})
-
-	// update enzyme wrapper
-	wrapper.update()
+	waitForUpdates(wrapper)
 }
 
 export function renderTK(override: any = {}) {
@@ -55,4 +60,11 @@ export function renderTK(override: any = {}) {
 		wrapper,
 		onChange,
 	}
+}
+
+export function changeToMinutes(wrapper: ReactWrapper) {
+	const minute = wrapper.find(TopBar).find('span[data-type="minute"]')
+	minute.simulate('click')
+
+	waitForUpdates(wrapper)
 }

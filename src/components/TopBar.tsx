@@ -43,7 +43,11 @@ export default function TopBar() {
 		<div css={styles.wrapper(hour24Mode)}>
 			{/* hour */}
 			<div css={styles.hourWrapper(hour24Mode)}>
-				<span css={[styles.time(isHour)]} onClick={() => timeClick('hour')}>
+				<span
+					css={[styles.time(isHour)]}
+					onClick={() => timeClick('hour')}
+					data-type="hour"
+				>
 					{hour}
 				</span>
 				{open === 'hour' && <TimeDropdown close={closeDropdown} />}
@@ -53,7 +57,11 @@ export default function TopBar() {
 
 			{/* minute */}
 			<div css={styles.minuteWrapper(hour24Mode)}>
-				<span css={styles.time(!isHour)} onClick={() => timeClick('minute')}>
+				<span
+					css={styles.time(!isHour)}
+					onClick={() => timeClick('minute')}
+					data-type="minute"
+				>
 					{formattedMinute}
 				</span>
 				{open === 'minute' && <TimeDropdown close={closeDropdown} />}
@@ -62,6 +70,7 @@ export default function TopBar() {
 			{/* meridiem */}
 			{!hour24Mode && (
 				<button
+					name="meridiem"
 					type="button"
 					onClick={toggleMeridiem}
 					css={styles.meridiem}

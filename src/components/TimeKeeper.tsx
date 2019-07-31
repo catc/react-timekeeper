@@ -3,19 +3,18 @@ import { Global, css, jsx } from '@emotion/core'
 
 import globalStyle from './styles/global'
 import style from './styles/main'
-import useConfig from '../hooks/config'
+import TopBar from './TopBar'
 import ClockWrapper from './ClockWrapper'
-// import { TimeInput, ChangeTimeFn } from '../helpers/types'
-import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import DoneButton from './DoneButton'
+import useConfig from '../hooks/config'
+import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import { isHourMode, isMinuteMode } from '../helpers/utils'
 import useTimekeeperState from '../hooks/state-context'
-import TopBar from './TopBar'
 
 export default function TimeKeeper() {
 	const config = useConfig()
 
-	const { mode, time, updateTime, setMode } = useTimekeeperState()
+	const { mode, updateTime, setMode } = useTimekeeperState()
 
 	// TODO - move all this to clock wrapper
 	function handleChange(val: number, canAutoChangeUnit: boolean) {
@@ -109,7 +108,7 @@ export default function TimeKeeper() {
 
 			<div className="react-timekeeper" css={[style, config.styles.main]}>
 				<TopBar />
-				<ClockWrapper time={time} mode={mode} calculateTimeValue={calculateTimeValue} />
+				<ClockWrapper calculateTimeValue={calculateTimeValue} />
 				<DoneButton />
 			</div>
 		</>

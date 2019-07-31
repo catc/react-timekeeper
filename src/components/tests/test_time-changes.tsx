@@ -2,14 +2,21 @@
 
 import { HourNumbers, MinuteNumbers } from '../Numbers'
 import Meridiems from '../Meridiems'
+import TopBar from '../TopBar'
+import TimeDropdown from '../TimeDropdown'
 
 import './setup'
-import { mockAnimations, triggerMouseClick, renderTK } from './utils'
+import {
+	mockAnimations,
+	triggerMouseClick,
+	renderTK,
+	waitForUpdates,
+	changeToMinutes,
+} from './utils'
 import { HOUR_12_INNER, HOUR_24_OUTER, HOUR_3_INNER, HOUR_3_OUTER } from './click-data'
 
 /*
 	TODO
-	- test minutes
 	- test coarse minutes + hours
 */
 
@@ -70,16 +77,38 @@ describe('handles events correctly', () => {
 		})
 	})
 
+	describe('updates minutes', () => {
+		function testMinutes(coords: any, expectedMinute: number) {
+			const { onChange, wrapper } = renderTK()
+
+			changeToMinutes(wrapper)
+			triggerMouseClick(wrapper, coords)
+
+			expect(onChange).toBeCalledTimes(1)
+			expect(onChange).toBeCalledWith(
+				expect.objectContaining({
+					minute: expectedMinute,
+				}),
+			)
+		}
+		test('handles click on "15"', () => {
+			testMinutes(HOUR_3_OUTER, 15)
+		})
+		test('handles click on "15"', () => {
+			testMinutes(HOUR_12_INNER, 0)
+		})
+	})
+
 	test('it changes from hours -> minutes on minute select', () => {
 		const { wrapper } = renderTK({ switchToMinuteOnHourSelect: true })
 
-		expect(wrapper.find(HourNumbers).length).toEqual(1)
+		expect(wrapper.find(HourNumbers)).toExist()
 
 		triggerMouseClick(wrapper, {
 			clientX: 150,
 			clientY: 35,
 		})
-		expect(wrapper.find(MinuteNumbers).length).toEqual(1)
+		expect(wrapper.find(MinuteNumbers)).toExist()
 	})
 
 	test('handles meridiem clicks correctly', () => {
@@ -100,5 +129,86 @@ describe('handles events correctly', () => {
 				hour: 14,
 			}),
 		)
+	})
+
+	describe('time top bar', () => {
+		function renderHourDropdown(index: number, props: any = {}) {
+			const { wrapper, onChange } = renderTK(props)
+
+			const topbar = wrapper.find(TopBar)
+			const hour = topbar.find('span[data-type="hour"]')
+
+			// open dropdown
+			hour.simulate('click')
+
+			const dropdown = wrapper.find(TimeDropdown)
+			const numbers = dropdown.find('li')
+			numbers.at(index).simulate('click')
+
+			waitForUpdates(wrapper)
+
+			expect(onChange).toBeCalledTimes(1)
+			return onChange
+		}
+
+		test('handles hour updates during 12h mode', () => {
+			const onChange = renderHourDropdown(6)
+
+			expect(onChange).toBeCalledWith(
+				expect.objectContaining({
+					hour: 7,
+				}),
+			)
+		})
+		test('handles click on "6" during 24h mode', () => {
+			const onChange = renderHourDropdown(6, { hour24Mode: true })
+
+			expect(onChange).toBeCalledWith(
+				expect.objectContaining({
+					hour: 7,
+				}),
+			)
+		})
+		test('handles click on "12" during 24h mode', () => {
+			const onChange = renderHourDropdown(11, { hour24Mode: true })
+
+			expect(onChange).toBeCalledWith(
+				expect.objectContaining({
+					hour: 12,
+				}),
+			)
+		})
+		test('handles click on "24" during 24h mode', () => {
+			const onChange = renderHourDropdown(23, { hour24Mode: true })
+
+			expect(onChange).toBeCalledWith(
+				expect.objectContaining({
+					hour: 0,
+				}),
+			)
+		})
+		test('handles minute updates correctly', () => {
+			const { wrapper, onChange } = renderTK()
+
+			const topbar = wrapper.find(TopBar)
+			const minute = topbar.find('span[data-type="minute"]')
+
+			// switch to minutes and open minutes
+			minute.simulate('click')
+			minute.simulate('click')
+
+			const dropdown = wrapper.find(TimeDropdown)
+			const numbers = dropdown.find('li')
+			numbers.at(32).simulate('click')
+
+			waitForUpdates(wrapper)
+
+			expect(onChange).toBeCalledTimes(1)
+			expect(onChange).toBeCalledWith(
+				expect.objectContaining({
+					minute: 33,
+				}),
+			)
+		})
 	})
 })

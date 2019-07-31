@@ -26,8 +26,8 @@
     "_clean": "rimraf lib && mkdir lib",
     "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib",
     "lib": " npm run _clean && npm run _build",
-    "test:watch": "NODE_ENV=test jest --watch",
-    "test:run": "NODE_ENV=test jest"
+    "tests:watch": "NODE_ENV=test jest --watch",
+    "tests:run": "NODE_ENV=test jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
