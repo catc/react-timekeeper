@@ -153,7 +153,8 @@ describe('it renders correctly', () => {
 
 		test('displays button if done fn provided', () => {
 			const fn = jest.fn()
-			const { wrapper } = renderTK({ onDoneClick: fn })
+			const time = { hour: 12, minute: 30}
+			const { wrapper } = renderTK({ onDoneClick: fn, time })
 
 			const done = wrapper.find(DoneButton)
 			expect(done.text()).toMatch(/done/i)
@@ -161,14 +162,22 @@ describe('it renders correctly', () => {
 			// test click
 			done.find('span').simulate('click')
 			expect(fn).toHaveBeenCalled()
+			expect(fn).toBeCalledWith(
+				expect.objectContaining({
+					hour: time.hour,
+					minute: time.minute
+				}),
+			)
 		})
 
 		test('displays content if done render props fn provided', () => {
-			const doneButton = <div>click me</div>
+			const buttonContent = <div>click me</div>
+			const doneButton = () => buttonContent
+
 			const { wrapper } = renderTK({ doneButton: doneButton })
 
 			const done = wrapper.find(DoneButton)
-			expect(done.contains(doneButton)).toEqual(true)
+			expect(done.contains(buttonContent)).toEqual(true)
 		})
 	})
 })

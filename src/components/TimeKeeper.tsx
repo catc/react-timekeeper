@@ -14,7 +14,7 @@ import useTimekeeperState from '../hooks/state-context'
 export default function TimeKeeper() {
 	const config = useConfig()
 
-	const { mode, updateTime, setMode } = useTimekeeperState()
+	const { mode, updateTime, setMode, getComposedTime } = useTimekeeperState()
 
 	// TODO - move all this to clock wrapper
 	function handleChange(val: number, canAutoChangeUnit: boolean) {
@@ -26,7 +26,7 @@ export default function TimeKeeper() {
 			if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
 				setMode(MODE.MINUTES)
 			} else if (config.closeOnMinuteSelect && isMinuteMode(mode)) {
-				config.onDoneClick && config.onDoneClick()
+				config.onDoneClick && config.onDoneClick(getComposedTime())
 			}
 		}
 	}

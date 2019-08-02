@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, createContext, ReactElement } from 'react'
+import { TimeOutput } from '../helpers/types'
 
 // TODO - move these types elsewhere?
 interface Style {
@@ -8,8 +9,8 @@ export interface Styles {
 	main?: Style
 }
 
-type DoneClickFn = null | (() => void)
-type DoneButton = null | ReactElement
+type DoneClickFn = null | ((time: TimeOutput) => void)
+type DoneButton = null | ((time: TimeOutput) => ReactElement)
 
 interface Config {
 	coarseMinutes: number

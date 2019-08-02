@@ -5,8 +5,8 @@ import { StateProvider } from '../hooks/state-context'
 import { TimeInput, ChangeTimeFn } from '../helpers/types'
 
 interface Props extends ConfigProps {
-	time: TimeInput
-	onChange: ChangeTimeFn
+	time?: TimeInput
+	onChange?: ChangeTimeFn
 }
 
 export default function TimepickerWithConfig({

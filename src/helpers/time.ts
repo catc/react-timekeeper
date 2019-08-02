@@ -10,8 +10,9 @@ const defaultTime = {
 
 // parse and normalize time to 24h
 export function parseTime(time: TimeInput): Time {
-	// account for null
-	time = time || defaultTime
+	if (time == null) {
+		return defaultTime
+	}
 
 	let hour = 0
 	let minute = 0

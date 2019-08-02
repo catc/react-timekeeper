@@ -1,18 +1,21 @@
 import React from 'react'
-import { css, jsx } from '@emotion/core'
+import { jsx } from '@emotion/core'
 
 import useConfig from '../hooks/config'
 import style from './styles/done-button'
+import useTimekeeperState from '../hooks/state-context'
 
 export default function DoneButton() {
 	const { onDoneClick, doneButton } = useConfig()
+	const { getComposedTime } = useTimekeeperState()
 
 	if (doneButton) {
-		return doneButton
+		return doneButton(getComposedTime())
 	}
+
 	if (onDoneClick) {
 		return (
-			<span css={style} onClick={onDoneClick}>
+			<span css={style} onClick={() => onDoneClick(getComposedTime())}>
 				Done
 			</span>
 		)

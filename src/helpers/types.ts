@@ -18,7 +18,7 @@ export interface Time12 extends Time24 {
 }
 
 // time passed in from parent
-export type TimeInput = string | Time24 | Time12
+export type TimeInput = string | Time24 | Time12 | undefined | null
 
 // function passed in from parent
 export type ChangeTimeFn = (t: TimeInput) => void

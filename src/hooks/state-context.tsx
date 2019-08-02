@@ -14,12 +14,12 @@ import debounce from 'lodash.debounce'
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
 import useConfig from '../hooks/config'
 import { isHourMode, isMinuteMode, isSameTime } from '../helpers/utils'
-import { TimeInput, ChangeTimeFn, Time } from '../helpers/types'
+import { TimeInput, ChangeTimeFn, Time, TimeOutput } from '../helpers/types'
 import { MODE, CLOCK_VALUES, MERIDIEM } from '../helpers/constants'
 
 interface Props {
-	time: TimeInput
-	onChange: ChangeTimeFn
+	time?: TimeInput
+	onChange?: ChangeTimeFn
 	children: ReactElement
 }
 
@@ -35,6 +35,7 @@ interface StateContext {
 	updateTime: (val: number) => void
 	updateMeridiem: (meridiem: MERIDIEM) => void
 	setMode: (mode: MODE) => void
+	getComposedTime: () => TimeOutput
 }
 
 const stateContext = createContext({})
@@ -67,6 +68,9 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 
 	// handle time update if parent changes
 	useEffect(() => {
+		if (parentTime == null) {
+			return
+		}
 		const newTime = parseTime(parentTime)
 		if (isSameTime(newTime, refTime.current)) {
 			return
@@ -131,6 +135,10 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		_actuallySetTime(newTime)
 	}
 
+	function getComposedTime(): TimeOutput {
+		return composeTime(time.hour, time.minute)
+	}
+
 	const setMode = useCallback(
 		(mode: MODE) => {
 			let m = mode
@@ -142,14 +150,9 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		[config.hour24Mode],
 	)
 
-	// TODO - memoize?
-	const value = {
-		time: state.time,
-		mode: state.mode,
-		updateTime,
-		updateMeridiem,
-		setMode,
-	}
+	const value = useMemo(() => {
+		return { time, mode, updateTime, updateMeridiem, setMode, getComposedTime }
+	}, [time, mode]);
 
 	return <stateContext.Provider value={value}>{children}</stateContext.Provider>
 }
