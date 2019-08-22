@@ -64,7 +64,7 @@ export function MinuteNumbers({ anim }: MinuteProps) {
 			{MINUTES.map((val, i) => {
 				return (
 					<animated.span
-						css={numbersStyle}
+						css={numbersStyle({})}
 						key={val}
 						style={{
 							transform: translate.interpolate((v) => transform(i + 1, v)),

@@ -1,20 +1,11 @@
-import React, { useEffect, useState, useContext, createContext, ReactElement } from 'react'
+import React, { useContext, createContext, ReactElement, useMemo } from 'react'
 import { TimeOutput } from '../helpers/types'
-
-// TODO - move these types elsewhere?
-interface Style {
-	[key: string]: string
-}
-export interface Styles {
-	main?: Style
-}
 
 type DoneClickFn = null | ((time: TimeOutput) => void)
 type DoneButton = null | ((time: TimeOutput) => ReactElement)
 
 interface Config {
 	coarseMinutes: number
-	styles: Styles
 	switchToMinuteOnHourSelect: boolean
 	closeOnMinuteSelect: boolean
 	hour24Mode: boolean
@@ -23,7 +14,6 @@ interface Config {
 }
 
 function genConfig({
-	styles = {},
 	coarseMinutes = 1,
 	switchToMinuteOnHourSelect = false,
 	closeOnMinuteSelect = false,
@@ -35,7 +25,6 @@ function genConfig({
 		throw new Error('coarseMinutes must be at least 1')
 	}
 	return {
-		styles,
 		coarseMinutes,
 		switchToMinuteOnHourSelect,
 		closeOnMinuteSelect,
@@ -46,7 +35,6 @@ function genConfig({
 }
 
 export interface ConfigProps {
-	styles?: Styles
 	coarseMinutes?: number
 	switchToMinuteOnHourSelect?: boolean
 	closeOnMinuteSelect?: boolean
@@ -63,7 +51,6 @@ const configContext = createContext(genConfig({}))
 
 export function ConfigProvider({
 	children,
-	styles,
 	coarseMinutes,
 	switchToMinuteOnHourSelect,
 	closeOnMinuteSelect,
@@ -71,22 +58,9 @@ export function ConfigProvider({
 	onDoneClick,
 	doneButton,
 }: Props) {
-	const [config, setConfig] = useState(() =>
-		genConfig({
-			styles,
-			coarseMinutes,
-			switchToMinuteOnHourSelect,
-			closeOnMinuteSelect,
-			onDoneClick,
-			hour24Mode,
-			doneButton,
-		}),
-	)
-
-	useEffect(() => {
-		setConfig(
+	const config = useMemo(
+		() =>
 			genConfig({
-				styles,
 				coarseMinutes,
 				switchToMinuteOnHourSelect,
 				closeOnMinuteSelect,
@@ -94,16 +68,15 @@ export function ConfigProvider({
 				hour24Mode,
 				doneButton,
 			}),
-		)
-	}, [
-		styles,
-		coarseMinutes,
-		switchToMinuteOnHourSelect,
-		closeOnMinuteSelect,
-		onDoneClick,
-		hour24Mode,
-		doneButton,
-	])
+		[
+			coarseMinutes,
+			switchToMinuteOnHourSelect,
+			closeOnMinuteSelect,
+			onDoneClick,
+			hour24Mode,
+			doneButton,
+		],
+	)
 
 	return <configContext.Provider value={config}>{children}</configContext.Provider>
 }

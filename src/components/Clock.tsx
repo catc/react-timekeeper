@@ -9,11 +9,10 @@ import {
 	INITIAL_MINUTE_TRANSFORM,
 	MODE,
 	INNER_NUMBER_POSITIONING,
-	INNER_NUMBER_RADIUS,
 	getOuterNumberPosition,
 } from '../helpers/constants'
 import { isHourMode, isMinuteMode } from '../helpers/utils'
-import { ElementRef, Time } from '../helpers/types'
+import { ElementRef } from '../helpers/types'
 import style from './styles/clock'
 import useConfig from '../hooks/config'
 import useTimekeeperState from '../hooks/state-context'
