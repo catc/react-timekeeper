@@ -24,7 +24,11 @@ export function HourNumbers({ anim, mode, hour24Mode }: HourProps) {
 	const { numbers: numbersOuter, numbersInner } = CLOCK_VALUES[mode]
 
 	return (
-		<animated.div style={{ opacity: opacity }} css={numbersWrapperStyle}>
+		<animated.div
+			style={{ opacity: opacity }}
+			css={numbersWrapperStyle}
+			className="react-timekeeper__clock-hours"
+		>
 			{numbersOuter.map((val, i) => {
 				return (
 					<animated.span
@@ -60,7 +64,11 @@ export function HourNumbers({ anim, mode, hour24Mode }: HourProps) {
 export function MinuteNumbers({ anim }: MinuteProps) {
 	const { opacity, translate } = anim
 	return (
-		<animated.div style={{ opacity: opacity }} css={numbersWrapperStyle}>
+		<animated.div
+			style={{ opacity: opacity }}
+			css={numbersWrapperStyle}
+			className="react-timekeeper__clock-minutes"
+		>
 			{MINUTES.map((val, i) => {
 				return (
 					<animated.span

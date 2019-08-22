@@ -15,7 +15,11 @@ export default function DoneButton() {
 
 	if (onDoneClick) {
 		return (
-			<span css={style} onClick={() => onDoneClick(getComposedTime())}>
+			<span
+				css={style}
+				onClick={() => onDoneClick(getComposedTime())}
+				className="react-timekeeper__done-button"
+			>
 				Done
 			</span>
 		)

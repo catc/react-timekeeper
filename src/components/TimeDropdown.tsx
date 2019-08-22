@@ -87,8 +87,9 @@ export default function TimeDropdown({ close }: Props) {
 			ref={container}
 			onMouseEnter={disableBodyScroll}
 			onMouseLeave={enableBodyScroll}
+			className="react-timekeeper__time-dropdown"
 		>
-			<ul css={styles.options}>
+			<ul css={styles.options} className="react-timekeeper__dropdown-numbers">
 				{options.map((o) => (
 					<li
 						ref={(el) => (selected === o ? (selectedOption.current = el) : '')}

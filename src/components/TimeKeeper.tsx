@@ -7,8 +7,6 @@ import TopBar from './TopBar'
 import ClockWrapper from './ClockWrapper'
 import DoneButton from './DoneButton'
 
-
-// TODO - merge in TimeKeeperWrapper?
 export default function TimeKeeper() {
 	return (
 		<>

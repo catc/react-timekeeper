@@ -110,6 +110,7 @@ export default function ClockHand({ mode, time }: Props) {
 				cy={NUMBER_OUTER_POSITION}
 				r={4}
 				fill={CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND}
+				className="react-timekeeper__hand-intermediate-circle"
 			/>
 		)
 	}
@@ -131,13 +132,21 @@ export default function ClockHand({ mode, time }: Props) {
 					x2={CLOCK_RADIUS}
 					y2={length}
 					strokeWidth="1"
+					className="react-timekeeper__clock-hand"
 				/>
-				<circle cx={CLOCK_RADIUS} cy={CLOCK_RADIUS} r={1.5} fill={CLOCK_HAND_ARM_FILL} />
+				<circle
+					cx={CLOCK_RADIUS}
+					cy={CLOCK_RADIUS}
+					r={1.5}
+					fill={CLOCK_HAND_ARM_FILL}
+					className="react-timekeeper__hand-circle-center"
+				/>
 				<animated.circle
 					fill={CLOCK_HAND_CIRCLE_BACKGROUND}
 					cx={CLOCK_RADIUS}
 					cy={position}
 					r={circleRadius}
+					className="react-timekeeper__hand-circle-outer"
 				/>
 				{showIntermediateValueDisplay}
 			</animated.g>

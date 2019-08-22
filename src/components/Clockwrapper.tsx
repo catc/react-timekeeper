@@ -10,11 +10,8 @@ import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import { isHourMode, isMinuteMode } from '../helpers/utils'
 import useTimekeeperState from '../hooks/state-context'
 
-interface Props {
-	// calculateTimeValue: CalcTimeFromAngle
-}
 
-export default function ClockWrapper({  }: Props) {
+export default function ClockWrapper() {
 	const config = useConfig()
 
 	// clock events
