@@ -21,20 +21,17 @@ export const CLOCK_VALUES = {
 	[MODE.MINUTES]: {
 		increments: 60,
 		numbers: MINUTES,
-		coarseIncrements: 5,
 		dropdown: MINUTES_60,
 	},
 	[MODE.HOURS_12]: {
 		increments: 12,
 		numbers: HOURS_12,
-		coarseIncrements: 1,
 		dropdown: HOURS_12,
 	},
 	[MODE.HOURS_24]: {
 		increments: 12,
 		numbers: HOURS_24.slice(12),
 		numbersInner: HOURS_24.slice(0, 12),
-		coarseIncrements: 1,
 		dropdown: HOURS_24,
 	},
 }

@@ -10,7 +10,6 @@ import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import { isHourMode, isMinuteMode } from '../helpers/utils'
 import useTimekeeperState from '../hooks/state-context'
 
-
 export default function ClockWrapper() {
 	const config = useConfig()
 
@@ -26,8 +25,7 @@ export default function ClockWrapper() {
 		- on drag, if count < 2, do not force coarse
 		- on mouseup, if count < 2 do not force coarse
 		- handlepoint
-			- if config OR forceCoarse arg, then coarse it
-			- since now providing option for coarse... need a more sophisticated method?
+			- if `wasTapped` OR `forceCoarse` config, then coarse it
 		- coarse is just rounding number to an increment before setting unit
 
 		LOGIC AROUND CAN CHANGE UNIT
@@ -44,18 +42,18 @@ export default function ClockWrapper() {
 		angle: number,
 		{ canAutoChangeUnit = false, wasTapped = false, isInnerClick = false },
 	) {
-		/*
-			TODO
-			- if coarse, avoid the double calculation
-			- first check if coarse, and then do one or either
-		*/
+		// total number of allowable increments, 12/24 for hours, 60 for min
+		const totalIncrements = CLOCK_VALUES[mode].increments
+		// minimum increment used for rounding
+		let minIncrement = 1;
 
-		const increments = CLOCK_VALUES[mode].increments
-		/*
-				calculate time value based on current clock increments
-				- % is to normalize angle - otherwise left side of 0 gives 12, right side of 0 gives 0
-			*/
-		let selected = Math.round((angle / 360) * increments) % increments
+		if (isMinuteMode(mode) && (wasTapped || config.forceCoarseMinutes)) {
+			minIncrement = config.coarseMinutes;
+		}
+
+		const val = angle / 360 * totalIncrements;
+		let selected = Math.round(val / minIncrement) * minIncrement
+
 		if (mode === MODE.HOURS_24 && config.hour24Mode) {
 			// fixes 12pm and midnight, both angle -> selected return 0
 			// for midnight need a final selected of 0, and for noon need 12
@@ -66,31 +64,7 @@ export default function ClockWrapper() {
 			}
 		}
 
-		/*
-				TODO
-				- clean up this logic, make it reusable for hours as well
-				- add hours coarse as well
-					- add a coarse object to config?
-					- but pass in to component as separate?
-				- fade out numbers depending on whether is has coarse value
-					- for this, should calculate all numbers and determine
-					which ones are faded out and cache
-			*/
-
-		/* if (mode === MODE.MINUTES) {
-				const coarseMinutes = config.coarseMinutes
-				const roundValue = coarseMinutes > 1 || wasTapped
-				if (roundValue) {
-					// number was just tapped so account for fat finger
-					// or coarse increments are enabled
-					const multiplier = coarseMinutes > 1 ? coarseMinutes : 5
-					// const multiplier = CLOCK_DATA[unit].coarseMultiplier;
-					selected = Math.round(selected / multiplier) * multiplier
-				}
-			} */
-
-
-		// update time officially on this component
+		// update time officially on timekeeper
 		updateTime(selected)
 
 		// handle any unit autochanges or done click

@@ -14,6 +14,7 @@ export default function TimepickerWithConfig({
 	onChange,
 	// config props:
 	coarseMinutes,
+	forceCoarseMinutes,
 	switchToMinuteOnHourSelect,
 	closeOnMinuteSelect,
 	hour24Mode,
@@ -23,6 +24,7 @@ export default function TimepickerWithConfig({
 	return (
 		<ConfigProvider
 			coarseMinutes={coarseMinutes}
+			forceCoarseMinutes={forceCoarseMinutes}
 			switchToMinuteOnHourSelect={switchToMinuteOnHourSelect}
 			closeOnMinuteSelect={closeOnMinuteSelect}
 			hour24Mode={hour24Mode}

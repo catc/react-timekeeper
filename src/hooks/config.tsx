@@ -6,6 +6,7 @@ type DoneButton = null | ((time: TimeOutput) => ReactElement)
 
 interface Config {
 	coarseMinutes: number
+	forceCoarseMinutes: boolean
 	switchToMinuteOnHourSelect: boolean
 	closeOnMinuteSelect: boolean
 	hour24Mode: boolean
@@ -15,6 +16,7 @@ interface Config {
 
 export interface ConfigProps {
 	coarseMinutes?: number
+	forceCoarseMinutes?: boolean
 	switchToMinuteOnHourSelect?: boolean
 	closeOnMinuteSelect?: boolean
 	hour24Mode?: boolean
@@ -31,6 +33,7 @@ const configContext = createContext<Config>({} as any)
 export function ConfigProvider({
 	children,
 	coarseMinutes = 5,
+	forceCoarseMinutes = false,
 	switchToMinuteOnHourSelect = false,
 	closeOnMinuteSelect = false,
 	hour24Mode = false,
@@ -43,6 +46,7 @@ export function ConfigProvider({
 		}
 		return {
 			coarseMinutes,
+			forceCoarseMinutes,
 			switchToMinuteOnHourSelect,
 			closeOnMinuteSelect,
 			hour24Mode,
@@ -51,6 +55,7 @@ export function ConfigProvider({
 		}
 	}, [
 		coarseMinutes,
+		forceCoarseMinutes,
 		switchToMinuteOnHourSelect,
 		closeOnMinuteSelect,
 		onDoneClick,
