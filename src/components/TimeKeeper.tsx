@@ -14,7 +14,7 @@ export default function TimeKeeper() {
 
 			<div className="react-timekeeper" css={style}>
 				<TopBar />
-				<ClockWrapper  />
+				<ClockWrapper />
 				<DoneButton />
 			</div>
 		</>

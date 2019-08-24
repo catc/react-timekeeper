@@ -80,8 +80,8 @@ export function getOuterNumberPosition(mode: MODE): number {
 }
 
 // initial position of hours/minutes before animating to final position
-export const INITIAL_HOUR_TRANSFORM = NUMBER_OUTER_POSITION - 30
-export const INITIAL_MINUTE_TRANSFORM = NUMBER_OUTER_POSITION + 26
+export const INITIAL_HOUR_TRANSFORM = NUMBER_OUTER_POSITION - 32
+export const INITIAL_MINUTE_TRANSFORM = NUMBER_OUTER_POSITION + 28
 
 // clock hand stuff
 export function getClockHandLength(mode: MODE, inner: boolean): number {

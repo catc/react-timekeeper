@@ -23,7 +23,7 @@ export default function useClockEvents(
 	const disableMouse = useRef(false)
 
 	// mouse events
-	function handleMouseDown(e: MouseEvent) {
+	function handleMouseDown(e: React.MouseEvent<HTMLElement>) {
 		if (disableMouse.current) {
 			return
 		}
@@ -39,7 +39,7 @@ export default function useClockEvents(
 		}
 
 		// move hand
-		handleMouseDrag(e)
+		handleMouseDrag(e) // TODO - fix ts
 	}
 	function handleMouseDrag(e: MouseEvent) {
 		if (calcOffsetCache.current) {

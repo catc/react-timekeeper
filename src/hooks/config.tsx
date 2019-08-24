@@ -13,27 +13,6 @@ interface Config {
 	doneButton: DoneButton
 }
 
-function genConfig({
-	coarseMinutes = 1,
-	switchToMinuteOnHourSelect = false,
-	closeOnMinuteSelect = false,
-	hour24Mode = false,
-	onDoneClick = null,
-	doneButton = null,
-}: ConfigProps): Config {
-	if (coarseMinutes < 1) {
-		throw new Error('coarseMinutes must be at least 1')
-	}
-	return {
-		coarseMinutes,
-		switchToMinuteOnHourSelect,
-		closeOnMinuteSelect,
-		hour24Mode,
-		onDoneClick,
-		doneButton,
-	}
-}
-
 export interface ConfigProps {
 	coarseMinutes?: number
 	switchToMinuteOnHourSelect?: boolean
@@ -47,36 +26,37 @@ interface Props extends ConfigProps {
 	children: ReactElement
 }
 
-const configContext = createContext(genConfig({}))
+const configContext = createContext<Config>({} as any)
 
 export function ConfigProvider({
 	children,
-	coarseMinutes,
-	switchToMinuteOnHourSelect,
-	closeOnMinuteSelect,
-	hour24Mode,
-	onDoneClick,
-	doneButton,
+	coarseMinutes = 5,
+	switchToMinuteOnHourSelect = false,
+	closeOnMinuteSelect = false,
+	hour24Mode = false,
+	onDoneClick = null,
+	doneButton = null,
 }: Props) {
-	const config = useMemo(
-		() =>
-			genConfig({
-				coarseMinutes,
-				switchToMinuteOnHourSelect,
-				closeOnMinuteSelect,
-				onDoneClick,
-				hour24Mode,
-				doneButton,
-			}),
-		[
+	const config = useMemo(() => {
+		if (coarseMinutes < 1) {
+			throw new Error('coarseMinutes must be at least 1')
+		}
+		return {
 			coarseMinutes,
 			switchToMinuteOnHourSelect,
 			closeOnMinuteSelect,
-			onDoneClick,
 			hour24Mode,
+			onDoneClick,
 			doneButton,
-		],
-	)
+		}
+	}, [
+		coarseMinutes,
+		switchToMinuteOnHourSelect,
+		closeOnMinuteSelect,
+		onDoneClick,
+		hour24Mode,
+		doneButton,
+	])
 
 	return <configContext.Provider value={config}>{children}</configContext.Provider>
 }
