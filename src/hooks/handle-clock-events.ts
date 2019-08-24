@@ -20,9 +20,13 @@ export default function useClockEvents(
 	const calcOffsetCache: React.MutableRefObject<null | CalcOffsetFn> = useRef(null)
 	const dragCount = useRef(0)
 	const cleanup = useCallback(_removeHandlers, [])
+	const disableMouse = useRef(false)
 
 	// mouse events
-	function handleMouseDown() {
+	function handleMouseDown(e: MouseEvent) {
+		if (disableMouse.current) {
+			return
+		}
 		dragCount.current = 0
 
 		// add listeners
@@ -33,6 +37,9 @@ export default function useClockEvents(
 		if (clock.current) {
 			calcOffsetCache.current = calcOffset(clock.current)
 		}
+
+		// move hand
+		handleMouseDrag(e)
 	}
 	function handleMouseDrag(e: MouseEvent) {
 		if (calcOffsetCache.current) {
@@ -52,6 +59,8 @@ export default function useClockEvents(
 
 	// touch events
 	function handleTouchStart() {
+		// disables mouse events during touch events
+		disableMouse.current = true
 		dragCount.current = 0
 
 		// add listeners
@@ -122,6 +131,10 @@ export default function useClockEvents(
 			const { offsetX, offsetY } = calcOffsetCache.current(touch.clientX, touch.clientY)
 			calculatePoint(offsetX, offsetY, true)
 		}
+
+		setTimeout(() => {
+			disableMouse.current = false
+		}, 10)
 	}
 	function calculatePoint(
 		offsetX: number,
