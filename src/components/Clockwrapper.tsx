@@ -45,13 +45,14 @@ export default function ClockWrapper() {
 		// total number of allowable increments, 12/24 for hours, 60 for min
 		const totalIncrements = CLOCK_VALUES[mode].increments
 		// minimum increment used for rounding
-		let minIncrement = 1;
+		let minIncrement = 1
 
+		// coarse minutes
 		if (isMinuteMode(mode) && (wasTapped || config.forceCoarseMinutes)) {
-			minIncrement = config.coarseMinutes;
+			minIncrement = config.coarseMinutes
 		}
 
-		const val = angle / 360 * totalIncrements;
+		const val = (angle / 360) * totalIncrements
 		let selected = Math.round(val / minIncrement) * minIncrement
 
 		if (mode === MODE.HOURS_24 && config.hour24Mode) {

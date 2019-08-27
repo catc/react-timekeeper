@@ -7,6 +7,11 @@ import { CLOCK_RADIUS } from '../../helpers/constants'
 		y = clock_radius
 */
 
+/* 
+	TODO - make function to convert minutes/hours to coords
+	otherwise changing CLOCK_RADIUS will end up breaking coords
+*/
+
 export const HOUR_3_OUTER = {
 	clientX: CLOCK_RADIUS * 2 - 1,
 	clientY: CLOCK_RADIUS,
@@ -24,4 +29,14 @@ export const HOUR_24_OUTER = {
 export const HOUR_12_INNER = {
 	clientX: CLOCK_RADIUS,
 	clientY: CLOCK_RADIUS - 1,
+}
+
+export const MINUTE_7 = {
+	clientX: CLOCK_RADIUS + 45,
+	clientY: CLOCK_RADIUS / 2,
+}
+
+export const MINUTE_23 = {
+	clientX: CLOCK_RADIUS + 60,
+	clientY: CLOCK_RADIUS + 60,
 }

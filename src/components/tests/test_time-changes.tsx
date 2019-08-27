@@ -13,7 +13,14 @@ import {
 	waitForUpdates,
 	changeToMinutes,
 } from './utils'
-import { HOUR_12_INNER, HOUR_24_OUTER, HOUR_3_INNER, HOUR_3_OUTER } from './click-data'
+import {
+	HOUR_12_INNER,
+	HOUR_24_OUTER,
+	HOUR_3_INNER,
+	HOUR_3_OUTER,
+	MINUTE_7,
+	MINUTE_23,
+} from './click-data'
 
 /*
 	TODO
@@ -78,8 +85,8 @@ describe('handles events correctly', () => {
 	})
 
 	describe('updates minutes', () => {
-		function testMinutes(coords: any, expectedMinute: number) {
-			const { onChange, wrapper } = renderTK()
+		function testMinutes(coords: any, expectedMinute: number, opts: any = {}) {
+			const { onChange, wrapper } = renderTK(opts)
 
 			changeToMinutes(wrapper)
 			triggerMouseClick(wrapper, coords)
@@ -96,6 +103,20 @@ describe('handles events correctly', () => {
 		})
 		test('handles click on "15"', () => {
 			testMinutes(HOUR_12_INNER, 0)
+		})
+
+		test('handles coarse minutes', () => {
+			// 7 rounded down to 5
+			testMinutes(MINUTE_7, 5)
+		})
+
+		test('handles custom coarse minutes', () => {
+			testMinutes(MINUTE_23, 30, {
+				// set diff time from 30 so update goes through
+				// since 23 min is rounded to 30 min
+				time: '12:35',
+				coarseMinutes: 15
+			})
 		})
 	})
 
