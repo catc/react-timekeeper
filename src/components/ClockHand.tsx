@@ -78,11 +78,15 @@ export default function ClockHand({ mode, time }: Props) {
 			prevState.current.time = time
 			dragCount.current++
 
-			// if on hour mode and `switchToMinuteOnHourSelect` is enabled, don't display
-			// change in time, just wait for mode to change (to avoid weird animation)
-			if (isHourMode(mode) && config.switchToMinuteOnHourSelect && dragCount.current < 2) {
-				return
-			}
+			/*
+			TODO - consider making this a config option?
+			if on hour mode and `switchToMinuteOnHourSelect` is enabled, don't display
+			change in time, just wait for mode to change
+			*/
+			// if (isHourMode(mode) && config.switchToMinuteOnHourSelect && dragCount.current < 2) {
+			// 	return
+			// }
+
 			setAnim({
 				immediate: true,
 				rotation: next,

@@ -115,7 +115,7 @@ describe('handles events correctly', () => {
 				// set diff time from 30 so update goes through
 				// since 23 min is rounded to 30 min
 				time: '12:35',
-				coarseMinutes: 15
+				coarseMinutes: 15,
 			})
 		})
 	})
