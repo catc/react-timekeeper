@@ -3,7 +3,6 @@ import React, {
 	useMemo,
 	useReducer,
 	useEffect,
-	useState,
 	useContext,
 	createContext,
 	ReactElement,
@@ -13,9 +12,9 @@ import debounce from 'lodash.debounce'
 
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
 import useConfig from '../hooks/config'
-import { isHourMode, isMinuteMode, isSameTime } from '../helpers/utils'
+import { isHourMode, isSameTime } from '../helpers/utils'
 import { TimeInput, ChangeTimeFn, Time, TimeOutput } from '../helpers/types'
-import { MODE, CLOCK_VALUES, MERIDIEM } from '../helpers/constants'
+import { MODE, MERIDIEM } from '../helpers/constants'
 
 interface Props {
 	time?: TimeInput
@@ -38,7 +37,7 @@ interface StateContext {
 	getComposedTime: () => TimeOutput
 }
 
-const stateContext = createContext({})
+const stateContext = createContext({} as StateContext)
 
 function reducer(state: GlobalState, action: any) {
 	switch (action.type) {
@@ -82,16 +81,20 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		dispatch(action)
 	}, [config.hour24Mode, parentTime])
 
+	const getComposedTime = useCallback(() => {
+		const time = refTime.current
+		return composeTime(time.hour, time.minute)
+	}, [])
+
 	// debounced onChange function from parent
 	const debounceUpdateParent = useMemo(() => {
 		if (typeof onChange === 'function') {
 			return debounce(() => {
-				const time = refTime.current
-				onChange(composeTime(time.hour, time.minute))
+				onChange(getComposedTime())
 			}, 80)
 		}
 		return () => {}
-	}, [onChange])
+	}, [getComposedTime, onChange])
 
 	// update 24 hour time on meridiem change
 	function updateMeridiem(newMeridiem: MERIDIEM) {
@@ -135,10 +138,6 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		_actuallySetTime(newTime)
 	}
 
-	function getComposedTime(): TimeOutput {
-		return composeTime(time.hour, time.minute)
-	}
-
 	const setMode = useCallback(
 		(mode: MODE) => {
 			let m = mode
@@ -150,10 +149,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		[config.hour24Mode],
 	)
 
-	const value = useMemo(() => {
-		return { time, mode, updateTime, updateMeridiem, setMode, getComposedTime }
-	}, [time, mode]);
-
+	const value = { time, mode, updateTime, updateMeridiem, setMode, getComposedTime }
 	return <stateContext.Provider value={value}>{children}</stateContext.Provider>
 }
 

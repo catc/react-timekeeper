@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { animated, AnimatedValue, ForwardedProps } from 'react-spring'
 
 import { MINUTES, CLOCK_VALUES, MODE } from '../helpers/constants'
@@ -19,7 +19,11 @@ interface HourProps extends MinuteProps {
 	hour24Mode: boolean
 }
 
-export function HourNumbers({ anim, mode, hour24Mode }: HourProps) {
+/*
+	can memoize components since `anim` object doesn't actually change
+*/
+
+function hours({ anim, mode, hour24Mode }: HourProps) {
 	const { opacity, translate, translateInner } = anim
 	const { numbers: numbersOuter, numbersInner } = CLOCK_VALUES[mode]
 
@@ -61,7 +65,11 @@ export function HourNumbers({ anim, mode, hour24Mode }: HourProps) {
 	)
 }
 
-export function MinuteNumbers({ anim }: MinuteProps) {
+export const HourNumbers = memo(hours, (prev, next) => {
+	return prev.mode === next.mode && prev.hour24Mode === next.hour24Mode
+})
+
+function minutes({ anim }: MinuteProps) {
 	const { opacity, translate } = anim
 	return (
 		<animated.div
@@ -85,3 +93,7 @@ export function MinuteNumbers({ anim }: MinuteProps) {
 		</animated.div>
 	)
 }
+
+export const MinuteNumbers = memo(minutes, () => {
+	return true
+})

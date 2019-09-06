@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useTransition } from 'react-spring'
-import { css, jsx } from '@emotion/core'
+import { jsx } from '@emotion/core'
 
 import ClockHand from './ClockHand'
 import { HourNumbers, MinuteNumbers } from './Numbers'
@@ -29,7 +29,7 @@ interface Props {
 	clockEl: ElementRef
 }
 
-export default function ClockWrapper5({ clockEl }: Props) {
+export default function ClockWrapper({ clockEl }: Props) {
 	const firstTime = useRef(true)
 	const { hour24Mode } = useConfig()
 	const { mode, time } = useTimekeeperState()

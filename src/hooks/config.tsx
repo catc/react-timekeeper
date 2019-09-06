@@ -28,7 +28,7 @@ interface Props extends ConfigProps {
 	children: ReactElement
 }
 
-const configContext = createContext<Config>({} as any)
+const configContext = createContext<Config>({} as Config)
 
 export function ConfigProvider({
 	children,
