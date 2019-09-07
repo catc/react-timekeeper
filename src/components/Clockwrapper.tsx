@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
 import { jsx } from '@emotion/core'
 
-import useConfig from '../hooks/config'
+import useConfig from '../hooks/config-context'
 import Clock from './Clock'
 import Meridiems from './Meridiems'
-import useClockEvents from '../hooks/handle-clock-events'
 import style from './styles/clock-wrapper'
+import useClockEvents from '../hooks/clock-events'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import { isHourMode, isMinuteMode } from '../helpers/utils'
 import useTimekeeperState from '../hooks/state-context'

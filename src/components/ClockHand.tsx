@@ -18,7 +18,7 @@ import {
 	CLOCK_HAND_CIRCLE_BACKGROUND,
 	CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND,
 } from './styles/constants'
-import useConfig from '../hooks/config'
+import useConfig from '../hooks/config-context'
 import { calcAnimationAngle } from '../helpers/math'
 
 interface Props {

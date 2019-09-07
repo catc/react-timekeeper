@@ -1,7 +1,7 @@
 import React from 'react'
 import { jsx } from '@emotion/core'
 
-import useConfig from '../hooks/config'
+import useConfig from '../hooks/config-context'
 import style from './styles/done-button'
 import useTimekeeperState from '../hooks/state-context'
 

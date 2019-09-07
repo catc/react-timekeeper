@@ -3,7 +3,7 @@ import { jsx } from '@emotion/core'
 
 import TimeDropdown from './TimeDropdown'
 import useTimekeeperState from '../hooks/state-context'
-import useConfig from '../hooks/config'
+import useConfig from '../hooks/config-context'
 import * as styles from './styles/top-bar'
 import { MODE, MERIDIEM } from '../helpers/constants'
 import { isHourMode } from '../helpers/utils'

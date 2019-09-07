@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, MutableRefObject } from 'react'
 
 import * as styles from './styles/time-dropdown'
-import useConfig from '../hooks/config'
+import useConfig from '../hooks/config-context'
 import { getScrollBarWidth } from '../helpers/dom'
 import { getTimeValue } from '../helpers/utils'
 import { ElementRef } from '../helpers/types'

@@ -1,6 +1,6 @@
 import React from 'react'
 import TimeKeeper from './TimeKeeper'
-import { ConfigProvider, ConfigProps } from '../hooks/config'
+import { ConfigProvider, ConfigProps } from '../hooks/config-context'
 import { StateProvider } from '../hooks/state-context'
 import { TimeInput, ChangeTimeFn } from '../helpers/types'
 
