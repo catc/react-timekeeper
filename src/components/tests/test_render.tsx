@@ -6,8 +6,8 @@ import TopBar from '../TopBar'
 import DoneButton from '../DoneButton'
 import TimeDropdown from '../TimeDropdown'
 
-import './setup'
-import { renderTK, changeToMinutes, mockAnimations } from './utils'
+import './helpers/setup'
+import { renderTK, changeToMinutes, mockAnimations } from './helpers/utils'
 
 describe('it renders correctly', () => {
 	beforeEach(() => {

@@ -5,14 +5,14 @@ import Meridiems from '../Meridiems'
 import TopBar from '../TopBar'
 import TimeDropdown from '../TimeDropdown'
 
-import './setup'
+import './helpers/setup'
 import {
 	mockAnimations,
 	triggerMouseClick,
 	renderTK,
 	waitForUpdates,
 	changeToMinutes,
-} from './utils'
+} from './helpers/utils'
 import {
 	HOUR_12_INNER,
 	HOUR_24_OUTER,
@@ -20,7 +20,7 @@ import {
 	HOUR_3_OUTER,
 	MINUTE_7,
 	MINUTE_23,
-} from './click-data'
+} from './helpers/click-data'
 
 /*
 	TODO

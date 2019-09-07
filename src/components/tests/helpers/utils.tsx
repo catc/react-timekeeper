@@ -2,9 +2,9 @@ import React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 
-import ClockWrapper from '../ClockWrapper'
-import TimeKeeperWrapper from '../TimeKeeperWrapper'
-import TopBar from '../TopBar'
+import ClockWrapper from '../../ClockWrapper'
+import TimeKeeperWrapper from '../../TimeKeeperWrapper'
+import TopBar from '../../TopBar'
 
 export const noop = () => {}
 

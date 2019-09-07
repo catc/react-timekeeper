@@ -1,4 +1,4 @@
-import { CLOCK_RADIUS } from '../../helpers/constants'
+import { CLOCK_RADIUS } from '../../../helpers/constants'
 
 /*
 	angles are based on top left:

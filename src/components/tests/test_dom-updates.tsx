@@ -1,10 +1,10 @@
 // import React from 'react'
 import ClockHand from '../ClockHand'
 
-import './setup'
-import { renderTK, triggerMouseClick, mockAnimations } from './utils'
+import './helpers/setup'
+import { renderTK, triggerMouseClick, mockAnimations } from './helpers/utils'
 import { getClockHandLength, MODE } from '../../helpers/constants'
-import { HOUR_12_INNER, HOUR_24_OUTER, HOUR_3_OUTER, HOUR_3_INNER } from './click-data'
+import { HOUR_12_INNER, HOUR_24_OUTER, HOUR_3_OUTER, HOUR_3_INNER } from './helpers/click-data'
 
 describe('dom updates correctly', () => {
 	beforeEach(() => {
