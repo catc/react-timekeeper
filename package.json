@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Time picker based on the style of the Google Keep app",
   "main": "lib/index.js",
+  "types": "lib/TODO.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/catc/react-timekeeper.git"
@@ -74,11 +75,13 @@
   "engines": {
     "node": "10.16.0"
   },
+  "peerDependencies": {
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
+  },
   "dependencies": {
     "@emotion/core": "^10.0.14",
     "lodash.debounce": "^4.0.8",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
     "react-spring": "^8.0.25"
   },
   "eslintIgnore": [
