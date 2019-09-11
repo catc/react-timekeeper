@@ -94,15 +94,7 @@ export default function ClockHand({ mode, time }: Props) {
 				position: circlePosition,
 			})
 		}
-	}, [
-		circlePosition,
-		config.switchToMinuteOnHourSelect,
-		handLength,
-		mode,
-		rotation,
-		setAnim,
-		time,
-	])
+	}, [circlePosition, handLength, mode, rotation, setAnim, time])
 
 	// mini circle on clockhand between increments on minutes
 	const value = getTimeValue(mode, time)
@@ -126,7 +118,6 @@ export default function ClockHand({ mode, time }: Props) {
 			viewBox={`0 0 ${CLOCK_SIZE} ${CLOCK_SIZE}`}
 			xmlns="http://www.w3.org/2000/svg"
 			className="react-timekeeper__clock-hand"
-			// style={{ overflow: 'visible' }}
 		>
 			<animated.g transform={rotation.interpolate((a) => rotate(a))}>
 				<animated.line
