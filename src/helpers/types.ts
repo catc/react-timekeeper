@@ -33,11 +33,3 @@ export interface TimeOutput {
 	minute: number
 	meridiem: string
 }
-
-export type CalcTimeFromAngle = (
-	angle: number,
-	{
-		canAutoChangeUnit,
-		wasTapped,
-	}: { canAutoChangeUnit: boolean; wasTapped: boolean; isInnerClick: boolean },
-) => void

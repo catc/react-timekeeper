@@ -40,6 +40,14 @@ export function isWithinRadius(x: number, y: number, radius: number): boolean {
 	return Math.sqrt(x * x + y * y) < radius
 }
 
+export type CalcTimeFromAngle = (
+	angle: number,
+	{
+		canAutoChangeUnit,
+		wasTapped,
+	}: { canAutoChangeUnit: boolean; wasTapped: boolean; isInnerClick: boolean },
+) => void
+
 // normalize any angles to 0-360 deg
 function normalize(angle: number): number {
 	return ((angle % 360) + 360) % 360
@@ -50,7 +58,7 @@ function normalize(angle: number): number {
 	to animate to - positive spins clockwise, negative is ccw
 
 	- prev is the previous angle - can literally be almost any value,
-	eg: 480 is valid
+	eg: 480 is valid, -480 is valid
 	- next is the angle to rotate to - is always between 0-360
 	- must return an angle relative to the previous, so once again
 	this value can be any negative or positive value (like prev)

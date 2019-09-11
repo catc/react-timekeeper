@@ -3,9 +3,17 @@ import { useEffect, useRef, useCallback } from 'react'
 import { CLOCK_RADIUS, INNER_NUMBER_RADIUS } from '../helpers/constants'
 import { calcOffset, CalcOffsetFn } from '../helpers/dom'
 import { deg, isWithinRadius } from '../helpers/math'
-import { ElementRef, CalcTimeFromAngle } from '../helpers/types'
+import { ElementRef } from '../helpers/types'
 
 const { atan2 } = Math
+
+type CalcTimeFromAngle = (
+	angle: number,
+	{
+		canAutoChangeUnit,
+		wasTapped,
+	}: { canAutoChangeUnit: boolean; wasTapped: boolean; isInnerClick: boolean },
+) => void
 
 /*
 	solely responsible for transforming click events into
