@@ -2,8 +2,8 @@
   "name": "react-timekeeper",
   "version": "2.0.0",
   "description": "Time picker based on the style of the Google Keep app",
-  "main": "lib/index.js",
-  "types": "lib/TODO.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/catc/react-timekeeper.git"
@@ -26,7 +26,8 @@
     "docs:build": "node ./bin/build.js",
     "_clean": "rimraf lib && mkdir lib",
     "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib",
-    "lib": " npm run _clean && npm run _build",
+    "_types": "NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib  --jsx react src/index.ts",
+    "lib": " npm run _clean && npm run _build & npm run _types",
     "tests:watch": "NODE_ENV=test jest --watch",
     "tests:run": "NODE_ENV=test jest"
   },

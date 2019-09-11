@@ -61,7 +61,7 @@ export default function ClockWrapper({ clockEl }: Props) {
 	return (
 		<div className="react-timekeeper__clock" css={style} ref={clockEl}>
 			{transitions.map(({ item: currentMode, key, props }) => {
-				// TODO - weird hot reloading issue, remove later
+				// TODO - weird hot reloading issue, remove during compilation
 				if (!currentMode) {
 					return null
 				}
