@@ -14,15 +14,7 @@ interface Config {
 	doneButton: DoneButton
 }
 
-export interface ConfigProps {
-	coarseMinutes?: number
-	forceCoarseMinutes?: boolean
-	switchToMinuteOnHourSelect?: boolean
-	closeOnMinuteSelect?: boolean
-	hour24Mode?: boolean
-	onDoneClick?: DoneClickFn
-	doneButton?: DoneButton
-}
+export type ConfigProps = Partial<Config>
 
 interface Props extends ConfigProps {
 	children: ReactElement
