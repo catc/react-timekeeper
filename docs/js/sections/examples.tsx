@@ -36,14 +36,13 @@ function YourComponent(){
 	
 	return (
 		<div>
-		<Timekeeper
-		time={time}
-		onChange={(data) => setTime(data.formatted12)}
-		/>
-		<span>Time is {time}</span>
+			<Timekeeper
+				time={time}
+				onChange={(data) => setTime(data.formatted12)}
+			/>
+			<span>Time is {time}</span>
 		</div>
-		)
-		
+	)
 }`}</Code>
 			</div>
 
