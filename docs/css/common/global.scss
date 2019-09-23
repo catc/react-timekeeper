@@ -1,0 +1,43 @@
+html {
+    font-size: 62.5%;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    background-color: #f7f7f7;
+    color: $b3;
+    font-family: $font-main;
+    font-size: 1.4em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.55;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+            font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	text-rendering: optimizelegibility;
+	-webkit-font-smoothing: antialiased;
+    font-family: $font-alt;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+pre code, code span, code {
+    font-family: $font-monospace;
+}
+
+* {
+	box-sizing: border-box;
+	position: relative;
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
