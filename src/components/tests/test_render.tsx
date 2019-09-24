@@ -153,7 +153,7 @@ describe('it renders correctly', () => {
 
 		test('displays button if done fn provided', () => {
 			const fn = jest.fn()
-			const time = { hour: 12, minute: 30}
+			const time = { hour: 12, minute: 30 }
 			const { wrapper } = renderTK({ onDoneClick: fn, time })
 
 			const done = wrapper.find(DoneButton)
@@ -165,7 +165,11 @@ describe('it renders correctly', () => {
 			expect(fn).toBeCalledWith(
 				expect.objectContaining({
 					hour: time.hour,
-					minute: time.minute
+					minute: time.minute,
+				}),
+				expect.objectContaining({
+					type: 'click',
+					target: expect.anything(),
 				}),
 			)
 		})
