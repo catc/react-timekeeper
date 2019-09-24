@@ -3,7 +3,9 @@ node_modules/
 lib/
 
 .DS_Store
+.awcache/
 
 # temp/testing
+__*
 z_old/
 z_temp/

@@ -1,0 +1,43 @@
+{
+	"awesomeTypescriptLoaderOptions": {
+		"useCache": true,
+		"errorsAsWarnings": true
+	},
+	"compilerOptions": {
+		// testing for the time being
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"target": "esnext",
+		"allowJs": true,
+		"skipLibCheck": false,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		// "isolatedModules": true,
+		// "noEmit": true,
+		"jsx": "react",
+		"experimentalDecorators": true,
+		"lib": [
+			"es2018",
+			"dom"
+		],
+		"baseUrl": ".",
+		"paths": {
+			// also see webpack config resolve.alias
+			"@tk": [
+				"src/"
+			]
+		},
+	},
+	"exclude": [
+		"node_modules",
+		"**/node_modules/*",
+		"**/staticresources/*",
+		"docs/build",
+		"lib"
+	],
+}
