@@ -8,7 +8,7 @@ TODO
 <h1 align="center">
 	<img height="350" src="./screenshots/example.png" />
 	<br/>
-	<a href="https://catc.github.io/react-timekeeper/">React Timekeeper</a>
+	React Timekeeper
 </h1>
 
 <p align="center">
