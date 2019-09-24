@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { hot } from 'react-hot-loader'
+import '../css/style.scss'
 
 import highlight from 'highlight.js/lib'
 import 'highlight.js/lib/languages/javascript'
 import 'highlight.js/lib/languages/scss'
 import 'highlight.js/styles/dracula.css'
-
-import '../css/style.scss'
 
 import Intro from './sections/intro'
 import Installation from './sections/installation'
@@ -15,7 +14,7 @@ import Examples from './sections/examples'
 import Other from './sections/other'
 
 function Content() {
-	useEffect(() => {
+	useLayoutEffect(() => {
 		highlight.configure({
 			tabReplace: '    ',
 		})

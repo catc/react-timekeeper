@@ -1,8 +1,27 @@
+<!-- 
+TODO
+- update react spring to v9 on release
+	- should fix about of typescript issues
+- fix remaining typescript errors
+-->
+
 <h1 align="center">
 	<img height="350" src="./screenshots/example.png" />
-	<br><br>
+	<br/>
 	<a href="https://catc.github.io/react-timekeeper/">React Timekeeper</a>
 </h1>
+
+<p align="center">
+  <a href="https://npmjs.org/package/driver.js">
+    <img src="https://img.shields.io/travis/catc/react-timekeeper" alt="build" />
+  </a>
+  <a href="https://www.npmjs.com/package/react-timekeeper">
+    <img src="https://img.shields.io/npm/dm/react-timekeeper" alt="downloads" />
+  </a>
+  <a href="https://github.com/catc/react-timekeeper/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+</p>
 
 <p align="center">
 	<b>
@@ -14,6 +33,7 @@
 	</b>
 </p>
 
+------------
 <br/>
 
 ## Installation
@@ -66,7 +86,7 @@ For full api and examples, see [API docs](https://catc.github.io/react-timekeepe
 
 Other useful commands:
 - build docs: `npm run docs:build`
-- run all tests: `npm run tests:run`
+- run all tests: `npm run tests`
 - watch tests: `npm run tests:watch`
 - create lib to publish npm: `npm run lib`
 
