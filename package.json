@@ -29,7 +29,7 @@
     "_types": "NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib  --jsx react src/index.ts",
     "lib": " npm run _clean && npm run _build & npm run _types",
     "tests:watch": "NODE_ENV=test jest --watch",
-    "tests:run": "NODE_ENV=test jest"
+    "tests": "NODE_ENV=test jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
