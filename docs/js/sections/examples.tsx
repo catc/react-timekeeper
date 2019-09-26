@@ -9,6 +9,7 @@ export default function Examples() {
 	const [time2, setTime2] = useState('12:34pm')
 	const [displayExample2, setDisplayExample2] = useState(true)
 	const [time3, setTime3] = useState('12:45pm')
+	const [time4, setTime4] = useState('12:45pm')
 
 	return (
 		<section className="examples docs-section" id="examples">
@@ -23,7 +24,10 @@ export default function Examples() {
 
 				<div className="examples__example-1">
 					<div className="examples__example-1-timekeeper-wrapper">
-						<Timekeeper time={time1} onChange={(data) => setTime1(data.formatted12)} />
+						<Timekeeper
+							time={time1}
+							onChange={(newTime) => setTime1(newTime.formatted12)}
+						/>
 					</div>
 					<span className="examples__example-1-time">Time is {time1}</span>
 				</div>
@@ -38,7 +42,7 @@ function YourComponent(){
 		<div>
 			<Timekeeper
 				time={time}
-				onChange={(data) => setTime(data.formatted12)}
+				onChange={(newTime) => setTime(newTime.formatted12)}
 			/>
 			<span>Time is {time}</span>
 		</div>
@@ -58,7 +62,7 @@ function YourComponent(){
 						<div className="examples__example-2-timekeeper-wrapper">
 							<Timekeeper
 								time={time2}
-								onChange={(data) => setTime2(data.formatted12)}
+								onChange={(newTime) => setTime2(newTime.formatted12)}
 								onDoneClick={() => setDisplayExample2(false)}
 								switchToMinuteOnHourSelect
 							/>
@@ -89,7 +93,7 @@ function YourComponent(){
 			{showTime &&
 				<Timekeeper
 					time={time}
-					onChange={(data) => setTime(data.formatted12)}
+					onChange={(newTime) => setTime(newTime.formatted12)}
 					onDoneClick={() => setShowTime(false)}
 					switchToMinuteOnHourSelect
 				/>
@@ -106,50 +110,13 @@ function YourComponent(){
 
 			{/* example 3 */}
 			<div className="examples__item">
-				<Text>Force 15 minute only increments.</Text>
-
-				<div className="examples__example-3">
-					<div className="examples__example-3-timekeeper-wrapper">
-						<Timekeeper
-							time={time3}
-							onChange={(data) => setTime3(data.formatted12)}
-							forceCoarseMinutes
-							coarseMinutes={15}
-						/>
-					</div>
-					<span className="examples__example-1-time">Time is {time3}</span>
-				</div>
-
-				<Code type={SYNTAX.js}>{`import React from 'react';
-import TimeKeeper from 'react-timekeeper';
-
-function YourComponent(){
-	const [time, setTime] = useState('12:34pm')
-	
-	return (
-		<div>
-			<Timekeeper
-				time={time}
-				onChange={(data) => setTime(data.formatted12)}
-				coarseMinutes={15}
-				forceCoarseMinutes
-			/>
-			<span>Time is {time}</span>
-		</div>
-	)
-		
-}`}</Code>
-			</div>
-
-			{/* example 3 */}
-			<div className="examples__item">
 				<Text>24 hour mode and force 15 minute only increments.</Text>
 
 				<div className="examples__example-3">
 					<div className="examples__example-3-timekeeper-wrapper">
 						<Timekeeper
 							time={time3}
-							onChange={(data) => setTime3(data.formatted12)}
+							onChange={(newTime) => setTime3(newTime.formatted12)}
 							switchToMinuteOnHourSelect
 							hour24Mode
 							forceCoarseMinutes
@@ -169,10 +136,59 @@ function YourComponent(){
 		<div>
 			<Timekeeper
 				time={time}
-				onChange={(data) => setTime(data.formatted12)}
+				onChange={(newTime) => setTime(newTime.formatted12)}
 				hour24Mode
 				coarseMinutes={15}
 				forceCoarseMinutes
+			/>
+			<span>Time is {time}</span>
+		</div>
+	)
+		
+}`}</Code>
+			</div>
+
+			{/* example 4 */}
+			<div className="examples__item">
+				<Text>Custom done button</Text>
+
+				<div className="examples__example-3">
+					<div className="examples__example-3-timekeeper-wrapper">
+						<Timekeeper
+							time={time4}
+							onChange={(newTime) => setTime4(newTime.formatted12)}
+							doneButton={(newTime) => (
+								<div
+									style={{ textAlign: 'center', padding: '10px 0' }}
+									onClick={() => alert('new time is now', newTime.formatted12)}
+								>
+									Close
+								</div>
+							)}
+						/>
+					</div>
+					<span className="examples__example-1-time">Time is {time4}</span>
+				</div>
+
+				<Code type={SYNTAX.js}>{`import React from 'react';
+import TimeKeeper from 'react-timekeeper';
+
+function YourComponent(){
+	const [time, setTime] = useState('12:34pm')
+	
+	return (
+		<div>
+			<Timekeeper
+				time={time}
+				onChange={(newTime) => setTime(newTime.formatted12)}
+				doneButton={(newTime) => (
+					<div
+						style={{ textAlign: 'center', padding: '10px 0' }}
+						onClick={() => alert('new time is now', newTime.formatted12)}
+					>
+						Close
+					</div>
+				)}
 			/>
 			<span>Time is {time}</span>
 		</div>

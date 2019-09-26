@@ -149,9 +149,8 @@ export default function Intro() {
 			{/* doneButton */}
 			<h3 className="h3-api">
 				<code className="name">doneButton</code>
-				<span className="accepts">
-					(TimeOutput) => React.ReactNode => void
-				</span>(default: <code className="default">null</code>)
+				<span className="accepts">(TimeOutput) => React.ReactNode</span>(default:{' '}
+				<code className="default">null</code>)
 			</h3>
 
 			<div className="api__description">
