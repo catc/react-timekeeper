@@ -1,7 +1,7 @@
 import React, { useContext, createContext, ReactElement, useMemo } from 'react'
 import { TimeOutput } from '../helpers/types'
 
-type DoneClickFn = null | ((time: TimeOutput, Event: React.MouseEvent) => void)
+type DoneClickFn = null | ((time: TimeOutput, Event?: React.MouseEvent) => void)
 type DoneButton = null | ((time: TimeOutput) => ReactElement)
 
 interface Config {

@@ -20,6 +20,7 @@ import {
 	HOUR_3_OUTER,
 	MINUTE_7,
 	MINUTE_23,
+	MINUTE_59,
 } from './helpers/click-data'
 
 /*
@@ -104,12 +105,10 @@ describe('handles events correctly', () => {
 		test('handles click on "15"', () => {
 			testMinutes(HOUR_12_INNER, 0)
 		})
-
 		test('handles coarse minutes', () => {
 			// 7 rounded down to 5
 			testMinutes(MINUTE_7, 5)
 		})
-
 		test('handles custom coarse minutes', () => {
 			testMinutes(MINUTE_23, 30, {
 				// set diff time from 30 so update goes through
@@ -117,6 +116,9 @@ describe('handles events correctly', () => {
 				time: '12:35',
 				coarseMinutes: 15,
 			})
+		})
+		test('handles coarse click on "59"', () => {
+			testMinutes(MINUTE_59, 0)
 		})
 	})
 
@@ -227,7 +229,7 @@ describe('handles events correctly', () => {
 			expect(onChange).toBeCalledTimes(1)
 			expect(onChange).toBeCalledWith(
 				expect.objectContaining({
-					minute: 33,
+					minute: 32,
 				}),
 			)
 		})

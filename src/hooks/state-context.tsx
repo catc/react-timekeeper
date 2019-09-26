@@ -122,6 +122,9 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 
 	// this method is called only due to changes in clock actions
 	function updateTime(val: number) {
+		// account if minutes is 60 (eg: 59 rounded to 60)
+		val = val % 60
+
 		// account for max number being 12 during 12h mode
 		if (mode === MODE.HOURS_12 && meridiem === 'pm') {
 			val += 12
