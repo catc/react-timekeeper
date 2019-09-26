@@ -3,6 +3,7 @@ TODO
 - update react spring to v9 on release
 	- should fix about of typescript issues
 - fix remaining typescript errors
+- add units tests for components once enzyme gains better supports shallow
 -->
 
 <h1 align="center">
