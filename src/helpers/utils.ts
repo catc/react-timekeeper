@@ -21,6 +21,3 @@ export function isMinuteMode(mode: MODE): boolean {
 export function isSameTime(prev: Time, next: Time) {
 	return prev.hour === next.hour && prev.minute === next.minute
 }
-
-// TODO
-export function hasCoarseValue(mode: MODE, config): boolean {}

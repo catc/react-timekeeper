@@ -37,16 +37,12 @@ export default function TimeDropdown({ close }: Props) {
 
 	const elsewhereClick = useCallback(
 		(e: MouseEvent) => {
-			const parent = container.current
-			const child = e.target
-			let node = child.parentNode
-			while (node != null) {
-				if (node === parent) {
-					return
-				}
-				node = node.parentNode
+			if (!container.current || !e.target) {
+				return
 			}
-			close()
+			if (!container.current.contains(e.target as Node)) {
+				close()
+			}
 		},
 		[close],
 	)
