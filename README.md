@@ -35,7 +35,12 @@ TODO
 </p>
 
 ------------
-<br/>
+
+**Features**
+- supports both 12 hour and 24 hour mode, and flexible time formats
+- simple to use with many customizable options
+- smooth, beautiful animations with [react spring](https://www.react-spring.io)
+- typescript support
 
 ## Installation
 
