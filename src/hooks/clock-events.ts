@@ -20,11 +20,8 @@ type CalcTimeFromAngle = (
 	angles (which are later converted into time depending
 	on current mode and other restrictions)
 */
-export default function useClockEvents(
-	wrapper: ElementRef,
-	clock: ElementRef,
-	handleChange: CalcTimeFromAngle,
-) {
+export default function useClockEvents(clock: ElementRef, handleChange: CalcTimeFromAngle) {
+	const wrapper = useRef<HTMLDivElement | null>(null)
 	const calcOffsetCache: React.MutableRefObject<null | CalcOffsetFn> = useRef(null)
 	const dragCount = useRef(0)
 	const cleanup = useCallback(_removeHandlers, [])
@@ -166,7 +163,7 @@ export default function useClockEvents(
 		}
 
 		// ensure touch doesn't bleed outside of clock radius
-		if (!isWithinRadius(x, y, CLOCK_RADIUS) && dragCount.current < 2) {
+		if (!isWithinRadius(x, y, CLOCK_RADIUS) && wasTapped) {
 			return false
 		}
 		const isInnerClick = isWithinRadius(x, y, INNER_NUMBER_RADIUS)
@@ -175,13 +172,16 @@ export default function useClockEvents(
 		handleChange(d, { canAutoChangeUnit, wasTapped, isInnerClick })
 	}
 
-	// will destroy cleanup
+	// clean up
 	useEffect(() => {
 		return cleanup
 	}, [cleanup])
 
 	return {
-		mousedown: handleMouseDown,
-		touchstart: handleTouchStart,
+		bind: {
+			onMouseDown: handleMouseDown,
+			onTouchStart: handleTouchStart,
+			ref: wrapper,
+		},
 	}
 }

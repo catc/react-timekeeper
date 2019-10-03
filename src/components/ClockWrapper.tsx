@@ -14,9 +14,8 @@ export default function ClockWrapper() {
 	const config = useConfig()
 
 	// clock events
-	const wrapper = useRef<HTMLDivElement | null>(null)
 	const clock = useRef<HTMLDivElement | null>(null)
-	const { mousedown, touchstart } = useClockEvents(wrapper, clock, calculateTimeValue)
+	const { bind } = useClockEvents(clock, calculateTimeValue)
 
 	const { mode, updateTime, setMode, getComposedTime } = useTimekeeperState()
 
@@ -68,7 +67,7 @@ export default function ClockWrapper() {
 		// update time officially on timekeeper
 		updateTime(selected)
 
-		// handle any unit autochanges or done click
+		// handle any unit autochanges on done click
 		if (canAutoChangeUnit) {
 			if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
 				setMode(MODE.MINUTES)
@@ -79,13 +78,7 @@ export default function ClockWrapper() {
 	}
 
 	return (
-		<div
-			ref={wrapper}
-			onMouseDown={mousedown}
-			onTouchStart={touchstart}
-			className="react-timekeeper__clock-wrapper"
-			css={style}
-		>
+		<div {...bind} className="react-timekeeper__clock-wrapper" css={style}>
 			<Clock clockEl={clock} />
 
 			{!config.hour24Mode && <Meridiems />}
