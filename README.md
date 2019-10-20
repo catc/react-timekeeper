@@ -1,4 +1,4 @@
-<!-- 
+<!--
 TODO
 - update react spring to v9 on release
 	- should fix about of typescript issues
@@ -48,7 +48,7 @@ TODO
 $ npm install --save react-timekeeper
 ```
 
-Version 2+ of timekeeper requires [react hooks (v16.8)](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html). If you're using an older version of react, install timekeeper v1 via 
+Version 2+ of timekeeper requires [react hooks (v16.8)](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html). If you're using an older version of react, install timekeeper v1 via
 ```shell
 $ npm install --save react-timekeeper@^1.0.0
 ```
@@ -56,15 +56,15 @@ $ npm install --save react-timekeeper@^1.0.0
 ## Usage
 
 ```javascript
-import React from 'react';
+import React, {useState} from 'react';
 import TimeKeeper from 'react-timekeeper';
 
 function YourComponent(){
   const [time, setTime] = useState('12:34pm')
-  
+
   return (
     <div>
-      <Timekeeper
+      <TimeKeeper
         time={time}
         onChange={(data) => setTime(data.formatted12)}
       />
