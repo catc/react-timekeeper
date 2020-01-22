@@ -50,7 +50,7 @@ export default function TopBar() {
 					css={[styles.time(isHour)]}
 					onClick={() => timeClick('hour')}
 					data-type="hour"
-					className="react-timekeeper__tb-hour"
+					className={`react-timekeeper__tb-hour ${isHour ? 'react-timekeeper__tb-hour--active' : ''}`}
 				>
 					{hour}
 				</span>
@@ -70,7 +70,7 @@ export default function TopBar() {
 					css={styles.time(!isHour)}
 					onClick={() => timeClick('minute')}
 					data-type="minute"
-					className="react-timekeeper__tb-minute"
+					className={`react-timekeeper__tb-minute ${isHour ? '' : 'react-timekeeper__tb-minute--active'}`}
 				>
 					{formattedMinute}
 				</span>
