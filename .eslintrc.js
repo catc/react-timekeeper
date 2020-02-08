@@ -43,7 +43,25 @@ module.exports = {
 	},
 	rules: {
 		// prettier
-		'prettier/prettier': 1,
+		'prettier/prettier': [
+			'error',
+			{
+				arrowParens: 'always',
+				bracketSpacing: true,
+				jsxBracketSameLine: false,
+				printWidth: 100,
+				proseWrap: 'preserve',
+				requirePragma: false,
+				semi: false,
+				singleQuote: true,
+				tabWidth: 4,
+				trailingComma: 'all',
+				useTabs: true
+			},
+			{
+				usePrettierrc: false,
+			},
+		],
 
 		// imports
 		'import/newline-after-import': 1,
