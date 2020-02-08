@@ -6,5 +6,18 @@ install:
   - npm install
   - npm install --no-save react@16.9.0 react-dom@16.9.0
 
-script:
-  - npm run tests
+jobs:
+  include:
+    - stage: test
+      script: npm run tests
+    - stage: github pages
+      script: npm run docs:build
+      deploy:
+        provider: pages
+        local_dir: docs
+        verbose: true
+        skip_cleanup: true
+        github_token: $GH_PAGE_DEPLOY_TOKEN
+        keep_history: true
+        committer_from_gh: true
+      if: branch = master
