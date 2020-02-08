@@ -4,7 +4,6 @@
 		"errorsAsWarnings": true
 	},
 	"compilerOptions": {
-		// testing for the time being
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"target": "esnext",
