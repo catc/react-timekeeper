@@ -44,7 +44,7 @@ export function parseTime(time: TimeInput): Time {
 		}
 		hour = time.hour
 		minute = time.minute
-		if (time.meridiem) {
+		if ('meridiem' in time) {
 			meridiem = time.meridiem.toLowerCase()
 		}
 	}
