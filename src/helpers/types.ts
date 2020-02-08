@@ -11,9 +11,12 @@ export interface Time {
 export interface Time24 {
 	hour: number
 	minute: number
+	meridiem: never
 }
 
-export interface Time12 extends Time24 {
+export interface Time12 {
+	hour: number
+	minute: number
 	meridiem: string
 }
 

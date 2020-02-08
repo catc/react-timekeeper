@@ -1,21 +1,21 @@
 import React, { memo } from 'react'
-import { animated, AnimatedValue, ForwardedProps } from 'react-spring'
+import { animated } from 'react-spring'
 
 import { MINUTES, CLOCK_VALUES, MODE } from '../helpers/constants'
 import { transform } from '../helpers/math'
 import { numbersStyle, numbersWrapperStyle } from './styles/numbers'
 
-// TODO - fix types... typescript is hard
 interface MinuteProps {
 	anim: {
-		opacity: AnimatedValue<ForwardedProps<{ opacity: number }>>
-		translate: AnimatedValue<ForwardedProps<{ translate: number }>>
-		translateInner: AnimatedValue<ForwardedProps<{ translate: number }>>
+		// TODO - fix types... typescript is hard
+		opacity: any
+		translate: any
+		translateInner: any
 	}
 }
 
 interface HourProps extends MinuteProps {
-	mode: MODE
+	mode: MODE.HOURS_12 | MODE.HOURS_24
 	hour24Mode: boolean
 }
 
@@ -24,7 +24,7 @@ interface HourProps extends MinuteProps {
 */
 
 function hours({ anim, mode, hour24Mode }: HourProps) {
-	const { opacity, translate, translateInner } = anim
+	const { opacity, translate: translateOuter, translateInner } = anim
 	const { numbers: numbersOuter, numbersInner } = CLOCK_VALUES[mode]
 
 	return (
@@ -39,7 +39,7 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 						css={numbersStyle({ hour24Mode })}
 						key={val}
 						style={{
-							transform: translate.interpolate((v) => transform(i + 1, v)),
+							transform: translateOuter.interpolate((v) => transform(i + 1, v)),
 						}}
 					>
 						{val}
@@ -48,7 +48,7 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 			})}
 
 			{hour24Mode &&
-				numbersInner.map((val, i) => {
+				numbersInner!.map((val, i) => {
 					return (
 						<animated.span
 							css={numbersStyle({ hour24Mode, inner: true })}

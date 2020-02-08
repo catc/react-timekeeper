@@ -44,7 +44,8 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 		}
 
 		// move hand
-		handleMouseDrag(e) // TODO - fix ts
+		// @ts-ignore
+		handleMouseDrag(e)
 	}
 	function handleMouseDrag(e: MouseEvent) {
 		if (calcOffsetCache.current) {

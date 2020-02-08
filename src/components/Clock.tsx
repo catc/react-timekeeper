@@ -29,6 +29,12 @@ interface Props {
 	clockEl: ElementRef
 }
 
+type Transition = {
+	item: MODE
+	key: string
+	props: any
+}
+
 export default function ClockWrapper({ clockEl }: Props) {
 	const firstTime = useRef(true)
 	const { hour24Mode } = useConfig()
@@ -51,7 +57,7 @@ export default function ClockWrapper({ clockEl }: Props) {
 			translate: exitPosition(mode),
 			translateInner: INNER_NUMBER_POSITIONING.exit,
 		},
-	})
+	} as any)
 
 	useEffect(() => {
 		// don't show intial animation on first render - ie: {from : ...}
@@ -60,18 +66,18 @@ export default function ClockWrapper({ clockEl }: Props) {
 
 	return (
 		<div className="react-timekeeper__clock" css={style} ref={clockEl}>
-			{transitions.map(({ item: currentMode, key, props }) => {
+			{transitions.map(({ item: currentMode, key, props: anim }: Transition) => {
 				// TODO - weird hot reloading issue, remove during compilation
 				if (!currentMode) {
 					return null
 				}
 				return isMinuteMode(currentMode) ? (
-					<MinuteNumbers anim={props} key={key} />
+					<MinuteNumbers anim={anim} key={key} />
 				) : (
 					<HourNumbers
-						anim={props}
+						anim={anim}
 						key={key}
-						mode={currentMode}
+						mode={currentMode as MODE.HOURS_12 | MODE.HOURS_24}
 						hour24Mode={hour24Mode}
 					/>
 				)

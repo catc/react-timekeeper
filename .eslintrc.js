@@ -77,6 +77,7 @@ module.exports = {
 		'@typescript-eslint/no-use-before-define': [2, { functions: false}],
 		'@typescript-eslint/no-non-null-assertion': 0,
 		'@typescript-eslint/no-explicit-any': 0,
+		'@typescript-eslint/ban-ts-ignore': 0,
 
 		// react hooks
 		'react-hooks/rules-of-hooks': 1,

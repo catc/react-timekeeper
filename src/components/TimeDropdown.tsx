@@ -31,7 +31,7 @@ export default function TimeDropdown({ close }: Props) {
 		document.documentElement.classList.add('react-timekeeper-noscroll')
 	}
 	function enableBodyScroll() {
-		document.documentElement.style.paddingRight = 0
+		document.documentElement.style.paddingRight = '0'
 		document.documentElement.classList.remove('react-timekeeper-noscroll')
 	}
 

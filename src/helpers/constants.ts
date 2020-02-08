@@ -17,7 +17,16 @@ export enum MERIDIEM {
 /*
 	- increments is how many splits on clock, visible or invisible
 */
-export const CLOCK_VALUES = {
+type ClockValues = {
+	[mode in MODE]: {
+		increments: number
+		numbers: string[]
+		dropdown: string[]
+		numbersInner?: string[]
+	}
+}
+
+export const CLOCK_VALUES: ClockValues = {
 	[MODE.MINUTES]: {
 		increments: 60,
 		numbers: MINUTES,

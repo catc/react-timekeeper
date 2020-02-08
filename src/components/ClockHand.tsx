@@ -45,6 +45,7 @@ export default function ClockHand({ mode, time }: Props) {
 	const circlePosition = getClockHandCirclePosition(mode, inner)
 	const circleRadius = getClockHandCircleRadius(mode, inner)
 
+	// @ts-ignore
 	const [anim, setAnim] = useSpring(() => {
 		return {
 			immediate: true,
