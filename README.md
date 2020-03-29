@@ -41,6 +41,7 @@ TODO
 - simple to use with many customizable options
 - smooth, beautiful animations with [react spring](https://www.react-spring.io)
 - typescript support
+- css variable support for custom styles
 
 ## Installation
 

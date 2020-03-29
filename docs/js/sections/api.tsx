@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Text from '../components/text'
+import Link from '../components/link'
 import Code, { SYNTAX } from '../components/code'
 
 export default function Intro() {
@@ -155,6 +156,19 @@ export default function Intro() {
 
 			<div className="api__description">
 				<Text>Custom done button as render props. See below for example.</Text>
+			</div>
+
+			{/* custom styles */}
+			<h3 className="h3-api">
+				<code className="name">custom styling</code>
+			</h3>
+
+			<div className="api__description">
+				<Text>
+					<Link samePage href="#custom-styles">
+						See below for examples
+					</Link>
+				</Text>
 			</div>
 		</section>
 	)
