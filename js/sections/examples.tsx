@@ -149,7 +149,7 @@ function YourComponent(){
 			</div>
 
 			{/* example 4 */}
-			<div className="examples__item">
+			<div className="examples__item foo">
 				<Text>Custom done button</Text>
 
 				<div className="examples__example-3">
