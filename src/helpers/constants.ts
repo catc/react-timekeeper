@@ -60,15 +60,9 @@ export const CLOCK_SIZE = CLOCK_RADIUS * 2
 export const INNER_NUMBER_RADIUS = 77
 
 // font sizes
-const NUMBER_REGULAR_FONT_SIZE = 16
-const HOUR_24_INNER_FONT_SIZE = 15
-const HOUR_24_OUTER_FONT_SIZE = 13
-export function getFontSize(hour24Mode: boolean, inner: boolean): number {
-	if (!hour24Mode) {
-		return NUMBER_REGULAR_FONT_SIZE
-	}
-	return inner ? HOUR_24_INNER_FONT_SIZE : HOUR_24_OUTER_FONT_SIZE
-}
+export const NUMBER_REGULAR_FONT_SIZE = 16
+export const HOUR_24_INNER_FONT_SIZE = 15
+export const HOUR_24_OUTER_FONT_SIZE = 13
 
 // size of circle surrounding individual numbers
 // loosely based on font sizes above

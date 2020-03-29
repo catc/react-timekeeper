@@ -22,14 +22,18 @@ export const wrapper = (hour24Mode: boolean, mode: MODE) => css`
 	position: absolute;
 	display: inline-block;
 	background: white;
-	border: 1px solid ${DROPDOWN_BORDER};
+	border: var(--dropdown-border, 1px solid ${DROPDOWN_BORDER});
 	border-radius: 2px;
 	padding: 6px 0;
 	z-index: 20;
 	top: 62px;
 	height: 250px;
 	overflow-y: auto;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	box-shadow: var(
+		--dropdown-shadow,
+		0 1px 3px rgba(0, 0, 0, 0.12),
+		0 1px 2px rgba(0, 0, 0, 0.24)
+	);
 	opacity: 0;
 	animation: ${fadeIn} 0.2s ease-out both;
 
@@ -48,10 +52,10 @@ export const option = (active: boolean) => css`
 	background: transparent;
 	padding: 7px 30px;
 	font-size: 16px;
-	color: ${DROPDOWN_COLOR};
+	color: var(--dropdown-text-color, ${DROPDOWN_COLOR});
 	cursor: pointer;
 	&:hover {
-		background: ${DROPDOWN_SELECTED_COLOR};
+		background: var(--dropdown-hover-bg, ${DROPDOWN_SELECTED_COLOR});
 	}
 	${active && selected}
 `

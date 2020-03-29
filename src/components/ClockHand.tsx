@@ -14,10 +14,11 @@ import {
 	getClockHandLength,
 } from '../helpers/constants'
 import {
-	CLOCK_HAND_ARM as CLOCK_HAND_ARM_FILL,
-	CLOCK_HAND_CIRCLE_BACKGROUND,
-	CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND,
-} from './styles/constants'
+	line as lineStyle,
+	outerCircle as outerCircleStyle,
+	centerCircle as centerCircleStyle,
+	intermediateMinuteCircle as intermediateMinuteCircleStyle,
+} from './styles/clock-hand'
 import { calcAnimationAngle } from '../helpers/math'
 
 interface Props {
@@ -101,11 +102,11 @@ export default function ClockHand({ mode, time }: Props) {
 	if (mode === MODE.MINUTES && value % 5) {
 		showIntermediateValueDisplay = (
 			<circle
+				className="react-timekeeper__hand-intermediate-circle"
+				css={intermediateMinuteCircleStyle}
 				cx={CLOCK_RADIUS}
 				cy={NUMBER_OUTER_POSITION}
 				r={4}
-				fill={CLOCK_HAND_INTERMEDIATE_CIRCLE_BACKGROUND}
-				className="react-timekeeper__hand-intermediate-circle"
 			/>
 		)
 	}
@@ -120,27 +121,27 @@ export default function ClockHand({ mode, time }: Props) {
 		>
 			<animated.g transform={rotation.interpolate((a) => rotate(a))}>
 				<animated.line
-					stroke={CLOCK_HAND_ARM_FILL}
+					className="react-timekeeper__clock-hand"
+					css={lineStyle}
 					x1={CLOCK_RADIUS}
 					y1={CLOCK_RADIUS}
 					x2={CLOCK_RADIUS}
 					y2={length}
 					strokeWidth="1"
-					className="react-timekeeper__clock-hand"
 				/>
 				<circle
+					className="react-timekeeper__hand-circle-center"
+					css={centerCircleStyle}
 					cx={CLOCK_RADIUS}
 					cy={CLOCK_RADIUS}
 					r={1.5}
-					fill={CLOCK_HAND_ARM_FILL}
-					className="react-timekeeper__hand-circle-center"
 				/>
 				<animated.circle
-					fill={CLOCK_HAND_CIRCLE_BACKGROUND}
+					className="react-timekeeper__hand-circle-outer"
+					css={outerCircleStyle}
 					cx={CLOCK_RADIUS}
 					cy={position}
 					r={circleRadius}
-					className="react-timekeeper__hand-circle-outer"
 				/>
 				{showIntermediateValueDisplay}
 			</animated.g>

@@ -24,14 +24,14 @@ const right = `
 `
 
 const selected = `
-	background: ${CLOCK_WRAPPER_MERIDIEM_BACKGROUND_COLOR_SELECTED};
-	color: ${CLOCK_WRAPPER_MERIDIEM_TEXT_COLOR_SELECTED};
+	background: var(--meridiem-selected-bg-color, ${CLOCK_WRAPPER_MERIDIEM_BACKGROUND_COLOR_SELECTED});
+	color: var(--meridiem-selected-text-color, ${CLOCK_WRAPPER_MERIDIEM_TEXT_COLOR_SELECTED});
 `
 
 export const meridiem = ({ isRight, isSelected }: Props) => css`
-	background: white;
+	background: var(--meridiem-bg-color, white);
 	font-size: 14px;
-	color: ${CLOCK_WRAPPER_MERIDIEM_COLOR};
+	color: var(--meridiem-text-color, ${CLOCK_WRAPPER_MERIDIEM_COLOR});
 	display: inline-block;
 	padding: 0;
 	cursor: pointer;

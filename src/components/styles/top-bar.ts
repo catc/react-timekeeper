@@ -4,7 +4,7 @@ const TIME_DEFAULT_COLOR = '#8C8C8C'
 const TIME_SELECTED_COLOR = '#8EDDFD'
 
 export const wrapper = (is24hr: boolean) => css`
-	background: white;
+	background: var(--top-bg, white);
 	padding: 14px 16px;
 	border-radius: 3px 3px 0 0;
 	position: relative;
@@ -31,7 +31,7 @@ export const minuteWrapper = (is24hr: boolean) => css`
 `
 
 export const colon = css`
-	color: ${TIME_DEFAULT_COLOR};
+	color: var(--top-colon-color, ${TIME_DEFAULT_COLOR});
 	font-weight: 500;
 	display: inline-block;
 	font-size: 46px;
@@ -48,12 +48,12 @@ const popInOut = keyframes`
 `
 
 const timeSelected = css`
-	color: ${TIME_SELECTED_COLOR};
+	color: var(--top-selected-color, ${TIME_SELECTED_COLOR});
 	animation: ${popInOut} 0.6s ease-out;
 `
 
 export const time = (isActive: boolean) => css`
-	color: ${TIME_DEFAULT_COLOR};
+	color: var(--top-text-color, ${TIME_DEFAULT_COLOR});
 	display: inline-block;
 	font-size: 48px;
 	cursor: pointer;
@@ -63,7 +63,7 @@ export const time = (isActive: boolean) => css`
 `
 
 export const meridiem = css`
-	color: ${TIME_DEFAULT_COLOR};
+	color: var(--top-meridiem-color, ${TIME_DEFAULT_COLOR});
 	display: inline-block;
 	font-size: 13px;
 	text-transform: uppercase;
