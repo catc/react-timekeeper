@@ -10,6 +10,11 @@ export function getTimeValue(mode: MODE, time: Time): number {
 	return time[unit]
 }
 
+export function getNormalizedTimeValue(mode: MODE, time: Time): number {
+	const val = getTimeValue(mode, time)
+	return mode === MODE.HOURS_12 ? val % 12 : val
+}
+
 export function isHourMode(mode: MODE): boolean {
 	return mode === MODE.HOURS_12 || mode === MODE.HOURS_24
 }

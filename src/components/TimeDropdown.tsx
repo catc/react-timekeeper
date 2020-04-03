@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, MutableRefObject } from 'react'
 import * as styles from './styles/time-dropdown'
 import useConfig from '../hooks/config-context'
 import { getScrollBarWidth } from '../helpers/dom'
-import { getTimeValue } from '../helpers/utils'
+import { getNormalizedTimeValue } from '../helpers/utils'
 import { ElementRef } from '../helpers/types'
 import { CLOCK_VALUES, MODE } from '../helpers/constants'
 import useTimekeeperState from '../hooks/state-context'
@@ -24,7 +24,7 @@ export default function TimeDropdown({ close }: Props) {
 	const selectedOption: ElementLiRef = useRef(null)
 
 	const options = CLOCK_VALUES[mode].dropdown
-	const selected = getTimeValue(mode, time).toString()
+	const selected = getNormalizedTimeValue(mode, time).toString()
 
 	function disableBodyScroll() {
 		document.documentElement.style.paddingRight = scrollbarWidth + 'px'
@@ -86,16 +86,22 @@ export default function TimeDropdown({ close }: Props) {
 			className="react-timekeeper__time-dropdown"
 		>
 			<ul css={styles.options} className="react-timekeeper__dropdown-numbers">
-				{options.map((o) => (
-					<li
-						ref={(el) => (selected === o ? (selectedOption.current = el) : '')}
-						css={styles.option(selected === o)}
-						key={o}
-						onClick={() => select(o)}
-					>
-						{o}
-					</li>
-				))}
+				{options.map((o) => {
+					const isSelected = selected === o
+					return (
+						<li
+							ref={(el) => (isSelected ? (selectedOption.current = el) : '')}
+							className={`react-timekeeper__dropdown-number ${
+								isSelected ? 'react-timekeeper__dropdown-number--active' : ''
+							}`}
+							css={styles.option(isSelected)}
+							key={o}
+							onClick={() => select(o)}
+						>
+							{o}
+						</li>
+					)
+				})}
 			</ul>
 		</div>
 	)
