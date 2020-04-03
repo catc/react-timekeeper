@@ -22,7 +22,9 @@ export default function Meridiems() {
 			<button
 				type="button"
 				css={meridiem({ isSelected: !isPM })}
-				className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
+				className={`react-timekeeper-button-reset react-timekeeper__meridiem-toggle ${
+					!isPM ? 'react-timekeeper__meridiem--active' : ''
+				}`}
 				onClick={setAM}
 			>
 				AM
@@ -30,7 +32,9 @@ export default function Meridiems() {
 			<button
 				type="button"
 				css={meridiem({ isRight: true, isSelected: isPM })}
-				className="react-timekeeper-button-reset react-timekeeper__meridiem-toggle"
+				className={`react-timekeeper-button-reset react-timekeeper__meridiem-toggle ${
+					isPM ? 'react-timekeeper__meridiem--active' : ''
+				}`}
 				onClick={setPM}
 			>
 				PM
