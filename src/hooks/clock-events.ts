@@ -25,13 +25,24 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 	const calcOffsetCache: React.MutableRefObject<null | CalcOffsetFn> = useRef(null)
 	const dragCount = useRef(0)
 	const cleanup = useCallback(_removeHandlers, [])
-	const disableMouse = useRef(false)
+
+	// Attach touchstart event manually to the clock to make it cancelable.
+	useEffect(() => {
+		const currentTarget = clock.current;
+		const type = 'touchstart';
+		const handler = handleTouchStart
+		if (currentTarget) {
+			currentTarget.addEventListener(type, handler);
+		}
+		return () => {
+			if (currentTarget) {
+				currentTarget.removeEventListener(type, handler);
+			}
+		};
+	}, [clock.current, handleTouchStart])
 
 	// mouse events
 	function handleMouseDown(e: React.MouseEvent<HTMLElement>) {
-		if (disableMouse.current) {
-			return
-		}
 		dragCount.current = 0
 
 		// add listeners
@@ -64,9 +75,8 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 	}
 
 	// touch events
-	function handleTouchStart() {
-		// disables mouse events during touch events
-		disableMouse.current = true
+	function handleTouchStart(e) {
+		e.preventDefault()
 		dragCount.current = 0
 
 		// add listeners
@@ -137,10 +147,6 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 			const { offsetX, offsetY } = calcOffsetCache.current(touch.clientX, touch.clientY)
 			calculatePoint(offsetX, offsetY, true)
 		}
-
-		setTimeout(() => {
-			disableMouse.current = false
-		}, 10)
 	}
 	function calculatePoint(
 		offsetX: number,
@@ -181,7 +187,6 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 	return {
 		bind: {
 			onMouseDown: handleMouseDown,
-			onTouchStart: handleTouchStart,
 			ref: wrapper,
 		},
 	}
