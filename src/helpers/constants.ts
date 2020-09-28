@@ -49,7 +49,7 @@ export const CLOCK_VALUES: ClockValues = {
 export const VISIBLE_NUMBERS_PER_CIRCLE = 12
 
 // radius of clock, in px
-export const CLOCK_RADIUS = 110
+export const CLOCK_RADIUS = 90
 export const CLOCK_SIZE = CLOCK_RADIUS * 2
 
 /*
@@ -57,7 +57,7 @@ export const CLOCK_SIZE = CLOCK_RADIUS * 2
 	- controls how far out the inner circle comes and
 	how far in numbers come as well
  */
-export const INNER_NUMBER_RADIUS = 77
+export const INNER_NUMBER_RADIUS = 65
 
 // font sizes
 export const NUMBER_REGULAR_FONT_SIZE = 16
