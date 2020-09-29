@@ -1,4 +1,7 @@
 import { css, jsx } from '@emotion/core'
+import { CLOCK_RADIUS } from '../../helpers/constants'
+
+const CLOCK_WIDTH_PADDING = 20
 
 const timepicker = css`
 	-webkit-tap-highlight-color: transparent;
@@ -14,7 +17,7 @@ const timepicker = css`
 	);
 	border-radius: 3px;
 	display: inline-block;
-	width: 260px;
+	width: ${CLOCK_RADIUS * 2 + CLOCK_WIDTH_PADDING * 2}px;
 	position: relative;
 	user-select: none;
 `

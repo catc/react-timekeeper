@@ -62,6 +62,9 @@ export default function ClockWrapper() {
 			} else if (isInnerClick && selected === 0) {
 				selected += 12
 			}
+			if (selected === 24) {
+				selected = 0
+			}
 		}
 
 		// update time officially on timekeeper
