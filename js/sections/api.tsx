@@ -89,6 +89,18 @@ export default function Intro() {
 					provides a better user experience.
 				</Text>
 			</div>
+			{/* switchToMinuteOnHourDropdownSelect */}
+			<h3 className="h3-api">
+				<code className="name">switchToMinuteOnHourDropdownSelect</code>
+				<span className="accepts">boolean</span>(default:{' '}
+				<code className="default">false</code>)
+			</h3>
+
+			<div className="api__description">
+				<Text>
+					Changes clock unit from hour to minute after selecting an hour via the dropdown.
+				</Text>
+			</div>
 
 			{/* closeOnMinuteSelect */}
 			<h3 className="h3-api">
