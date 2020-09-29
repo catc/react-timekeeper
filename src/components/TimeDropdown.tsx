@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, MutableRefObject } from 'react'
 import * as styles from './styles/time-dropdown'
 import useConfig from '../hooks/config-context'
 import { getScrollBarWidth } from '../helpers/dom'
-import { getNormalizedTimeValue } from '../helpers/utils'
+import { getNormalizedTimeValue, isHourMode } from '../helpers/utils'
 import { ElementRef } from '../helpers/types'
 import { CLOCK_VALUES, MODE } from '../helpers/constants'
 import useTimekeeperState from '../hooks/state-context'
@@ -17,8 +17,8 @@ let scrollbarWidth: null | number = null
 type ElementLiRef = MutableRefObject<HTMLLIElement | null>
 
 export default function TimeDropdown({ close }: Props) {
-	const { hour24Mode } = useConfig()
-	const { updateTime, mode, time } = useTimekeeperState()
+	const { hour24Mode, switchToMinuteOnHourDropdownSelect } = useConfig()
+	const { updateTime, mode, time, setMode } = useTimekeeperState()
 
 	const container: ElementRef = useRef(null)
 	const selectedOption: ElementLiRef = useRef(null)
@@ -74,6 +74,11 @@ export default function TimeDropdown({ close }: Props) {
 			parsed = 0
 		}
 		updateTime(parsed)
+
+		// handle any unit autochanges on hour select
+		if (switchToMinuteOnHourDropdownSelect && isHourMode(mode)) {
+			setMode(MODE.MINUTES)
+		}
 		close()
 	}
 

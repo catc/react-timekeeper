@@ -16,6 +16,7 @@ export default function TimepickerWithConfig({
 	coarseMinutes,
 	forceCoarseMinutes,
 	switchToMinuteOnHourSelect,
+	switchToMinuteOnHourDropdownSelect,
 	closeOnMinuteSelect,
 	hour24Mode,
 	onDoneClick,
@@ -26,6 +27,7 @@ export default function TimepickerWithConfig({
 			coarseMinutes={coarseMinutes}
 			forceCoarseMinutes={forceCoarseMinutes}
 			switchToMinuteOnHourSelect={switchToMinuteOnHourSelect}
+			switchToMinuteOnHourDropdownSelect={switchToMinuteOnHourDropdownSelect}
 			closeOnMinuteSelect={closeOnMinuteSelect}
 			hour24Mode={hour24Mode}
 			onDoneClick={onDoneClick}

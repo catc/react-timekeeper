@@ -7,7 +7,12 @@ type DoneButton = null | ((time: TimeOutput) => ReactElement)
 interface Config {
 	coarseMinutes: number
 	forceCoarseMinutes: boolean
+	/*
+		TODO - better naming for next major version
+		maybe: autoSwitchMode ?
+	*/
 	switchToMinuteOnHourSelect: boolean
+	switchToMinuteOnHourDropdownSelect: boolean
 	closeOnMinuteSelect: boolean
 	hour24Mode: boolean
 	onDoneClick: DoneClickFn
@@ -27,6 +32,7 @@ export function ConfigProvider({
 	coarseMinutes = 5,
 	forceCoarseMinutes = false,
 	switchToMinuteOnHourSelect = false,
+	switchToMinuteOnHourDropdownSelect = false,
 	closeOnMinuteSelect = false,
 	hour24Mode = false,
 	onDoneClick = null,
@@ -40,6 +46,7 @@ export function ConfigProvider({
 			coarseMinutes,
 			forceCoarseMinutes,
 			switchToMinuteOnHourSelect,
+			switchToMinuteOnHourDropdownSelect,
 			closeOnMinuteSelect,
 			hour24Mode,
 			onDoneClick,
@@ -49,6 +56,7 @@ export function ConfigProvider({
 		coarseMinutes,
 		forceCoarseMinutes,
 		switchToMinuteOnHourSelect,
+		switchToMinuteOnHourDropdownSelect,
 		closeOnMinuteSelect,
 		onDoneClick,
 		hour24Mode,
