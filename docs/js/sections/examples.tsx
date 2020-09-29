@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Timekeeper from '@tk'
+import TimeKeeper from '@tk'
 
 import Text from '../components/text'
 import Code, { SYNTAX } from '../components/code'
@@ -24,7 +24,7 @@ export default function Examples() {
 
 				<div className="examples__example-1">
 					<div className="examples__example-1-timekeeper-wrapper">
-						<Timekeeper
+						<TimeKeeper
 							time={time1}
 							onChange={(newTime) => setTime1(newTime.formatted12)}
 						/>
@@ -40,7 +40,7 @@ function YourComponent(){
 	
 	return (
 		<div>
-			<Timekeeper
+			<TimeKeeper
 				time={time}
 				onChange={(newTime) => setTime(newTime.formatted12)}
 			/>
@@ -60,7 +60,7 @@ function YourComponent(){
 				<div className="examples__example-2">
 					{displayExample2 && (
 						<div className="examples__example-2-timekeeper-wrapper">
-							<Timekeeper
+							<TimeKeeper
 								time={time2}
 								onChange={(newTime) => setTime2(newTime.formatted12)}
 								onDoneClick={() => setDisplayExample2(false)}
@@ -91,7 +91,7 @@ function YourComponent(){
 	return (
 		<div>
 			{showTime &&
-				<Timekeeper
+				<TimeKeeper
 					time={time}
 					onChange={(newTime) => setTime(newTime.formatted12)}
 					onDoneClick={() => setShowTime(false)}
@@ -114,7 +114,7 @@ function YourComponent(){
 
 				<div className="examples__example-3">
 					<div className="examples__example-3-timekeeper-wrapper">
-						<Timekeeper
+						<TimeKeeper
 							time={time3}
 							onChange={(newTime) => setTime3(newTime.formatted12)}
 							switchToMinuteOnHourSelect
@@ -134,7 +134,7 @@ function YourComponent(){
 	
 	return (
 		<div>
-			<Timekeeper
+			<TimeKeeper
 				time={time}
 				onChange={(newTime) => setTime(newTime.formatted12)}
 				hour24Mode
@@ -154,7 +154,7 @@ function YourComponent(){
 
 				<div className="examples__example-3">
 					<div className="examples__example-3-timekeeper-wrapper">
-						<Timekeeper
+						<TimeKeeper
 							time={time4}
 							onChange={(newTime) => setTime4(newTime.formatted12)}
 							doneButton={(newTime) => (
@@ -178,7 +178,7 @@ function YourComponent(){
 	
 	return (
 		<div>
-			<Timekeeper
+			<TimeKeeper
 				time={time}
 				onChange={(newTime) => setTime(newTime.formatted12)}
 				doneButton={(newTime) => (
