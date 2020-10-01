@@ -1,3 +1,17 @@
+
+bin
 docs
-node_modules
 src
+node_modules/
+*.log
+docs/build/
+
+.DS_Store
+.awcache/
+
+# temp/testing
+__*
+z_old/
+z_temp/
+todo.md
+z_temp
