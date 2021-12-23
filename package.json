@@ -79,8 +79,8 @@
     "node": ">=12.16.2"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "dependencies": {
     "@emotion/core": "^10.0.14",
@@ -94,7 +94,7 @@
   ],
   "jest": {
     "rootDir": "src",
-    "testRegex": "(test\\_.*)\\.tsx?$",
+    "testRegex": ".*\\.test\\.tsx?$",
     "watchPlugins": [
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"

@@ -84,7 +84,7 @@ For full api and examples, see [API docs](https://catc.github.io/react-timekeepe
 
 ## Development
 1. Clone the repo
-3. `nvm use v10.16.0` (or anything >10)
+3. `nvm use v12.16.0` (or anything >12+)
 2. `npm install`
 3. `npm run docs:dev`
 4. Navigate to `localhost:3002`
