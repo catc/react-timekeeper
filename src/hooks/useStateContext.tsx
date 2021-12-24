@@ -11,7 +11,7 @@ import React, {
 import debounce from 'lodash.debounce'
 
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
-import useConfig from './config-context'
+import useConfig from './useConfigContext'
 import { isHourMode, isSameTime } from '../helpers/utils'
 import { TimeInput, ChangeTimeFn, Time, TimeOutput } from '../helpers/types'
 import { MODE, MERIDIEM } from '../helpers/constants'

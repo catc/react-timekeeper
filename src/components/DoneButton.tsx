@@ -1,9 +1,9 @@
 import React from 'react'
 import { jsx } from '@emotion/core'
 
-import useConfig from '../hooks/config-context'
+import useConfig from '../hooks/useConfigContext'
 import style from './styles/done-button'
-import useTimekeeperState from '../hooks/state-context'
+import useTimekeeperState from '../hooks/useStateContext'
 
 export default function DoneButton() {
 	const { onDoneClick, doneButton } = useConfig()

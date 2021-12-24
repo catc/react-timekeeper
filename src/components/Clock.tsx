@@ -14,8 +14,8 @@ import {
 import { isHourMode, isMinuteMode } from '../helpers/utils'
 import { ElementRef } from '../helpers/types'
 import style from './styles/clock'
-import useConfig from '../hooks/config-context'
-import useTimekeeperState from '../hooks/state-context'
+import useConfig from '../hooks/useConfigContext'
+import useTimekeeperState from '../hooks/useStateContext'
 
 function exitPosition(mode: MODE): number {
 	return isHourMode(mode) ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM

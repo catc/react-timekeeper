@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, MutableRefObject } from 'react'
 
 import * as styles from './styles/time-dropdown'
-import useConfig from '../hooks/config-context'
+import useConfig from '../hooks/useConfigContext'
 import { getScrollBarWidth } from '../helpers/dom'
 import { getNormalizedTimeValue, isHourMode } from '../helpers/utils'
 import { ElementRef } from '../helpers/types'
 import { CLOCK_VALUES, MODE } from '../helpers/constants'
-import useTimekeeperState from '../hooks/state-context'
+import useTimekeeperState from '../hooks/useStateContext'
 
 interface Props {
 	close: () => void

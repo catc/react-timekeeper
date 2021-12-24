@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { jsx } from '@emotion/core'
 
 import { meridiemWrapper, meridiem } from './styles/meridiems'
-import useTimekeeperState from '../hooks/state-context'
+import useTimekeeperState from '../hooks/useStateContext'
 import { MERIDIEM } from '../helpers/constants'
 
 export default function Meridiems() {
