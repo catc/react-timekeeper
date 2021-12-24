@@ -81,7 +81,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.14",
     "lodash.debounce": "^4.0.8",
-    "react-spring": "^8.0.25"
+    "react-spring": "^9.3.3"
   },
   "eslintIgnore": [
     "lib/",

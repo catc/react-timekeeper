@@ -46,8 +46,7 @@ export default function ClockHand({ mode, time }: Props) {
 	const circlePosition = getClockHandCirclePosition(mode, inner)
 	const circleRadius = getClockHandCircleRadius(mode, inner)
 
-	// @ts-ignore
-	const [anim, setAnim] = useSpring(() => {
+	const [anim, api] = useSpring(() => {
 		return {
 			immediate: true,
 			rotation: getAngle(mode, time),
@@ -58,7 +57,7 @@ export default function ClockHand({ mode, time }: Props) {
 	const { rotation, length, position } = anim
 
 	useEffect(() => {
-		const current = rotation.value
+		const current = rotation.get()
 		const next = getAngle(mode, time)
 
 		if (prevState.current.mode !== mode) {
@@ -67,7 +66,7 @@ export default function ClockHand({ mode, time }: Props) {
 
 			// mode changed, animate clockhand to next mode angle
 			const finalAngle = calcAnimationAngle(current, next)
-			setAnim({
+			api.start({
 				immediate: false,
 				rotation: finalAngle,
 				length: handLength,
@@ -87,14 +86,14 @@ export default function ClockHand({ mode, time }: Props) {
 			// 	return
 			// }
 
-			setAnim({
+			api.start({
 				immediate: true,
 				rotation: next,
 				length: handLength,
 				position: circlePosition,
 			})
 		}
-	}, [circlePosition, handLength, mode, rotation, setAnim, time])
+	}, [circlePosition, handLength, mode, rotation, api, time])
 
 	// mini circle on clockhand between increments on minutes
 	const value = getTimeValue(mode, time)
@@ -119,7 +118,7 @@ export default function ClockHand({ mode, time }: Props) {
 			xmlns="http://www.w3.org/2000/svg"
 			className="react-timekeeper__clock-hand"
 		>
-			<animated.g transform={rotation.interpolate(a => rotate(a))}>
+			<animated.g transform={rotation.to(a => rotate(a))}>
 				<animated.line
 					className="react-timekeeper__clock-hand"
 					css={lineStyle}
