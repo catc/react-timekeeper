@@ -29,7 +29,7 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 
 	return (
 		<animated.div
-			style={{ opacity: opacity }}
+			style={{ opacity }}
 			css={numbersWrapperStyle}
 			className="react-timekeeper__clock-hours"
 		>
@@ -38,8 +38,11 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 					<animated.span
 						css={numbersStyle({ hour24Mode })}
 						key={val}
+						data-testid="number_hour_outer"
 						style={{
-							transform: translateOuter.interpolate((v) => transform(i + 1, v)),
+							transform: translateOuter.interpolate(v =>
+								transform(i + 1, v),
+							),
 						}}
 					>
 						{val}
@@ -53,8 +56,11 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 						<animated.span
 							css={numbersStyle({ hour24Mode, inner: true })}
 							key={val}
+							data-testid="number_hour_inner"
 							style={{
-								transform: translateInner.interpolate((v) => transform(i + 1, v)),
+								transform: translateInner.interpolate(v =>
+									transform(i + 1, v),
+								),
 							}}
 						>
 							{val}
@@ -73,7 +79,7 @@ function minutes({ anim }: MinuteProps) {
 	const { opacity, translate } = anim
 	return (
 		<animated.div
-			style={{ opacity: opacity }}
+			style={{ opacity }}
 			css={numbersWrapperStyle}
 			className="react-timekeeper__clock-minutes"
 		>
@@ -82,8 +88,9 @@ function minutes({ anim }: MinuteProps) {
 					<animated.span
 						css={numbersStyle({})}
 						key={val}
+						data-testid="number_minute"
 						style={{
-							transform: translate.interpolate((v) => transform(i + 1, v)),
+							transform: translate.interpolate(v => transform(i + 1, v)),
 						}}
 					>
 						{val}

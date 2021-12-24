@@ -119,7 +119,7 @@ export default function ClockHand({ mode, time }: Props) {
 			xmlns="http://www.w3.org/2000/svg"
 			className="react-timekeeper__clock-hand"
 		>
-			<animated.g transform={rotation.interpolate((a) => rotate(a))}>
+			<animated.g transform={rotation.interpolate(a => rotate(a))}>
 				<animated.line
 					className="react-timekeeper__clock-hand"
 					css={lineStyle}
@@ -128,6 +128,7 @@ export default function ClockHand({ mode, time }: Props) {
 					x2={CLOCK_RADIUS}
 					y2={length}
 					strokeWidth="1"
+					data-testid="clock-hand"
 				/>
 				<circle
 					className="react-timekeeper__hand-circle-center"

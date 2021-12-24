@@ -81,7 +81,12 @@ export default function ClockWrapper() {
 	}
 
 	return (
-		<div {...bind} className="react-timekeeper__clock-wrapper" css={style}>
+		<div
+			{...bind}
+			className="react-timekeeper__clock-wrapper"
+			css={style}
+			data-testid="clock-wrapper"
+		>
 			<Clock clockEl={clock} />
 
 			{!config.hour24Mode && <Meridiems />}

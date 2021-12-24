@@ -86,6 +86,7 @@ For full api and examples, see [API docs](https://catc.github.io/react-timekeepe
 1. Clone the repo
 3. `nvm use v12.16.0` (or anything >12+)
 2. `npm install`
+  - may also need to install react since it's a peer dev: `yarn add -P react react-dom`
 3. `npm run docs:dev`
 4. Navigate to `localhost:3002`
 

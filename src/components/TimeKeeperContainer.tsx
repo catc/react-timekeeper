@@ -4,7 +4,7 @@ import { ConfigProvider, ConfigProps } from '../hooks/config-context'
 import { StateProvider } from '../hooks/state-context'
 import { TimeInput, ChangeTimeFn } from '../helpers/types'
 
-interface Props extends ConfigProps {
+export interface Props extends ConfigProps {
 	time?: TimeInput
 	onChange?: ChangeTimeFn
 }

@@ -40,7 +40,11 @@ export default function TopBar() {
 	const closeDropdown = () => setOpen(null)
 
 	return (
-		<div css={styles.wrapper(hour24Mode)} className="react-timekeeper__top-bar">
+		<div
+			css={styles.wrapper(hour24Mode)}
+			className="react-timekeeper__top-bar"
+			data-testid="topbar"
+		>
 			{/* hour */}
 			<div
 				css={styles.hourWrapper(hour24Mode)}
@@ -49,8 +53,10 @@ export default function TopBar() {
 				<span
 					css={[styles.time(isHour)]}
 					onClick={() => timeClick('hour')}
-					data-type="hour"
-					className={`react-timekeeper__tb-hour ${isHour ? 'react-timekeeper__tb-hour--active' : ''}`}
+					data-testid="topbar_hour"
+					className={`react-timekeeper__tb-hour ${
+						isHour ? 'react-timekeeper__tb-hour--active' : ''
+					}`}
 				>
 					{hour}
 				</span>
@@ -69,8 +75,10 @@ export default function TopBar() {
 				<span
 					css={styles.time(!isHour)}
 					onClick={() => timeClick('minute')}
-					data-type="minute"
-					className={`react-timekeeper__tb-minute ${isHour ? '' : 'react-timekeeper__tb-minute--active'}`}
+					data-testid="topbar_minute"
+					className={`react-timekeeper__tb-minute ${
+						isHour ? '' : 'react-timekeeper__tb-minute--active'
+					}`}
 				>
 					{formattedMinute}
 				</span>
@@ -84,6 +92,7 @@ export default function TopBar() {
 					type="button"
 					onClick={toggleMeridiem}
 					css={styles.meridiem}
+					data-testid="topbar_meridiem"
 					className="react-timekeeper-button-reset react-timekeeper__tb-meridiem"
 				>
 					{meridiem}
