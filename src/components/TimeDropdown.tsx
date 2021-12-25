@@ -17,8 +17,8 @@ let scrollbarWidth: null | number = null
 type ElementLiRef = MutableRefObject<HTMLLIElement | null>
 
 export default function TimeDropdown({ close }: Props) {
-	const { hour24Mode, switchToMinuteOnHourDropdownSelect } = useConfig()
-	const { updateTime, mode, time, setMode } = useTimekeeperState()
+	const { hour24Mode } = useConfig()
+	const { updateTimeValue, mode, time } = useTimekeeperState()
 
 	const container: ElementRef = useRef(null)
 	const selectedOption: ElementLiRef = useRef(null)
@@ -73,12 +73,7 @@ export default function TimeDropdown({ close }: Props) {
 		if (mode === MODE.HOURS_12 && parsed === 12) {
 			parsed = 0
 		}
-		updateTime(parsed)
-
-		// handle any unit autochanges on hour select
-		if (switchToMinuteOnHourDropdownSelect && isHourMode(mode)) {
-			setMode(MODE.MINUTES)
-		}
+		updateTimeValue(parsed, { type: 'dropdown' })
 		close()
 	}
 

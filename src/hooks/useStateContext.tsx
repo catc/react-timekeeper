@@ -12,7 +12,7 @@ import debounce from 'lodash.debounce'
 
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
 import useConfig from './useConfigContext'
-import { isHourMode, isSameTime } from '../helpers/utils'
+import { isHourMode, isMinuteMode, isSameTime } from '../helpers/utils'
 import { TimeInput, ChangeTimeFn, Time, TimeOutput } from '../helpers/types'
 import { MODE, MERIDIEM } from '../helpers/constants'
 
@@ -28,10 +28,19 @@ interface GlobalState {
 	meridiem: MERIDIEM
 }
 
+type UpdateTimeValueSource =
+	| {
+			type: 'clock'
+			canAutoChangeMode: boolean
+	  }
+	| {
+			type: 'dropdown'
+	  }
+
 interface StateContext {
 	time: Time
 	mode: MODE
-	updateTime: (val: number) => void
+	updateTimeValue: (val: number, source: UpdateTimeValueSource) => void
 	updateMeridiem: (meridiem: MERIDIEM) => void
 	setMode: (mode: MODE) => void
 	getComposedTime: () => TimeOutput
@@ -69,6 +78,18 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 	const { mode, time, meridiem } = state
 	const refTime = useRef(time)
 
+	// store onChange as ref to memoize update fn
+	const onChangeFn = useRef(onChange)
+	const onDoneClickFn = useRef(config.onDoneClick)
+
+	useEffect(() => {
+		onChangeFn.current = onChange
+	}, [onChange])
+
+	useEffect(() => {
+		onDoneClickFn.current = config.onDoneClick
+	}, [config.onDoneClick])
+
 	// handle time update if parent changes
 	useEffect(() => {
 		if (parentTime == null) {
@@ -92,13 +113,24 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 
 	// debounced onChange function from parent
 	const debounceUpdateParent = useMemo(() => {
-		if (typeof onChange === 'function') {
-			return debounce(() => {
-				onChange(getComposedTime())
-			}, 80)
-		}
-		return () => {}
-	}, [getComposedTime, onChange])
+		return debounce(() => {
+			typeof onChangeFn.current === 'function' &&
+				onChangeFn.current(getComposedTime())
+		}, 80)
+	}, [getComposedTime])
+
+	// update time on component and then on parent
+	const updateTime = useCallback(
+		(newTime: Time, meridiem?: MERIDIEM) => {
+			// update component global state
+			dispatch({ type: 'SET_TIME', time: newTime, meridiem })
+			refTime.current = newTime
+
+			// update time on parent
+			debounceUpdateParent()
+		},
+		[debounceUpdateParent],
+	)
 
 	// update 24 hour time on meridiem change
 	function updateMeridiem(newMeridiem: MERIDIEM) {
@@ -111,38 +143,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		} else if (newMeridiem === 'pm') {
 			newTime.hour = time.hour + 12
 		}
-		_actuallySetTime(newTime, newMeridiem)
-	}
-
-	// update time on component and then on parent
-	function _actuallySetTime(newTime: Time, meridiem?: MERIDIEM) {
-		// update component global state
-		dispatch({ type: 'SET_TIME', time: newTime, meridiem })
-		refTime.current = newTime
-
-		// update time on parent
-		debounceUpdateParent()
-	}
-
-	// this method is called only due to changes in clock actions
-	function updateTime(val: number) {
-		// account if minutes is 60 (eg: 59 rounded to 60)
-		val = val % 60
-
-		// account for max number being 12 during 12h mode
-		if (mode === MODE.HOURS_12 && meridiem === 'pm') {
-			val += 12
-		}
-
-		// generate new time and update timekeeper state
-		const unit = isHourMode(mode) ? 'hour' : 'minute'
-
-		// useful for same value when dragging between degrees in hours
-		if (refTime.current[unit] === val) {
-			return
-		}
-		const newTime: Time = { ...time, [unit]: val }
-		_actuallySetTime(newTime)
+		updateTime(newTime, newMeridiem)
 	}
 
 	const setMode = useCallback(
@@ -156,7 +157,71 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		[config.hour24Mode],
 	)
 
-	const value = { time, mode, updateTime, updateMeridiem, setMode, getComposedTime }
+	// handle any side effects from changing the time (ie: change mode, trigger done clicks)
+	const handleUpdateTimeSideEffects = useCallback(
+		(source: UpdateTimeValueSource) => {
+			if (source.type === 'clock' && source.canAutoChangeMode) {
+				if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
+					setMode(MODE.MINUTES)
+				} else if (
+					config.closeOnMinuteSelect &&
+					isMinuteMode(mode) &&
+					onDoneClickFn.current
+				) {
+					onDoneClickFn.current(getComposedTime())
+				}
+			} else if (source.type === 'dropdown') {
+				if (config.switchToMinuteOnHourDropdownSelect && isHourMode(mode)) {
+					setMode(MODE.MINUTES)
+				}
+			}
+		},
+		[
+			config.switchToMinuteOnHourSelect,
+			config.closeOnMinuteSelect,
+			config.switchToMinuteOnHourDropdownSelect,
+			getComposedTime,
+			mode,
+			setMode,
+		],
+	)
+
+	// this method is called only due to changes in clock actions
+	const updateTimeValue = useCallback(
+		(val: number, source: UpdateTimeValueSource) => {
+			// account if minutes is 60 (eg: 59 rounded to 60)
+			val = val % 60
+
+			// account for max number being 12 during 12h mode
+			if (mode === MODE.HOURS_12 && meridiem === 'pm') {
+				val += 12
+			}
+
+			handleUpdateTimeSideEffects(source)
+
+			const unit = isHourMode(mode) ? 'hour' : 'minute'
+			const time = refTime.current
+
+			// useful for same value when dragging between degrees in hours
+			if (time[unit] === val) {
+				return
+			}
+
+			// generate new time and update timekeeper state
+			const newTime: Time = { ...time, [unit]: val }
+			updateTime(newTime)
+		},
+		[updateTime, handleUpdateTimeSideEffects, meridiem, mode],
+	)
+
+	const value = {
+		time,
+		mode,
+		updateTimeValue,
+		updateMeridiem,
+		setMode,
+		getComposedTime,
+	}
 	return <stateContext.Provider value={value}>{children}</stateContext.Provider>
 }
 

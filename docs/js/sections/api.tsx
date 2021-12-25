@@ -50,7 +50,7 @@ export default function Intro() {
 
 			<div className="api__description">
 				<Text>
-					Pass a function to be called when time is changed. Used to store time state in
+					Pass a function to be called when time is changed. Used to update time state in
 					parent component. Function called returns object with updated time.
 				</Text>
 				<Code type={SYNTAX.js}>{`// TimeOutput

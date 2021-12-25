@@ -10,9 +10,9 @@ const { atan2 } = Math
 type CalcTimeFromAngle = (
 	angle: number,
 	{
-		canAutoChangeUnit,
+		canAutoChangeMode,
 		wasTapped,
-	}: { canAutoChangeUnit: boolean; wasTapped: boolean; isInnerClick: boolean },
+	}: { canAutoChangeMode: boolean; wasTapped: boolean; isInnerClick: boolean },
 ) => void
 
 /*
@@ -159,7 +159,7 @@ export default function useClockEvents(
 		// determines if change is due to mouseup/touchend in order to
 		// automatically change unit (eg: hour -> minute) if enabled
 		// prevents changing unit if dragging along clock
-		canAutoChangeUnit: boolean,
+		canAutoChangeMode: boolean,
 	) {
 		// if user just clicks/taps a number (drag count < 2), then just assume it's a rough tap
 		// and force a rounded/coarse number (ie: 1, 2, 3, 4 is tapped, assume 0 or 5)
@@ -181,7 +181,7 @@ export default function useClockEvents(
 		const isInnerClick = isWithinRadius(x, y, INNER_NUMBER_RADIUS)
 
 		// update time on main
-		handleChange(d, { canAutoChangeUnit, wasTapped, isInnerClick })
+		handleChange(d, { canAutoChangeMode, wasTapped, isInnerClick })
 	}
 
 	// clean up
