@@ -14,8 +14,8 @@ import {
 import { isHourMode, isMinuteMode } from '../helpers/utils'
 import { ElementRef } from '../helpers/types'
 import style from './styles/clock'
-import useConfig from '../hooks/config-context'
-import useTimekeeperState from '../hooks/state-context'
+import useConfig from '../hooks/useConfigContext'
+import useTimekeeperState from '../hooks/useStateContext'
 
 function exitPosition(mode: MODE): number {
 	return isHourMode(mode) ? INITIAL_HOUR_TRANSFORM : INITIAL_MINUTE_TRANSFORM
@@ -29,20 +29,14 @@ interface Props {
 	clockEl: ElementRef
 }
 
-type Transition = {
-	item: MODE
-	key: string
-	props: any
-}
-
 export default function ClockWrapper({ clockEl }: Props) {
-	const firstTime = useRef(true)
+	const firstRun = useRef(true)
 	const { hour24Mode } = useConfig()
 	const { mode, time } = useTimekeeperState()
 
-	const transitions = useTransition(mode, null, {
+	const transitions = useTransition(mode, {
 		unique: true,
-		from: !firstTime.current && {
+		from: !firstRun.current && {
 			opacity: 0,
 			translate: initialPosition(mode),
 			translateInner: INNER_NUMBER_POSITIONING.exit,
@@ -57,31 +51,26 @@ export default function ClockWrapper({ clockEl }: Props) {
 			translate: exitPosition(mode),
 			translateInner: INNER_NUMBER_POSITIONING.exit,
 		},
-	} as any)
+	})
 
 	useEffect(() => {
 		// don't show intial animation on first render - ie: {from : ...}
-		firstTime.current = false
+		firstRun.current = false
 	}, [])
 
 	return (
 		<div className="react-timekeeper__clock" css={style} ref={clockEl}>
-			{transitions.map(({ item: currentMode, key, props: anim }: Transition) => {
-				// TODO - weird hot reloading issue, remove during compilation
-				if (!currentMode) {
-					return null
-				}
-				return isMinuteMode(currentMode) ? (
-					<MinuteNumbers anim={anim} key={key} />
+			{transitions((anim, currentMode) =>
+				isMinuteMode(currentMode) ? (
+					<MinuteNumbers anim={anim} />
 				) : (
 					<HourNumbers
 						anim={anim}
-						key={key}
 						mode={currentMode as MODE.HOURS_12 | MODE.HOURS_24}
 						hour24Mode={hour24Mode}
 					/>
-				)
-			})}
+				),
+			)}
 
 			{/* place svg over and set z-index on numbers to prevent highlighting numbers on drag */}
 			<ClockHand time={time} mode={mode} />

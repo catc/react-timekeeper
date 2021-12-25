@@ -7,7 +7,6 @@ docs/build/
 .awcache/
 
 # temp/testing
-__*
 z_old/
 z_temp/
 todo.md

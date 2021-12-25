@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { animated } from 'react-spring'
+import { animated, SpringValue } from 'react-spring'
 
 import { MINUTES, CLOCK_VALUES, MODE } from '../helpers/constants'
 import { transform } from '../helpers/math'
@@ -7,10 +7,9 @@ import { numbersStyle, numbersWrapperStyle } from './styles/numbers'
 
 interface MinuteProps {
 	anim: {
-		// TODO - fix types... typescript is hard
-		opacity: any
-		translate: any
-		translateInner: any
+		opacity: SpringValue<number>
+		translate: SpringValue<number>
+		translateInner: SpringValue<number>
 	}
 }
 
@@ -29,7 +28,7 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 
 	return (
 		<animated.div
-			style={{ opacity: opacity }}
+			style={{ opacity }}
 			css={numbersWrapperStyle}
 			className="react-timekeeper__clock-hours"
 		>
@@ -38,8 +37,9 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 					<animated.span
 						css={numbersStyle({ hour24Mode })}
 						key={val}
+						data-testid="number_hour_outer"
 						style={{
-							transform: translateOuter.interpolate((v) => transform(i + 1, v)),
+							transform: translateOuter.to(v => transform(i + 1, v)),
 						}}
 					>
 						{val}
@@ -53,8 +53,9 @@ function hours({ anim, mode, hour24Mode }: HourProps) {
 						<animated.span
 							css={numbersStyle({ hour24Mode, inner: true })}
 							key={val}
+							data-testid="number_hour_inner"
 							style={{
-								transform: translateInner.interpolate((v) => transform(i + 1, v)),
+								transform: translateInner.to(v => transform(i + 1, v)),
 							}}
 						>
 							{val}
@@ -73,7 +74,7 @@ function minutes({ anim }: MinuteProps) {
 	const { opacity, translate } = anim
 	return (
 		<animated.div
-			style={{ opacity: opacity }}
+			style={{ opacity }}
 			css={numbersWrapperStyle}
 			className="react-timekeeper__clock-minutes"
 		>
@@ -82,8 +83,9 @@ function minutes({ anim }: MinuteProps) {
 					<animated.span
 						css={numbersStyle({})}
 						key={val}
+						data-testid="number_minute"
 						style={{
-							transform: translate.interpolate((v) => transform(i + 1, v)),
+							transform: translate.to(v => transform(i + 1, v)),
 						}}
 					>
 						{val}

@@ -11,7 +11,7 @@ import React, {
 import debounce from 'lodash.debounce'
 
 import { parseTime, composeTime, parseMeridiem } from '../helpers/time'
-import useConfig from './config-context'
+import useConfig from './useConfigContext'
 import { isHourMode, isSameTime } from '../helpers/utils'
 import { TimeInput, ChangeTimeFn, Time, TimeOutput } from '../helpers/types'
 import { MODE, MERIDIEM } from '../helpers/constants'
@@ -37,12 +37,16 @@ interface StateContext {
 	getComposedTime: () => TimeOutput
 }
 
-const stateContext = createContext({} as StateContext)
+export const stateContext = createContext({} as StateContext)
 
 function reducer(state: GlobalState, action: any) {
 	switch (action.type) {
 		case 'SET_TIME':
-			return { ...state, time: action.time, meridiem: action.meridiem || state.meridiem }
+			return {
+				...state,
+				time: action.time,
+				meridiem: action.meridiem || state.meridiem,
+			}
 		case 'SET_MODE':
 			return { ...state, mode: action.mode }
 		case 'SET_MERIDIEM':
@@ -113,7 +117,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 	// update time on component and then on parent
 	function _actuallySetTime(newTime: Time, meridiem?: MERIDIEM) {
 		// update component global state
-		dispatch({ type: 'SET_TIME', time: newTime, meridiem: meridiem })
+		dispatch({ type: 'SET_TIME', time: newTime, meridiem })
 		refTime.current = newTime
 
 		// update time on parent

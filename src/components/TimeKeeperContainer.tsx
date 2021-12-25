@@ -1,10 +1,10 @@
 import React from 'react'
 import TimeKeeper from './TimeKeeper'
-import { ConfigProvider, ConfigProps } from '../hooks/config-context'
-import { StateProvider } from '../hooks/state-context'
+import { ConfigProvider, ConfigProps } from '../hooks/useConfigContext'
+import { StateProvider } from '../hooks/useStateContext'
 import { TimeInput, ChangeTimeFn } from '../helpers/types'
 
-interface Props extends ConfigProps {
+export interface Props extends ConfigProps {
 	time?: TimeInput
 	onChange?: ChangeTimeFn
 }

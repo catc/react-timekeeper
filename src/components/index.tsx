@@ -1,3 +1,3 @@
-import TimeKeeper from './TimeKeeperWrapper'
+import TimeKeeper from './TimeKeeperContainer'
 
 export default TimeKeeper

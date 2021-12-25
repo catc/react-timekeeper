@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { jsx } from '@emotion/core'
 
 import { meridiemWrapper, meridiem } from './styles/meridiems'
-import useTimekeeperState from '../hooks/state-context'
+import useTimekeeperState from '../hooks/useStateContext'
 import { MERIDIEM } from '../helpers/constants'
 
 export default function Meridiems() {
@@ -22,6 +22,7 @@ export default function Meridiems() {
 			<button
 				type="button"
 				css={meridiem({ isSelected: !isPM })}
+				data-testid="meridiem_am"
 				className={`react-timekeeper-button-reset react-timekeeper__meridiem-toggle ${
 					!isPM ? 'react-timekeeper__meridiem--active' : ''
 				}`}
@@ -32,6 +33,7 @@ export default function Meridiems() {
 			<button
 				type="button"
 				css={meridiem({ isRight: true, isSelected: isPM })}
+				data-testid="meridiem_pm"
 				className={`react-timekeeper-button-reset react-timekeeper__meridiem-toggle ${
 					isPM ? 'react-timekeeper__meridiem--active' : ''
 				}`}

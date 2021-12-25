@@ -1,4 +1,4 @@
-import TimeKeeper from './components/TimeKeeperWrapper'
+import TimeKeeper from './components/TimeKeeperContainer'
 
 export default TimeKeeper
 

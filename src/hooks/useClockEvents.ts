@@ -20,7 +20,10 @@ type CalcTimeFromAngle = (
 	angles (which are later converted into time depending
 	on current mode and other restrictions)
 */
-export default function useClockEvents(clock: ElementRef, handleChange: CalcTimeFromAngle) {
+export default function useClockEvents(
+	clock: ElementRef,
+	handleChange: CalcTimeFromAngle,
+) {
 	const wrapper = useRef<HTMLDivElement | null>(null)
 	const calcOffsetCache: React.MutableRefObject<null | CalcOffsetFn> = useRef(null)
 	const dragCount = useRef(0)
@@ -37,7 +40,8 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 		// add listeners
 		document.addEventListener('mousemove', handleMouseDrag, false)
 		document.addEventListener('mouseup', handleStopDrag, false)
-		wrapper.current && wrapper.current.addEventListener('mouseleave', handleStopDrag, false)
+		wrapper.current &&
+			wrapper.current.addEventListener('mouseleave', handleStopDrag, false)
 
 		if (clock.current) {
 			calcOffsetCache.current = calcOffset(clock.current)
@@ -81,7 +85,10 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 	function touchDragHandler(e: TouchEvent) {
 		if (calcOffsetCache.current) {
 			const touch = e.targetTouches[0]
-			const { offsetX, offsetY } = calcOffsetCache.current(touch.clientX, touch.clientY)
+			const { offsetX, offsetY } = calcOffsetCache.current(
+				touch.clientX,
+				touch.clientY,
+			)
 			calculatePoint(offsetX, offsetY, false)
 		}
 		dragCount.current++
@@ -114,7 +121,8 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 	function _removeHandlers() {
 		document.removeEventListener('mousemove', handleMouseDrag, false)
 		document.removeEventListener('mouseup', handleStopDrag, false)
-		wrapper.current && wrapper.current.removeEventListener('mouseleave', handleStopDrag, false)
+		wrapper.current &&
+			wrapper.current.removeEventListener('mouseleave', handleStopDrag, false)
 
 		document.removeEventListener('touchmove', touchDragHandler, false)
 		document.removeEventListener('touchend', handleStopDrag, false)
@@ -134,7 +142,10 @@ export default function useClockEvents(clock: ElementRef, handleChange: CalcTime
 	function _handleTouchEnd(e: TouchEvent) {
 		const touch = e.targetTouches[0] || e.changedTouches[0]
 		if (touch && calcOffsetCache.current) {
-			const { offsetX, offsetY } = calcOffsetCache.current(touch.clientX, touch.clientY)
+			const { offsetX, offsetY } = calcOffsetCache.current(
+				touch.clientX,
+				touch.clientY,
+			)
 			calculatePoint(offsetX, offsetY, true)
 		}
 

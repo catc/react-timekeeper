@@ -1,14 +1,14 @@
 import React, { useRef } from 'react'
 import { jsx } from '@emotion/core'
 
-import useConfig from '../hooks/config-context'
+import useConfig from '../hooks/useConfigContext'
 import Clock from './Clock'
 import Meridiems from './Meridiems'
 import style from './styles/clock-wrapper'
-import useClockEvents from '../hooks/clock-events'
+import useClockEvents from '../hooks/useClockEvents'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
 import { isHourMode, isMinuteMode } from '../helpers/utils'
-import useTimekeeperState from '../hooks/state-context'
+import useTimekeeperState from '../hooks/useStateContext'
 
 export default function ClockWrapper() {
 	const config = useConfig()
@@ -81,7 +81,12 @@ export default function ClockWrapper() {
 	}
 
 	return (
-		<div {...bind} className="react-timekeeper__clock-wrapper" css={style}>
+		<div
+			{...bind}
+			className="react-timekeeper__clock-wrapper"
+			css={style}
+			data-testid="clock-wrapper"
+		>
 			<Clock clockEl={clock} />
 
 			{!config.hour24Mode && <Meridiems />}
