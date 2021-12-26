@@ -54,17 +54,20 @@ export default function ClockWrapper() {
 			const val = (angle / 360) * totalIncrements
 			let selected = Math.round(val / minIncrement) * minIncrement
 
+			/*
+				normalize value, acounts for angle that 12 is selected at, eg:
+				- if 12 clicked between 12 and 1, results in 0
+				- if 12 clicked between 11 and 12, results in 12
+			*/
+			selected = selected % 12
 			if (mode === MODE.HOURS_24 && config.hour24Mode) {
+				if (!isInnerClick) {
+					selected += 12
+				}
 				// fixes 12pm and midnight, both angle -> selected return 0
 				// for midnight need a final selected of 0, and for noon need 12
-				if (!isInnerClick && selected !== 0) {
-					selected += 12
-				} else if (isInnerClick && selected === 0) {
-					selected += 12
-				}
-				if (selected === 24) {
-					selected = 0
-				}
+				if (selected === 12) selected = 0
+				else if (selected === 0) selected = 12
 			}
 
 			// update time officially on timekeeper

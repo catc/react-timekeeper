@@ -16,8 +16,6 @@ function parseTime(time: string) {
 	}
 }
 
-// TODO - account for 24 and 0 ranges
-// DONE - account for same
 function generateHourValidator(
 	fromH: number,
 	fromM: number,
@@ -33,7 +31,7 @@ function generateHourValidator(
 		return hour => hour <= minH || hour >= maxH
 	}
 
-	// overnight range - fromH > toH || (isSameHour && fromM > toM)
+	// overnight range: fromH > toH || (isSameHour && fromM > toM)
 	return hour => hour <= minH && hour >= maxH
 }
 
