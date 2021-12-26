@@ -1,7 +1,7 @@
 import { Time, TimeInput, TimeOutput } from './types'
 
 const TIME_PARSE_MERIDIEM = new RegExp(/^(\d{1,2}?):(\d{2}?)\s?(am|pm)$/i)
-const TIME_PARSE_24 = new RegExp(/^(\d{1,2}?):(\d{2}?)$/)
+export const TIME_PARSE_24 = new RegExp(/^(\d{1,2}?):(\d{2}?)$/)
 
 const defaultTime = {
 	hour: 12,
@@ -104,8 +104,8 @@ export function composeTime(hour: number, minute: number): TimeOutput {
 		formatted12: `${hour12}:${paddedMinute} ${meridiem}`,
 		formattedSimple: `${hour12}:${paddedMinute}`,
 		hour: hour24,
-		hour12: hour12,
-		minute: minute,
-		meridiem: meridiem,
+		hour12,
+		minute,
+		meridiem,
 	}
 }

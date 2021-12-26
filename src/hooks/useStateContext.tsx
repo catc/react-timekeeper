@@ -15,11 +15,13 @@ import useConfig from './useConfigContext'
 import { isHourMode, isMinuteMode, isSameTime } from '../helpers/utils'
 import { TimeInput, ChangeTimeFn, Time, TimeOutput } from '../helpers/types'
 import { MODE, MERIDIEM } from '../helpers/constants'
+import DisabledTimeRange from '../helpers/disable-time'
 
 interface Props {
 	time?: TimeInput
 	onChange?: ChangeTimeFn
 	children: ReactElement
+	disabledTimeRange?: null | { from: string; to: string }
 }
 
 interface GlobalState {
@@ -44,11 +46,13 @@ interface StateContext {
 	updateMeridiem: (meridiem: MERIDIEM) => void
 	setMode: (mode: MODE) => void
 	getComposedTime: () => TimeOutput
+	disabledTimeRangeValidator: DisabledTimeRange | null
+	meridiem: MERIDIEM
 }
 
 export const stateContext = createContext({} as StateContext)
 
-function reducer(state: GlobalState, action: any) {
+function reducer(state: GlobalState, action: any): GlobalState {
 	switch (action.type) {
 		case 'SET_TIME':
 			return {
@@ -64,7 +68,12 @@ function reducer(state: GlobalState, action: any) {
 	return state
 }
 
-export function StateProvider({ onChange, time: parentTime, children }: Props) {
+export function StateProvider({
+	onChange,
+	time: parentTime,
+	children,
+	disabledTimeRange,
+}: Props) {
 	const config = useConfig()
 	const [state, dispatch] = useReducer(reducer, null, () => {
 		return {
@@ -73,7 +82,7 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 			// need meridiem for context when 12h mode, so can tell
 			// if user is changing hours before or after 12pm
 			meridiem: parseMeridiem(parentTime),
-		}
+		} as GlobalState
 	})
 	const { mode, time, meridiem } = state
 	const refTime = useRef(time)
@@ -89,6 +98,15 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 	useEffect(() => {
 		onDoneClickFn.current = config.onDoneClick
 	}, [config.onDoneClick])
+
+	const disabledTimeRangeValidator = useMemo(() => {
+		const from = disabledTimeRange?.from
+		const to = disabledTimeRange?.to
+		if (!from || !to) {
+			return null
+		}
+		return new DisabledTimeRange(from, to)
+	}, [disabledTimeRange?.from, disabledTimeRange?.to])
 
 	// handle time update if parent changes
 	useEffect(() => {
@@ -207,11 +225,28 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 				return
 			}
 
+			//
+			if (disabledTimeRangeValidator) {
+				if (
+					(isHourMode(mode) && !disabledTimeRangeValidator.validateHour(val)) ||
+					(isMinuteMode(mode) &&
+						!disabledTimeRangeValidator.validateMinute(time.hour, val))
+				) {
+					return
+				}
+			}
+
 			// generate new time and update timekeeper state
 			const newTime: Time = { ...time, [unit]: val }
 			updateTime(newTime)
 		},
-		[updateTime, handleUpdateTimeSideEffects, meridiem, mode],
+		[
+			mode,
+			meridiem,
+			handleUpdateTimeSideEffects,
+			disabledTimeRangeValidator,
+			updateTime,
+		],
 	)
 
 	const value = {
@@ -221,6 +256,8 @@ export function StateProvider({ onChange, time: parentTime, children }: Props) {
 		updateMeridiem,
 		setMode,
 		getComposedTime,
+		disabledTimeRangeValidator,
+		meridiem,
 	}
 	return <stateContext.Provider value={value}>{children}</stateContext.Provider>
 }
