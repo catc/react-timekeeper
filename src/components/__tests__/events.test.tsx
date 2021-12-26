@@ -9,6 +9,10 @@ import {
 	MINUTE_7,
 	MINUTE_23,
 	MINUTE_59,
+	MIDNIGHT_OUTER_FROM_LEFT,
+	MIDNIGHT_OUTER_FROM_RIGHT,
+	MIDNIGHT_INNER_FROM_LEFT,
+	MIDNIGHT_INNER_FROM_RIGHT,
 } from './helpers/coords'
 import { Props as TimekeeperProps } from '../TimeKeeperContainer'
 
@@ -43,19 +47,15 @@ describe('handles events correctly', () => {
 		it('handles outer click on "3" during 12h mode', () => {
 			testHours(HOUR_3_OUTER, '3:20')
 		})
-
 		it('handles inner click on "3" during 12h mode', () => {
 			testHours(HOUR_3_INNER, '3:20')
 		})
-
 		it('handles outer click on "12" during 12h mode', () => {
 			testHours(HOUR_24_OUTER, '0:20')
 		})
-
 		it('handles inner click on "12" during 12h mode', () => {
 			testHours(HOUR_12_INNER, '0:20')
 		})
-
 		it('handles outer click on "3" during 24h mode', () => {
 			testHours(HOUR_3_OUTER, '15:20', true)
 		})
@@ -67,6 +67,26 @@ describe('handles events correctly', () => {
 		})
 		it('handles inner click on "12" during 24h mode', () => {
 			testHours(HOUR_12_INNER, '12:20', true)
+		})
+
+		// test midnight/noon values from angles on left and right
+		it('handles click on "12" from left during 12h mode', () => {
+			testHours(MIDNIGHT_OUTER_FROM_LEFT, '0:20')
+		})
+		it('handles click on "12" from right during 12h mode', () => {
+			testHours(MIDNIGHT_OUTER_FROM_RIGHT, '0:20')
+		})
+		it('handles outer click on "12" from left during 24h mode', () => {
+			testHours(MIDNIGHT_OUTER_FROM_LEFT, '0:20', true)
+		})
+		it('handles outer click on "12" from right during 24h mode', () => {
+			testHours(MIDNIGHT_OUTER_FROM_RIGHT, '0:20', true)
+		})
+		it('handles inner click on "12" from right during 24h mode', () => {
+			testHours(MIDNIGHT_INNER_FROM_LEFT, '12:20', true)
+		})
+		it('handles inner click on "12" from right during 24h mode', () => {
+			testHours(MIDNIGHT_INNER_FROM_RIGHT, '12:20', true)
 		})
 	})
 

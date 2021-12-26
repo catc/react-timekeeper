@@ -7,7 +7,7 @@ import Meridiems from './Meridiems'
 import style from './styles/clock-wrapper'
 import useClockEvents from '../hooks/useClockEvents'
 import { MODE, CLOCK_VALUES } from '../helpers/constants'
-import { isMinuteMode } from '../helpers/utils'
+import { isHourMode, isMinuteMode } from '../helpers/utils'
 import useTimekeeperState from '../hooks/useStateContext'
 
 export default function ClockWrapper() {
@@ -59,7 +59,9 @@ export default function ClockWrapper() {
 				- if 12 clicked between 12 and 1, results in 0
 				- if 12 clicked between 11 and 12, results in 12
 			*/
-			selected = selected % 12
+			if (isHourMode(mode)) {
+				selected = selected % 12
+			}
 			if (mode === MODE.HOURS_24 && config.hour24Mode) {
 				if (!isInnerClick) {
 					selected += 12

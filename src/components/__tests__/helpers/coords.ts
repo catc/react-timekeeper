@@ -50,3 +50,21 @@ export const MINUTE_59: Coords = {
 	clientX: CLOCK_RADIUS - 2,
 	clientY: 1,
 }
+
+// for testing midnight/noon angles
+export const MIDNIGHT_OUTER_FROM_LEFT: Coords = {
+	clientX: CLOCK_RADIUS - 1,
+	clientY: 1,
+}
+export const MIDNIGHT_OUTER_FROM_RIGHT: Coords = {
+	clientX: CLOCK_RADIUS + 1,
+	clientY: 1,
+}
+export const MIDNIGHT_INNER_FROM_LEFT: Coords = {
+	clientX: CLOCK_RADIUS - 1,
+	clientY: CLOCK_RADIUS - 25,
+}
+export const MIDNIGHT_INNER_FROM_RIGHT: Coords = {
+	clientX: CLOCK_RADIUS + 1,
+	clientY: CLOCK_RADIUS - 25,
+}
