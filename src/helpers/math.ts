@@ -9,7 +9,7 @@ const pi = Math.PI
 
 const ANGLE_PER_INCREMENT = 360 / VISIBLE_NUMBERS_PER_CIRCLE
 
-function rad(deg: number): number {
+export function rad(deg: number): number {
 	return deg / (180 / pi)
 }
 export function deg(rad: number): number {

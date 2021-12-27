@@ -29,6 +29,12 @@ export function changeToMinutes(wrapper: RenderResult) {
 	})
 }
 
+export function changeMeridiem(wrapper: RenderResult, meridiem = 'pm') {
+	fireEvent.click(
+		wrapper.getByTestId(meridiem === 'pm' ? 'meridiem_pm' : 'meridiem_am'),
+	)
+}
+
 export function clickOnPoint(wrapper: RenderResult, coords: Coords) {
 	const { getByTestId } = wrapper
 	const cw = getByTestId('clock-wrapper')
