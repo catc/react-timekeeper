@@ -7,6 +7,7 @@ import {
 } from '../../helpers/constants'
 
 const CLOCK_NUMBER_COLOR = '#999999'
+const CLOCK_NUMBER_COLOR_DISABLED = '#ddd'
 
 function getFontSize(hour24Mode: boolean, inner: boolean): string {
 	if (!hour24Mode) {
@@ -20,12 +21,21 @@ function getFontSize(hour24Mode: boolean, inner: boolean): string {
 interface Props {
 	hour24Mode?: boolean
 	inner?: boolean
+	enabled?: boolean
 }
 
-export const numbersStyle = ({ hour24Mode = false, inner = false }: Props) => css`
+const enabledColor = `var(--numbers-text-color, ${CLOCK_NUMBER_COLOR})`
+const disabledColor = `var(--numbers-text-color-disabled, ${CLOCK_NUMBER_COLOR_DISABLED})`
+
+export const numbersStyle = ({
+	hour24Mode = false,
+	inner = false,
+	enabled = true,
+}: Props) => css`
 	display: inline-block;
 	position: absolute;
-	color: var(--numbers-text-color, ${CLOCK_NUMBER_COLOR});
+	color: ${enabled ? enabledColor : disabledColor};
+	transition: color 0.15s ease-out;
 	pointer-events: none;
 	border-radius: 99px;
 	width: ${NUMBER_RADIUS_REGULAR}px;

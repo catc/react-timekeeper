@@ -76,13 +76,11 @@ function Hours({
 			{numbersOuter.map(({ value, enabled }, i) => {
 				return (
 					<animated.span
-						css={numbersStyle({ hour24Mode })}
+						css={numbersStyle({ hour24Mode, enabled })}
 						key={value}
 						data-testid="number_hour_outer"
 						style={{
 							transform: translateOuter.to(v => transform(i + 1, v)),
-							opacity: enabled ? 1 : 0.2,
-							transition: 'opacity 0.2s ease-out',
 						}}
 					>
 						{value}
@@ -94,13 +92,11 @@ function Hours({
 				numbersInner!.map(({ value, enabled }, i) => {
 					return (
 						<animated.span
-							css={numbersStyle({ hour24Mode, inner: true })}
+							css={numbersStyle({ hour24Mode, inner: true, enabled })}
 							key={value}
 							data-testid="number_hour_inner"
 							style={{
 								transform: translateInner.to(v => transform(i + 1, v)),
-								opacity: enabled ? 1 : 0.2,
-								transition: 'opacity 0.2s ease-out',
 							}}
 						>
 							{value}
@@ -140,13 +136,11 @@ function Minutes({ anim, hour, disabledTimeRangeValidator }: MinuteProps) {
 			{minutes.map(({ value, enabled }, i) => {
 				return (
 					<animated.span
-						css={numbersStyle({})}
+						css={numbersStyle({ enabled })}
 						key={value}
 						data-testid="number_minute"
 						style={{
 							transform: translate.to(v => transform(i + 1, v)),
-							opacity: enabled ? 1 : 0.2,
-							transition: 'opacity 0.2s ease-out',
 						}}
 					>
 						{value}
