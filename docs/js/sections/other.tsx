@@ -54,6 +54,7 @@ var(--top-meridiem-color, #8C8C8C)
 var(--dropdown-border, 1px solid #f4f4f4)
 var(--dropdown-shadow, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24))
 var(--dropdown-text-color, #8c8c8c)
+var(--dropdown-text-color-disabled, #ddd)
 var(--dropdown-hover-bg, #EAF8FF)
 
 // clock wrapper
@@ -72,7 +73,6 @@ var(--numbers-text-color-disabled, #ddd);
 var(--numbers-font-size-reg, 16px); // 12h mode only
 var(--numbers-font-size-inner, 15px); // 24h mode only
 var(--numbers-font-size-outer, 13px); // 24h mode only
-
 
 // meridiem buttons
 var(--meridiem-bg-color, white);
