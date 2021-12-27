@@ -37,15 +37,21 @@ export default function useClockEvents(
 		}
 		dragCount.current = 0
 
+		// terminate if click is outside of clock radius, ie:
+		// if clicking meridiem button which overlaps with clock
+		if (clock.current) {
+			calcOffsetCache.current = calcOffset(clock.current)
+			const { offsetX, offsetY } = calcOffsetCache.current!(e.clientX, e.clientY)
+			const x = offsetX - CLOCK_RADIUS
+			const y = offsetY - CLOCK_RADIUS
+			if (!isWithinRadius(x, y, CLOCK_RADIUS)) return
+		}
+
 		// add listeners
 		document.addEventListener('mousemove', handleMouseDrag, false)
 		document.addEventListener('mouseup', handleStopDrag, false)
 		wrapper.current &&
 			wrapper.current.addEventListener('mouseleave', handleStopDrag, false)
-
-		if (clock.current) {
-			calcOffsetCache.current = calcOffset(clock.current)
-		}
 
 		// @ts-ignore
 		handleMouseDrag(e)
