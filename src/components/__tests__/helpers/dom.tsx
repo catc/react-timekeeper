@@ -34,7 +34,13 @@ export function clickOnPoint(wrapper: RenderResult, coords: Coords) {
 	const cw = getByTestId('clock-wrapper')
 
 	// trigger mousedown and them up with coordinates
-	fireEvent.mouseDown(cw)
+	fireEvent(
+		cw,
+		new MouseEvent('mousedown', {
+			...coords,
+			bubbles: true,
+		}),
+	)
 	fireEvent(
 		cw,
 		new MouseEvent('mouseup', {

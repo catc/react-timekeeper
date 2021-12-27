@@ -36,7 +36,7 @@ describe('handles events correctly', () => {
 
 			clickOnPoint(wrapper, coords)
 
-			expect(onChange).toBeCalledTimes(1)
+			expect(onChange).toBeCalledTimes(2)
 			expect(onChange).toBeCalledWith(
 				expect.objectContaining({
 					formatted24: expectedTime,
@@ -105,7 +105,7 @@ describe('handles events correctly', () => {
 
 			clickOnPoint(wrapper, coords)
 
-			expect(onChange).toBeCalledTimes(1)
+			expect(onChange).toBeCalledTimes(2)
 			expect(onChange).toBeCalledWith(
 				expect.objectContaining({
 					formatted24: expectedTime,
