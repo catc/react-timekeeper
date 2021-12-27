@@ -47,7 +47,6 @@ export default function useClockEvents(
 			calcOffsetCache.current = calcOffset(clock.current)
 		}
 
-		// move hand
 		// @ts-ignore
 		handleMouseDrag(e)
 	}

@@ -215,17 +215,19 @@ export function StateProvider({
 				val += 12
 			}
 
-			handleUpdateTimeSideEffects(source)
-
 			const unit = isHourMode(mode) ? 'hour' : 'minute'
 			const time = refTime.current
 
-			// useful for same value when dragging between degrees in hours
-			if (time[unit] === val) {
+			// perf to avoid unecessary updates when dragging on clock
+			if (
+				time[unit] === val &&
+				source.type === 'clock' &&
+				!source.canAutoChangeMode
+			) {
 				return
 			}
 
-			//
+			// if time is blocked off, dont update
 			if (disabledTimeRangeValidator) {
 				if (
 					(isHourMode(mode) && !disabledTimeRangeValidator.validateHour(val)) ||
@@ -235,6 +237,8 @@ export function StateProvider({
 					return
 				}
 			}
+
+			handleUpdateTimeSideEffects(source)
 
 			// generate new time and update timekeeper state
 			const newTime: Time = { ...time, [unit]: val }
