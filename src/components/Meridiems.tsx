@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { jsx } from '@emotion/core'
 
 import { meridiemWrapper, meridiem } from './styles/meridiems'
 import useTimekeeperState from '../hooks/useStateContext'

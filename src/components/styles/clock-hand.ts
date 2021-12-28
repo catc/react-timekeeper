@@ -1,4 +1,4 @@
-import { css, jsx } from '@emotion/core'
+import { css } from '@emotion/react'
 
 const CLOCK_HAND_ARM = '#bceaff'
 const CLOCK_HAND_CIRCLE_BACKGROUND = '#e6f7ff'

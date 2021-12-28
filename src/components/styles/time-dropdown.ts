@@ -1,4 +1,4 @@
-import { css, jsx, keyframes } from '@emotion/core'
+import { css, keyframes } from '@emotion/react'
 import { isMinuteMode } from '../../helpers/utils'
 import { MODE } from '../../helpers/constants'
 

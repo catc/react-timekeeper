@@ -20,6 +20,7 @@ module.exports = {
 		'react-hooks',
 		'@typescript-eslint',
 		'prettier',
+		'@emotion',
 	],
 	settings: {
 		'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

@@ -41,7 +41,8 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@emotion/babel-preset-css-prop": "^10.0.14",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@emotion/eslint-plugin": "^11.7.0",
     "@hot-loader/react-dom": "^16.13.0",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^24.0.15",
@@ -82,7 +83,7 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.14",
+    "@emotion/react": "^11.7.1",
     "lodash.debounce": "^4.0.8",
     "react-spring": "^9.3.3"
   },

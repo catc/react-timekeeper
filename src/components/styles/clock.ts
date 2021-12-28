@@ -1,4 +1,4 @@
-import { css, jsx } from '@emotion/core'
+import { css } from '@emotion/react'
 import { CLOCK_SIZE } from '../../helpers/constants'
 
 const styles = css`

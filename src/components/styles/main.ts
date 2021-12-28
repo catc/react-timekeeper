@@ -1,4 +1,4 @@
-import { css, jsx } from '@emotion/core'
+import { css } from '@emotion/react'
 import { CLOCK_RADIUS } from '../../helpers/constants'
 
 const CLOCK_WIDTH_PADDING = 20

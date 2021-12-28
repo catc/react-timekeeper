@@ -1,4 +1,4 @@
-import { css, jsx, keyframes } from '@emotion/core'
+import { css, keyframes } from '@emotion/react'
 
 const TIME_DEFAULT_COLOR = '#8C8C8C'
 const TIME_SELECTED_COLOR = '#8EDDFD'
