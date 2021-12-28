@@ -10,7 +10,7 @@ export const wrapper = (is24hr: boolean) => css`
 	position: relative;
 
 	${is24hr &&
-		`
+	`
 		display: flex;
 		justify-content: center;
 	`}

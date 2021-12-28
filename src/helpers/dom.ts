@@ -12,7 +12,7 @@ export type CalcOffsetFn = (x: number, y: number) => { offsetX: number; offsetY:
 export function calcOffset(el: HTMLDivElement): CalcOffsetFn {
 	const style = window.getComputedStyle(el, null)
 
-	return function (
+	return function memoizedCalcOffset(
 		clientX: number,
 		clientY: number,
 	): { offsetX: number; offsetY: number } {

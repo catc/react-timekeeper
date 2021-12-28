@@ -39,5 +39,5 @@ describe('math/calcAnimationAngle', () => {
 		[0, 360, 0],
 		[360, 360, 360],
 	]
-	tests.forEach((tc) => run(tc))
+	tests.forEach(tc => run(tc))
 })
