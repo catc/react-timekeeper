@@ -37,6 +37,7 @@
 		"**/node_modules/*",
 		"**/staticresources/*",
 		"docs/build",
-		"lib"
+		"lib",
+		"**/z_*"
 	],
 }

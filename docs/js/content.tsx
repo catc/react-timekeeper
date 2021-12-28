@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react'
 import { hot } from 'react-hot-loader'
 import '../css/style.scss'
 
+// @ts-ignore
 import highlight from 'highlight.js/lib'
 import 'highlight.js/lib/languages/javascript'
 import 'highlight.js/lib/languages/scss'

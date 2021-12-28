@@ -1,4 +1,4 @@
-import { act, RenderResult } from '@testing-library/react'
+import { RenderResult } from '@testing-library/react'
 import { renderTK, mockAnimations, clickOnPoint } from './helpers/dom'
 import {
 	HOUR_12_INNER,

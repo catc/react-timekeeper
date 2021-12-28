@@ -180,6 +180,7 @@ describe('helpers/parse-time', () => {
 
 			expect(() =>
 				parse({
+					// @ts-expect-error
 					someKey: 26,
 					anotherKey: 70,
 				}),
