@@ -1,7 +1,8 @@
+import DisabledTimeRange from './disable-time'
 import { Time, TimeInput, TimeOutput } from './types'
 
 const TIME_PARSE_MERIDIEM = new RegExp(/^(\d{1,2}?):(\d{2}?)\s?(am|pm)$/i)
-const TIME_PARSE_24 = new RegExp(/^(\d{1,2}?):(\d{2}?)$/)
+export const TIME_PARSE_24 = new RegExp(/^(\d{1,2}?):(\d{2}?)$/)
 
 const defaultTime = {
 	hour: 12,
@@ -87,7 +88,11 @@ export function parseMeridiem(time: TimeInput): string {
 }
 
 // formats time output to poss to parent
-export function composeTime(hour: number, minute: number): TimeOutput {
+export function composeTime(
+	hour: number,
+	minute: number,
+	disabledTimeRangeValidator: DisabledTimeRange | null,
+): TimeOutput {
 	const paddedMinute = ('0' + minute).slice(-2)
 	const hour24 = hour === 24 ? 0 : hour
 
@@ -99,13 +104,24 @@ export function composeTime(hour: number, minute: number): TimeOutput {
 		hour12 = hour = 12
 	}
 
+	let isValid = true
+	if (disabledTimeRangeValidator) {
+		if (
+			!disabledTimeRangeValidator.validateHour(hour24) ||
+			!disabledTimeRangeValidator.validateMinute(hour24, minute)
+		) {
+			isValid = false
+		}
+	}
+
 	return {
 		formatted24: `${hour24}:${paddedMinute}`,
 		formatted12: `${hour12}:${paddedMinute} ${meridiem}`,
 		formattedSimple: `${hour12}:${paddedMinute}`,
 		hour: hour24,
-		hour12: hour12,
-		minute: minute,
-		meridiem: meridiem,
+		hour12,
+		minute,
+		meridiem,
+		isValid,
 	}
 }

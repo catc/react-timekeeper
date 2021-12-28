@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { jsx } from '@emotion/core'
 
 import useConfig from '../hooks/useConfigContext'
@@ -15,9 +15,8 @@ export default function ClockWrapper() {
 
 	// clock events
 	const clock = useRef<HTMLDivElement | null>(null)
-	const { bind } = useClockEvents(clock, calculateTimeValue)
 
-	const { mode, updateTime, setMode, getComposedTime } = useTimekeeperState()
+	const { mode, updateTimeValue } = useTimekeeperState()
 
 	/*
 		LOGIC AROUND COARSE
@@ -37,48 +36,55 @@ export default function ClockWrapper() {
 	/*
 		converts angle into time, also factors in any rounding to the closest increment
 	*/
-	function calculateTimeValue(
-		angle: number,
-		{ canAutoChangeUnit = false, wasTapped = false, isInnerClick = false },
-	) {
-		// total number of allowable increments, 12/24 for hours, 60 for min
-		const totalIncrements = CLOCK_VALUES[mode].increments
-		// minimum increment used for rounding
-		let minIncrement = 1
+	const calculateTimeValue = useCallback(
+		(
+			angle: number,
+			{ canAutoChangeMode = false, wasTapped = false, isInnerClick = false },
+		) => {
+			// total number of allowable increments, 12/24 for hours, 60 for min
+			const totalIncrements = CLOCK_VALUES[mode].increments
+			// minimum increment used for rounding
+			let minIncrement = 1
 
-		// coarse minutes
-		if (isMinuteMode(mode) && (wasTapped || config.forceCoarseMinutes)) {
-			minIncrement = config.coarseMinutes
-		}
-
-		const val = (angle / 360) * totalIncrements
-		let selected = Math.round(val / minIncrement) * minIncrement
-
-		if (mode === MODE.HOURS_24 && config.hour24Mode) {
-			// fixes 12pm and midnight, both angle -> selected return 0
-			// for midnight need a final selected of 0, and for noon need 12
-			if (!isInnerClick && selected !== 0) {
-				selected += 12
-			} else if (isInnerClick && selected === 0) {
-				selected += 12
+			// coarse minutes
+			if (isMinuteMode(mode) && (wasTapped || config.forceCoarseMinutes)) {
+				minIncrement = config.coarseMinutes
 			}
-			if (selected === 24) {
-				selected = 0
-			}
-		}
 
-		// update time officially on timekeeper
-		updateTime(selected)
+			const val = (angle / 360) * totalIncrements
+			let selected = Math.round(val / minIncrement) * minIncrement
 
-		// handle any unit autochanges on done click
-		if (canAutoChangeUnit) {
-			if (config.switchToMinuteOnHourSelect && isHourMode(mode)) {
-				setMode(MODE.MINUTES)
-			} else if (config.closeOnMinuteSelect && isMinuteMode(mode)) {
-				config.onDoneClick && config.onDoneClick(getComposedTime())
+			/*
+				normalize value, acounts for angle that 12 is selected at, eg:
+				- if 12 clicked between 12 and 1, results in 0
+				- if 12 clicked between 11 and 12, results in 12
+			*/
+			if (isHourMode(mode)) {
+				selected = selected % 12
 			}
-		}
-	}
+			if (mode === MODE.HOURS_24 && config.hour24Mode) {
+				if (!isInnerClick) {
+					selected += 12
+				}
+				// fixes 12pm and midnight, both angle -> selected return 0
+				// for midnight need a final selected of 0, and for noon need 12
+				if (selected === 12) selected = 0
+				else if (selected === 0) selected = 12
+			}
+
+			// update time officially on timekeeper
+			updateTimeValue(selected, { type: 'clock', canAutoChangeMode })
+		},
+		[
+			config.forceCoarseMinutes,
+			config.coarseMinutes,
+			config.hour24Mode,
+			mode,
+			updateTimeValue,
+		],
+	)
+
+	const { bind } = useClockEvents(clock, calculateTimeValue)
 
 	return (
 		<div

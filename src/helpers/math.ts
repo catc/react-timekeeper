@@ -1,11 +1,15 @@
-import { VISIBLE_NUMBERS_PER_CIRCLE, CLOCK_RADIUS, NUMBER_RADIUS_REGULAR } from './constants'
+import {
+	VISIBLE_NUMBERS_PER_CIRCLE,
+	CLOCK_RADIUS,
+	NUMBER_RADIUS_REGULAR,
+} from './constants'
 
 const { cos, sin } = Math
 const pi = Math.PI
 
 const ANGLE_PER_INCREMENT = 360 / VISIBLE_NUMBERS_PER_CIRCLE
 
-function rad(deg: number): number {
+export function rad(deg: number): number {
 	return deg / (180 / pi)
 }
 export function deg(rad: number): number {
@@ -39,14 +43,6 @@ export function transform(index: number, t: number): string {
 export function isWithinRadius(x: number, y: number, radius: number): boolean {
 	return Math.sqrt(x * x + y * y) < radius
 }
-
-export type CalcTimeFromAngle = (
-	angle: number,
-	{
-		canAutoChangeUnit,
-		wasTapped,
-	}: { canAutoChangeUnit: boolean; wasTapped: boolean; isInnerClick: boolean },
-) => void
 
 // normalize any angles to 0-360 deg
 function normalize(angle: number): number {

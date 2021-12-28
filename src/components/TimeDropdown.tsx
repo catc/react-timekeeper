@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useRef, MutableRefObject } from 'react'
+import React, { useCallback, useEffect, useRef, MutableRefObject, useMemo } from 'react'
 
 import * as styles from './styles/time-dropdown'
 import useConfig from '../hooks/useConfigContext'
 import { getScrollBarWidth } from '../helpers/dom'
-import { getNormalizedTimeValue, isHourMode } from '../helpers/utils'
+import { getNormalizedTimeValue } from '../helpers/utils'
 import { ElementRef } from '../helpers/types'
 import { CLOCK_VALUES, MODE } from '../helpers/constants'
 import useTimekeeperState from '../hooks/useStateContext'
@@ -17,13 +17,43 @@ let scrollbarWidth: null | number = null
 type ElementLiRef = MutableRefObject<HTMLLIElement | null>
 
 export default function TimeDropdown({ close }: Props) {
-	const { hour24Mode, switchToMinuteOnHourDropdownSelect } = useConfig()
-	const { updateTime, mode, time, setMode } = useTimekeeperState()
+	const { hour24Mode } = useConfig()
+	const { updateTimeValue, mode, time, meridiem, disabledTimeRangeValidator } =
+		useTimekeeperState()
 
 	const container: ElementRef = useRef(null)
 	const selectedOption: ElementLiRef = useRef(null)
 
-	const options = CLOCK_VALUES[mode].dropdown
+	const options = useMemo(() => {
+		const o = CLOCK_VALUES[mode].dropdown
+
+		let validator: (value: string, i: number) => boolean = () => true
+		if (disabledTimeRangeValidator) {
+			if (mode === MODE.HOURS_12) {
+				if (meridiem === 'am') {
+					validator = (_, i) =>
+						disabledTimeRangeValidator.validateHour((i + 1) % 12)
+				} else {
+					validator = (_, i) => {
+						// account for last number (12) which should be first (noon, 1pm, ...) in 24h format
+						const num = i === 11 ? 12 : i + 13
+						return disabledTimeRangeValidator.validateHour(num)
+					}
+				}
+			} else if (mode === MODE.HOURS_24) {
+				validator = (_, i) =>
+					disabledTimeRangeValidator.validateHour((i + 1) % 24)
+			} else if (mode === MODE.MINUTES) {
+				validator = v =>
+					disabledTimeRangeValidator.validateMinute(time.hour, parseInt(v, 10))
+			}
+		}
+		return o.map((value, i) => ({
+			value,
+			enabled: validator(value, i),
+		}))
+	}, [mode, disabledTimeRangeValidator, meridiem, time.hour])
+
 	const selected = getNormalizedTimeValue(mode, time).toString()
 
 	function disableBodyScroll() {
@@ -68,17 +98,14 @@ export default function TimeDropdown({ close }: Props) {
 	}, [elsewhereClick])
 
 	// select a value
-	function select(val: string) {
+	function select(val: string, enabled: boolean) {
+		if (!enabled) return
+
 		let parsed = parseInt(val, 10)
 		if (mode === MODE.HOURS_12 && parsed === 12) {
 			parsed = 0
 		}
-		updateTime(parsed)
-
-		// handle any unit autochanges on hour select
-		if (switchToMinuteOnHourDropdownSelect && isHourMode(mode)) {
-			setMode(MODE.MINUTES)
-		}
+		updateTimeValue(parsed, { type: 'dropdown' })
 		close()
 	}
 
@@ -92,8 +119,8 @@ export default function TimeDropdown({ close }: Props) {
 			data-testid="time-dropdown"
 		>
 			<ul css={styles.options} className="react-timekeeper__dropdown-numbers">
-				{options.map(o => {
-					const isSelected = selected === o
+				{options.map(({ value, enabled }) => {
+					const isSelected = selected === value
 					return (
 						<li
 							ref={el => (isSelected ? (selectedOption.current = el) : '')}
@@ -102,12 +129,12 @@ export default function TimeDropdown({ close }: Props) {
 									? 'react-timekeeper__dropdown-number--active'
 									: ''
 							}`}
-							css={styles.option(isSelected)}
-							key={o}
-							onClick={() => select(o)}
+							css={styles.option({ active: isSelected, enabled })}
+							key={value}
+							onClick={() => select(value, enabled)}
 							data-testid="time-dropdown_number"
 						>
-							{o}
+							{value}
 						</li>
 					)
 				})}

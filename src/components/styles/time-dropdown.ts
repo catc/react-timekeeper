@@ -4,6 +4,7 @@ import { MODE } from '../../helpers/constants'
 
 const DROPDOWN_BORDER = '#f4f4f4'
 const DROPDOWN_COLOR = '#8c8c8c'
+const DROPDOWN_COLOR_DISABLED = '#ddd'
 const DROPDOWN_SELECTED_COLOR = '#EAF8FF'
 
 const hour = `right: -22px;`
@@ -48,14 +49,23 @@ export const options = css`
 `
 
 const selected = `background: ${DROPDOWN_SELECTED_COLOR};`
-export const option = (active: boolean) => css`
+
+interface OptionStyleProps {
+	active: boolean
+	enabled: boolean
+}
+
+const enabledColor = `var(--dropdown-text-color, ${DROPDOWN_COLOR})`
+const disabledColor = `var(--dropdown-text-color-disabled, ${DROPDOWN_COLOR_DISABLED})`
+
+export const option = ({ active, enabled }: OptionStyleProps) => css`
 	background: transparent;
 	padding: 7px 30px;
 	font-size: 16px;
-	color: var(--dropdown-text-color, ${DROPDOWN_COLOR});
-	cursor: pointer;
+	color: ${enabled ? enabledColor : disabledColor};
+	cursor: ${enabled ? 'pointer' : 'not-allowed'};
 	&:hover {
-		background: var(--dropdown-hover-bg, ${DROPDOWN_SELECTED_COLOR});
+		background: ${enabled && `var(--dropdown-hover-bg, ${DROPDOWN_SELECTED_COLOR})`};
 	}
 	${active && selected}
 `

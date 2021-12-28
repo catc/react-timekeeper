@@ -11,8 +11,8 @@ export default function Other() {
 			<div className="examples__item">
 				<Text>There are two ways of overriding/customizing styles:</Text>
 				<Text>
-					<strong>CSS variables:</strong> for changing basic styling - mainly text colors,
-					background colors, fonts, etc. See{' '}
+					<strong>CSS variables:</strong> for changing basic styling - mainly
+					text colors, background colors, fonts, etc. See{' '}
 					<Link
 						samePage
 						href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
@@ -54,6 +54,7 @@ var(--top-meridiem-color, #8C8C8C)
 var(--dropdown-border, 1px solid #f4f4f4)
 var(--dropdown-shadow, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24))
 var(--dropdown-text-color, #8c8c8c)
+var(--dropdown-text-color-disabled, #ddd)
 var(--dropdown-hover-bg, #EAF8FF)
 
 // clock wrapper
@@ -68,10 +69,10 @@ var(--hand-minute-circle, #ade2fb); // minutes only, dot between intervals
 
 // numbers
 var(--numbers-text-color, #999);
+var(--numbers-text-color-disabled, #ddd);
 var(--numbers-font-size-reg, 16px); // 12h mode only
 var(--numbers-font-size-inner, 15px); // 24h mode only
 var(--numbers-font-size-outer, 13px); // 24h mode only
-
 
 // meridiem buttons
 var(--meridiem-bg-color, white);
@@ -90,8 +91,9 @@ var(--done-font-weight, 500);
 
 				<hr />
 				<Text>
-					<strong>Higher CSS specificity:</strong> for more control over css, each element
-					has a class name you can override properties with 1 level of specifity.
+					<strong>Higher CSS specificity:</strong> for more control over css,
+					each element has a class name you can override properties with 1 level
+					of specifity.
 				</Text>
 				<Code type={SYNTAX.css}>
 					{`// won't work because emotion will override your styles

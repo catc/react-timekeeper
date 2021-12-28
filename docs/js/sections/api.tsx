@@ -44,14 +44,15 @@ export default function Intro() {
 			{/* onchange */}
 			<h3 className="h3-api">
 				<code className="name">onChange</code>
-				<span className="accepts">(TimeOutput) => void</span>(default:{' '}
+				<span className="accepts">(TimeOutput) {`=>`} void</span>(default:{' '}
 				<code className="default">null</code>)
 			</h3>
 
 			<div className="api__description">
 				<Text>
-					Pass a function to be called when time is changed. Used to store time state in
-					parent component. Function called returns object with updated time.
+					Pass a function to be called when time is changed. Used to update time
+					state in parent component. Function called returns object with updated
+					time.
 				</Text>
 				<Code type={SYNTAX.js}>{`// TimeOutput
 {
@@ -61,7 +62,8 @@ export default function Intro() {
 	hour: 16,                // 24 hour
 	hour12: 4,
 	minute: 55,
-	meridiem: 'pm'				
+	meridiem: 'pm',
+	isValid: boolean,        // requires \`disabledTimeRange\`, false if time selected is blocked off
 }`}</Code>
 			</div>
 
@@ -85,8 +87,8 @@ export default function Intro() {
 
 			<div className="api__description">
 				<Text>
-					Changes clock unit from hour to minute after selecting an hour. Exists mainly to
-					provides a better user experience.
+					Changes clock unit from hour to minute after selecting an hour. Exists
+					mainly to provides a better user experience.
 				</Text>
 			</div>
 			{/* switchToMinuteOnHourDropdownSelect */}
@@ -98,7 +100,8 @@ export default function Intro() {
 
 			<div className="api__description">
 				<Text>
-					Changes clock unit from hour to minute after selecting an hour via the dropdown.
+					Changes clock unit from hour to minute after selecting an hour via the
+					dropdown.
 				</Text>
 			</div>
 
@@ -111,23 +114,25 @@ export default function Intro() {
 
 			<div className="api__description">
 				<Text>
-					Whether or not to trigger "Done" button click when the user selects minutes.
-					Similar to Google Keep functionality, where once the selects hour and minute,
-					the picker automatically closes.
+					Whether or not to trigger &quot;Done&quot; button click when the user
+					selects minutes. Similar to Google Keep functionality, where once the
+					selects hour and minute, the picker automatically closes.
 				</Text>
 			</div>
 
 			{/* coarseMinutes */}
 			<h3 className="h3-api">
 				<code className="name">coarseMinutes</code>
-				<span className="accepts">number</span>(default: <code className="default">5</code>)
+				<span className="accepts">number</span>(default:{' '}
+				<code className="default">5</code>)
 			</h3>
 
 			<div className="api__description">
 				<Text>
-					When roughly tapping minutes (ie: not dragging the cursor), rounds selected
-					number to increments (eg, tapping on 23 will round to 25). Is especially useful
-					for mobile. Set to 1 if you wish to avoid this feature.
+					When roughly tapping minutes (ie: not dragging the cursor), rounds
+					selected number to increments (eg, tapping on 23 will round to 25). Is
+					especially useful for mobile. Set to 1 if you wish to avoid this
+					feature.
 				</Text>
 			</div>
 
@@ -140,34 +145,59 @@ export default function Intro() {
 
 			<div className="api__description">
 				<Text>
-					Forces minutes to always round to <Code inline>coarseMinutes</Code> value - even
-					when dragging clockhand.
+					Forces minutes to always round to <Code inline>coarseMinutes</Code>{' '}
+					value - even when dragging clockhand.
 				</Text>
 			</div>
 
 			{/* onDoneClick */}
 			<h3 className="h3-api">
 				<code className="name">onDoneClick</code>
-				<span className="accepts">(TimeOutput, Event) => void</span>(default:{' '}
-				<code className="default">null</code>)
+				<span className="accepts">
+					(TimeOutput, Event) {`=>`} void
+				</span>(default: <code className="default">null</code>)
 			</h3>
 
 			<div className="api__description">
 				<Text>
-					Displays the "Done" button and calls function when button is clicked. Useful for
-					triggering some action on the parent component, like closing the timepicker.
+					Displays the &quot;Done&quot; button and calls function when button is
+					clicked. Useful for triggering some action on the parent component,
+					like closing the timepicker.
 				</Text>
 			</div>
 
 			{/* doneButton */}
 			<h3 className="h3-api">
 				<code className="name">doneButton</code>
-				<span className="accepts">(TimeOutput) => React.ReactNode</span>(default:{' '}
-				<code className="default">null</code>)
+				<span className="accepts">(TimeOutput) {`=>`} React.ReactNode</span>
+				(default: <code className="default">null</code>)
 			</h3>
 
 			<div className="api__description">
 				<Text>Custom done button as render props. See below for example.</Text>
+			</div>
+
+			{/* disabledTimeRange */}
+			<h3 className="h3-api">
+				<code className="name">disabledTimeRange</code>
+				<span className="accepts">{`{ from: string, to: string }`}</span>(default:{' '}
+				<code className="default">null</code>)
+			</h3>
+
+			<div className="api__description">
+				<Text>
+					Blocks off time range. From and to accepts 24hr formatted strings only
+					(eg: 16:20), regardless of 12h or 24h mode. Disabled times are
+					exclusive, eg: <code>{`{ from: 6:30, to: 8:40 }`}</code> allows
+					selecting 6:30 (but not 6:31+) and 8:40 (but not 8:39 or earlier).
+					<br />
+					<br />
+					Additional validation should be handled by your own app since there
+					are cases where user can select blocked off times, eg: if{' '}
+					<code>from: 6:30</code>, can select 5:45, then change hour to 6
+					resulting in 6:30 (which is blocked). For these cases, you can use{' '}
+					<code>TimeOutput.isValid</code> to determine if time is valid.
+				</Text>
 			</div>
 
 			{/* custom styles */}

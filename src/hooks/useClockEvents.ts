@@ -10,9 +10,9 @@ const { atan2 } = Math
 type CalcTimeFromAngle = (
 	angle: number,
 	{
-		canAutoChangeUnit,
+		canAutoChangeMode,
 		wasTapped,
-	}: { canAutoChangeUnit: boolean; wasTapped: boolean; isInnerClick: boolean },
+	}: { canAutoChangeMode: boolean; wasTapped: boolean; isInnerClick: boolean },
 ) => void
 
 /*
@@ -37,17 +37,22 @@ export default function useClockEvents(
 		}
 		dragCount.current = 0
 
+		// terminate if click is outside of clock radius, ie:
+		// if clicking meridiem button which overlaps with clock
+		if (clock.current) {
+			calcOffsetCache.current = calcOffset(clock.current)
+			const { offsetX, offsetY } = calcOffsetCache.current!(e.clientX, e.clientY)
+			const x = offsetX - CLOCK_RADIUS
+			const y = offsetY - CLOCK_RADIUS
+			if (!isWithinRadius(x, y, CLOCK_RADIUS)) return
+		}
+
 		// add listeners
 		document.addEventListener('mousemove', handleMouseDrag, false)
 		document.addEventListener('mouseup', handleStopDrag, false)
 		wrapper.current &&
 			wrapper.current.addEventListener('mouseleave', handleStopDrag, false)
 
-		if (clock.current) {
-			calcOffsetCache.current = calcOffset(clock.current)
-		}
-
-		// move hand
 		// @ts-ignore
 		handleMouseDrag(e)
 	}
@@ -159,7 +164,7 @@ export default function useClockEvents(
 		// determines if change is due to mouseup/touchend in order to
 		// automatically change unit (eg: hour -> minute) if enabled
 		// prevents changing unit if dragging along clock
-		canAutoChangeUnit: boolean,
+		canAutoChangeMode: boolean,
 	) {
 		// if user just clicks/taps a number (drag count < 2), then just assume it's a rough tap
 		// and force a rounded/coarse number (ie: 1, 2, 3, 4 is tapped, assume 0 or 5)
@@ -181,7 +186,7 @@ export default function useClockEvents(
 		const isInnerClick = isWithinRadius(x, y, INNER_NUMBER_RADIUS)
 
 		// update time on main
-		handleChange(d, { canAutoChangeUnit, wasTapped, isInnerClick })
+		handleChange(d, { canAutoChangeMode, wasTapped, isInnerClick })
 	}
 
 	// clean up

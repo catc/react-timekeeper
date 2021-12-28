@@ -32,7 +32,7 @@ interface Props {
 export default function ClockWrapper({ clockEl }: Props) {
 	const firstRun = useRef(true)
 	const { hour24Mode } = useConfig()
-	const { mode, time } = useTimekeeperState()
+	const { mode, time, meridiem, disabledTimeRangeValidator } = useTimekeeperState()
 
 	const transitions = useTransition(mode, {
 		unique: true,
@@ -62,12 +62,18 @@ export default function ClockWrapper({ clockEl }: Props) {
 		<div className="react-timekeeper__clock" css={style} ref={clockEl}>
 			{transitions((anim, currentMode) =>
 				isMinuteMode(currentMode) ? (
-					<MinuteNumbers anim={anim} />
+					<MinuteNumbers
+						anim={anim}
+						disabledTimeRangeValidator={disabledTimeRangeValidator}
+						hour={time.hour}
+					/>
 				) : (
 					<HourNumbers
 						anim={anim}
 						mode={currentMode as MODE.HOURS_12 | MODE.HOURS_24}
 						hour24Mode={hour24Mode}
+						disabledTimeRangeValidator={disabledTimeRangeValidator}
+						meridiem={meridiem}
 					/>
 				),
 			)}

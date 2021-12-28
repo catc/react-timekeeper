@@ -12,7 +12,10 @@ export type CalcOffsetFn = (x: number, y: number) => { offsetX: number; offsetY:
 export function calcOffset(el: HTMLDivElement): CalcOffsetFn {
 	const style = window.getComputedStyle(el, null)
 
-	return function(clientX: number, clientY: number): { offsetX: number; offsetY: number } {
+	return function (
+		clientX: number,
+		clientY: number,
+	): { offsetX: number; offsetY: number } {
 		const borderLeftWidth = parseInt(style.borderLeftWidth!, 10) || 0
 		const borderTopWidth = parseInt(style.borderTopWidth!, 10) || 0
 		const rect = el.getBoundingClientRect()

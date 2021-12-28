@@ -73,7 +73,7 @@ export default function ClockHand({ mode, time }: Props) {
 				position: circlePosition,
 			})
 		} else if (!isSameTime(prevState.current.time, time)) {
-			// time changed, no animation necessary - just update clockhand
+			// time changed, no animation necessary - just update clockhand (without animation)
 			prevState.current.time = time
 			dragCount.current++
 
