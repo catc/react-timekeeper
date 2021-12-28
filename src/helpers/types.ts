@@ -32,4 +32,5 @@ export interface TimeOutput {
 	hour12: number
 	minute: number
 	meridiem: string
+	isValid: boolean
 }

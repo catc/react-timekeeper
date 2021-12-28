@@ -20,6 +20,7 @@ const hourTestCases: HourTestCase[] = [
 		from: '6:00',
 		to: '15:00',
 		cases: [
+			[0, true],
 			[4, true],
 			[6, true],
 			[7, false],

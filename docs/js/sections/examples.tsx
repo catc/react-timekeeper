@@ -11,6 +11,7 @@ export default function Examples() {
 	const [time3, setTime3] = useState('12:45pm')
 	const [time4, setTime4] = useState('12:45pm')
 	const [time5, setTime5] = useState('5:30')
+	const [isValid5, setIsValid5] = useState(true)
 
 	return (
 		<section className="examples docs-section" id="examples">
@@ -205,11 +206,16 @@ function YourComponent(){
 					<div className="examples__example-3-timekeeper-wrapper">
 						<TimeKeeper
 							time={time5}
-							onChange={newTime => setTime5(newTime.formatted12)}
+							onChange={newTime => {
+								setIsValid5(newTime.isValid)
+								setTime5(newTime.formatted12)
+							}}
 							disabledTimeRange={{ from: '6:20', to: '20:45' }}
 						/>
 					</div>
-					<span className="examples__example-1-time">Time is {time5}</span>
+					<span className="examples__example-1-time">
+						Time is {time5}, valid time: {isValid5 ? '✅' : '❌'}
+					</span>
 				</div>
 
 				<Code type={SYNTAX.js}>{`import React from 'react';
@@ -217,15 +223,19 @@ import TimeKeeper from 'react-timekeeper';
 
 function YourComponent(){
 	const [time, setTime] = useState('12:34pm')
+	const [isValid, setIsValid] = useState(true)
 
 	return (
 		<div>
 			<TimeKeeper
 				time={time}
-				onChange={(newTime) => setTime(newTime.formatted12)}
+				onChange={(newTime) => {
+					setIsValid(newTime.isValid)
+					setTime(newTime.formatted12)
+				}}
 				disabledTimeRange={{ from: '6:20', to: '20:45' }}
 			/>
-			<span>Time is {time}</span>
+			<span>Time is {time5}, valid time: {isValid ? '✅' : '❌'}</span>
 		</div>
 	)
 }`}</Code>

@@ -126,8 +126,8 @@ export function StateProvider({
 
 	const getComposedTime = useCallback(() => {
 		const time = refTime.current
-		return composeTime(time.hour, time.minute)
-	}, [])
+		return composeTime(time.hour, time.minute, disabledTimeRangeValidator)
+	}, [disabledTimeRangeValidator])
 
 	// debounced onChange function from parent
 	const debounceUpdateParent = useMemo(() => {

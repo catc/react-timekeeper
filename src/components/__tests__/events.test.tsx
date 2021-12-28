@@ -1,4 +1,4 @@
-import { fireEvent, RenderResult, act, getAllByTestId } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 import {
 	renderTK,
 	mockAnimations,
@@ -189,6 +189,38 @@ describe('handles events correctly', () => {
 				expect(onChange).toHaveBeenCalledWith(
 					expect.objectContaining({
 						formatted24: '6:10',
+					}),
+				)
+			})
+		})
+
+		// TimeOutput.isValid
+		describe('supports TimeOutput.isValid', () => {
+			it('handles isValid', () => {
+				const { wrapper, onChange } = renderTK({
+					time: { hour: 5, minute: 45 },
+					disabledTimeRange: { from: '6:20', to: '17:35' },
+				})
+				const { getByTestId } = wrapper
+
+				// 6:45 is invalid
+				clickOnPoint(wrapper, generateCoords(6, 'hour'))
+				expect(onChange).toHaveBeenCalledWith(
+					expect.objectContaining({
+						formatted24: '6:45',
+						isValid: false,
+					}),
+				)
+
+				// change minutes to something valid
+				fireEvent.click(getByTestId('topbar_minute'))
+				fireEvent.click(getByTestId('topbar_minute'))
+				onChange.mockClear()
+				clickOnPoint(wrapper, generateCoords(15, 'minute'))
+				expect(onChange).toHaveBeenCalledWith(
+					expect.objectContaining({
+						formatted24: '6:15',
+						isValid: true,
 					}),
 				)
 			})

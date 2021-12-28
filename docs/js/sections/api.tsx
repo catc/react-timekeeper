@@ -62,7 +62,8 @@ export default function Intro() {
 	hour: 16,                // 24 hour
 	hour12: 4,
 	minute: 55,
-	meridiem: 'pm'				
+	meridiem: 'pm',
+	isValid: boolean,        // requires \`disabledTimeRange\`, false if time selected is blocked off
 }`}</Code>
 			</div>
 
@@ -189,6 +190,13 @@ export default function Intro() {
 					(eg: 16:20), regardless of 12h or 24h mode. Disabled times are
 					exclusive, eg: <code>{`{ from: 6:30, to: 8:40 }`}</code> allows
 					selecting 6:30 (but not 6:31+) and 8:40 (but not 8:39 or earlier).
+					<br />
+					<br />
+					Additional validation should be handled by your own app since there
+					are cases where user can select blocked off times, eg: if{' '}
+					<code>from: 6:30</code>, can select 5:45, then change hour to 6
+					resulting in 6:30 (which is blocked). For these cases, you can use{' '}
+					<code>TimeOutput.isValid</code> to determine if time is valid.
 				</Text>
 			</div>
 
