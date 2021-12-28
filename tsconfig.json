@@ -18,7 +18,7 @@
 		"resolveJsonModule": true,
 		// "isolatedModules": true,
 		// "noEmit": true,
-		"jsx": "react",
+		"jsx": "react-jsx",
 		"experimentalDecorators": true,
 		"lib": [
 			"es2018",
@@ -37,6 +37,7 @@
 		"**/node_modules/*",
 		"**/staticresources/*",
 		"docs/build",
+		"bin/",
 		"lib",
 		"**/z_*"
 	],
