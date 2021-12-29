@@ -29,8 +29,8 @@
     "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib --ignore '**/__tests__/'",
     "_types": "NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib --esModuleInterop --jsx react-jsx src/index.ts",
     "lib": " npm run _clean && npm run _build & npm run _types",
-    "ts:check": "tsc --noEmit -p tsconfig.json",
     "eslint": "eslint src/ docs/",
+    "ts:compile": "tsc --noEmit -p tsconfig.json",
     "tests:watch": "NODE_ENV=test jest --watch",
     "tests": "NODE_ENV=test jest"
   },
