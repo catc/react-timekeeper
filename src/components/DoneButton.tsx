@@ -1,5 +1,3 @@
-import React from 'react'
-
 import useConfig from '../hooks/useConfigContext'
 import style from './styles/done-button'
 import useTimekeeperState from '../hooks/useStateContext'

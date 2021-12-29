@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
 import { meridiemWrapper, meridiem } from './styles/meridiems'
 import useTimekeeperState from '../hooks/useStateContext'

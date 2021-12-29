@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTransition } from 'react-spring'
 
 import ClockHand from './ClockHand'

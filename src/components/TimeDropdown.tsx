@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, MutableRefObject, useMemo } from 'react'
+import { useCallback, useEffect, useRef, MutableRefObject, useMemo } from 'react'
 
 import * as styles from './styles/time-dropdown'
 import useConfig from '../hooks/useConfigContext'

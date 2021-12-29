@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { hot } from 'react-hot-loader'
 import '../css/style.scss'
 

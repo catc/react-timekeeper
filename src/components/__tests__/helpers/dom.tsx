@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, fireEvent, RenderResult, act } from '@testing-library/react'
 import TimeKeeper, { Props as TimekeeperProps } from '../../TimeKeeperContainer'
 import { Coords } from './coords'

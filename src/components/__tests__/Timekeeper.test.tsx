@@ -1,4 +1,3 @@
-import React from 'react'
 import { fireEvent } from '@testing-library/react'
 import { renderTK, mockAnimations, changeToMinutes } from './helpers/dom'
 

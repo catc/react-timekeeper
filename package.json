@@ -22,15 +22,15 @@
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "install-all": "yarn install && yarn add -P react react-dom",
     "docs:dev": "node ./bin/dev.js",
     "docs:build": "node ./bin/build.js",
     "_clean": "rimraf lib && mkdir lib",
     "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib --ignore '**/__tests__/'",
     "_types": "NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib --esModuleInterop --jsx react-jsx src/index.ts",
-    "install-all": "yarn install && yarn add -P react react-dom",
-    "eslint": "eslint src/ docs/",
-    "tsc:compile": "tsc --noEmit -p tsconfig.json",
     "lib": " npm run _clean && npm run _build & npm run _types",
+    "ts:check": "tsc --noEmit -p tsconfig.json",
+    "eslint": "eslint src/ docs/",
     "tests:watch": "NODE_ENV=test jest --watch",
     "tests": "NODE_ENV=test jest"
   },

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import Timekeeper from '@tk'
 
 import { Github, Plug } from '../components/icons'
