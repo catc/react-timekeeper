@@ -6,7 +6,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://travis-ci.com/catc/react-timekeeper">
+  <a href="https://github.com/catc/react-timekeeper/actions/workflows/ci.yml">
     <img src="https://github.com/catc/react-timekeeper/actions/workflows/ci.yml/badge.svg" alt="build" />
   </a>
   <a href="https://www.npmjs.com/package/react-timekeeper">
