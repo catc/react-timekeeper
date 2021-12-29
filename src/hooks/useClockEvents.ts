@@ -28,13 +28,32 @@ export default function useClockEvents(
 	const calcOffsetCache: React.MutableRefObject<null | CalcOffsetFn> = useRef(null)
 	const dragCount = useRef(0)
 	const cleanup = useCallback(_removeHandlers, [])
-	const disableMouse = useRef(false)
+
+	// use ref to avoid re-adding touchstart event listener each render
+	const handleTouchStartRef = useRef(handleTouchStart)
+	useEffect(() => {
+		handleTouchStartRef.current = handleTouchStart
+	}, [handleTouchStart])
+
+	// attach touchstart event manually to the clock to make it cancelable.
+	useEffect(() => {
+		const currentTarget = clock.current
+		const type = 'touchstart'
+		const handler = (e: TouchEvent) => {
+			handleTouchStartRef.current(e)
+		}
+		if (currentTarget) {
+			currentTarget.addEventListener(type, handler, false)
+		}
+		return () => {
+			if (currentTarget) {
+				currentTarget.removeEventListener(type, handler, false)
+			}
+		}
+	}, [clock])
 
 	// mouse events
 	function handleMouseDown(e: React.MouseEvent<HTMLElement>) {
-		if (disableMouse.current) {
-			return
-		}
 		dragCount.current = 0
 
 		// terminate if click is outside of clock radius, ie:
@@ -73,9 +92,9 @@ export default function useClockEvents(
 	}
 
 	// touch events
-	function handleTouchStart() {
-		// disables mouse events during touch events
-		disableMouse.current = true
+	function handleTouchStart(e: TouchEvent) {
+		e.preventDefault()
+
 		dragCount.current = 0
 
 		// add listeners
@@ -153,10 +172,6 @@ export default function useClockEvents(
 			)
 			calculatePoint(offsetX, offsetY, true)
 		}
-
-		setTimeout(() => {
-			disableMouse.current = false
-		}, 10)
 	}
 	function calculatePoint(
 		offsetX: number,
@@ -197,7 +212,6 @@ export default function useClockEvents(
 	return {
 		bind: {
 			onMouseDown: handleMouseDown,
-			onTouchStart: handleTouchStart,
 			ref: wrapper,
 		},
 	}
