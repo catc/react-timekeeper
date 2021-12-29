@@ -1,0 +1,31 @@
+name: Publish release
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  npm-publish:
+    name: publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.22.8'
+
+      - name: check if package.json version has been updated
+        id: check
+        uses: EndBug/version-check@v1
+
+      - name: build library
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          npm run install-all
+          npm run lib
+
+      - name: publish to npm
+        if: steps.check.outputs.changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+        run: npm publish --dry-run

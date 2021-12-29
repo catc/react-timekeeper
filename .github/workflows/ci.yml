@@ -13,11 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '12.22.8'
+
       # TODO - add caching
       - run: npm run install-all
+
       - run: npm run tests
 
   lint:
@@ -25,11 +28,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '12.22.8'
+
       - run: npm run install-all
+
       - run: npm run eslint
+
       - run: npm run ts:compile
 
   build-gh-pages:
@@ -41,11 +48,15 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '12.22.8'
+
       - run: npm run install-all
+
       - run: npm run docs:build
+
       - name: deploy gh pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
