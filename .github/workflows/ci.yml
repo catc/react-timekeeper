@@ -28,9 +28,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12.22.8'
-    - run: install-all
-    - run: npm run eslint
-    - run: npm run ts:compile
+      - run: install-all
+      - run: npm run eslint
+      - run: npm run ts:compile
 
   build-gh-pages:
     name: build github pages
