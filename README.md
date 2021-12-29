@@ -1,10 +1,3 @@
-<!--
-TODO
-- update react spring to v9 on release
-	- should fix about of typescript issues
-- fix remaining typescript errors
-- add units tests for components once enzyme gains better supports shallow
--->
 
 <h1 align="center">
 	<img height="350" src="./screenshots/example.png" />
@@ -14,7 +7,7 @@ TODO
 
 <p align="center">
   <a href="https://travis-ci.com/catc/react-timekeeper">
-    <img src="https://travis-ci.com/catc/react-timekeeper.svg?branch=master" alt="build" />
+    <img src="https://github.com/catc/react-timekeeper/actions/workflows/ci.yml/badge.svg" alt="build" />
   </a>
   <a href="https://www.npmjs.com/package/react-timekeeper">
     <img src="https://img.shields.io/npm/dm/react-timekeeper" alt="downloads" />
