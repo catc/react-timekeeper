@@ -1,4 +1,4 @@
-import { css, jsx } from '@emotion/core'
+import { css } from '@emotion/react'
 
 const CLOCK_WRAPPER_MERIDIEM_COLOR = '#898989'
 const CLOCK_WRAPPER_MERIDIEM_BACKGROUND_COLOR_SELECTED = '#E1EFF6'

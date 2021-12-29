@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { animated, useSpring } from 'react-spring'
 
 import { Time } from '../helpers/types'

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import Timekeeper from '@tk'
 
 import { Github, Plug } from '../components/icons'
@@ -17,7 +17,7 @@ export default function Intro() {
 		return dateString
 	})
 
-	const updateTime = useCallback((t) => {
+	const updateTime = useCallback(t => {
 		setTime(t.formatted12)
 	}, [])
 
@@ -55,7 +55,9 @@ export default function Intro() {
 				</div>
 				<span onClick={() => setVisibility(true)} className="selected-demo-time">
 					The time is currently <strong>{time}</strong>
-					{!isVisible && <span className="selected-demo-time__hint">Click to open</span>}
+					{!isVisible && (
+						<span className="selected-demo-time__hint">Click to open</span>
+					)}
 				</span>
 			</div>
 		</section>

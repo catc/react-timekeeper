@@ -1,4 +1,4 @@
-import { css, jsx } from '@emotion/core'
+import { css } from '@emotion/react'
 import {
 	NUMBER_RADIUS_REGULAR,
 	NUMBER_REGULAR_FONT_SIZE,

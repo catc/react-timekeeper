@@ -20,6 +20,7 @@ module.exports = {
 		'react-hooks',
 		'@typescript-eslint',
 		'prettier',
+		'@emotion',
 	],
 	settings: {
 		'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
@@ -94,7 +95,6 @@ module.exports = {
 			{
 				arrowParens: 'avoid',
 				bracketSpacing: true,
-				jsxBracketSameLine: false,
 				printWidth: 90,
 				proseWrap: 'preserve',
 				requirePragma: false,

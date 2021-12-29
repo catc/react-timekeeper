@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { animated, SpringValue } from 'react-spring'
 import DisabledTimeRange from '../helpers/disable-time'
 

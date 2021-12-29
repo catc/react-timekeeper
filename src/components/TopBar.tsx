@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { jsx } from '@emotion/core'
+import { useState } from 'react'
 
 import TimeDropdown from './TimeDropdown'
 import useTimekeeperState from '../hooks/useStateContext'

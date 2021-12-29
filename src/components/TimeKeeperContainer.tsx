@@ -1,4 +1,3 @@
-import React from 'react'
 import TimeKeeper from './TimeKeeper'
 import { ConfigProvider, ConfigProps } from '../hooks/useConfigContext'
 import { StateProvider } from '../hooks/useStateContext'

@@ -22,12 +22,15 @@
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "install-all": "yarn install && yarn add -P react react-dom",
     "docs:dev": "node ./bin/dev.js",
     "docs:build": "node ./bin/build.js",
     "_clean": "rimraf lib && mkdir lib",
-    "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib",
-    "_types": "NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib --esModuleInterop --jsx react src/index.ts",
+    "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib --ignore '**/__tests__/'",
+    "_types": "NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib --esModuleInterop --jsx react-jsx src/index.ts",
     "lib": " npm run _clean && npm run _build & npm run _types",
+    "eslint": "eslint src/ docs/",
+    "ts:compile": "tsc --noEmit -p tsconfig.json",
     "tests:watch": "NODE_ENV=test jest --watch",
     "tests": "NODE_ENV=test jest"
   },
@@ -38,7 +41,8 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@emotion/babel-preset-css-prop": "^10.0.14",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@emotion/eslint-plugin": "^11.7.0",
     "@hot-loader/react-dom": "^16.13.0",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^24.0.15",
@@ -79,7 +83,7 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.14",
+    "@emotion/react": "^11.7.1",
     "lodash.debounce": "^4.0.8",
     "react-spring": "^9.3.3"
   },

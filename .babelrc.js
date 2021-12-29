@@ -16,11 +16,13 @@ const config = {
 			}
 		],
 		"@babel/preset-typescript",
-		"@babel/preset-react",
-		"@emotion/babel-preset-css-prop"
+		["@babel/preset-react", {
+			"runtime": "automatic",
+			"importSource": "@emotion/react"
+		}],
 	],
 	"plugins": [
-		'@babel/plugin-transform-runtime',
+		"@emotion/babel-plugin"
 	]
 }
 

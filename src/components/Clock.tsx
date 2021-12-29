@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTransition } from 'react-spring'
-import { jsx } from '@emotion/core'
 
 import ClockHand from './ClockHand'
 import { HourNumbers, MinuteNumbers } from './Numbers'

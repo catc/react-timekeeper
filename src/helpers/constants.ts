@@ -1,4 +1,6 @@
-export const MINUTES = ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'].map((a) => a.toString())
+export const MINUTES = ['05', 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, '00'].map(a =>
+	a.toString(),
+)
 const MINUTES_60 = Array.from(Array(60), (_, i) => i.toString())
 const HOURS_12 = Array.from(Array(12), (_, i) => (i + 1).toString())
 const HOURS_24 = Array.from(Array(23), (_, i) => (i + 1).toString()).concat('00')
