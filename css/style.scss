@@ -1,0 +1,259 @@
+@import 'common/variables.scss';
+@import 'common/normalize.scss';
+@import 'common/global.scss';
+
+
+body {
+	background: white;
+}
+
+$max-width: 800px;
+
+// common
+.text {
+	font-size: 1.6rem;
+	margin: 14px 0;
+	line-height: 2.6rem;
+	code {
+		background: rgba($blue1, 0.5);
+		border-radius: 2px;
+		display: inline-block;
+		padding: 0 4px;
+		font-size: inherit;
+		font-family: $font-monospace;
+		font-size: 1.4rem;
+	}
+	a {
+		color: $blue3;
+	}
+}
+.hljs {
+	border-radius: 2px;
+	overflow: hidden;
+	padding: 14px 20px 18px !important;
+	margin-bottom: 24px;
+}
+
+// pre 
+
+pre code {
+	overflow-x: auto !important;
+}
+
+// ---------- sections ----------
+
+// intro demo
+.intro-demo {
+	min-height: 100vh;
+	padding: 38px 1em;
+	border-bottom: 9px solid $blue1;
+	width: 100%;
+	// background: #b0e8ff;
+	h1 {
+		margin: 0.5em 0;
+		font-family: $font-main;
+		text-align: center;
+		font-size: 5.6rem;
+		line-height: 1;
+		// color: #ffffff;
+		color: $blue2;
+		// text-shadow: 0 1px 1px #2e86aa;
+	}
+}
+.intro-description {
+	display: block;
+	text-align: center;
+	font-size: 1.6rem;
+	margin-top: 14px;
+	// color: #535353;
+	color: #868686;
+	a {
+		border-bottom: 1px solid #535353;
+		// border-bottom: 1px solid $blue1;
+		// color: #4FC3F7;
+	}
+}
+.action-buttons {
+	text-align: center;
+	margin-top: 26px;
+	// $color: $blue2;
+	$color: #aaa;
+	a {
+		display: inline-block;
+		min-width: 132px;
+		border-radius: 3px;
+		transition: 0.15s ease;
+		// background: $blue1;
+		// border: 2px solid $blue1;
+		border: 2px solid #d4d4d4;
+		padding: 8px 18px;
+		color: white;
+		font-size: 1.6rem;
+		font-weight: bold;
+		// text-transform: uppercase;
+		color: $color;
+		svg {
+			fill: $color;
+			transition: 0.15s ease;
+			vertical-align: middle;
+			margin-right: 5px;
+			vertical-align: -4px;
+		}
+		&:first-child {
+			margin-right: 14px;
+		}
+		&:hover {
+			border-color: $blue1;
+			color: $blue2;
+			svg {
+				fill: $blue2;
+			}
+		}
+	}
+}
+.intro-demo-wrapper {
+	text-align: center;
+	min-height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	// margin-top: 40px;
+	padding-top: 80px;
+	border-radius: 3px;
+	// border: 1px solid darken($blue1, 2%);
+}
+.selected-demo-time {
+	// align-self: flex-end;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	display: block;
+	padding-top: 60px;
+	cursor: pointer;
+	color: #b5b5b5;
+	strong {
+		color: $blue2	;
+		text-align: center;
+		display: block;
+		font-size: 2.8rem;
+		margin-top: 4px;
+		transition: 0.15s ease;
+		&:hover {
+			color: darken($blue1, 5%);
+		}
+	}
+	&__hint {
+		font-size: 1.2rem;
+		margin-top: 4px;
+		display: block;
+		text-transform: none;
+		color: #9b9b9b;
+	}
+}
+.intro-demo-picker {
+	display: inline-block;
+	text-align: left;
+	min-height: 420px;
+	&__wrapper {
+		animation: 0.3s ease fadeIn;
+	}
+}
+
+.docs-section {
+	max-width: $max-width;
+	margin: 0 auto;
+	padding: 40px 0;
+	@include mq(max, $max-width + 40px){
+		padding: 0 1em;
+	}
+	h2 {
+		font-family: $font-alt;
+		font-weight: 400;
+		color: $blue3;
+		font-size: 2.4rem;
+	}
+}
+
+
+// api
+.api {
+	&__description {
+		margin-bottom: 36px;
+	}
+}
+.h3-api {
+	font-weight: 400;
+	font-family: $font-main;
+	// color: 
+	.name {
+		background: rgba($blue1, 0.5);
+		border-radius: 2px;
+		display: inline-block;
+		padding: 2px 8px 3px;
+		margin-right: 4px;
+		font-size: inherit;
+		font-family: $font-monospace;
+	}
+	.accepts {
+		font-style: italic;
+		font-weight: bold;
+		margin-right: 4px;
+		user-select: none;
+	}
+	.default {
+		border-radius: 2px;
+		font-size: 1.3rem;
+		background: #DDD;
+		padding: 1px 4px;
+	}
+	code {
+		// font-size: 1.4rem;
+	}
+}
+
+// examples
+.examples {
+	&__item:not(:first-of-type) {
+		padding-top: 44px;
+		margin-top: 60px;
+		border-top: 1px solid $blue1;
+	}
+	&__example-1 {
+		padding: 20px 0;
+		&-timekeeper-wrapper {
+			margin: 0 auto;
+			width: 260px;
+		}
+		&-time {
+			display: block;
+			text-align: center;
+			margin-top: 20px;
+		}
+	}
+	&__example-2 {
+		padding: 20px 0;
+		&-timekeeper-wrapper {
+			margin: 0 auto;
+			width: 260px;
+		}
+		&-time {
+			display: block;
+			text-align: center;
+			margin-top: 20px;
+		}
+		&-open {
+			display: block;
+			cursor: pointer;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-top: 4px;
+		}
+	}
+	&__example-3 {
+		padding: 20px 0;
+		&-timekeeper-wrapper {
+			margin: 0 auto;
+			width: 260px;
+		}
+	}
+}

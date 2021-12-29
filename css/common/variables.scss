@@ -1,0 +1,42 @@
+$font-main: 'Roboto', sans-serif;
+$font-alt: 'Roboto Condensed', sans-serif;
+$font-monospace: 'Roboto Mono', monospace;
+
+// colors
+// $b1: black;
+$b2: #323232;
+$b3: #6c6c6c;
+
+$blue1: #8eddfd;
+$blue2: #61c8f2;
+$blue3: #2196f3;
+
+@mixin keyframes ($name) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	}
+}
+
+@include keyframes(fadeIn){
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@mixin mq($type, $sizes...){
+	@if $type == min {
+		@media only screen and (min-width : nth($sizes, 1)) { @content; }
+	}
+	@else if $type == max {
+		@media only screen and (max-width : nth($sizes, 1)) { @content; }
+	}
+	@else if $type == between {
+		@media only screen and (min-width : nth($sizes, 1)) and (max-width : nth($sizes, 2)) { @content; }
+	}
+}
