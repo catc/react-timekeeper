@@ -105,8 +105,8 @@ Before submitting a PR, ensure that:
 ------------
 
 Other useful commands:
-- build docs: `npm run docs:build`
-- run all tests: `npm run tests`
-- watch tests: `npm run tests:watch`
-- create lib to publish npm: `npm run lib`
+- new npm releases:
+  - bump version: `npm version NEW_VERSION`, commit and push - CI should publish to npm automatically
+- new github releases
+  - manual (TODO - add github action)
 

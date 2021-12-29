@@ -3,6 +3,7 @@ name: Publish release
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   npm-publish:
@@ -15,17 +16,20 @@ jobs:
           node-version: '12.22.8'
 
       - name: check if package.json version has been updated
-        id: check
         uses: EndBug/version-check@v1
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+        id: check
 
       - name: build library
-        if: steps.check.outputs.changed == 'true'
+        if: steps.check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
         run: |
           npm run install-all
           npm run lib
+          touch .npmrc
+          echo "//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}" >> ./.npmrc
 
       - name: publish to npm
-        if: steps.check.outputs.changed == 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-        run: npm publish --dry-run
+        if: steps.check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: npm publish
