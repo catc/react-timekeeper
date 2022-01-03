@@ -1,6 +1,6 @@
 {
   "name": "react-timekeeper",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Time picker based on the style of the Google Keep app",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
