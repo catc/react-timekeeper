@@ -1,6 +1,5 @@
 node_modules/
 *.log
-lib/
 docs/build/
 
 .DS_Store
