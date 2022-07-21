@@ -19,7 +19,7 @@
     "minute",
     "react spring"
   ],
-  "author": "Catalin Covic <catalin.covic@gmail.com>",
+  "author": "Md Sarmad <sarmad@onesingleview.com>",
   "license": "MIT",
   "scripts": {
     "install-all": "yarn install && yarn add -P react react-dom",
