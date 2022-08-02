@@ -1,13 +1,13 @@
 import { memo, useMemo } from 'react'
 import { animated, SpringValue } from 'react-spring'
-import DisabledTimeRange from '../helpers/disable-time'
+import { TimeRangeValidator } from '../helpers/disable-time'
 
 import { MINUTES, CLOCK_VALUES, MODE, MERIDIEM } from '../helpers/constants'
 import { transform } from '../helpers/math'
 import { numbersStyle, numbersWrapperStyle } from './styles/numbers'
 
 interface CommonProps {
-	disabledTimeRangeValidator: DisabledTimeRange | null
+	timeRangeValidator: TimeRangeValidator | null
 	anim: {
 		opacity: SpringValue<number>
 		translate: SpringValue<number>
@@ -33,7 +33,7 @@ function Hours({
 	anim,
 	mode,
 	hour24Mode,
-	disabledTimeRangeValidator,
+    timeRangeValidator,
 	meridiem,
 }: HourProps) {
 	const { opacity, translate: translateOuter, translateInner } = anim
@@ -55,17 +55,17 @@ function Hours({
 			numbersOuter: numbersOuter.map((value, i) => ({
 				value,
 				enabled:
-					disabledTimeRangeValidator?.validateHour(normalizeOuterIndex(i)) ??
+					timeRangeValidator?.validateHour(normalizeOuterIndex(i)) ??
 					true,
 			})),
 			numbersInner: numbersInner?.map((value, i) => ({
 				value,
 				enabled:
-					disabledTimeRangeValidator?.validateHour(normalizeInnerIndex(i)) ??
+					timeRangeValidator?.validateHour(normalizeInnerIndex(i)) ??
 					true,
 			})),
 		}
-	}, [mode, meridiem, disabledTimeRangeValidator])
+	}, [mode, meridiem, timeRangeValidator])
 
 	return (
 		<animated.div
@@ -112,20 +112,20 @@ export const HourNumbers = memo(Hours, (prev, next) => {
 		prev.mode === next.mode &&
 		prev.hour24Mode === next.hour24Mode &&
 		prev.meridiem === next.meridiem &&
-		prev.disabledTimeRangeValidator === next.disabledTimeRangeValidator
+		prev.timeRangeValidator === next.timeRangeValidator
 	)
 })
 
-function Minutes({ anim, hour, disabledTimeRangeValidator }: MinuteProps) {
+function Minutes({ anim, hour, timeRangeValidator }: MinuteProps) {
 	const { opacity, translate } = anim
 	const minutes = useMemo(() => {
 		return MINUTES.map(value => ({
 			value,
 			enabled:
-				disabledTimeRangeValidator?.validateMinute(hour, parseInt(value, 10)) ??
+				timeRangeValidator?.validateMinute(hour, parseInt(value, 10)) ??
 				true,
 		}))
-	}, [disabledTimeRangeValidator, hour])
+	}, [timeRangeValidator, hour])
 
 	return (
 		<animated.div
@@ -153,7 +153,7 @@ function Minutes({ anim, hour, disabledTimeRangeValidator }: MinuteProps) {
 
 export const MinuteNumbers = memo(Minutes, (prev, next) => {
 	return (
-		prev.disabledTimeRangeValidator === next.disabledTimeRangeValidator &&
+		prev.timeRangeValidator === next.timeRangeValidator &&
 		prev.hour === next.hour
 	)
 })

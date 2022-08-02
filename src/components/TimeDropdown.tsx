@@ -18,7 +18,7 @@ type ElementLiRef = MutableRefObject<HTMLLIElement | null>
 
 export default function TimeDropdown({ close }: Props) {
 	const { hour24Mode } = useConfig()
-	const { updateTimeValue, mode, time, meridiem, disabledTimeRangeValidator } =
+	const { updateTimeValue, mode, time, meridiem, timeRangeValidator } =
 		useTimekeeperState()
 
 	const container: ElementRef = useRef(null)
@@ -28,31 +28,31 @@ export default function TimeDropdown({ close }: Props) {
 		const o = CLOCK_VALUES[mode].dropdown
 
 		let validator: (value: string, i: number) => boolean = () => true
-		if (disabledTimeRangeValidator) {
+		if (timeRangeValidator) {
 			if (mode === MODE.HOURS_12) {
 				if (meridiem === 'am') {
 					validator = (_, i) =>
-						disabledTimeRangeValidator.validateHour((i + 1) % 12)
+						timeRangeValidator.validateHour((i + 1) % 12)
 				} else {
 					validator = (_, i) => {
 						// account for last number (12) which should be first (noon, 1pm, ...) in 24h format
 						const num = i === 11 ? 12 : i + 13
-						return disabledTimeRangeValidator.validateHour(num)
+						return timeRangeValidator.validateHour(num)
 					}
 				}
 			} else if (mode === MODE.HOURS_24) {
 				validator = (_, i) =>
-					disabledTimeRangeValidator.validateHour((i + 1) % 24)
+					timeRangeValidator.validateHour((i + 1) % 24)
 			} else if (mode === MODE.MINUTES) {
 				validator = v =>
-					disabledTimeRangeValidator.validateMinute(time.hour, parseInt(v, 10))
+					timeRangeValidator.validateMinute(time.hour, parseInt(v, 10))
 			}
 		}
 		return o.map((value, i) => ({
 			value,
 			enabled: validator(value, i),
 		}))
-	}, [mode, disabledTimeRangeValidator, meridiem, time.hour])
+	}, [mode, timeRangeValidator, meridiem, time.hour])
 
 	const selected = getNormalizedTimeValue(mode, time).toString()
 
