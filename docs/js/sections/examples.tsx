@@ -12,6 +12,8 @@ export default function Examples() {
 	const [time4, setTime4] = useState('12:45pm')
 	const [time5, setTime5] = useState('5:30')
 	const [isValid5, setIsValid5] = useState(true)
+	const [time6, setTime6] = useState('7:00')
+	const [isValid6, setIsValid6] = useState(true)
 
 	return (
 		<section className="examples docs-section" id="examples">
@@ -39,7 +41,7 @@ import TimeKeeper from 'react-timekeeper';
 
 function YourComponent(){
 	const [time, setTime] = useState('12:34pm')
-	
+
 	return (
 		<div>
 			<TimeKeeper
@@ -132,7 +134,7 @@ import TimeKeeper from 'react-timekeeper';
 
 function YourComponent(){
 	const [time, setTime] = useState('12:34pm')
-	
+
 	return (
 		<div>
 			<TimeKeeper
@@ -177,7 +179,7 @@ import TimeKeeper from 'react-timekeeper';
 
 function YourComponent(){
 	const [time, setTime] = useState('12:34pm')
-	
+
 	return (
 		<div>
 			<TimeKeeper
@@ -235,7 +237,50 @@ function YourComponent(){
 				}}
 				disabledTimeRange={{ from: '6:20', to: '20:45' }}
 			/>
-			<span>Time is {time5}, valid time: {isValid ? '✅' : '❌'}</span>
+			<span>Time is {time}, valid time: {isValid ? '✅' : '❌'}</span>
+		</div>
+	)
+}`}</Code>
+			</div>
+
+			{/* example 6 */}
+			<div className="examples__item foo">
+				<Text>time range</Text>
+
+				<div className="examples__example-3">
+					<div className="examples__example-3-timekeeper-wrapper">
+						<TimeKeeper
+							time={time6}
+							onChange={newTime => {
+								setIsValid6(newTime.isValid)
+								setTime6(newTime.formatted12)
+							}}
+							timeRange={{ from: '6:20', to: '20:45' }}
+						/>
+					</div>
+					<span className="examples__example-1-time">
+						Time is {time6}, valid time: {isValid6 ? '✅' : '❌'}
+					</span>
+				</div>
+
+				<Code type={SYNTAX.js}>{`import React from 'react';
+import TimeKeeper from 'react-timekeeper';
+
+function YourComponent(){
+	const [time, setTime] = useState('12:34pm')
+	const [isValid, setIsValid] = useState(true)
+
+	return (
+		<div>
+			<TimeKeeper
+				time={time}
+				onChange={(newTime) => {
+					setIsValid(newTime.isValid)
+					setTime(newTime.formatted12)
+				}}
+				timeRange={{ from: '6:20', to: '20:45' }}
+			/>
+			<span>Time is {time}, valid time: {isValid ? '✅' : '❌'}</span>
 		</div>
 	)
 }`}</Code>
