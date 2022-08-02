@@ -31,7 +31,7 @@ interface Props {
 export default function ClockWrapper({ clockEl }: Props) {
 	const firstRun = useRef(true)
 	const { hour24Mode } = useConfig()
-	const { mode, time, meridiem, disabledTimeRangeValidator } = useTimekeeperState()
+	const { mode, time, meridiem, timeRangeValidator } = useTimekeeperState()
 
 	const transitions = useTransition(mode, {
 		unique: true,
@@ -63,7 +63,7 @@ export default function ClockWrapper({ clockEl }: Props) {
 				isMinuteMode(currentMode) ? (
 					<MinuteNumbers
 						anim={anim}
-						disabledTimeRangeValidator={disabledTimeRangeValidator}
+						timeRangeValidator={timeRangeValidator}
 						hour={time.hour}
 					/>
 				) : (
@@ -71,7 +71,7 @@ export default function ClockWrapper({ clockEl }: Props) {
 						anim={anim}
 						mode={currentMode as MODE.HOURS_12 | MODE.HOURS_24}
 						hour24Mode={hour24Mode}
-						disabledTimeRangeValidator={disabledTimeRangeValidator}
+						timeRangeValidator={timeRangeValidator}
 						meridiem={meridiem}
 					/>
 				),

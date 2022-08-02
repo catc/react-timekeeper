@@ -1,4 +1,4 @@
-import DisabledTimeRange from '../disable-time'
+import { TimeOutRange } from '../disable-time'
 import { composeTime as compose } from '../time'
 
 describe('helpers/compose-time', () => {
@@ -49,7 +49,7 @@ describe('helpers/compose-time', () => {
 	})
 
 	it('supports disabled time ranges', () => {
-		const dsr = new DisabledTimeRange('6:20', '15:20')
+		const dsr = new TimeOutRange('6:20', '15:20')
 		expect(compose(6, 20, dsr)).toHaveProperty('isValid', true)
 		expect(compose(6, 21, dsr)).toHaveProperty('isValid', false)
 	})

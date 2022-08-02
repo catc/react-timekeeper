@@ -1,4 +1,4 @@
-import DisabledTimeRange from './disable-time'
+import { TimeRangeValidator } from './disable-time'
 import { Time, TimeInput, TimeOutput } from './types'
 
 const TIME_PARSE_MERIDIEM = new RegExp(/^(\d{1,2}?):(\d{2}?)\s?(am|pm)$/i)
@@ -91,7 +91,7 @@ export function parseMeridiem(time: TimeInput): string {
 export function composeTime(
 	hour: number,
 	minute: number,
-	disabledTimeRangeValidator: DisabledTimeRange | null,
+	timeRangeValidator: TimeRangeValidator | null,
 ): TimeOutput {
 	const paddedMinute = ('0' + minute).slice(-2)
 	const hour24 = hour === 24 ? 0 : hour
@@ -105,10 +105,10 @@ export function composeTime(
 	}
 
 	let isValid = true
-	if (disabledTimeRangeValidator) {
+	if (timeRangeValidator) {
 		if (
-			!disabledTimeRangeValidator.validateHour(hour24) ||
-			!disabledTimeRangeValidator.validateMinute(hour24, minute)
+			!timeRangeValidator.validateHour(hour24) ||
+			!timeRangeValidator.validateMinute(hour24, minute)
 		) {
 			isValid = false
 		}

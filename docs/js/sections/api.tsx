@@ -61,7 +61,7 @@ export default function Intro() {
 	hour12: 4,
 	minute: 55,
 	meridiem: 'pm',
-	isValid: boolean,        // requires \`disabledTimeRange\`, false if time selected is blocked off
+	isValid: boolean,        // requires \`disabledTimeRange\` or \`timeRange\`, false if time selected is blocked off
 }`}</Code>
 			</div>
 

@@ -6,6 +6,7 @@ import { TimeInput, ChangeTimeFn } from '../helpers/types'
 export interface Props extends ConfigProps {
 	time?: TimeInput
 	onChange?: ChangeTimeFn
+	timeRange?: null | { from: string, to: string }
 	disabledTimeRange?: null | { from: string; to: string }
 }
 
@@ -21,6 +22,7 @@ export default function TimepickerWithConfig({
 	hour24Mode,
 	onDoneClick,
 	doneButton,
+	timeRange,
 	disabledTimeRange,
 }: Props) {
 	return (
@@ -37,6 +39,7 @@ export default function TimepickerWithConfig({
 			<StateProvider
 				onChange={onChange}
 				time={time}
+				timeRange={timeRange}
 				disabledTimeRange={disabledTimeRange}
 			>
 				<TimeKeeper />

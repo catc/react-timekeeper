@@ -15,12 +15,13 @@ import useConfig from './useConfigContext'
 import { isHourMode, isMinuteMode, isSameTime } from '../helpers/utils'
 import { TimeInput, ChangeTimeFn, Time, TimeOutput } from '../helpers/types'
 import { MODE, MERIDIEM } from '../helpers/constants'
-import DisabledTimeRange from '../helpers/disable-time'
+import {TimeInRange, TimeOutRange, TimeRangeValidator} from '../helpers/disable-time'
 
 interface Props {
 	time?: TimeInput
 	onChange?: ChangeTimeFn
 	children: ReactElement
+	timeRange?: null | { from: string; to: string }
 	disabledTimeRange?: null | { from: string; to: string }
 }
 
@@ -46,7 +47,7 @@ interface StateContext {
 	updateMeridiem: (meridiem: MERIDIEM) => void
 	setMode: (mode: MODE) => void
 	getComposedTime: () => TimeOutput
-	disabledTimeRangeValidator: DisabledTimeRange | null
+	timeRangeValidator: TimeRangeValidator | null
 	meridiem: MERIDIEM
 }
 
@@ -72,6 +73,7 @@ export function StateProvider({
 	onChange,
 	time: parentTime,
 	children,
+	timeRange,
 	disabledTimeRange,
 }: Props) {
 	const config = useConfig()
@@ -99,14 +101,25 @@ export function StateProvider({
 		onDoneClickFn.current = config.onDoneClick
 	}, [config.onDoneClick])
 
-	const disabledTimeRangeValidator = useMemo(() => {
-		const from = disabledTimeRange?.from
-		const to = disabledTimeRange?.to
-		if (!from || !to) {
-			return null
+	const timeRangeValidator = useMemo(() => {
+		if (timeRange) {
+			const from = timeRange.from
+			const to = timeRange.to
+			if (!from || !to) {
+				return null
+			}
+			return new TimeInRange(from, to)
 		}
-		return new DisabledTimeRange(from, to)
-	}, [disabledTimeRange?.from, disabledTimeRange?.to])
+		if (disabledTimeRange) {
+			const from = disabledTimeRange.from
+			const to = disabledTimeRange.to
+			if (!from || !to) {
+				return null
+			}
+			return new TimeOutRange(from, to)
+		}
+		return null
+	}, [timeRange?.from, timeRange?.to, disabledTimeRange?.from, disabledTimeRange?.to])
 
 	// handle time update if parent changes
 	useEffect(() => {
@@ -126,8 +139,8 @@ export function StateProvider({
 
 	const getComposedTime = useCallback(() => {
 		const time = refTime.current
-		return composeTime(time.hour, time.minute, disabledTimeRangeValidator)
-	}, [disabledTimeRangeValidator])
+		return composeTime(time.hour, time.minute, timeRangeValidator)
+	}, [timeRangeValidator])
 
 	// debounced onChange function from parent
 	const debounceUpdateParent = useMemo(() => {
@@ -228,11 +241,11 @@ export function StateProvider({
 			}
 
 			// if time is blocked off, dont update
-			if (disabledTimeRangeValidator) {
+			if (timeRangeValidator) {
 				if (
-					(isHourMode(mode) && !disabledTimeRangeValidator.validateHour(val)) ||
+					(isHourMode(mode) && !timeRangeValidator.validateHour(val)) ||
 					(isMinuteMode(mode) &&
-						!disabledTimeRangeValidator.validateMinute(time.hour, val))
+						!timeRangeValidator.validateMinute(time.hour, val))
 				) {
 					return
 				}
@@ -248,7 +261,7 @@ export function StateProvider({
 			mode,
 			meridiem,
 			handleUpdateTimeSideEffects,
-			disabledTimeRangeValidator,
+			timeRangeValidator,
 			updateTime,
 		],
 	)
@@ -260,7 +273,7 @@ export function StateProvider({
 		updateMeridiem,
 		setMode,
 		getComposedTime,
-		disabledTimeRangeValidator,
+		timeRangeValidator,
 		meridiem,
 	}
 	return <stateContext.Provider value={value}>{children}</stateContext.Provider>
