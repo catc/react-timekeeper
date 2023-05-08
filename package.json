@@ -22,17 +22,16 @@
   "author": "Catalin Covic <catalin.covic@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "install-all": "yarn install && yarn add -P react react-dom",
     "docs:dev": "node ./bin/dev.js",
     "docs:build": "node ./bin/build.js",
     "_clean": "rimraf lib && mkdir lib",
-    "_build": "NODE_ENV=production babel src --extensions '.tsx' --extensions '.ts' -d lib --ignore '**/__tests__/'",
-    "_types": "NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib --esModuleInterop --jsx react-jsx src/index.ts",
+    "_build": "cross-env NODE_ENV=production babel src --extensions .ts,.tsx -d lib --ignore **/__tests__/",
+    "_types": "cross-env NODE_ENV=production tsc --emitDeclarationOnly -d --outDir lib --esModuleInterop --jsx react-jsx src/index.ts",
     "lib": " npm run _clean && npm run _build & npm run _types",
     "eslint": "eslint src/ docs/",
     "ts:compile": "tsc --noEmit -p tsconfig.json",
-    "tests:watch": "NODE_ENV=test jest --watch",
-    "tests": "NODE_ENV=test jest"
+    "tests:watch": "cross-env NODE_ENV=test jest --watch",
+    "tests": "cross-env NODE_ENV=test jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -44,15 +43,16 @@
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/eslint-plugin": "^11.7.0",
     "@hot-loader/react-dom": "^16.13.0",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "^14.0.0",
     "@types/jest": "^24.0.15",
-    "@types/lodash.debounce": "^4.0.6",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
+    "@types/lodash.debounce": "^4.0.7",
+    "@types/react": "^18.0.38",
+    "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "5.8.0",
     "@typescript-eslint/parser": "5.8.0",
     "autoprefixer": "^9.7.4",
     "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
     "css-loader": "^3.0.0",
     "cssnano": "^4.1.10",
     "eslint": "^8.5.0",
@@ -67,6 +67,8 @@
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-hot-loader": "^4.11.1",
     "rimraf": "^2.6.3",
     "sass-loader": "^7.1.0",
@@ -79,13 +81,13 @@
     "node": ">=12.16.2"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^17.0.2 || ^18.0.2",
+    "react-dom": "^17.0.2 || ^18.0.2"
   },
   "dependencies": {
-    "@emotion/react": "^11.7.1",
+    "@emotion/react": "^11.10.6",
     "lodash.debounce": "^4.0.8",
-    "react-spring": "^9.3.3"
+    "react-spring": "^9.7.1"
   },
   "eslintIgnore": [
     "lib/",
